@@ -1,6 +1,6 @@
 <?php
-$GLOBALS['HTTP_SITE_ADMIN_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrafrontend/index.php/admin/';
-$GLOBALS['SITE_APP_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrafrontend/index.php/application/index';
+$GLOBALS['HTTP_SITE_ADMIN_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrafrontend/admin/';
+$GLOBALS['SITE_APP_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrafrontend/application/index';
 $GLOBALS['SITE_COMPANY_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrabasket/merchant/';
 $GLOBALS['PAGE_BEFORE_LOGIN'] = array('Admin\Controller\Index\login','Admin\Controller\Index\index');
 $GLOBALS['SITE_PATH'] = $_SERVER['DOCUMENT_ROOT'];
