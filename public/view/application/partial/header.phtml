@@ -1,43 +1,6 @@
-<head>
-    <title>Afro Basket an E-commerce Online Shopping Category</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Afro Basket Responsive web template" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="<?php echo $this->basePath() ?>/public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo $this->basePath() ?>/public/css/style.css" rel="stylesheet" type="text/css" media="all" /> 
-    <link href="<?php echo $this->basePath() ?>/public/css/menu.css" rel="stylesheet" type="text/css" media="all" /> <!-- menu style --> 
-    <link href="<?php echo $this->basePath() ?>/public/css/ken-burns.css" rel="stylesheet" type="text/css" media="all" /> <!-- banner slider --> 
-    <link href="<?php echo $this->basePath() ?>/public/css/animate.min.css" rel="stylesheet" type="text/css" media="all" /> 
-    <link href="<?php echo $this->basePath() ?>/public/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all"> <!-- carousel slider -->  
-    <link href="<?php echo $this->basePath() ?>/public/css/slider.css" rel="stylesheet" type="text/css" media="all">    
-    <link href="<?php echo $this->basePath() ?>/public/css/location.css" rel="stylesheet" type="text/css" media="all">   
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
-    <link href="<?php echo $this->basePath() ?>/public/css/font-awesome.css" rel="stylesheet"> 
-    <!-- //font-awesome icons -->
-    <!-- js -->
-    <script src="<?php echo $this->basePath() ?>/public/js/jquery-2.2.3.min.js"></script> 
-    <!-- //js --> 
-    <!-- web-fonts -->
-    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Lovers+Quarrel' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Offside' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
-    <!-- web-fonts --> 
-    <style> 
-        .owl-nav{position: absolute; top: 0; left: 0;width: 100%; margin: 0;}
-        .owl-carousel .owl-nav .owl-prev{position: absolute;left: -5px; top: 0; height: 300px; width: 30px; margin: 0; }
-        .owl-carousel .owl-nav .owl-next{position: absolute;right: 0px; top: 0; height: 300px; width: 30px; margin: 0;}
-        .owl-carousel .owl-item .merchant img{width: 80%;}
-        .merchant_name{font-size: 16px;}
-    </style>
-</head>
 
-<!--<div class="header">
-    <div class="w3ls-header">header-one 
+<div class="header">
+    <div class="w3ls-header"><!--header-one--> 
         <div class="w3ls-header-left">
             <p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="<?= $this->basePath() ?>/application/index/products">SHOP NOW</a></p>
         </div>                
@@ -49,7 +12,14 @@
                 <img src="<?php echo $this->basePath() ?>/public/images/logo-big.png" alt="logo"/> 
             </div>	
             <div class="header-city">
-                <a class="cd-dropdown-trigger" href="#" id="city-link"  style="color:#000000;">Select Your City</a>
+                <select class="form-control select2" style="width: 100%;">
+                    <?php
+                        foreach ($this->cityList as $key => $value) {
+                            echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                        }
+                    ?>
+                    </select>
+                <!--<a class="cd-dropdown-trigger" href="#" id="city-link"  style="color:#000000;">Select Your City</a>-->
             </div>
             <div class="header-search">
                 <form action="#" method="post">
@@ -74,12 +44,12 @@
             </div> 
             <div class="clearfix"> </div>
         </div>		
-    </div> //header-two 
-     navigation 
+    </div><!-- //header-two -->
+    <!-- navigation -->
     <div class="navigation-agileits">
         <div class="container">
             <nav class="navbar navbar-default">
-                 Brand and toggle get grouped for better mobile display 
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header nav_2">
                     <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
                         <span class="sr-only">Toggle navigation</span>
@@ -91,7 +61,7 @@
                 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?= $this->basePath() ?>/application/index/index" class="act">Home</a></li>	
-                         Mega Menu 
+                        <!-- Mega Menu -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groceries<b class="caret"></b></a>
                             <ul class="dropdown-menu multi-column columns-3">
@@ -198,9 +168,9 @@
         </div>
     </div>
 
-     //navigation 
+    <!-- //navigation -->
 
-    <div class="header-three hide"> header-three 
+    <div class="header-three hide"><!-- header-three -->
         <div class="container">
             <div class="menu">
                 <div class="cd-dropdown-wrapper">
@@ -322,8 +292,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products">cables</a></li>
                                         </ul>
                                     </li>
-                                </ul>  .cd-secondary-dropdown  
-                            </li>  .has-children 
+                                </ul> <!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children -->
                             <li class="has-children">
                                 <a href="#">Fashion Store</a> 
                                 <ul class="cd-secondary-dropdown is-hidden">
@@ -407,8 +377,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products1">Bath & Spa</a></li>   
                                         </ul>
                                     </li>
-                                </ul>  .cd-secondary-dropdown  
-                            </li>  .has-children 
+                                </ul> <!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children -->
                             <li class="has-children">
                                 <a href="<?= $this->basePath() ?>/application/index/products2">Kids Fashion & Toys</a> 
                                 <ul class="cd-secondary-dropdown is-hidden"> 
@@ -451,8 +421,8 @@
                                                 </ul>
                                             </li>  
                                             <li><a href="<?= $this->basePath() ?>/application/index/products2">Toddlers' Rooms</a></li> 	
-                                        </ul> .cd-secondary-dropdown  
-                                    </li>  .has-children 								
+                                        </ul><!-- .cd-secondary-dropdown --> 
+                                    </li> <!-- .has-children -->								
                                     <li class="has-children"><a href="#">TOYS & GAMES </a>
                                         <ul class="is-hidden"> 
                                             <li class="go-back"><a href="#">All Kids Fashions</a></li>
@@ -474,8 +444,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products2">PC & Digital Gaming</a></li>
                                         </ul>	
                                     </li> 
-                                </ul> .cd-secondary-dropdown  
-                            </li>  .has-children  
+                                </ul><!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children --> 
                             <li class="has-children">
                                 <a href="#">Home, Furniture & Patio</a> 
                                 <ul class="cd-secondary-dropdown is-hidden">
@@ -540,8 +510,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products3">Tool Kits</a></li>
                                         </ul>
                                     </li>  
-                                </ul> .cd-secondary-dropdown  
-                            </li>  .has-children   
+                                </ul><!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children -->  
                             <li class="has-children">
                                 <a href="#">Sports, Fitness & Outdoor</a>
                                 <ul class="cd-secondary-dropdown is-hidden">
@@ -613,8 +583,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products4">Health Drinks </a></li> 
                                         </ul>
                                     </li> 	
-                                </ul> .cd-secondary-dropdown  
-                            </li>  .has-children   
+                                </ul><!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children -->  
                             <li class="has-children">
                                 <a href="#">Grocery store</a>
                                 <ul class="cd-secondary-dropdown is-hidden">
@@ -684,8 +654,8 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products">Nutrition</a></li> 
                                         </ul>
                                     </li> 
-                                </ul> .cd-secondary-dropdown  
-                            </li>  .has-children   
+                                </ul><!-- .cd-secondary-dropdown --> 
+                            </li> <!-- .has-children -->  
                             <li class="has-children">
                                 <a href="#">Photo, Gifts & Office Supplies</a>
                                 <ul class="cd-secondary-dropdown is-hidden">
@@ -757,7 +727,7 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products">Cakes</a></li>
                                         </ul>
                                     </li> 
-                                </ul> .cd-secondary-dropdown  
+                                </ul><!-- .cd-secondary-dropdown --> 
                             </li> 
                             <li class="has-children">
                                 <a href="#">Health, Beauty & Pharmacy</a>
@@ -818,7 +788,7 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products">Pharmacy Help</a></li> 
                                         </ul>
                                     </li>  
-                                </ul> .cd-secondary-dropdown  
+                                </ul><!-- .cd-secondary-dropdown --> 
                             </li>
                             <li class="has-children">
                                 <a href="#">Automotive</a>
@@ -891,7 +861,7 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products8">Detailing Kits </a></li>
                                         </ul>
                                     </li> 
-                                </ul> .cd-secondary-dropdown  
+                                </ul><!-- .cd-secondary-dropdown --> 
                             </li>
                             <li class="has-children">
                                 <a href="#">Books, Music & Movies</a>
@@ -971,12 +941,12 @@
                                             <li><a href="<?= $this->basePath() ?>/application/index/products9">Top Shows</a></li> 
                                         </ul>
                                     </li> 
-                                </ul> .cd-secondary-dropdown  
+                                </ul><!-- .cd-secondary-dropdown --> 
                             </li>  
                             <li><a href="sitemap">Full Site Directory </a></li>  
-                        </ul>  .cd-dropdown-content 
-                    </nav>  .cd-dropdown 
-                </div>  .cd-dropdown-wrapper 	 
+                        </ul> <!-- .cd-dropdown-content -->
+                    </nav> <!-- .cd-dropdown -->
+                </div> <!-- .cd-dropdown-wrapper -->	 
             </div>
             <div class="move-text">
                 <div class="marquee"><a href="offers"> New collections are available here...... <span>Get extra 10% off on everything | no extra taxes </span> <span> Try shipping pass free for 15 days with unlimited</span></a></div>
@@ -988,8 +958,4 @@
             </div>
         </div>
     </div>
-</div>-->
-
-<script>
-    var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
-</script>
+</div>
