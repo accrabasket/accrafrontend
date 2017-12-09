@@ -3,14 +3,18 @@
                         <?php 
                             foreach ($this->categoryList as $key => $value) {
                         ?>
-                        <span><?=$value['category_name']?></span> 
+                        <a href="<?=$this->basePath()?>/application/index/product?id=<?=$value['id']?>">
+                           <span><?=$value['category_name']?></span>    
+                        </a>
+                        
                         <div>
                             <ul class="category-sub-list list-unstyled">
                                 <?php 
                                 if(!empty($value['child'])){
                                     foreach ($value['child'] as $keys => $values) {
                                 ?>
-                                <li class="category-list_sub-item"><a href="#">
+                                <li class="category-list_sub-item">
+                                    <a href="<?=$this->basePath()?>/application/index/product?id=<?=$values['id']?>">
                                         <div class="category-item-details">
                                             <span class="name"><span><?=$values['category_name']?></span></span>
                                         </div>

@@ -54,7 +54,13 @@ class IndexController extends AbstractActionController
         if (!empty($request)) {
             $postParams['method'] = 'productlist';
             $postParams['city_id'] = 0;
-            $postParams['category_id'] = $request['id'];
+            if(!empty($request['id'])){
+                $postParams['category_id'] = $request['id'];
+            }
+            if(!empty($request['merchant'])){
+                $postParams['merchant_id'] = $request['merchant'];
+            }
+            
             $postParams['pagination'] = 1;
             $postParams['page'] = 1;
             $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
@@ -65,6 +71,7 @@ class IndexController extends AbstractActionController
                 $this->view->categoryName = $this->session['category_list']['data'][$request['id']]['category_name'];
             }
         }
+//        print_r($getProduct);die;
         return $this->view;
     }
     
@@ -142,20 +149,17 @@ class IndexController extends AbstractActionController
         }
         return  $childWiseCategory; 
     }    
-    public function updatecompanyAction() {
-        $request = $this->getRequest()->getQuery();
-        $params = array();
-        $params['user']['first_name'] = $request['name'];
-        $params['user']['password'] = md5($request['password']);
-        $params['company']['activation_code'] = $request['activation_code'];
-        $inputParams['parameters'] = json_encode($params);
-        $response = $this->commonObj->curlhit($inputParams, 'updatecompany');
-        $response = json_decode($response, true);
-        if($response['status'] == true){
-            $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
-            return $this->redirect()->toRoute('admin');
+    public function addtocartAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'addtocart';
+        if(!empty($this->session['user']->data[0]->id)){
+            $postParams['user_id'] = $this->session['user']->data[0]->id;
+        }else{
+            $postParams['guest_id'] = session_id();
         }
-        echo json_encode($response);die;
+        $response = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $response;
+        exit;
     }    
     public function activateAction()
     {

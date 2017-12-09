@@ -62,7 +62,7 @@
                                 foreach ($this->categoryList['data'] as $key => $value) {
                             ?>
                             <li role="presentation" class="active">
-                                <a href="index/product?id=<?=$key?>" >
+                                <a href="<?=$this->basePath()?>/application/index/product?id=<?=$key?>" >
                                     <!--<i class="fa fa-laptop" aria-hidden="true"></i> -->
                                     <?php
                                         if(!empty($this->categoryList['images'][$key])){
@@ -73,7 +73,7 @@
                                             echo'<img src="'.$image.'" style="height: 140px;width:200px;"/>';
                                         
                                         }else{
-                                            echo'<img src=""/>';
+                                            echo'<img src="'.$this->basePath().'/public/images/newimg/noimage.png" style="height: 140px;width:200px;"/>';
                                         }
                                            
                                     ?>   
@@ -770,7 +770,7 @@
                                     foreach ($this->marchantList as $key => $value) {
                                 ?>
                                 <div class="item">
-                                    <a  href="#" class="product_wrapper">
+                                    <a  href="<?=$this->basePath()?>/application/index/product?merchant=<?=$value['id']?>" class="product_wrapper">
                                         <div class="plp-product">
                                             <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
                                             <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
