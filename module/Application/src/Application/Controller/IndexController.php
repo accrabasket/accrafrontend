@@ -155,7 +155,7 @@ class IndexController extends AbstractActionController
         if(!empty($this->session['user']->data[0]->id)){
             $postParams['user_id'] = $this->session['user']->data[0]->id;
         }else{
-            $postParams['guest_id'] = session_id();
+            $postParams['guest_user_id'] = session_id();
         }
         $response = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $response;
