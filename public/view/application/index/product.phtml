@@ -72,6 +72,8 @@
                     <div class="category-navs">
                         <div class="img-widget-box plp-banner-edlp"><a class="full-width display--block" href="/"><img class="full-width animated fadeIn" alt="" src="images/banner-edlp-b4f073debb34ce3046769c4faab9bbcd.jpg"></a></div>
                         <div class="clearfix com-marg"> </div>
+                        <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
+                        <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
                         <div class="category-navs_container">
                             <div class="category-navs_current plp-banner-edlp"><?=$this->categoryName?></div>
 
@@ -88,7 +90,15 @@
                                 <div class="plp-product">
                                     <!--<div class="plp-product_offer">19% OFF</div>-->
                                     <div class="plp-product_offer display--none"><!-- react-text: 3259 -->GHC<!-- /react-text --><!-- react-text: 3260 -->30<!-- /react-text --><!-- react-text: 3261 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Economy Kabuli Chana" src="<?=$imagepath?>" style="width:200px"></div>
+                                    <div class="plp-product_img ">
+                                        <?php 
+                                            if(!empty($imagename)){
+                                        ?>
+                                        <img class="img animated fadeIn" alt="<?= $value['product_name'] ?>" src="<?=$imagepath?>" style="width:200px">
+                                            <?php }else{?>
+                                                <img class="img animated fadeIn" alt="<?= $value['product_name'] ?>" src="<?php echo $this->basePath() ?>/public/images/newimg/noimage.png" style="width:200px">
+                                            <?php }?>
+                                    </div>
                                     <div class="plp-product_name " title="<?= $value['product_name'] ?>">
                                         <div class="LinesEllipsis  plp-product_name--box"><?= $value['product_name'] ?><wbr></wbr>
                                         </div>
@@ -103,6 +113,7 @@
                                     </select>
                                     <div class="plp-product_price">
                                         <div class="plp-product_price--container">
+                                            <input type="hidden" id="att_<?=$key?>">
                                             <!--<div class="plp-product_price--old display--inline-block@mobile"> react-text: 3274 GHC /react-text  react-text: 3275 154 /react-text </div>-->
                                             <div class="plp-product_price--new display--inline-block@mobile" id="<?=$key?>"></div>
                                         </div>
@@ -110,7 +121,7 @@
                                     <div class="plp-product_add-to-cart">
                                         <div class="add-to-cart">
                                             <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
+                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addtocart('<?=$key?>','<?=$value['product_name']?>')">Add To Cart</button>
                                             <button class="add-to-cart_inc" data-test-id="plus-button"></button>
                                         </div>
                                     </div>
