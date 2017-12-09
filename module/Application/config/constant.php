@@ -5,6 +5,6 @@ $GLOBALS['SITE_COMPANY_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/accrabasket/me
 $GLOBALS['PAGE_BEFORE_LOGIN'] = array('Admin\Controller\Index\login','Admin\Controller\Index\index');
 $GLOBALS['SITE_PATH'] = $_SERVER['DOCUMENT_ROOT'];
 define('NODE_API', 'http://localhost:3000/');
-define('BASKET_API', 'http://localhost/basketapi/index.php/');
+define('BASKET_API', '54.233.182.212/basketapi/');
 $GLOBALS['PRODUCTIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'accrabasket/product_img';
 $GLOBALS['ATTRIBUTEIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'/accrabasket/attribute_img';

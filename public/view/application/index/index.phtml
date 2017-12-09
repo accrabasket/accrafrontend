@@ -1,8 +1,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-    <body>
+<?php 
+        echo $this->partial('application/partial/header.phtml');
+    ?>   
+    <body ng-app="app" ng-controller="index" ng-cloak="true">
         <!-- header -->
 
         <!-- //header -->	
@@ -56,43 +58,29 @@
                 <div class="welcome-info">
                     <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class=" nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" >
+                            <?php
+                                foreach ($this->categoryList['data'] as $key => $value) {
+                            ?>
+                            <li role="presentation" class="active">
+                                <a href="index/product?id=<?=$key?>" >
                                     <!--<i class="fa fa-laptop" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-9.jpg"/>
-                                    <h5>Fruits &amp; Vegetables</h5>
-                                </a></li>
-                            <li role="presentation"><a href="#carl" role="tab" id="carl-tab" data-toggle="tab"> 
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-16.jpg"/>
-                                    <!--<i class="fa fa-female" aria-hidden="true"></i> -->
-                                    <h5>Grocery &amp; Staples</h5>
-                                </a></li>
-                            <li role="presentation"><a href="#james" role="tab" id="james-tab" data-toggle="tab"> 
-                                    <!--<i class="fa fa-gift" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-12.jpg"/>
-                                    <h5>Beverages</h5>
-                                </a></li>
-                            <li role="presentation"><a href="#decor" role="tab" id="decor-tab" data-toggle="tab"> 
-                                    <!--<i class="fa fa-home" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-1047.jpg"/>
-                                    <h5>Home &amp; Kitchen</h5>
-                                </a></li>
-                            <li role="presentation"><a href="#sports" role="tab" id="sports-tab" data-toggle="tab"> 
-                                    <!--							<i class="fa fa-motorcycle" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-18.jpg"/>
-                                    <h5>Household Needs</h5>
-                                </a></li> 
-                            <li role="presentation"><a href="#sports" role="tab" id="sports-tab" data-toggle="tab"> 
-                                    <!--<i class="fa fa-motorcycle" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-163.jpg"/>
-                                    <h5>Personal Care</h5>
-                                </a></li>
-                            <li role="presentation"><a href="#sports" role="tab" id="sports-tab" data-toggle="tab"> 
-                                    <!--<i class="fa fa-motorcycle" aria-hidden="true"></i> -->
-                                    <img src="<?php echo $this->basePath() ?>/public/images/category-l0-14.jpg"/>
-                                    <h5>Breakfas &amp; Diary</h5>
-                                </a></li>
-
-
+                                    <?php
+                                        if(!empty($this->categoryList['images'][$key])){
+                                            $type = $this->categoryList['images'][$key][0]['type'];
+                                            $name = $this->categoryList['images'][$key][0]['image_name'];
+                                            $path = $this->categoryList['imageRootPath'];
+                                            $image = $path.'/'.$type.'/'.$key.'/'.$name;
+                                            echo'<img src="'.$image.'" style="height: 140px;width:200px;"/>';
+                                        
+                                        }else{
+                                            echo'<img src=""/>';
+                                        }
+                                           
+                                    ?>   
+                                    <h5><?=$value['category_name']?></h5>
+                                </a>
+                            </li>
+                                <?php }?>
                         </ul>
                         <div class="clearfix"> </div>                            
                     </div>  
@@ -778,186 +766,27 @@
                             <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
                         <div class="products products--inline">
                             <div class="owl-carousel owl-theme">
+                                <?php 
+                                    foreach ($this->marchantList as $key => $value) {
+                                ?>
                                 <div class="item">
                                     <a  href="#" class="product_wrapper">
                                         <div class="plp-product">
                                             <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
                                             <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name One </div>
+                                                <div  class="merchant_name"><?= $value['first_name']?> </div>
                                             </div>
                                             <div class="plp-product_add-to-cart">
                                                 <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
+                                                   <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Two </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Three </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Four </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Five </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Six </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Seven </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Eight </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Nine </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Ten </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Eleven </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="merchant_name">Merchant Name Twelve </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                <?php
+                                }
+                                ?>
                             </div>  
 
                         </div>
@@ -1013,14 +842,15 @@
 
         <div class="" id="city-box" style="display: none;"> 
             <div class="location__shake-container animated">
-                <div class="location">
+                
+<!--                <div class="location">
                     <div>
                         <div class="location-body">
                             <div class="location-body__top-container">
                                 <div class="location-helper weight--semibold text-center">Where do you want the delivery?</div>
                                 <div class="location__selected"><img class="img animated fadeIn location-body__selected-image" alt="Gurugram / Faridabad" src="<?php echo $this->basePath() ?>/public/images/gurugram-ff049a38d323a7bf38f44435af2e61ed.png">
                                     <div class="location-body__selected-body">
-                                        <div class="location-body__selected-title"><!-- react-text: 1114 -->Deliver in <!-- /react-text --><span class="weight--semibold">Gurugram / Faridabad</span></div>
+                                        <div class="location-body__selected-title"> react-text: 1114 Deliver in  /react-text <span class="weight--semibold">Gurugram / Faridabad</span></div>
                                         <span class="location-body__right-arrow" data-test-id="location-right-arrow"></span></div>
                                 </div>
                             </div>
@@ -1030,21 +860,17 @@
                                     <div class="cities-container">
                                         <div class="cities-container__title">Top Searched Cities</div>
                                         <div class="cities-container-list">
-                                            <div class="cities-container-list__item"><img class="img animated fadeIn cities-container-list__item-img" alt="New Delhi" src="<?php echo $this->basePath() ?>/public/images/delhi-ab05911c3fbe7efe5fe72177c29e267e.png">
-                                                <div class="cities-container-list__item-name">New Delhi</div>
+                                            <div class="cities-container-list__item">
+                                                <select class="form-control select2" style="width: 100%;">
+                                                <?php
+                                                    foreach ($this->cityList as $key => $value) {
+//                                                        echo'<div class="cities-container-list__item-name">'.$value['city_name'].'</div>';
+                                                        echo'<option >'.$value['city_name'].'</option>';
+                                                    }
+                                                ?>
+                                                </select>
                                             </div>
-                                            <div class="cities-container-list__item"><img class="img animated fadeIn cities-container-list__item-img" alt="Mumbai" src="<?php echo $this->basePath() ?>/public/images/mumbai-b33309a079351a273fdfea407396fed3.png">
-                                                <div class="cities-container-list__item-name">Mumbai</div>
-                                            </div>
-                                            <div class="cities-container-list__item"><img class="img animated fadeIn cities-container-list__item-img" alt="Bengaluru" src="<?php echo $this->basePath() ?>/public/images/bengaluru-834403a06b2c9d3995ec883fe50ada53.png">
-                                                <div class="cities-container-list__item-name">Bengaluru</div>
-                                            </div>
-                                            <div class="cities-container-list__item"><img class="img animated fadeIn cities-container-list__item-img" alt="Hyderabad" src="<?php echo $this->basePath() ?>/public/images/hyderabad-c72a596b90f658842ee798e33d99d77a.png">
-                                                <div class="cities-container-list__item-name">Hyderabad</div>
-                                            </div>
-                                            <div class="cities-container-list__item"><img class="img animated fadeIn cities-container-list__item-img" alt="Kolkata" src="<?php echo $this->basePath() ?>/public/images/kolkata-4165d9690ad7299100d2d1fd5ab6cf72.png">
-                                                <div class="cities-container-list__item-name">Kolkata</div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="location-autosuggest">
@@ -1067,9 +893,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
     </body>
 </html>
+<script src="<?php echo $this->basePath() . '/public/js/frontend/index.js' ?>">
+</script>

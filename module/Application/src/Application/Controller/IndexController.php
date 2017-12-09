@@ -12,6 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Application\Model\common;
 class IndexController extends AbstractActionController
 {
     public $commonObj;
@@ -20,11 +21,23 @@ class IndexController extends AbstractActionController
     public function __construct() {
         $this->view =  new ViewModel();
         $this->session = new Container('User');
-        
+        $this->commonObj = new common();
+        if(empty($this->session['city_list'])){
+            $this->session['city_list'] = $this->getCityList();
+        }
+        if(empty($this->session['category_list'])){
+            $this->session['category_list'] = $this->categoryList();
+        }
+        if(empty($this->session['marchant_list'])){
+            $this->session['marchant_list'] = $this->getMarchantList();
+        }
     }
     public function indexAction()
     { 
-      return $this->view;
+        $this->view->cityList = $this->session['city_list'];
+        $this->view->marchantList = $this->session['marchant_list'];
+        $this->view->categoryList = $this->session['category_list'];
+        return $this->view;
     }
     
     public function contactAction() {
@@ -37,6 +50,21 @@ class IndexController extends AbstractActionController
    
     
     public function productAction() {
+        $request = (array) $this->getRequest()->getQuery();
+        if (!empty($request)) {
+            $postParams['method'] = 'productlist';
+            $postParams['city_id'] = 0;
+            $postParams['category_id'] = $request['id'];
+            $postParams['pagination'] = 1;
+            $postParams['page'] = 1;
+            $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
+            $getProduct = json_decode($getProduct,true);
+            if(!empty($getProduct)){
+                $this->view->product = $getProduct;
+                $this->view->categoryList = $this->session['category_list']['data'];
+                $this->view->categoryName = $this->session['category_list']['data'][$request['id']]['category_name'];
+            }
+        }
         return $this->view;
     }
     
@@ -60,39 +88,59 @@ class IndexController extends AbstractActionController
         return $this->view;
     }
     
-    public function signup1Action() {
-        $return = array('status' => false, 'msg' => 'error');
-        $request = (array) $this->getRequest()->getPost();
-        $registrationResponse = $this->commonObj->registration($request);
-        if (!empty($registrationResponse)) {
-            $return = array('status' => true, 'msg' => 'Succesfully created');
+    function getCityList(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $cityList  = array();
+        $postParams['method'] = 'cityList';
+        $getCity = $this->commonObj->curlhitApi($postParams);
+        $getCity = json_decode($getCity,true);
+        if(!empty($getCity)){
+            $cityList = $getCity['data'];
         }
-        echo json_encode($return);
-        exit;
+        return $cityList;
     }
     
-    public function addcompanyAction() {
-        $request = $this->getRequest()->getPost();
-        $params = array();
-        $params['company_name'] = $request['name'];
-        $params['company_url'] = $request['company_url'];
-        $params['country_id'] = $request['country_id'];
-        $params['state_id'] = $request['state_id'];
-        $params['address'] = $request['address'];
-        $params['zip_code'] = $request['zip_code'];
-        $params['email'] = $request['email_id'];
-        $params['phone_number'] = $request['phone_number'];
-        $params['alt_phone_number'] = $request['alt_phone_number'];
-        $params['type'] = $request['type'];
-        $params['contact_via'] = $request['contact_via'];
-        $inputParams['parameters'] = json_encode($params);
-        $response = $this->commonObj->curlhit($inputParams, 'addcompany');
-        $response = json_decode($response, true);
-        if($response['status'] == true){
-            $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
-            return $this->redirect()->toRoute('application');
+    function categoryList(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $categoryList  = array();
+        $postParams['method'] = 'categoryList';
+        $categoryList = $this->commonObj->curlhitApi($postParams);
+        $categoryList = json_decode($categoryList,true);
+        if(!empty($categoryList)){
+            $categoryList['data'] = $this->prepairCategory($categoryList['data']);
         }
-        echo json_encode($response);die;
+        return $categoryList;
+    }
+    
+    function getMarchantList(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $marchantList  = array();
+        $postParams['method'] = 'getMarchantList';
+        $marchantList = $this->commonObj->curlhitApi($postParams);
+        $marchantList = json_decode($marchantList,true);
+        if(!empty($marchantList)){
+            $marchantList = $marchantList['data'];
+        }
+        return $marchantList;
+    }
+    
+     function prepairCategory($categoryList) {
+        $childWiseCategory = array();
+        $childCategory = array();
+        foreach ($categoryList as $key => $value) {
+            if($value['parent_category_id'] == 0){
+                $childWiseCategory[$value['id']] = $value;
+            }else {
+                $childCategory[$key] = $value;
+            }
+        }
+        
+        if(!empty($childCategory)){
+            foreach ($childCategory as $key => $value) {
+                $childWiseCategory[$value['parent_category_id']]['child'][$key] = $value;
+            }
+        }
+        return  $childWiseCategory; 
     }    
     public function updatecompanyAction() {
         $request = $this->getRequest()->getQuery();
