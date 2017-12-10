@@ -181,15 +181,15 @@ class IndexController extends AbstractActionController
     {
         $postParams = (array) $this->getRequest()->getPost();
         $cartList  = array();
-        $postParams['method'] = 'orderlist';
+        $postParams['method'] = 'getitemintocart';
         if(!empty($this->session['user']['data'][0]['id'])){
             $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         }else{
             $postParams['guest_user_id'] = session_id();
         }
-        $postParams['order_status'] = 'current_order';
         $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
         $cartList = json_decode($cartList,true);
+        print_r($cartList);die;
         if(!empty($cartList)){
             $cartList = $cartList['data'];
         }
@@ -210,17 +210,24 @@ class IndexController extends AbstractActionController
         $user = json_decode($response,true);
         if($user['status'] == 'success'){
             $data['data'] = array_values($user['data']);
+            $params['method'] = 'updatecart';
+            $params['user_id'] = $data['data'][0]['id'];
+            $params['guest_user_id'] = session_id();
+            $response = $this->commonObj->curlhitApi($params, 'application/customer');
+            $update = json_decode($response,true);
             $this->session['user'] = $data;
         }
         echo $response;
         exit;
     }
 
-    public function servicesAction()
-    {
-        return new ViewModel();
+    public function logoutAction() {
+        $this->session->offsetUnset('user');
+        unset($this->session['user']);
+        $this->redirect()->toUrl($GLOBALS['SITE_APP_URL'] . '/login');
     }
-     public function pricingAction()
+
+    public function pricingAction()
     {
         return new ViewModel();
     }
