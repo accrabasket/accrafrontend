@@ -13,7 +13,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, productData) 
         angular.forEach(productData, function (value, key) {
             angular.forEach(value['attribute'], function (values, keys) {
                 if (values.id == attribute_id) {
-                    $('#att_' + key).val(values.merchant_id);
+                    $('#att_' + key).val(values.id);
                     $('#' + key).text('GHS '+values.price);
                 }
             });
@@ -24,7 +24,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, productData) 
         angular.forEach(productData, function (value, key) {
             angular.forEach(value['attribute'], function (values, keys) {
                 $('#' + key).text('GHS '+values.price);
-                $('#att_' + key).val(values.merchant_id);
+                $('#att_' + key).val(values.id);
             });
         });
     }
