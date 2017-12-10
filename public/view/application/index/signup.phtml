@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body>
-        <!-- header -->
-        <!-- //header -->
+    <body ng-app="app" ng-controller="signup" ng-cloak="true">
+        <div class="login-page">
+            <div class="container"> 
+                <a href="<?=$this->basePath()?>">
+                <img src="<?php echo $this->basePath() ?>/public/images/logo-big.png" alt="logo"/> 
+                </a>
+                <h3 class="w3ls-title w3ls-title1">Create your account</h3>
+                <h4 class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</h4>
+                <h4 class="danger" style="color:green" ng-show="successShow">{{successMsg}}</h4> 
+                 <div class="clearfix"> </div>
+                 <div class="login-body">
+                    <form method="post">
+                        <input type="text" ng-model="signupData.name" class="user" name="name" placeholder="Enter your Name" required="">
+                        <input type="text" ng-model="signupData.email" class="user" name="email" placeholder="Enter your email" required="">
+                        <input type="text" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" class="user" name="mobile" placeholder="Enter your mobile number" required="">
+                        <select class="form-control select2 user" style="width: 100%;" ng-model="signupData.city_id">
+                            <option value=""> Select City</option>
+                        <?php
+                            foreach ($this->cityList as $key => $value) {
+                                echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                            }
+                        ?>
+                        </select>
+                        <input type="password" style="margin-top: 20px" ng-model="signupData.password" name="password" class="lock" placeholder="Password" required="">
+                        <input type="submit" value="Sign Up " ng-click="createaccount(signupData)">
+                        <div class="forgot-grid">
+                            <!--<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>-->
+                            <div class="forgot">
+                                <a href="#">Forgot Password?</a>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </form>
+                </div>  
+                <h6>Already have an account? <a href="<?=$this->basePath()?>/application/index/login">Login Now »</a> </h6>  
 
-<!-- login-page -->
-	<div class="login-page">
-		<div class="container"> 
-			 <img src="images/logo-big.png" alt="logo"/> 
-			 
-			 <h3 class="w3ls-title w3ls-title1">Create your account</h3>  
-			<div class="login-body">
-				<form action="#" method="post">
-					<input type="text" class="user" name="name" placeholder="Enter your Name" required="">
-					<input type="text" class="user" name="email" placeholder="Enter your email" required="">
-					<input type="password" name="password" class="lock" placeholder="Password" required="">
-					<input type="submit" value="Sign Up ">
-					<div class="forgot-grid">
-						<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>
-						<div class="forgot">
-							<a href="#">Forgot Password?</a>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-				</form>
-			</div>  
-			<h6>Already have an account? <a href="login.html">Login Now »</a> </h6>  
-			 
-			<div class="login-page-bottom social-icons">
-				<h5>Recover your social account</h5>
-				<ul>
-					<li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-					<li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-					<li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-					<li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-					<li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-				</ul> 
-			</div>
-		</div>
-	</div>
-	<!-- //login-page --> 
-	 	
+                <div class="login-page-bottom social-icons">
+                    <!--<h5>Recover your social account</h5>-->
+                    <ul>
+                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
+                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
+                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
+                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
+                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
+                    </ul> 
+                </div>
+            </div>
+        </div>
+        <!-- //login-page --> 
+
         <div class="copy-right"> 
             <div class="container">
                 <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
             </div>
         </div> 
-       </body>
+    </body>
 </html>
+<script src="<?php echo $this->basePath() . '/public/js/frontend/signup.js' ?>">
+</script>

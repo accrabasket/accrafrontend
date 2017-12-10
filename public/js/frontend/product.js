@@ -2,7 +2,13 @@ var app = angular.module('app', []);
 app.controller('product', function ($scope, $http, $sce, $timeout, productData) {
     $scope.errorShow = false;
     $scope.successShow = false;
-    var productData = jQuery.parseJSON(productData);
+    $scope.no_record = '';
+    if(productData != ''){
+        var productData = jQuery.parseJSON(productData);
+    }else{
+        $scope.no_record = 'No Data Available.';
+    }
+    
     $scope.changeAttribute = function (attribute_id) {
         angular.forEach(productData, function (value, key) {
             angular.forEach(value['attribute'], function (values, keys) {

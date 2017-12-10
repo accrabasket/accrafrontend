@@ -43,7 +43,7 @@
         ?>
         <!-- //header -->	
         <!-- welcome -->
-        <div class="container" ng-app="app" ng-controller="product" ng-init="changeAllAttribute()">
+        <div class="container" ng-app="app" ng-cloak="true" ng-controller="product" ng-init="changeAllAttribute()">
             <div class="product-cont">
                  <?php
                     echo $this->partial('application/partial/leftMenu.phtml');
@@ -79,8 +79,12 @@
 
                         </div>
                     </div>
-                    <div class="products products--grid">                    
+                    <div class="products products--grid">   
+                        <div ng-show="no_record != ''"> 
+                            <h4 style="color:red;"> {{no_record}}</h4>
+                        </div>
                         <?php
+                        if(!empty($this->product['data'])){
                         foreach ($this->product['data'] as $key => $value) {
                             $imagename = $this->product['productImageData'][$key][0]['image_name'];
                             $imagetype = $this->product['productImageData'][$key][0]['type'];
@@ -129,7 +133,7 @@
                             </a>
 
 
-                        <?php } ?>  
+                        <?php }} ?>  
 
 
                     </div> 
