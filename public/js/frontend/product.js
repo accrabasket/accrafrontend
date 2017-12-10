@@ -3,9 +3,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, productData) 
     $scope.errorShow = false;
     $scope.successShow = false;
     $scope.no_record = '';
-    if(productData != ''){
-        var productData = jQuery.parseJSON(productData);
-    }else{
+    if(productData == ''){
         $scope.no_record = 'No Data Available.';
     }
     
