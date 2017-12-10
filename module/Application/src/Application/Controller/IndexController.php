@@ -31,12 +31,17 @@ class IndexController extends AbstractActionController
         if(empty($this->session['marchant_list'])){
             $this->session['marchant_list'] = $this->getMarchantList();
         }
+        if(empty($this->session['banner'])){
+            $this->session['banner'] = $this->banner();
+        }
     }
     public function indexAction()
     { 
         $this->view->cityList = $this->session['city_list'];
         $this->view->marchantList = $this->session['marchant_list'];
         $this->view->categoryList = $this->session['category_list'];
+        $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]:0;
+        $this->view->banner = $this->session['banner'];
         return $this->view;
     }
     
@@ -66,6 +71,7 @@ class IndexController extends AbstractActionController
             $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
             $getProduct = json_decode($getProduct,true);
             if(!empty($getProduct)){
+                $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
                 $this->view->product = $getProduct;
                 $this->view->categoryList = $this->session['category_list']['data'];
                 $this->view->categoryName = $this->session['category_list']['data'][$request['id']]['category_name'];
@@ -84,6 +90,7 @@ class IndexController extends AbstractActionController
     }
     
     public function signupAction(){
+        $this->view->cityList = $this->session['city_list'];
         return $this->view;
     }
     
@@ -131,6 +138,15 @@ class IndexController extends AbstractActionController
         return $marchantList;
     }
     
+    function banner(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'banner';
+        $postParams['status'] = 1;
+        $banner = $this->commonObj->curlhitApi($postParams);
+        $banner = json_decode($banner,true);
+        return $banner;
+    }
+    
      function prepairCategory($categoryList) {
         $childWiseCategory = array();
         $childCategory = array();
@@ -152,8 +168,8 @@ class IndexController extends AbstractActionController
     public function addtocartAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'addtocart';
-        if(!empty($this->session['user']->data[0]->id)){
-            $postParams['user_id'] = $this->session['user']->data[0]->id;
+        if(!empty($this->session['user']['data'][0]['id'])){
+            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         }else{
             $postParams['guest_user_id'] = session_id();
         }
@@ -161,26 +177,46 @@ class IndexController extends AbstractActionController
         echo $response;
         exit;
     }    
-    public function activateAction()
+    public function viewcartAction()
     {
-        $request = $this->getRequest()->getQuery();
-        $params = array();
-        if(isset($request['code']) && !empty($request['code'])){
-            $params['activation_code'] = $request['code'];
-            $params['status'] = 1;
-            $companyDetailResponse = $this->commonObj->curlhit($params, 'getcompanylist', 'companycontroller');        
-            $companyDetail = json_decode($companyDetailResponse, true);
-            if($companyDetail['status']){
-                $this->view->companyDetail = $companyDetail['data'][0];
-            }
+        $postParams = (array) $this->getRequest()->getPost();
+        $cartList  = array();
+        $postParams['method'] = 'orderlist';
+        if(!empty($this->session['user']['data'][0]['id'])){
+            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        }else{
+            $postParams['guest_user_id'] = session_id();
+        }
+        $postParams['order_status'] = 'current_order';
+        $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
+        $cartList = json_decode($cartList,true);
+        if(!empty($cartList)){
+            $cartList = $cartList['data'];
         }
         return $this->view;
     }    
-    public function aboutusAction()
-    {
-        return new ViewModel();
+    public function createuserAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'addedituser';
+        $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
+        echo $response;
+        exit;
     }
-     public function servicesAction()
+    
+    public function loginuserAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'login';
+        $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
+        $user = json_decode($response,true);
+        if($user['status'] == 'success'){
+            $data['data'] = array_values($user['data']);
+            $this->session['user'] = $data;
+        }
+        echo $response;
+        exit;
+    }
+
+    public function servicesAction()
     {
         return new ViewModel();
     }
