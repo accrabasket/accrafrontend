@@ -11,17 +11,25 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container;
 
 class Module
 {
-    public function onBootstrap(MvcEvent $e)
-    {
-        include 'config/constant.php';
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
+    public function onBootstrap(MvcEvent $e) {
+        $eventManager = $e->getApplication()->getEventManager();
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
+            $this,
+            'boforeDispatch'
+                ), 100);
+    }    
 
+    function boforeDispatch(MvcEvent $event) {
+        include 'config/constant.php';
+        $session = new Container('User');            
+        if ($session->offsetExists('user')) {
+            $GLOBALS['user'] = $session->user;
+        }
+    }    
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
