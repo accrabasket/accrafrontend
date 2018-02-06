@@ -21,14 +21,16 @@ class Module
             $this,
             'boforeDispatch'
                 ), 100);
-    }    
-
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+    }   
+     
     function boforeDispatch(MvcEvent $event) {
         include 'config/constant.php';
         $session = new Container('User');            
         if ($session->offsetExists('user')) {
             $GLOBALS['user'] = $session->user;
-        }
+        }    
     }    
     public function getConfig()
     {
