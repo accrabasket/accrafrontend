@@ -1,32 +1,44 @@
 <div class="left-panel">
-                    <div id="accordion">
-                        <?php 
-                            foreach ($this->categoryList as $key => $value) {
-                        ?>
-                        <a href="<?=$this->basePath()?>/application/index/product?id=<?=$value['id']?>">
-                           <span><?=$value['category_name']?></span>    
-                        </a>
-                        
-                        <div>
-                            <ul class="category-sub-list list-unstyled">
-                                <?php 
-                                if(!empty($value['child'])){
-                                    foreach ($value['child'] as $keys => $values) {
-                                ?>
-                                <li class="category-list_sub-item">
-                                    <a href="<?=$this->basePath()?>/application/index/product?id=<?=$values['id']?>">
-                                        <div class="category-item-details">
-                                            <span class="name"><span><?=$values['category_name']?></span></span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <?php }}?>
-                                
-                            </ul>
-                        </div>
-                        
-                            <?php  }?>
+            <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
+              
+                    <?php 
+                         $i = 0;
+                        foreach ($this->categoryList as $key => $value) {
+                             $i++;
+                    ?>
+                   
+                    <h3 onclick="expendButton('<?=$i?>')" class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-<?=$i?>" aria-controls="ui-id-<?=$i+1?>" aria-selected="false" aria-expanded="false" tabindex="-1">
+                        <span class="ui-accordion-header-icon ui-icon <?= $value['id'] == $this->productId ? 'ui-icon-minusthick':'ui-icon-plusthick'?>" id="span_<?=$i?>"></span>
+                                <?=$value['category_name']?>
+                    </h3>
+                    <?php 
+                        if($value['id'] == $this->productId){
+                    ?>
+                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style=" height: 289px;">
+                    <?php 
+                        }else{
+                    ?>
+                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style="display: none; height: 289px;">
+                    <?php }?>
+                        <ul class="category-sub-list list-unstyled">
+                            <?php 
+                            if(!empty($value['child'])){
+                                foreach ($value['child'] as $keys => $values) {
+                            ?>
+                            <li class="category-list_sub-item">
+                                <a href="<?=$this->basePath()?>/application/index/product?id=<?=$values['id']?>">
+                                    <div class="category-item-details"><span class="name"><span><?=$values['category_name']?></span></span></div>
+                                </a>
+                            </li>
+                            <?php }}?> 
+                        </ul>  
                     </div>
+                     <?php  
+                     $i++;
+                    }?>
+                   
+                    
+                </div>
                     <div class="col-md-12 rsidebar">
                         <div class="rsidebar-top">
                             <div class="slider-left">
@@ -129,3 +141,13 @@
                         </div>-->
                     </div>
                 </div>
+<script>
+    var lastId = 0;
+    function expendButton(id){
+        $('#'+id).css('display','block');
+        $('#span_'+id).removeClass( "ui-icon-plusthick" ).addClass( "ui-icon-minusthick" );
+        $('#'+lastId).css('display','none');
+        $('#span_'+lastId).removeClass( "ui-icon-minusthick" ).addClass( "ui-icon-plusthick" );;
+        lastId = id;
+    }
+</script>
