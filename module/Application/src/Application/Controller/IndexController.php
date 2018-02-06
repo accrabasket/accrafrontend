@@ -73,6 +73,7 @@ class IndexController extends AbstractActionController
             if(!empty($getProduct)){
                 $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
                 $this->view->product = $getProduct;
+                $this->view->productId = $request['id'];
                 $this->view->categoryList = $this->session['category_list']['data'];
                 $this->view->categoryName = $this->session['category_list']['data'][$request['id']]['category_name'];
             }
