@@ -19,9 +19,11 @@ echo $this->doctype(); ?>
     </head>
    
     <?php
-    echo $this->partial('layout/header');
+        echo $this->partial('layout/header');
     ?>
-    
+    <?php
+       echo $this->partial('application/partial/leftMenu.phtml');
+    ?>    
         
         
             <?php 

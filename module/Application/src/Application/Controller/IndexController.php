@@ -56,30 +56,27 @@ class IndexController extends AbstractActionController
     
     public function productAction() {
         $request = (array) $this->getRequest()->getQuery();
-        if (!empty($request)) {
-            $postParams['method'] = 'productlist';
-            $postParams['city_id'] = 0;
-            if(!empty($request['id'])){
-                $postParams['category_id'] = $request['id'];
-            }
-            if(!empty($request['merchant'])){
-                $postParams['merchant_id'] = $request['merchant'];
-            }
-            
-            $postParams['pagination'] = 1;
-            $postParams['page'] = 1;
-            $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
-            $getProduct = json_decode($getProduct,true);
-            if(!empty($getProduct)){
-                $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
-                $this->view->product = $getProduct;
-                $this->view->productId = $request['id'];
-                $this->view->categoryList = $this->session['category_list']['data'];
-                $this->view->categoryName = $this->session['category_list']['data'][$request['id']]['category_name'];
-            }
-        }
-//        print_r($getProduct);die;
+        $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
+        $this->view->categoryId = $request['id'];
+        
         return $this->view;
+    }
+    
+    public function productlist(){
+        $request = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'productlist';
+        if(!empty($request['category_id'])){
+            $postParams['category_id'] = $request['category_id'];
+        }
+        if(!empty($request['merchant'])){
+            $postParams['merchant_id'] = $request['merchant'];
+        }
+        $postParams['pagination'] = 1;
+        $postParams['page'] = !empty($request['page'])?$request['page']:1;
+        $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
+        
+        echo $getProduct;
+        exit;
     }
     
     public function faqAction(){

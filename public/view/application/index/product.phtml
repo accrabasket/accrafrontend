@@ -1,157 +1,84 @@
-<!DOCTYPE html>
-<?php
-//error_reporting(0);
-?>
-<html lang="en">
-    <body>
-        <div class="container" ng-app="app" ng-cloak="true" ng-controller="product">
-            <div class="product-cont">
-                 <?php
-                    echo $this->partial('application/partial/leftMenu.phtml');
-                ?>
-                <div class="right-panel">
-                    <div class="full-width"> 
-                        <ol class="breadcrumb breadcrumb1 relative pdp_top-container" >
-                            <li><a href="#">Home</a></li>
-                            <li class="active"><?=$this->categoryName?></li>	
-                            <div class="pull-right">
-                                <div class="plp-sort-dd">                  
-                                    <label class="dropdown_title-label" for="dd-title-label">Sort by</label>
-                                    <select>
-                                        <option>Relevance</option>
-                                        <option>Low to High</option>
-                                        <option>High to Low</option>
-                                        <option>Name (A To Z)</option>
-                                    </select>
-                                </div>
-                            </div>		
-                        </ol>
+<div class="right-panel"  ng-app="app" ng-cloak="true" ng-controller="product">
+    <div class="full-width"> 
+        <ol class="breadcrumb breadcrumb1 relative pdp_top-container" >
+            <li><a href="#">Home</a></li>
+            <li class="active"><?= $this->categoryName ?></li>	
+            <div class="pull-right">
+                <div class="plp-sort-dd">                  
+                    <label class="dropdown_title-label" for="dd-title-label">Sort by</label>
+                    <select>
+                        <option>Relevance</option>
+                        <option>Low to High</option>
+                        <option>High to Low</option>
+                        <option>Name (A To Z)</option>
+                    </select>
+                </div>
+            </div>		
+        </ol>
 
-                        <div class="clearfix"> </div>
+        <div class="clearfix"> </div>
+    </div>
+
+    <div class="category-navs">
+        <div class="clearfix com-marg"> </div>
+        <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
+        <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
+    </div>
+    <div class="products products--grid">   
+        <div ng-show="no_record != ''"> 
+            <h4 style="color:red;"> {{no_record}}</h4>
+        </div>
+        <a class="product_wrapper" href="javascript:void(0)">
+            <div class="plp-product">
+                <!--<div class="plp-product_offer">19% OFF</div>-->
+                <div class="plp-product_offer display--none"><!-- react-text: 3259 -->GHC<!-- /react-text --><!-- react-text: 3260 -->30<!-- /react-text --><!-- react-text: 3261 --> Off<!-- /react-text --></div>
+                <div class="plp-product_img ">
+                    <img class="img animated fadeIn"  src="images" style="width:200px">
+                </div>
+                <div class="plp-product_name " title="product_name">
+                    <div class="LinesEllipsis  plp-product_name--box">{{product_name}}<wbr></wbr>
                     </div>
-
-                    <div class="category-navs">
-                        <div class="img-widget-box plp-banner-edlp"><a class="full-width display--block" href="/"><img class="full-width animated fadeIn" alt="" src="images/banner-edlp-b4f073debb34ce3046769c4faab9bbcd.jpg"></a></div>
-                        <div class="clearfix com-marg"> </div>
-                        <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
-                        <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
-                        <div class="category-navs_container">
-                            <div class="category-navs_current plp-banner-edlp"><?=$this->categoryName?></div>
-
-                        </div>
+                </div>
+                <div class="plp-product_quantity" title="">
+                    <span>
+                        {{attribute_name}}
+                    </span>
+                </div>
+                <select class="form-control " style="width: 100%;">
+                    <option value="attribute"> 1kg</option>
+                    <option value="attribute"> 1kg</option>
+                </select>
+                <!--div class="plp-product_price">
+                    <div class="plp-product_price--container">
+                        <input type="hidden" id="att_<?= $key ?>">
+                        <div class="plp-product_price--new display--inline-block@mobile" id="<?= $key ?>"></div>
                     </div>
-                    <div class="products products--grid">   
-                        <div ng-show="no_record != ''"> 
-                            <h4 style="color:red;"> {{no_record}}</h4>
-                        </div>
-                        <?php
-                        if(!empty($this->product['data'])){
-                        foreach ($this->product['data'] as $key => $value) {
-                            $imagename = !empty($this->product['productImageData'][$key][0]['image_name'])?$this->product['productImageData'][$key][0]['image_name']:'';
-                            $imagetype = !empty($this->product['productImageData'][$key][0]['type'])?$this->product['productImageData'][$key][0]['type']:'';
-                            $imagepath = $this->product['imageRootPath'].'/'.$imagetype.'/'.$key.'/'.$imagename;
-                            ?>
-                            <a class="product_wrapper" href="javascript:void(0)">
-                                <div class="plp-product">
-                                    <!--<div class="plp-product_offer">19% OFF</div>-->
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3259 -->GHC<!-- /react-text --><!-- react-text: 3260 -->30<!-- /react-text --><!-- react-text: 3261 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img ">
-                                        <?php 
-                                            if(!empty($imagename)){
-                                        ?>
-                                        <img class="img animated fadeIn" alt="<?= $value['product_name'] ?>" src="<?=$imagepath?>" style="width:200px">
-                                            <?php }else{?>
-                                                <img class="img animated fadeIn" alt="<?= $value['product_name'] ?>" src="<?php echo $this->basePath() ?>/public/images/newimg/noimage.png" style="width:200px">
-                                            <?php }?>
-                                    </div>
-                                    <div class="plp-product_name " title="<?= $value['product_name'] ?>">
-                                        <div class="LinesEllipsis  plp-product_name--box"><?= $value['product_name'] ?><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="">
-                                        <span>
-                                            <?php echo isset($attribute['attribute_name'])?$attribute['attribute_name']:'' ?>
-                                        </span>
-                                    </div>
-                                    <?php
-                                    //print_r($value);die;
-                                    ?>
-                                    <select class="form-control " style="width: 100%;">
-                                        <?php    
-                                        
-                                        foreach ($value['attribute'] as $keys => $values) {
-                                            ?>
-                                        <option value="<?=$values['id']?>"><?= $values['attribute_name'] ?></option>
-                                        <?php } ?>    
-                                    </select>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <input type="hidden" id="att_<?=$key?>">
-                                            <!--<div class="plp-product_price--old display--inline-block@mobile"> react-text: 3274 GHC /react-text  react-text: 3275 154 /react-text </div>-->
-                                            <div class="plp-product_price--new display--inline-block@mobile" id="<?=$key?>"></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addtocart('<?=$key?>','<?=$value['product_name']?>')">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-
-                        <?php }} ?>  
-
-
-                    </div> 
+                </div-->
+                <div class="plp-product_add-to-cart">
+                    <div class="add-to-cart">
+                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
+                        <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addtocart()">Add To Cart</button>
+                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--</div>-->
-        <!-- //footer-top --> 
-        <!-- subscribe -->
-        <div class="subscribe"> 
-            <div class="container">
-                <div class="col-md-6 social-icons w3-agile-icons">
-                    <h4>Keep in touch</h4>  
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-                    </ul> 
-                    <ul class="apps"> 
-                        <li><h4>Download Our app : </h4> </li>
-                        <li><a href="#" class="fa fa-apple"></a></li>
-                        <li><a href="#" class="fa fa-windows"></a></li>
-                        <li><a href="#" class="fa fa-android"></a></li>
-                    </ul> 
-                </div> 
-                <div class="col-md-6 subscribe-right no-rpad no-lpad">
-                    <h4>Sign up for email and get 25%off!</h4>  
-                    <form action="#" method="post"> 
-                        <input type="text" name="email" placeholder="Enter your Email..." required="">
-                        <input type="submit" value="Subscribe">
-                    </form>
-                    <div class="clearfix"> </div> 
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-        <!-- //subscribe --> 
-        <!-- footer -->
-        <!-- //footer -->		
-        <div class="copy-right"> 
-            <div class="container">
-                <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
-            </div>
-        </div>   
+        </a>
+    </div> 
+</div>
+</div>
+</div>
+
+<!-- //subscribe --> 
+<!-- footer -->
+<!-- //footer -->		
+<div class="copy-right"> 
+    <div class="container">
+        <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
+    </div>
+</div>   
 </html>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/product.js' ?>">
 </script>
 <script>
-    app.value('productData', <?php echo json_encode($this->product['data'])?>);
+    app.value('productData', <?php echo $this->categoryId;?>);
 </script>

@@ -49,7 +49,7 @@
             <div class="header-city">
                 <select class="form-control select2" style="width: 100%;">
                     <?php
-                        foreach ($this->cityList as $key => $value) {
+                        foreach ($GLOBALS['city_list'] as $key => $value) {
                             echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
                         }
                     ?>

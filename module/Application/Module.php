@@ -31,6 +31,18 @@ class Module
         if ($session->offsetExists('user')) {
             $GLOBALS['user'] = $session->user;
         }    
+        if ($session->offsetExists('city_list')) {
+            $GLOBALS['city_list'] = $session->city_list;
+        }        
+        if ($session->offsetExists('category_list')) {
+            $GLOBALS['category_list'] = $session->category_list;
+        }        
+        if ($session->offsetExists('marchant_list')) {
+            $GLOBALS['marchant_list'] = $session->marchant_list;
+        }               
+        if ($session->offsetExists('banner')) {
+            $GLOBALS['banner'] = $session->banner;
+        }         
     }    
     public function getConfig()
     {
