@@ -1,18 +1,6 @@
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
-    <head>
-        <script src="<?= $this->basePath() . '/public/plugins/jquery.min.js' ?>"></script>
-        <script src="<?= $this->basePath() . '/public/plugins/jquery-ui/jquery-ui.js' ?>"></script>
-        <script src="<?= $this->basePath() . '/public/plugins/bootstrap/js/bootstrap.min.js' ?>"></script>        
-        <?php
-        echo $this->headScript()
-                ->prependFile($this->basePath() . '/public/js/angular.min.js')
-        ;
-        ?>
-
-    </head>
-
     <?php
     echo $this->partial('layout/adminlayout/header');
     ?>

@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <?php
-error_reporting(0);
+//error_reporting(0);
 ?>
 <html lang="en">
     <body>
-        <!-- header -->
-        <?php
-            echo $this->partial('application/partial/header.phtml');
-        ?>
-        <!-- //header -->	
-        <!-- welcome -->
-        <div class="container" ng-app="app" ng-cloak="true" ng-controller="product" ng-init="changeAllAttribute()">
+        <div class="container" ng-app="app" ng-cloak="true" ng-controller="product">
             <div class="product-cont">
                  <?php
                     echo $this->partial('application/partial/leftMenu.phtml');
@@ -53,8 +47,8 @@ error_reporting(0);
                         <?php
                         if(!empty($this->product['data'])){
                         foreach ($this->product['data'] as $key => $value) {
-                            $imagename = $this->product['productImageData'][$key][0]['image_name'];
-                            $imagetype = $this->product['productImageData'][$key][0]['type'];
+                            $imagename = !empty($this->product['productImageData'][$key][0]['image_name'])?$this->product['productImageData'][$key][0]['image_name']:'';
+                            $imagetype = !empty($this->product['productImageData'][$key][0]['type'])?$this->product['productImageData'][$key][0]['type']:'';
                             $imagepath = $this->product['imageRootPath'].'/'.$imagetype.'/'.$key.'/'.$imagename;
                             ?>
                             <a class="product_wrapper" href="javascript:void(0)">
@@ -74,9 +68,17 @@ error_reporting(0);
                                         <div class="LinesEllipsis  plp-product_name--box"><?= $value['product_name'] ?><wbr></wbr>
                                         </div>
                                     </div>
-                                    <div class="plp-product_quantity" title=""><span><?= $attribute['attribute_name'] ?></span></div>
-                                    <select class="form-control " style="width: 100%;" ng-change="changeAttribute(attribute)" ng-model="attribute">
-                                        <?php
+                                    <div class="plp-product_quantity" title="">
+                                        <span>
+                                            <?php echo isset($attribute['attribute_name'])?$attribute['attribute_name']:'' ?>
+                                        </span>
+                                    </div>
+                                    <?php
+                                    //print_r($value);die;
+                                    ?>
+                                    <select class="form-control " style="width: 100%;">
+                                        <?php    
+                                        
                                         foreach ($value['attribute'] as $keys => $values) {
                                             ?>
                                         <option value="<?=$values['id']?>"><?= $values['attribute_name'] ?></option>
@@ -146,8 +148,7 @@ error_reporting(0);
             <div class="container">
                 <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
             </div>
-        </div>  
-        <script src="<?php echo $this->basePath() . '/public/js/jquery.min.js'?>"></script>  
+        </div>   
 </html>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/product.js' ?>">
 </script>
