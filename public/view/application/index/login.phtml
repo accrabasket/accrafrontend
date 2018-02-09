@@ -3,9 +3,6 @@
     <body ng-app="app" ng-controller="login">
         <div class="login-page">
             <div class="container"> 
-                <a href="<?= $this->basePath() ?>">
-                    <img src="<?php echo $this->basePath() ?>/public/images/logo-big.png" alt="logo"/> 
-                </a>
                 <h3 class="w3ls-title w3ls-title1 subscribe-right">  Login to your account</h3> 
                 <h4 class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</h4>
                 <h4 class="danger" style="color:green" ng-show="successShow">{{successMsg}}</h4>
