@@ -26,6 +26,7 @@ class Module
     }   
      
     function boforeDispatch(MvcEvent $event) {
+        $GLOBALS['action']  = $event->getRouteMatch()->getParam('action');
         include 'config/constant.php';
         $session = new Container('User');            
         if ($session->offsetExists('user')) {

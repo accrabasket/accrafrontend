@@ -1,39 +1,39 @@
 var app = angular.module('app', []);
-app.controller('login', function ($scope, $http, $sce, $timeout) {
+app.controller('changepassword', function ($scope, $http, $timeout) {
     $scope.errorShow = false;
     $scope.successShow = false;
     $scope.ajaxLoadingData = false;
-    $scope.loginData = {};
+    $scope.changepasswordData = {};
 
-    $scope.login = function (loginData) {
+    $scope.changepassword = function (changepasswordData) {
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         var error = ' ';
-        
-        if (loginData.email == undefined || loginData.email == '') {
-            error = 'Email should not empty';
-        }else{
-            if (!filter.test(loginData.email)) {
-                error = 'Enter correct email id .';
-            }
+        if (changepasswordData.password != changepasswordData.confirm_password) {
+            error = 'New password and confirm password should be same';
         }
-        if (loginData.password == undefined || loginData.password == '') {
+        
+        if (changepasswordData.password == undefined || changepasswordData.password == '') {
             error = 'Password should not empty';
+        }
+        
+        if (changepasswordData.confirm_password == undefined || changepasswordData.confirm_password == '') {
+            error = 'Enter new password';
         }
         
         if (error == ' ') {
             $scope.ajaxLoadingData = true;
             $http({
                 method: 'POST',
-                url: serverAppUrl + '/loginuser',
-                data: ObjecttoParams(loginData),
+                url: serverAppUrl + '/changepasswordsave',
+                data: ObjecttoParams(changepasswordData),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
                 if (response.status == 'success') {
-//                    $scope.successShow = true;
-                    //$scope.successMsg = response.msg ;
+                    $scope.successShow = true;
+                    $scope.successMsg = response.msg ;
                     $timeout(function(){
-                        var path = serverAppUrl + '/index';
+                        var path = serverAppUrl + '/logout';
                         window.location.href = path;
                     },200);
                 }else{

@@ -225,14 +225,19 @@ class IndexController extends AbstractActionController
         $this->redirect()->toUrl($GLOBALS['SITE_APP_URL'] . '/login');
     }
 
-    public function pricingAction()
-    {
+    public function changepasswordAction(){
         return new ViewModel();
     }
     
-    public function signinAction()
-    {
-        return new ViewModel();
+    public function changepasswordsaveAction(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $data = array();
+        $data['method'] = 'addedituser';
+        $data['password'] = $postParams['password'];
+        $data['id'] =  $this->session['user']['data'][0]['id'];
+        $response = $this->commonObj->curlhitApi($data, 'application/customer');
+        echo $response;
+        exit;
     }
     public function forgetpasswordAction()
     {

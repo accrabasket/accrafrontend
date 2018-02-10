@@ -23,7 +23,10 @@ echo $this->doctype(); ?>
         echo $this->partial('layout/header');
     ?>
     <?php
-//       echo $this->partial('application/partial/leftMenu.phtml');
+       if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
+           echo $this->partial('application/partial/leftMenu.phtml');
+       }
+       
     ?>    
         
         
