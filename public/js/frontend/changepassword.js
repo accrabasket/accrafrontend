@@ -7,17 +7,29 @@ app.controller('changepassword', function ($scope, $http, $timeout) {
 
     $scope.changepassword = function (changepasswordData) {
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
+        var auth = '';
+        auth = $('#auth').val();
+        
         var error = ' ';
-        if (changepasswordData.password != changepasswordData.confirm_password) {
+        if (changepasswordData.new_password != changepasswordData.confirm_password) {
             error = 'New password and confirm password should be same';
         }
-        
-        if (changepasswordData.password == undefined || changepasswordData.password == '') {
-            error = 'Password should not empty';
+        if(auth == ''){
+            if (changepasswordData.password == changepasswordData.confirm_password) {
+                error = 'New password and old password should not be same';
+            }
+
+            if (changepasswordData.password == undefined || changepasswordData.password == '') {
+                error = 'Password should not empty';
+            }
+        }else{
+            changepasswordData.auth_key = auth;
         }
         
         if (changepasswordData.confirm_password == undefined || changepasswordData.confirm_password == '') {
+            error = 'Enter conform password';
+        }
+        if (changepasswordData.new_password == undefined || changepasswordData.new_password == '') {
             error = 'Enter new password';
         }
         

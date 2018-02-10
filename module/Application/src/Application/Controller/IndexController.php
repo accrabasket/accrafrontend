@@ -226,27 +226,45 @@ class IndexController extends AbstractActionController
     }
 
     public function changepasswordAction(){
-        return new ViewModel();
+        $postParams = (array) $this->getRequest()->getQuery();
+        $this->view = new ViewModel();
+        if(!empty($postParams['key'])){
+            $this->view->authkey = $postParams['key'];
+        }
+        return $this->view;
     }
     
     public function changepasswordsaveAction(){
         $postParams = (array) $this->getRequest()->getPost();
         $data = array();
-        $data['method'] = 'addedituser';
-        $data['password'] = $postParams['password'];
-        $data['id'] =  $this->session['user']['data'][0]['id'];
+        if(!empty($postParams['auth_key'])){
+            $data['method'] = 'changepasswordbyauthkey';
+            $data['auth_key'] = $postParams['auth_key'];
+        }else{
+            $data['method'] = 'changepassword';;
+            $data['password'] = $postParams['password'];
+            $data['user_id'] =  $this->session['user']['data'][0]['id'];
+        }
+        $data['new_password'] = $postParams['new_password'];
         $response = $this->commonObj->curlhitApi($data, 'application/customer');
         echo $response;
         exit;
     }
-    public function forgetpasswordAction()
-    {
+    public function forgetpasswordAction(){
         return new ViewModel();
     }
-    public function contactusAction()
-    {
-        return new ViewModel();
+    
+    
+    public function forgetpassworduserAction(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $data = array();
+        $data['method'] = 'forgetpassword';
+        $data['email'] = $postParams['email'];
+        $response = $this->commonObj->curlhitApi($data, 'application/customer');
+        echo $response;
+        exit;
     }
+    
     public function pagenotfoundAction()
     {
         return new ViewModel();
