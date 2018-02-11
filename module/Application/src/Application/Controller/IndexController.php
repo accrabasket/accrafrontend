@@ -62,7 +62,7 @@ class IndexController extends AbstractActionController
         return $this->view;
     }
     
-    public function productlist(){
+    public function productlistAction(){
         $request = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'productlist';
         if(!empty($request['category_id'])){
