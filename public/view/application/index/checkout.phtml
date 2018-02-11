@@ -119,34 +119,7 @@
                                                 <option value="7">Bayelsa</option>
                                                 <option value="8">Benue</option>
                                                 <option value="9">Borno</option>
-                                                <option value="10">Cross River</option>
-                                                <option value="11">Delta</option>
-                                                <option value="12">Ebonyi</option>
-                                                <option value="13">Edo</option>
-                                                <option value="14">Ekiti</option>
-                                                <option value="15">Enugu</option>
-                                                <option value="16">Gombe</option>
-                                                <option value="17">Imo</option>
-                                                <option value="18">Jigawa</option>
-                                                <option value="19">Kaduna</option>
-                                                <option value="20">Kano</option>
-                                                <option value="21">Katsina</option>
-                                                <option value="22">Kebbi</option>
-                                                <option value="23">Kogi</option>
-                                                <option value="24">Kwara</option>
-                                                <option value="25">Lagos</option>
-                                                <option value="26">Nassarawa</option>
-                                                <option value="27">Niger</option>
-                                                <option value="28">Ogun</option>
-                                                <option value="29">Ondo</option>
-                                                <option value="30">Osun</option>
-                                                <option value="31">Oyo</option>
-                                                <option value="32">Plateau</option>
-                                                <option value="33">Rivers</option>
-                                                <option value="34">Sokoto</option>
-                                                <option value="35">Taraba</option>
-                                                <option value="36">Yobe</option>
-                                                <option value="37">Zamfara</option>
+                                                <option value="10">Cross River</opti
                                                 <option value="38">Zone outside Nigeria</option>
                                             </select>
                                         </td>
@@ -186,74 +159,91 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="right"><a class="button" href="#" id="cart">Proceed To Checkout</a></div>
+                        <div class="right"><a class="button" href="#" id="cart" ng-click="getUserAddress()">Proceed To Checkout</a></div>
                         <div class="left"><a class="button" href="<?php echo $this->basePath() . '/application' ?>">Continue Shopping</a></div>
                     </div>
                 </div>
             </div>
             <div class="content">
+                <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
+                <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
                 <h1>Shipping Address <span class="pull-right"><i class="fa fa-edit" id="edit-shipping"></i></span></h1>
                 <div class="checkout wrapper no-margin none" id="shippingbox">
-                    <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-8 col-sm-8 col-xs-12" ng-show="createAddress">
                         <h4>Add New Address</h4>
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                <h5 class="mb10">Nick Name</h5>
+                                <input type="text" ng-model="address.address_nickname" value="<?= $this->user_details['name']?>" placeholder="Nick Name" class="checkout"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h5 class="mb10">Full Name</h5>
-                                <input type="text" value="<?= $this->user_details['name']?>" placeholder="Nick Name" class="checkout"/>
+                                <input type="text" ng-model="address.contact_name" value="<?= $this->user_details['name']?>" placeholder="Nick Name" class="checkout"/>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Mobile Number</h5>
-                                <input type="text" value="<?= $this->user_details['mobile_number']?>" placeholder="Mobile Number" class="checkout"/>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h5 class="mb10">City</h5>
-                                <input type="text" placeholder="City" class="checkout"/>
+                                <select id="cityname" class="form-control select2" style="width: 100%;">
+                                <?php
+                                    foreach ($GLOBALS['city_list'] as $key => $value) {
+                                        echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                                    }
+                                ?>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h5 class="mb10">House No. &amp; Details</h5>
-                                <input type="text" placeholder="eg:Flat 201, Block B, 2nd Floor" class="checkout"/>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Contact Residential Complex</h5>
-                                <input type="text" placeholder="eg: DLF Apparment" class="checkout"/>
+                                <input type="text" ng-model="address.house_number" placeholder="eg:Flat 201, Block B, 2nd Floor" class="checkout"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Area</h5>
-                                <input type="text" placeholder="110059" class="checkout"/>
+                                <input type="text" ng-model="address.area" placeholder="110059" class="checkout"/>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Pin Code</h5>
-                                <input type="text" placeholder="110059" class="checkout"/>
+                                <input type="text" ng-model="address.zipcode" placeholder="110059" class="checkout"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Street Details</h5>
-                                <input type="text" placeholder="near HDFC Bank" class="checkout"/>
+                                <input type="text" ng-model="address.street_detail" placeholder="near HDFC Bank" class="checkout"/>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Contact Landmark</h5>
-                                <input type="text" placeholder="near HDFC Bank" class="checkout"/>
+                                <input type="text" ng-model="address.landmark" placeholder="near HDFC Bank" class="checkout"/>
                             </div>
                         </div>
                         <div class="row mb10">
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="submit" value="SUBMIT" id="shipping">
+                                <input type="submit" ng-click="savenewaddress(address)" value="SUBMIT" >
                             </div>
                         </div>
                         <div class="clearfix mb10"></div>
                     </div>
-                    <div class="col-md-4 col-sm-12 col-xs-12" style="background:#E4E8E9; padding:8px;">
+                    <div class="col-md-2 col-sm-12 col-xs-12" style=" padding:8px;">
+                        <span ng-repeat="data in userAddress">
+                            <input type="radio" ng-checked="{{$first}}" id="show_coupon" value="valuable" name="next" onclick="showcoupon()">{{data.address_nickname}} , {{data.area}} ,{{data.city_name}} , {{data.zipcode}}
+                        
+                        </span>
+                    </div>
+                    <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style="background:#E4E8E9; padding:8px;">
                         <h4 class="font-size--medium">
                             <input type="checkbox">
                             &nbsp; Primary Address is same as parmanent address.</h4>
-                        <a href="#" style="color:#00CC33; font-size:16px;"><i class="fa fa-plus-square"></i> Create  New Address</a> </div>
+                        <a href="#" ng-click="openNewAddress()" style="color:#00CC33; font-size:16px;"><i class="fa fa-plus-square"></i> Create  New Address</a> </div>
+                        <div class="row mb10" ng-show="!createAddress">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="submit"  value="SUBMIT" id="shipping1">
+                            </div>
+                        </div>
                     <div class="clearfix"> </div>
                 </div>
             </div>
@@ -385,6 +375,14 @@
                               $("#edit-cart").fadeIn();
                           });
                           $("#shipping").click(function () {
+                              $("#cartbox").fadeOut();
+                              $("#shippingbox").fadeOut();
+                              $("#paybox").fadeIn();
+
+                              $("#edit-cart").fadeIn();
+                              $("#edit-shipping").fadeIn();
+                          });
+                          $("#shipping1").click(function () {
                               $("#cartbox").fadeOut();
                               $("#shippingbox").fadeOut();
                               $("#paybox").fadeIn();
