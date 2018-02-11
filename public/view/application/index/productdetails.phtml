@@ -7,13 +7,10 @@
             .com-marg{margin-bottom:2.4em;}
         </style>
     </head>
-    <body>
-        <!-- header -->
-        <!-- //header -->
-        <!-- breadcrumbs --> 
+    <body ng-app="app" ng-controller="productdetails">
         <div class="container subscribe-right"> 
             <ol class="breadcrumb breadcrumb1">
-                <li><a href="index.html">Home</a></li>
+                <li>Home</li>
                 <li class="active">Product</li>
             </ol> 
             <div class="clearfix"> </div>
@@ -21,27 +18,26 @@
         <!-- //breadcrumbs -->
         <!-- products -->
         <div class="products">	 
-            <div class="container">  
+            <div class="container">
                 <div class="single-page">
                     <div class="single-page-row" id="detail-21">
-                        <div class="col-md-6 single-top-left">	
+                        <div class="col-md-6 single-top-left">
+                            <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
+                             <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
                             <div class="flexslider">
                                 <ul class="slides">
                                     <li data-thumb="images/si-1.jpg">
                                         <div class="thumb-image detail_images"> <img src="images/si-1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
                                     </li>
                                     <li data-thumb="images/si.jpg">
-                                        <div class="thumb-image"> <img src="images/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                        <div class="thumb-image"> <img src="<?=$this->productImage?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
                                     </li>
-                                    <!--<li data-thumb="images/s3.jpg">
-                                        <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                    </li> --> 
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-6 single-top-right">
-                            <h3 class="item_name">AAshrivaad Multigrain Atta</h3>
-                            <p>Processing Time: Item will be shipped out within 1 working days. </p>
+                            <h3 class="item_name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?></h3>
+                            <!--<p>Processing Time: Item will be shipped out within 1 working days. </p>-->
                             <div class="single-rating">
                                 <ul>
                                     <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -54,21 +50,29 @@
                                 </ul> 
                             </div>
                             <div class="single-price">
+                                <?php 
+                                    if(!empty($this->productDetails['attribute'])){
+                                        foreach ($this->productDetails['attribute'] as $key => $value) {
+                                            $price = $value['price'];
+                                            $id = $value['id'];
+                                        }
+                                    }
+                                ?>
                                 <ul>
-                                    <li>GHC540</li>  
-                                    <li><del>GHC600</del></li> 
-                                    <li><span class="w3off">10% OFF</span></li> 
-                                    <li>Ends on: Dec,5th</li>
+                                    <li>GHC <?= $price?></li> 
+                                    <!--<li><span class="w3off">10% OFF</span></li>--> 
+                                    <!--<li>Ends on: Dec,5th</li>-->
                                     <li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i> Coupon</a></li>
                                 </ul>	
                             </div> 
-                            <p class="single-price-text">Fusce a egestas nibh, eget ornare erat. Proin placerat, urna et consequat efficitur, sem odio blandit enim, sit amet euismod turpis est mattis lectus. Vestibulum maximus quam et quam egestas imperdiet. In dignissim auctor viverra. </p>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart" />
-                                <input type="hidden" name="add" value="1" /> 
-                                <input type="hidden" name="w3ls_item" value="AAshrivaad Multigrain Atta" /> 
-                                <input type="hidden" name="amount" value="540.00" /> 
-                                <button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
+                            <p class="single-price-text"><?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?> </p>
+                            <form >
+                                <input type="hidden" name="number_of_item" value="1" />
+                                <input type="hidden" name="action" value="add" /> 
+                                <input type="hidden" name="item_name" value="<?=$this->productDetails['product_name']?>" /> 
+                                <input type="hidden" name="merchant_inventry_id" value="<?=$id?>" /> 
+                                <input type="hidden" name="gotoproductpage" value="<?=$this->productDetails['category_id']?>" /> 
+                                <button type="button" class="w3ls-cart" ng-click="addtocart('<?=$this->productDetails['product_id']?>','<?=$this->productDetails['product_name']?>','<?=$id?>')" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
                             </form>
                             <button class="w3ls-cart w3ls-cart-like"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</button>
                         </div>
@@ -89,7 +93,7 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?>
                                 </div>
                             </div>
                         </div>
@@ -103,308 +107,22 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    <a class="collapsed pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <i class="fa fa-check-square-o fa-icon" aria-hidden="true"></i> reviews (5) <span class="fa fa-angle-down fa-arrow" aria-hidden="true"></span> <i class="fa fa-angle-up fa-arrow" aria-hidden="true"></i>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    <a class="collapsed pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        <i class="fa fa-question-circle fa-icon" aria-hidden="true"></i> help <span class="fa fa-angle-down fa-arrow" aria-hidden="true"></span> <i class="fa fa-angle-up fa-arrow" aria-hidden="true"></i>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <?php
+                                    if(!empty($this->productDetails['custom_info'])){
+                                        foreach ($this->productDetails['custom_info'] as $key => $value) {
+                                            echo $key .' : ' .$value.'<br>';
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- //collapse --> 
-
-                <!-- recommendations -->
-                <div class="recommend">
-                    <h3 class="w3ls-title">Our Recommendations </h3> 
-
-                    <div class="products products--grid">     
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/economy-kabuli-chana/prid/375917">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">19% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3259 -->GHC<!-- /react-text --><!-- react-text: 3260 -->30<!-- /react-text --><!-- react-text: 3261 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Economy Kabuli Chana" src="images//pro_375917.jpg"></div>
-                                    <div class="plp-product_name " title="Economy Kabuli Chana">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3267 -->Economy Kabuli Chana<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3274 -->GHC<!-- /react-text --><!-- react-text: 3275 -->154<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3277 -->GHC<!-- /react-text --><!-- react-text: 3278 -->124<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/economy-malka-masoor-dal/prid/375918">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">16% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3288 -->GHC<!-- /react-text --><!-- react-text: 3289 -->15<!-- /react-text --><!-- react-text: 3290 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Economy Malka Masoor Dal" src="images//pro_375918.jpg"></div>
-                                    <div class="plp-product_name " title="Economy Malka Masoor Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3296 -->Economy Malka Masoor Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3303 -->GHC<!-- /react-text --><!-- react-text: 3304 -->90<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3306 -->GHC<!-- /react-text --><!-- react-text: 3307 -->75<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/economy-dhuli-moong-dal/prid/375919">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">21% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3317 -->GHC<!-- /react-text --><!-- react-text: 3318 -->19<!-- /react-text --><!-- react-text: 3319 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Economy Dhuli Moong Dal" src="images//pro_375919.jpg"></div>
-                                    <div class="plp-product_name " title="Economy Dhuli Moong Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3325 -->Economy Dhuli Moong Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3332 -->GHC<!-- /react-text --><!-- react-text: 3333 -->90<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3335 -->GHC<!-- /react-text --><!-- react-text: 3336 -->71<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/economy-chitra-rajma/prid/375920">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">16% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3346 -->GHC<!-- /react-text --><!-- react-text: 3347 -->20<!-- /react-text --><!-- react-text: 3348 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Economy Chitra Rajma" src="images//pro_375920.jpg"></div>
-                                    <div class="plp-product_name " title="Economy Chitra Rajma">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3354 -->Economy Chitra Rajma<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3361 -->GHC<!-- /react-text --><!-- react-text: 3362 -->120<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3364 -->GHC<!-- /react-text --><!-- react-text: 3365 -->100<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/best-value-arhar-daltoor-dal/prid/318544">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">34% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3375 -->GHC<!-- /react-text --><!-- react-text: 3376 -->41<!-- /react-text --><!-- react-text: 3377 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Best Value Arhar Dal/Toor Dal" src="images//pro_318544.jpg"></div>
-                                    <div class="plp-product_name " title="Best Value Arhar Dal/Toor Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3383 -->Best Value Arhar Dal/Toor Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg">
-                                        <div class="plp-product_variant">
-                                            <div class="plp-product_variant-units">1 kg</div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3392 -->GHC<!-- /react-text --><!-- react-text: 3393 -->120<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3395 -->GHC<!-- /react-text --><!-- react-text: 3396 -->79<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/tata-sampann-arhar-daltoor-dal/prid/39493">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">17% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3406 -->GHC<!-- /react-text --><!-- react-text: 3407 -->23<!-- /react-text --><!-- react-text: 3408 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Tata Sampann Arhar Dal/Toor Dal" src="images//pro_39493.jpg"></div>
-                                    <div class="plp-product_name " title="Tata Sampann Arhar Dal/Toor Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3414 -->Tata Sampann Arhar Dal/Toor Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3421 -->GHC<!-- /react-text --><!-- react-text: 3422 -->129<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3424 -->GHC<!-- /react-text --><!-- react-text: 3425 -->106<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/tata-sampann-unpolished-arhar-daltoor-dal/prid/305650">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">27% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3435 -->GHC<!-- /react-text --><!-- react-text: 3436 -->18<!-- /react-text --><!-- react-text: 3437 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Tata Sampann Unpolished Arhar Dal/Toor Dal" src="images//pro_305650.jpg"></div>
-                                    <div class="plp-product_name " title="Tata Sampann Unpolished Arhar Dal/Toor Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3443 -->Tata Sampann Unpolished Arhar Dal/Toor Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="500 gm"><span>500 gm</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3450 -->GHC<!-- /react-text --><!-- react-text: 3451 -->66<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3453 -->GHC<!-- /react-text --><!-- react-text: 3454 -->48<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                        <div class="col-lg-3 col-xs-12 col-sm-6 com-marg"><a class="product_wrapper" href="/prn/green-bite-arhar-daltoor-dal/prid/367617">
-                                <div class="plp-product">
-                                    <div class="plp-product_offer">42% OFF</div>
-                                    <div class="plp-product_offer display--none"><!-- react-text: 3464 -->GHC<!-- /react-text --><!-- react-text: 3465 -->59<!-- /react-text --><!-- react-text: 3466 --> Off<!-- /react-text --></div>
-                                    <div class="plp-product_img "><img class="img animated fadeIn" alt="Green Bite Arhar Dal/Toor Dal" src="images//pro_367617.jpg"></div>
-                                    <div class="plp-product_name " title="Green Bite Arhar Dal/Toor Dal">
-                                        <div class="LinesEllipsis  plp-product_name--box"><!-- react-text: 3472 -->Green Bite Arhar Dal/Toor Dal<!-- /react-text --><wbr></wbr>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div>
-                                    <div class="plp-product_price">
-                                        <div class="plp-product_price--container">
-                                            <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 3479 -->GHC<!-- /react-text --><!-- react-text: 3480 -->140<!-- /react-text --></div>
-                                            <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 3482 -->GHC<!-- /react-text --><!-- react-text: 3483 -->81<!-- /react-text --></div>
-                                        </div>
-                                    </div>
-                                    <div class="plp-product_add-to-cart">
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                            <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button">Add To Cart</button>
-                                            <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a></div>
-                    </div>  
-                </div>
-                <!-- //recommendations --> 
-                <div class="col-md-12 subscribe-right no-lpad no-rpad"><img src="images/shop1.jpg" class="img-responsive"/></div>
-                <div class="clearfix"></div>
-                <!-- offers-cards --> 
-                <div class="w3single-offers offer-bottom subscribe-right"> 
-                    <div class="col-md-6 offer-bottom-grids no-lpad">
-                        <div class="offer-bottom-grids-info2">
-                            <h4>Special Gift Cards</h4> 
-                            <h6>More brands, more ways to shop. <br> Check out these ideal gifts!</h6>
-                        </div>
-                    </div>
-                    <div class="col-md-6 offer-bottom-grids  no-rpad">
-                        <div class="offer-bottom-grids-info">
-                            <h4>Flat $10 Discount</h4> 
-                            <h6>The best Shopping Offer <br> On Grocery Store</h6>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <!-- //offers-cards -->
-            </div>
-        </div>
-        <!--//products-->  
-
-        <!-- subscribe -->
-        <div class="subscribe"> 
-            <div class="container">
-                <div class="col-md-6 social-icons w3-agile-icons">
-                    <h4>Keep in touch</h4>  
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-                    </ul>
-                    <ul class="apps"> 
-                        <li><h4>Download Our app : </h4> </li>
-                        <li><a href="#" class="fa fa-apple"></a></li>
-                        <li><a href="#" class="fa fa-windows"></a></li>
-                        <li><a href="#" class="fa fa-android"></a></li>
-                    </ul>
-                </div> 
-                <div class="col-md-6 subscribe-right">
-                    <h4>Sign up for email and get 25%off!</h4> 
-                    <form action="#" method="post"> 
-                        <input type="text" name="email" placeholder="Enter your Email..." required="">
-                        <input type="submit" value="Subscribe">
-                    </form>
-                    <div class="clearfix"> </div> 
-                </div>
-                <div class="clearfix"> </div>
+                
             </div>
         </div>
     </body>
+    <script src="<?php echo $this->basePath() . '/public/js/frontend/productdetails.js' ?>">
+</script>
 </html>
