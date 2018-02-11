@@ -1,4 +1,4 @@
-app.controller('login', function ($scope, $http, $sce, $timeout) {
+app.controller('login', function ($scope, $http, $timeout) {
     $scope.errorShow = false;
     $scope.successShow = false;
     $scope.ajaxLoadingData = false;

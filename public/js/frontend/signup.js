@@ -1,4 +1,4 @@
-var app = angular.module('app', []);
+//var app = angular.module('app', []);
 app.controller('signup', function ($scope, $http, $sce, $timeout) {
     $scope.errorShow = false;
     $scope.successShow = false;
@@ -44,6 +44,8 @@ app.controller('signup', function ($scope, $http, $sce, $timeout) {
                     
                     $timeout(function(){
                         $scope.successShow = false;
+                        var path = serverAppUrl + '/index';
+                        window.location.href = path;
                     },200);
                 }else{
                     $scope.errorShow = true;
