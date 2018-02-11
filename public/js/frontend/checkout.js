@@ -9,15 +9,17 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         $scope.ajaxLoadingData = true;
         $http({
             method: 'POST',
-            url: serverAppUrl + '/getcartdata',
+            url: serverAppUrl + '/getcheckoutdetail',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             console.log(response);
             if (response.status == 'success') {
-                $scope.productDataList = response.productDetails.data;
-                $scope.product = response.data;
-                $scope.productImage = response.imageRootPath;
-                $scope.productImageDetais = response.productDetails.productImageData;
+                $scope.totalOrderDetails = response.data.totalOrderDetails;
+                $scope.cartData = response.cartitems;
+                $scope.productDataList = $scope.cartData.productDetails.data;
+                $scope.product = $scope.cartData.data;
+                $scope.productImage = $scope.cartData.imageRootPath;
+                $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
                 $scope.ajaxLoadingData = false;
             } else {
                 $scope.errorShow = true;
@@ -29,6 +31,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         });
         
     }
+    
+    $scope.getcartdata();
 
     $scope.addtocart = function (product_id, product_name) {
         var cartData = {};

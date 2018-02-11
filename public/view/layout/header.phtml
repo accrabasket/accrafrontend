@@ -106,9 +106,13 @@
                                 <ul class="cart-column-dropdown">
                                     <li ng-repeat="cartItem in cartResponse.data">
                                         <img src="{{cartResponse.imageRootPath}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].type}}/{{cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].image_name}}"/>
-                                        <span class="title">{{cartItem.item_name}}</span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+                                        <span class="title">{{cartItem.item_name}}<br>
+                                            <span class="item-quant">Item:  {{cartItem.number_of_item}}</span>
+                                            <i class="fa fa-plus green-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'add', 1)"></i> <i class="fa fa-minus red-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'delete', 1)"></i>
+                                        </span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
                                     </li>
-				  <li><a class="button conti" href="index.html">Continue Shopping</a> 
+				  <li>
+                                        <a class="button conti" href="index.html">Continue Shopping</a> 
 					<a class="button proceed" href="#" id="cart" >Proceed To Checkout</a>
 				  </li>                                    
                                 </ul>
