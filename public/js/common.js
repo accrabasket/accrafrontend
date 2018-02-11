@@ -24,7 +24,7 @@ function fillInAddress() {
     
 var app = angular.module('app', []);
 
-app.controller('cartcontroller', function ($scope, $http) {
+app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.cartResponse = {};
     $scope.cartResponse.productImageData = {};
     $scope.cartItem = {};
@@ -37,6 +37,28 @@ app.controller('cartcontroller', function ($scope, $http) {
             if(response.status=='success') {
                 $scope.cartResponse = response; 
                 console.log($scope.cartResponse);
+            }
+        });        
+    }
+    $rootScope.addToCart = function(inventory_id, product_name, action, number_of_item) {
+        $scope.addToCartData = {};
+        $scope.addToCartData.merchant_inventry_id = inventory_id;
+        $scope.addToCartData.item_name = product_name;
+        $scope.addToCartData.number_of_item = number_of_item;
+        $scope.addToCartData.action = action;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/addtocart',
+            data: ObjecttoParams($scope.addToCartData),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            if (response.status == 'success') {
+                $scope.successMsg = response.msg;
+                $scope.successShow = true;
+                $timeout(function(){
+                    $scope.successShow = false;
+                },2000);                
+                $scope.cartList();
             }
         });        
     }    

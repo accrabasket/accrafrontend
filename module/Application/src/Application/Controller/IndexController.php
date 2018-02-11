@@ -285,14 +285,12 @@ class IndexController extends AbstractActionController
         return $this->view;
     } 
     
-    public function getcartdataAction() {
+    public function getcheckoutdetailAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $cartList  = array();
-        $postParams['method'] = 'getitemintocart';
-        if(!empty($this->session['user']['data'][0]['id'])){
+        $postParams['method'] = 'checkout';
+        if(!empty($this->session['user']['data'][0]['id'])) {
             $postParams['user_id'] = $this->session['user']['data'][0]['id'];
-        }else{
-            $postParams['guest_user_id'] = session_id();
         }
         $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $cartList;

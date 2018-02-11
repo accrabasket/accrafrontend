@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+
     <head>
         <link href="<?php echo $this->basePath() ?>/public/css/checkout.css" rel="stylesheet" type="text/css" media="all" />
         
     </head>
-    <body ng-app="app" ng-controller="chekout" ng-init="getcartdata()">
+    <div ng-controller="chekout">
         <!-- header -->
         
         <div class="container subscribe-right">
@@ -43,9 +42,8 @@
                                         
                                         <td data-label="Quantity" class="quantity">
                                             <input type="text" size="1" value="{{data.number_of_item}}" name="total_item" disabled="true">
-                                            &nbsp;
-                                            <input type="image" title="Update" alt="Update" src="<?php echo $this->basePath() ?>/public/images/newimg/update.png">
-                                            &nbsp;<a href="#"><img title="Remove" style="padding:5px;" alt="Remove" src="<?php echo $this->basePath() ?>/public/images/newimg/remove.png"></a> </td>
+                                            <i class="fa fa-plus green-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'add', 1)"></i> <br/><i class="fa fa-minus red-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'delete', 1)"></i>
+                                       </td>
                                         <td data-label="Unit Price" class="price">GHC {{productDataList[key]['price']}}</td>
                                         <td data-label="Total" class="total">GHC {{productDataList[key]['price'] * data.number_of_item}}</td>
                                     </tr>
@@ -54,8 +52,8 @@
                             </table>
                         </div>
                     </form>
-                    <h2 style="font-size:16px">What would you like to do next?</h2>
-                    <div class="content">
+                    <!--h2 style="font-size:16px">What would you like to do next?</h2-->
+                    <!--div class="content">
                         <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
                         <table class="radio table-hover">
                             <tbody>
@@ -73,98 +71,39 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="cart-module">
-                        <div class="content none" id="show-me">
-                            <form role="form" enctype="multipart/form-data" method="post" action="http://livetesting.designbyrich.com/index.php?route=checkout/cart">
-                                Enter your coupon here:&nbsp;
-                                <input type="text" value="" name="coupon">
-                                <input type="hidden" value="coupon" name="next">
-                                &nbsp;
-                                <input type="submit" class="button" value="Apply Coupon">
-                            </form>
-                        </div>
-                        <div class="content none" id="voucher-div">
-                            <form role="form" enctype="multipart/form-data" method="post" action="http://livetesting.designbyrich.com/index.php?route=checkout/cart">
-                                Enter your gift voucher code here:&nbsp;
-                                <input type="text" value="" name="voucher">
-                                <input type="hidden" value="voucher" name="next">
-                                &nbsp;
-                                <input type="submit" class="button" value="Apply Voucher">
-                            </form>
-                        </div>
-                        <div class="content none" id="rewardDIV">
-                            <form role="form" enctype="multipart/form-data" method="post" action="http://livetesting.designbyrich.com/index.php?route=checkout/cart">
-                                Points to use (Max 0):&nbsp;
-                                <input type="text" value="" name="reward">
-                                <input type="hidden" value="reward" name="next">
-                                &nbsp;
-                                <input type="submit" class="button" value="Apply Points">
-                            </form>
-                        </div>
-                        <div class="content none" id="estimate-div">
-                            <p>Enter your destination to get a shipping estimate.</p>
-                            <table cellpadding="5" cellspacing="5">
-                                <tbody>
-                                    <tr>
-                                        <td><span class="required">*</span> State:</td>
-                                        <td><select name="country_id">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="2">Abia</option>
-                                                <option selected="selected" value="1">Abuja Federal Capital Territory</option>
-                                                <option value="3">Adamawa</option>
-                                                <option value="4">Akaw Ibom</option>
-                                                <option value="5">Anambra</option>
-                                                <option value="6">Bauchi</option>
-                                                <option value="7">Bayelsa</option>
-                                                <option value="8">Benue</option>
-                                                <option value="9">Borno</option>
-                                                <option value="10">Cross River</opti
-                                                <option value="38">Zone outside Nigeria</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="required">*</span> Local Govt. Area:</td>
-                                        <td><select name="zone_id">
-                                                <option value=""> --- Please Select --- </option>
-                                                <option value="227">Damaturu</option>
-                                                <option value="228">Potiskum</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr style="display:none;">
-                                        <td><span class="required" id="postcode-required" style="display: none;">*</span> Post Code:</td>
-                                        <td><input type="text" value="" name="postcode"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <input type="button" class="button" id="button-quote" value="Get Quotes">
-                        </div>
+                    </div-->
                     </div>
                     <div class="wrapper-cart-total">
                         <div class="cart-total clearfix">
                             <table id="total">
                                 <tbody>
                                     <tr>
-                                        <td class="right"><b>Sub-Total:</b></td>
-                                        <td class="right">₦101</td>
+                                        <td class="right"><b>Sub-Total: </b></td>
+                                        <td class="right">GHC {{totalOrderDetails.amount}}</td>
                                     </tr>
                                     <tr>
+                                        <td class="right"><b>Tax: </b></td>
+                                        <td class="right">GHC {{totalOrderDetails.tax_amount}}</td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td class="right"><b>Discount:</b></td>
+                                        <td class="right">- GHC {{totalOrderDetails.discount_amount}}</td>
+                                    </tr>                                    
+                                    <tr>
                                         <td class="right"><b>Total:</b></td>
-                                        <td class="right">₦101</td>
+                                        <td class="right">GHC {{totalOrderDetails.payable_amount}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="right"><a class="button" href="#" id="cart" ng-click="getUserAddress()">Proceed To Checkout</a></div>
+                        <div class="right"><a class="button cart" href="#" id="cart">Proceed To Checkout</a></div>
                         <div class="left"><a class="button" href="<?php echo $this->basePath() . '/application' ?>">Continue Shopping</a></div>
                     </div>
                 </div>
             </div>
-            <div class="content">
+    <div class="content">
                 <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
                 <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
                 <h1>Shipping Address <span class="pull-right"><i class="fa fa-edit" id="edit-shipping"></i></span></h1>
@@ -368,7 +307,7 @@
                           }
                           $("#edit-cart").hide();
                           $("#edit-shipping").hide();
-                          $("#cart").click(function () {
+                          $(".cart").click(function () {
                               $("#cartbox").fadeOut();
                               $("#shippingbox").fadeIn();
                               $("#paybox").fadeOut();
@@ -404,7 +343,6 @@
         <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
             <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
         </div>
-    </body>
-</html>
+    </div>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/checkout.js' ?>">
 </script>

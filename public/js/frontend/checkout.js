@@ -11,15 +11,17 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         $scope.ajaxLoadingData = true;
         $http({
             method: 'POST',
-            url: serverAppUrl + '/getcartdata',
+            url: serverAppUrl + '/getcheckoutdetail',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             console.log(response);
             if (response.status == 'success') {
-                $scope.productDataList = response.productDetails.data;
-                $scope.product = response.data;
-                $scope.productImage = response.imageRootPath;
-                $scope.productImageDetais = response.productDetails.productImageData;
+                $scope.totalOrderDetails = response.data.totalOrderDetails;
+                $scope.cartData = response.cartitems;
+                $scope.productDataList = $scope.cartData.productDetails.data;
+                $scope.product = $scope.cartData.data;
+                $scope.productImage = $scope.cartData.imageRootPath;
+                $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
                 $scope.ajaxLoadingData = false;
             } else {
                 $scope.ajaxLoadingData = false;
@@ -33,22 +35,6 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         
     }
     getUserAddress();
-     $scope.getUserAddress = function () {
-        $scope.ajaxLoadingData = true;
-        $http({
-            method: 'POST',
-            url: serverAppUrl + '/getUserAddress',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        }).success(function (response) {
-            console.log(response);
-            $scope.ajaxLoadingData = false;
-            if (response.status == 'success') {
-                $scope.userAddress = response.data;
-            }
-        });
-        
-    }
-    
     function getUserAddress(){
        $scope.ajaxLoadingData = true;
         $http({
@@ -66,6 +52,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
     $scope.openNewAddress = function(){
         $scope.createAddress = true;
     }
+    $scope.getcartdata();
 
     $scope.savenewaddress = function (address) {
         
