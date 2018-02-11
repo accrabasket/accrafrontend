@@ -97,6 +97,19 @@ class IndexController extends AbstractActionController
     }
     
     public function productdetailsAction(){
+        $postParams = (array) $this->getRequest()->getQuery();
+        if (!empty($postParams)) {
+            $params['method'] = 'productlist';
+            $params['city_id'] = 1;
+            $params['product_id'] = $postParams['id'];
+            $response = $this->commonObj->curlhitApi($params, 'application/product');
+            $product_details = json_decode($response,true);
+            if(!empty($product_details['data'])){
+                $this->view->productDetails = $product_details['data'][$postParams['id']];
+                $this->view->productImage = $product_details['imageRootPath'].'/product/'.$postParams['id'].'/'.$product_details['productImageData'][$postParams['id']][0]['image_name'];
+            }
+        }
+//        print_r($this->view->productDetails);die;
         return $this->view;
     }
     

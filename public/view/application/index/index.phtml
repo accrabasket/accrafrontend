@@ -770,8 +770,9 @@
                                 <div class="item">
                                     <a  href="<?=$this->basePath()?>/application/index/product?merchant=<?=$value['id']?>" class="product_wrapper">
                                         <div class="plp-product">
-                                            <div  class="plp-product_img merchant"><img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/img1.jpg"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
+                                            <div  class="plp-product_img merchant">
+                                                <img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg"></div>
+                                            <div  title="<?= $value['first_name']?>" class="plp-product_name ">
                                                 <div  class="merchant_name"><?= $value['first_name']?> </div>
                                             </div>
                                             <div class="plp-product_add-to-cart">
