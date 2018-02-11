@@ -1,4 +1,3 @@
-var app = angular.module('app', []);
 app.controller('productdetails', function ($scope, $http, $timeout) {
     $scope.errorShow = false;
     $scope.successShow = false;

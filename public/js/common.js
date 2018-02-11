@@ -36,6 +36,7 @@ app.controller('cartcontroller', function ($scope, $http) {
         }).success(function (response) {
             if(response.status=='success') {
                 $scope.cartResponse = response; 
+                console.log($scope.cartResponse);
             }
         });        
     }    
