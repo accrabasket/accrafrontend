@@ -106,7 +106,11 @@
                                 <ul class="cart-column-dropdown">
                                     <li ng-repeat="cartItem in cartResponse.data">
                                         <img src="{{cartResponse.imageRootPath}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].type}}/{{cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].image_name}}"/>
-                                        <span class="title">{{cartItem.item_name}}</span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span></li>
+                                        <span class="title">{{cartItem.item_name}}</span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+                                    </li>
+				  <li><a class="button conti" href="index.html">Continue Shopping</a> 
+					<a class="button proceed" href="#" id="cart" >Proceed To Checkout</a>
+				  </li>                                    
                                 </ul>
                             </div>	
                         </div>

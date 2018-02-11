@@ -78,7 +78,7 @@ class IndexController extends AbstractActionController
         echo $getProduct;
         exit;
     }
-    
+  
     public function faqAction(){
         return $this->view;
     }

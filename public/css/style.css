@@ -1807,6 +1807,8 @@ h3.w3ls-title.w3ls-title1 {
     font-family: 'Offside', cursive;
 }
 /*-- //card-page --*/
+
+
 /*-- help --*/
 .help .header-search {
     margin: 0 auto;
@@ -3789,6 +3791,10 @@ h3.w3ls-title {
 .breadcrumb { 
     margin-bottom: 10px; 
 }
+.pt0{padding-top: 0px !important; }
+.mt0{margin-top: 0px; }
+.mt10{margin-top: 10px; }
+.mb10{margin-bottom: 10px !important; }
 .single-top-right h3 {
     font-size: 1.2em;
 }
@@ -4038,8 +4044,7 @@ ul.multi-column-dropdown h6 {
 }
 .multi-column-dropdown li:hover {
     background:#efefef;
-	color: #434343 !important;
-}
+	color: #434343 !important;}
 .multi-column-dropdown li a {
     display: block;
     clear: both;
@@ -4082,7 +4087,15 @@ ul.cart-column-dropdown h6 {
 }
 .cart-column-dropdown li span.title{line-height: normal;
     color: #999 !important; width:140px; display:inline-block;}
+
+.cart-column-dropdown li span.title .fa{font-weight:bold; margin-top:8px; margin-right:10px; cursor:pointer;}	
+.cart-column-dropdown li .conti{float:left; width:100%; color:#fff !important; margin-bottom:10px !important; text-align:center;}
+.cart-column-dropdown li .proceed{float:left; width:100%; color:#fff !important; margin-bottom:10px !important; text-align:center;}
+.red-text{color:#FF3300;}
+
+.green-text{color: #009933;}
 .cart-column-dropdown li span.price{font-weight:bold; float:right; margin-top:8px;}
+
 .cart-gd-img img {
     width: 40px;
 }
@@ -4117,3 +4130,55 @@ ul.cart-column-dropdown h6 {
     margin-left: 0px;
 }
 .map-grids{height:25em;}
+button, input, select, textarea {
+	border: 1px solid #e2e2e2;
+	padding: 5px;
+}
+a.button, input.button {
+	background-color: #ed5565;
+	border: 0 none;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	font-size: 11px;
+	padding: 8px 15px;
+	text-transform: uppercase;
+}
+a.button:hover, input.button:hover {
+	background-color: #68707c;
+}
+a.button:active, a.button:focus, a.button:hover, input.button:active, input.button:focus, input.button:hover {
+	outline: 0 none;
+}
+.buttons {
+	background: #fff none repeat scroll 0 0;
+	border: 0px solid #e2e2e2;
+	margin-bottom:0px;
+	margin-top: 10px;
+	overflow: auto;
+	padding: 5px 0;
+}
+.buttons::after, .buttons::before {
+	content: " ";
+	display: table;
+}
+.buttons::after {
+	clear: both;
+}
+.buttons .center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.buttons .right {
+	float: right;
+	text-align: right;
+}
+.buttons .left {
+	float: left;
+	text-align: left;
+}
+.buttons.no-padding {
+	border: 0 none;
+	padding: 0;
+}
