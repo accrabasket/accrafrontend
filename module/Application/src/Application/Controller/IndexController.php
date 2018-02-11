@@ -297,33 +297,22 @@ class IndexController extends AbstractActionController
         exit;
     }
     
-    public function pakagelistAction(){
-		$package = array();
-        $packageList = $this->commonObj->getPackageList();
-        if(!empty($packageList)){
-            foreach ($packageList as $key => $value) {
-                $package[] = $value;
-            }
-        }    
-		
-		$this->view->packageList = $package;
-        return $this->view;
+    public function getUserAddressAction(){
+	$postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'getaddresslist';
+        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $addressList;
+        exit;
     }
 	
-	public function bookingAction(){
-		$packageList = array();
-		$id = $this->params()->fromQuery('data');
-        if (!empty($id)) {
-            $getPackageList = $this->commonObj->getPackageList($id);
-            if (!empty($getPackageList)) {
-                foreach ($getPackageList as $key => $value) {
-                    $packageList[] = $value;
-                }
-                
-            }
-        }
-		$this->view->packageList = $packageList;
-        return $this->view;
+    public function saveaddressAction(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'addeditdeliveryaddress';
+        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $addressList;
+        exit;
     }
 	
 	public function createbookingAction(){

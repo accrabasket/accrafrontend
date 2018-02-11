@@ -33,6 +33,7 @@ app.controller('productdetails', function ($scope, $http, $timeout) {
                         $scope.successShow = false;
                     },2000);
                 }else{
+                    $scope.ajaxLoadingData = false;
                     $scope.errorShow = true;
                     $scope.errorMsg = response.msg == undefined ? 'somthing went wrong ':response.msg;
                     $timeout(function(){

@@ -4,6 +4,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
     $scope.successShow = false;
     $scope.no_record = '';
     $scope.ajaxLoadingData = false;
+    $scope.createAddress = false;
+    $scope.address = {};
     
     $scope.getcartdata = function () {
         $scope.ajaxLoadingData = true;
@@ -22,6 +24,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
                 $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
                 $scope.ajaxLoadingData = false;
             } else {
+                $scope.ajaxLoadingData = false;
                 $scope.errorShow = true;
                 $scope.errorMsg = response.msg == undefined ? 'somthing went wrong ' : response.msg;
                 $timeout(function () {
@@ -31,29 +34,55 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         });
         
     }
-    
+    getUserAddress();
+    function getUserAddress(){
+       $scope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/getUserAddress',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+            $scope.ajaxLoadingData = false;
+            if (response.status == 'success') {
+                $scope.userAddress = response.data;
+            }
+        }); 
+    }
+    $scope.openNewAddress = function(){
+        $scope.createAddress = true;
+    }
     $scope.getcartdata();
 
-    $scope.addtocart = function (product_id, product_name) {
-        var cartData = {};
-        cartData.number_of_item = 1;
-        cartData.action = 'add';
-        cartData.item_name = product_name;
-        cartData.merchant_inventry_id = $('#att_' + product_id).val();
+    $scope.savenewaddress = function (address) {
+        
         var error = ' ';
-        if (cartData.item_name == undefined || cartData.item_name == '') {
-            error = 'Item name should not empty';
+        if (address.contact_name == undefined || address.contact_name == '') {
+            error = 'Full name should not empty';
         }
-        if (cartData.merchant_inventry_id == undefined || cartData.merchant_inventry_id == '') {
-            error = 'Please select attribute';
+        if (address.area == undefined || address.area == '') {
+            error = 'Area name should not empty';
         }
+        if (address.zipcode == undefined || address.zipcode == '') {
+            error = 'Zipcode name should not empty';
+        }
+        address.city_id = $('#cityname').val();
+        address.city_name = $("#cityname option:selected").text();
         if (error == ' ') {
             $http({
                 method: 'POST',
-                url: serverAppUrl + '/addtocart',
-                data: ObjecttoParams(cartData),
+                url: serverAppUrl + '/saveaddress',
+                data: ObjecttoParams(address),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
+                $("#shipping").click(function () {
+                              $("#cartbox").fadeOut();
+                              $("#shippingbox").fadeOut();
+                              $("#paybox").fadeIn();
+
+                              $("#edit-cart").fadeIn();
+                              $("#edit-shipping").fadeIn();
+                          });
                 if (response.status == 'success') {
                     $scope.successShow = true;
                     $scope.successMsg = response.msg ;
