@@ -74,7 +74,7 @@
                                 <input type="hidden" name="gotoproductpage" value="<?=$this->productDetails['category_id']?>" /> 
                                 <button type="button" class="w3ls-cart" ng-click="addtocart('<?=$this->productDetails['product_id']?>','<?=$this->productDetails['product_name']?>','<?=$id?>')" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
                             </form>
-                            <button class="w3ls-cart w3ls-cart-like"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</button>
+                            <button class="w3ls-cart " ng-click="proceedtocheckout()"><i class="fa fa-heart-o" aria-hidden="true"></i> Proceed To Checkout</button>
                         </div>
                         <div class="clearfix"> </div>  
                     </div>
@@ -121,6 +121,9 @@
                 </div>
                 
             </div>
+        </div>
+        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
         </div>
     </body>
     <script src="<?php echo $this->basePath() . '/public/js/frontend/productdetails.js' ?>">

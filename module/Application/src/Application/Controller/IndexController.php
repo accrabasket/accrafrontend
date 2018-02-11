@@ -274,10 +274,31 @@ class IndexController extends AbstractActionController
         exit;
     }
     
-    public function pagenotfoundAction()
-    {
-        return new ViewModel();
+    public function checkoutAction(){
+        if(empty($this->session['user']['data'][0]['id'])){
+            $path = $GLOBALS['SITE_APP_URL'].'/login';
+            header('Location: '.$path);
+            exit;
+        }
+        $this->view = new ViewModel();
+        $this->view->user_details = $this->session['user']['data'][0];
+        return $this->view;
     } 
+    
+    public function getcartdataAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $cartList  = array();
+        $postParams['method'] = 'getitemintocart';
+        if(!empty($this->session['user']['data'][0]['id'])){
+            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        }else{
+            $postParams['guest_user_id'] = session_id();
+        }
+        $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $cartList;
+        exit;
+    }
+    
     public function pakagelistAction(){
 		$package = array();
         $packageList = $this->commonObj->getPackageList();
