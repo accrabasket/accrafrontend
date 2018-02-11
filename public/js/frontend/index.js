@@ -1,4 +1,3 @@
-var app = angular.module('app', []);
 app.controller('index', function ($scope, $http, $sce,$timeout,categoryList) {
     $scope.errorShow = false;
     var categoryList = jQuery.parseJSON(categoryList);

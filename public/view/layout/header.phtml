@@ -32,7 +32,7 @@
         .merchant_name{font-size: 16px;}
     </style>
 </head>
-
+<div ng-app="app">
 <div class="header">
     <div class="w3ls-header"><!--header-one--> 
         <div class="w3ls-header-left">
@@ -98,12 +98,19 @@
                     </ul>
                     <?php }?>
                 </div>
-                <div class="cart"> 
-                    <form action="#" method="post" class="last"> 
-                        <input type="hidden" name="cmd" value="_cart" />
-                        <input type="hidden" name="display" value="1" />
-                        <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button> My Cart
-                    </form>  
+                <div class="cart dropdown" ng-controller="cartcontroller"> 
+                    <button ng-click="cartList()" class="w3view-cart dropdown-toggle" data-toggle="dropdown" ng-click="view"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button> My Cart
+                    <ul class="dropdown-menu multi-column columns-5 pull-right">
+                        <div class="row">
+                            <div class="cart-gd-img">
+                                <ul class="cart-column-dropdown">
+                                    <li ng-repeat="cartItem in cartResponse.data">
+                                        <img src="{{cartResponse.imageRootPath}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].type}}/{{cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].image_name}}"/>
+                                        <span class="title">{{cartItem.item_name}}</span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span></li>
+                                </ul>
+                            </div>	
+                        </div>
+                    </ul>
                 </div>
                 <div class="clearfix"> </div> 
             </div> 

@@ -199,12 +199,8 @@ class IndexController extends AbstractActionController
             $postParams['guest_user_id'] = session_id();
         }
         $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
-        $cartList = json_decode($cartList,true);
-        print_r($cartList);die;
-        if(!empty($cartList)){
-            $cartList = $cartList['data'];
-        }
-        return $this->view;
+        echo $cartList;
+        exit();
     }    
     public function createuserAction() {
         $postParams = (array) $this->getRequest()->getPost();

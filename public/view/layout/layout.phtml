@@ -11,11 +11,12 @@ echo $this->doctype(); ?>
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
         <?php 
-            echo $this->headScript()->prependFile($this->basePath().'/public/js/angular.min.js')
+            echo $this->headScript()
+                ->prependFile($this->basePath() . '/public/js/common.js')    
+                ->prependFile($this->basePath().'/public/js/angular.min.js')
                 ->prependFile($this->basePath() . '/public/js/bootstrap.js')
                 ->prependFile($this->basePath() . '/public/js/jquery-ui.js')
-                ->prependFile($this->basePath() . '/public/js/jquery.min.js')
-                ->prependFile($this->basePath() . '/public/js/common.js');;
+                ->prependFile($this->basePath() . '/public/js/jquery.min.js');
         ?>
     </head>
    

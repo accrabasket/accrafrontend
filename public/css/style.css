@@ -4033,7 +4033,12 @@ ul.multi-column-dropdown h6 {
 }
 .multi-column-dropdown li {
     list-style-type: none;
-    margin: 14px 0;
+    padding:8px 14px;
+	margin:0;
+}
+.multi-column-dropdown li:hover {
+    background:#efefef;
+	color: #434343 !important;
 }
 .multi-column-dropdown li a {
     display: block;
@@ -4047,6 +4052,42 @@ ul.multi-column-dropdown h6 {
     min-width: 190px;
     padding: 20px 30px;
 }
+
+/*8-12-17 Css Start Here */
+.dropdown-menu.columns-5 {
+    min-width: 290px;
+    padding: 10px 30px;
+}
+ul.cart-column-dropdown h6 {
+    font-size: 20px;
+    color:#689f39;
+    margin: 0 0 0em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #E4E4E4;
+    text-transform: capitalize;
+}
+.cart-column-dropdown li {
+    list-style-type: none;
+    padding:4px 0px;
+	margin:0 0 4px;
+	border-bottom:1px dotted #e4e4e4;
+}
+.cart-column-dropdown li a {
+    display: block;
+    clear: both;
+    line-height: 1.428571429;
+    color: #999 !important;
+    white-space: normal;
+	font-weight:500 !important;
+}
+.cart-column-dropdown li span.title{line-height: normal;
+    color: #999 !important; width:140px; display:inline-block;}
+.cart-column-dropdown li span.price{font-weight:bold; float:right; margin-top:8px;}
+.cart-gd-img img {
+    width: 40px;
+}
+/*8-12-17 Css End Here */
+
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background: none;
     border: none;
@@ -4064,6 +4105,7 @@ ul.multi-column-dropdown h6 {
 .multi-gd-img img {
     width: 100%;
 }
+
 .navigation-agileits {
     background: #689f39;
 }

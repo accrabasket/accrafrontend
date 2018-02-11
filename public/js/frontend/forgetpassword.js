@@ -1,4 +1,3 @@
-var app = angular.module('app', []);
 app.controller('forgetpassword', function ($scope, $http, $sce, $timeout) {
     $scope.errorShow = false;
     $scope.successShow = false;

@@ -1,4 +1,4 @@
-var app = angular.module('app', []);
+//var app = angular.module('app', []);
 app.controller('product', function ($scope, $http, $sce, $timeout, categoryId) {
     $scope.errorShow = false;
     $scope.successShow = false;
@@ -89,10 +89,37 @@ app.controller('product', function ($scope, $http, $sce, $timeout, categoryId) {
         });
     }
     
-    $scope.addToCart = function(inventory_id) {
-        alert('sfdf'+ inventory_id);    
+    $scope.addToCart = function(inventory_id, product_name) {
+        $scope.addToCartData = {};
+        $scope.addToCartData.merchant_inventry_id = inventory_id;
+        $scope.addToCartData.item_name = product_name;
+        $scope.addToCartData.number_of_item = 1;
+        $scope.addToCartData.action = 'add';
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/addtocart',
+            data: ObjecttoParams($scope.addToCartData),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            if (response.status == 'success') {
+                $scope.successMsg = response.msg;
+                $scope.successShow = true;
+                $timeout(function(){
+                    $scope.successShow = false;
+                },2000);                
+                $scope.cartList();
+            }
+        });        
     }
+    
+    /*$scope.cartList = function(){
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/viewcart',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+        });        
+    }*/
     $scope.productlist();
-
-
 });
