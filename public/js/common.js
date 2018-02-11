@@ -21,3 +21,22 @@ function fillInAddress() {
     scope.locationData.lat = place.geometry.location.lat();
     scope.locationData.lng = place.geometry.location.lng();
 }
+    
+var app = angular.module('app', []);
+
+app.controller('cartcontroller', function ($scope, $http) {
+    $scope.cartResponse = {};
+    $scope.cartResponse.productImageData = {};
+    $scope.cartItem = {};
+    $scope.cartList = function(){
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/viewcart',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            if(response.status=='success') {
+                $scope.cartResponse = response; 
+            }
+        });        
+    }    
+});
