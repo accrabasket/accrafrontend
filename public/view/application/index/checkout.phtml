@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="buttons">
-                        <div class="right"><a class="button" href="#" id="cart">Proceed To Checkout</a></div>
+                        <div class="right"><a class="button cart" href="#" id="cart">Proceed To Checkout</a></div>
                         <div class="left"><a class="button" href="<?php echo $this->basePath() . '/application' ?>">Continue Shopping</a></div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                           }
                           $("#edit-cart").hide();
                           $("#edit-shipping").hide();
-                          $("#cart").click(function () {
+                          $(".cart").click(function () {
                               $("#cartbox").fadeOut();
                               $("#shippingbox").fadeIn();
                               $("#paybox").fadeOut();
