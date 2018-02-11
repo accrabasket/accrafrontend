@@ -49,6 +49,21 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
             }
         }); 
     }
+    
+    $scope.getUserAddress = function(){
+        $scope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/getUserAddress',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+            $scope.ajaxLoadingData = false;
+            if (response.status == 'success') {
+                $scope.userAddress = response.data;
+            }
+        });
+    }
     $scope.openNewAddress = function(){
         $scope.createAddress = true;
     }
