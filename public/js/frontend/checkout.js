@@ -43,9 +43,12 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             console.log(response);
+            $scope.AddressLeng = 0;
             $scope.ajaxLoadingData = false;
             if (response.status == 'success') {
                 $scope.userAddress = response.data;
+                var keys = Object.keys($scope.userAddress);
+                $scope.AddressLeng = keys.length;
             }
         }); 
     }

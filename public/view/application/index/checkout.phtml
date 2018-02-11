@@ -178,8 +178,9 @@
                             <input type="checkbox">
                             &nbsp; Primary Address is same as parmanent address.</h4>
                         <a href="#" ng-click="openNewAddress()" style="color:#00CC33; font-size:16px;"><i class="fa fa-plus-square"></i> Create  New Address</a> </div>
-                        <div class="row mb10" ng-show="!createAddress">
+                        <div class="row mb10" ng-show="!createAddress && AddressLeng > 0">
                             <div class="col-md-6 col-sm-6 col-xs-12">
+                                {{userAddress.length}}
                                 <input type="submit"  value="SUBMIT" id="shipping1">
                             </div>
                         </div>
