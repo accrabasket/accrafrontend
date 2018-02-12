@@ -1,0 +1,88 @@
+<div class="content-wrapper" ng-controller="pastorderController" ng-cloak="true" ng-init="getOrderList()">
+
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    
+                    <div class="box-body">
+                        <p class="danger showMsg" style="color:green">
+                                                    
+                        </p>                        
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover dataTable" id="example2" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Order id</th>
+                                                
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Shipping Address</th>
+                                  
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Amount</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Order status</th>
+                                                
+                                                <th class="sorting" tabindex="0" rowspan="1">Order Date &nbsp;
+<!--                                                    <a href="#" ng-click="shortByDate('asc')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                                                    &nbsp;|&nbsp;&nbsp;
+                                                    <a href="#" ng-click="shortByDate('desc')"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>-->
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row" class="odd" ng-repeat="data in orderList">
+                                                <td class=""><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</td>
+                                            
+                                                <td class="">{{shipping_address_list[data.order_details.shipping_address_id].address_nickname}}
+                                                    {{shipping_address_list[data.order_details.shipping_address_id].house_number}}
+                                                    {{shipping_address_list[data.order_details.shipping_address_id].city}}</td>
+                                              
+                                                <td>{{data.order_details.payable_amount}}</td>
+                                                <td>{{data.order_details.order_status|underscoreless}}</td>
+                                       
+                                                <td>{{data.order_details.created_date}}</td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Total {{numberOfRecord}} entries</div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                        <pagination  class="pagination pull-right mt0" ng-model="currentPage" total-items="numberOfRecord" max-size="3" boundary-links="true" ng-click="selectPage(currentPage)"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+        <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
+    </div> 
+</div>
+
+<script src="<?php echo $this->basePath() . '/public/js/frontend/pastorder.js' ?>"></script>
+<script>
+         var PAGE_COUNT = 5;
+         var PAGING_GAP = 3;
+         $(document).ready(function () {
+             $("#show-attribute").click(function () {
+                 $("#add-attribute").toggle();
+             });
+             $('.test').jfilestyle();
+         });
+
+</script>
