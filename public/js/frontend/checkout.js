@@ -1,5 +1,5 @@
 //var app = angular.module('app', []);
-app.controller('chekout', function ($scope, $http, $sce, $timeout) {
+app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     $scope.errorShow = false;
     $scope.successShow = false;
     $scope.no_record = '';
@@ -7,7 +7,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
     $scope.createAddress = false;
     $scope.address = {};
     
-    $scope.getcartdata = function () {
+    $rootScope.getcartdata = function () {
         $scope.ajaxLoadingData = true;
         $http({
             method: 'POST',
@@ -34,7 +34,6 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         });
         
     }
-    getUserAddress();
     function getUserAddress(){
        $scope.ajaxLoadingData = true;
         $http({
@@ -54,21 +53,43 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
     }
     
     $scope.getUserAddress = function(){
+        $scope.getDeliveryTime();
         $scope.ajaxLoadingData = true;
         $http({
             method: 'POST',
             url: serverAppUrl + '/getUserAddress',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
-            console.log(response);
             $scope.ajaxLoadingData = false;
             if (response.status == 'success') {
                 $scope.userAddress = response.data;
             }
         });
     }
+    $scope.getDeliveryTime = function(){
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/getdeliverytime',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+            if (response.status == 'success') {
+                $scope.deliverTimeSlotList = response.datewisetimeslot;
+            }
+        });
+    }   
+    $scope.placeOrderData = {};
+    $scope.selectTimeSlot = function(deliveryDate, deliveryTimeSlot) {
+        $scope.placeOrderData.delivery_date =  deliveryDate;
+        $scope.placeOrderData.time_slot_id =  deliveryTimeSlot;
+        console.log($scope.placeOrderData);
+    }
+    $scope.selectShipingAddress = function() {
+        $scope.createAddress = false;
+    }
     $scope.openNewAddress = function(){
         $scope.createAddress = true;
+        $scope.placeOrderData.shipping_address_id = 0;
     }
     $scope.getcartdata();
 
@@ -93,18 +114,12 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
                 data: ObjecttoParams(address),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
-                $("#shipping").click(function () {
-                              $("#cartbox").fadeOut();
-                              $("#shippingbox").fadeOut();
-                              $("#paybox").fadeIn();
-
-                              $("#edit-cart").fadeIn();
-                              $("#edit-shipping").fadeIn();
-                          });
                 if (response.status == 'success') {
                     $scope.successShow = true;
                     $scope.successMsg = response.msg ;
-                    
+                    $scope.createAddress = false;
+                    $scope.placeOrderData.shipping_address_id = response.data.id;
+                    $scope.getUserAddress();
                     $timeout(function(){
                         $scope.successShow = false;
                     },2000);
@@ -122,7 +137,37 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout) {
         }
     }
 
+    $scope.SelectPaymentMethod = function () {
+        $("#cartbox").fadeOut();
+        $("#shippingbox").fadeOut();
+        $("#paybox").fadeIn();
 
+        $("#edit-cart").fadeIn();
+        $("#edit-shipping").fadeIn();
+    };
+    
+    $scope.PlaceOrder = function() {
+        $scope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/placeorder',
+            data: ObjecttoParams($scope.placeOrderData),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            if (response.status == 'success') {
+                $scope.ajaxLoadingData = false;
+                alert('order Placed')
+            } else {
+                $scope.ajaxLoadingData = false;
+                $scope.errorShow = true;
+                $scope.errorMsg = response.msg == undefined ? 'somthing went wrong ' : response.msg;
+                $timeout(function () {
+                    $scope.errorShow = false;
+                }, 2000);
+            }
+        });
+        
+    }
 
 
 });

@@ -1,349 +1,338 @@
 
-    <head>
-        <link href="<?php echo $this->basePath() ?>/public/css/checkout.css" rel="stylesheet" type="text/css" media="all" />
-        
-    </head>
-    <div ng-controller="chekout">
-        <!-- header -->
-        
-        <div class="container subscribe-right">
-            <ol class="breadcrumb breadcrumb1">
-                <li>Home</li>
-                <li class="active">View Cart</li>
-            </ol>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="container">
-            <div class="content">
-                <h1>Shopping Cart<span class="pull-right"><i class="fa fa-edit" id="edit-cart"></i></span> </h1>
-                <div class="checkout wrapper no-margin" id="cartbox">
-                    <form role="form" enctype="multipart/form-data" method="post" action="#">
-                        <div class="cart-info table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td class="image">Image</td>
-                                        <td class="name">Product Name</td>
-                                        <td class="quantity">Quantity</td>
-                                        <td class="price">Unit Price</td>
-                                        <td class="total">Total</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr ng-repeat="(key,data) in product">
-                                        <td data-label="Image" class="image">
-                                            <a href="#"> <img title="{{data.item_name}}" alt="iPhone" src="{{productImage+'/product/'+productDataList[key]['product_id']+'/'+productImageDetais[productDataList[key]['product_id']][0]['image_name']}}" width="50" height="50"> </a> 
-                                        </td>
-                                        <td data-label="Product Name" class="name">
-                                            <a href="<?php echo $this->basePath() ?>/application/index/productdetails?id={{productDataList[key]['product_id']}}"> {{data.item_name}} </a>
-                                            <div class="cart-option"> </div>
-                                        </td>
-                                        
-                                        <td data-label="Quantity" class="quantity">
-                                            <input type="text" size="1" value="{{data.number_of_item}}" name="total_item" disabled="true">
-                                            <i class="fa fa-plus green-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'add', 1)"></i> <br/><i class="fa fa-minus red-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'delete', 1)"></i>
-                                       </td>
-                                        <td data-label="Unit Price" class="price">GHC {{productDataList[key]['price']}}</td>
-                                        <td data-label="Total" class="total">GHC {{productDataList[key]['price'] * data.number_of_item}}</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                    <!--h2 style="font-size:16px">What would you like to do next?</h2-->
-                    <!--div class="content">
-                        <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-                        <table class="radio table-hover">
+<head>
+    <link href="<?php echo $this->basePath() ?>/public/css/checkout.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+<div ng-controller="chekout">
+    <!-- header -->
+
+    <div class="container subscribe-right">
+        <ol class="breadcrumb breadcrumb1">
+            <li>Home</li>
+            <li class="active">View Cart</li>
+        </ol>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="container">
+        <div class="content">
+            <h1>Shopping Cart<span class="pull-right"><i class="fa fa-edit" id="edit-cart"></i></span> </h1>
+            <div class="checkout wrapper no-margin" id="cartbox">
+                <form role="form" enctype="multipart/form-data" method="post" action="#">
+                    <div class="cart-info table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td class="image">Image</td>
+                                    <td class="name">Product Name</td>
+                                    <td class="quantity">Quantity</td>
+                                    <td class="price">Unit Price</td>
+                                    <td class="total">Total</td>
+                                </tr>
+                            </thead>
                             <tbody>
-                                <tr class="highlight">
-                                    <td><input type="radio" id="show_coupon" value="valuable" name="next" onClick="showcoupon()"></td>
-                                    <td><label for="show_coupon">Use Coupon Code</label></td>
+
+                                <tr ng-repeat="(key,data) in product">
+                                    <td data-label="Image" class="image">
+                                        <a href="#"> <img title="{{data.item_name}}" alt="iPhone" src="{{productImage + '/product/' + productDataList[key]['product_id'] + '/' + productImageDetais[productDataList[key]['product_id']][0]['image_name']}}" width="50" height="50"> </a> 
+                                    </td>
+                                    <td data-label="Product Name" class="name">
+                                        <a href="<?php echo $this->basePath() ?>/application/index/productdetails?id={{productDataList[key]['product_id']}}"> {{data.item_name}} </a>
+                                        <div class="cart-option"> </div>
+                                    </td>
+
+                                    <td data-label="Quantity" class="quantity">
+                                        <input type="text" size="1" value="{{data.number_of_item}}" name="total_item" disabled="true">
+                                        <i style="margin:5px;" class="fa fa-plus green-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'add', 1, 1)"></i> &nbsp;<i style="margin-top:5px;" class="fa fa-minus red-text" ng-click="addToCart(data.merchant_inventry_id, data.item_name, 'delete', 1, 1)"></i>
+                                    </td>
+                                    <td data-label="Unit Price" class="price">GHC {{productDataList[key]['price']}}</td>
+                                    <td data-label="Total" class="total">GHC {{productDataList[key]['price'] * data.number_of_item}}</td>
                                 </tr>
-                                <tr class="highlight">
-                                    <td><input type="radio" id="show_voucher" value="valuable" name="next" onClick="showvoucher()"></td>
-                                    <td><label for="use_voucher">Use Gift Voucher</label></td>
-                                </tr>
-                                <tr class="highlight hidden-xs">
-                                    <td><input type="radio" id="shipping_estimate" value="valuable" name="next" onClick="showestimate()"></td>
-                                    <td><label for="shipping_estimate">Estimate Shipping &amp; Taxes</label></td>
-                                </tr>
+
                             </tbody>
                         </table>
-                    </div-->
                     </div>
-                    <div class="wrapper-cart-total">
-                        <div class="cart-total clearfix">
-                            <table id="total">
-                                <tbody>
-                                    <tr>
-                                        <td class="right"><b>Sub-Total: </b></td>
-                                        <td class="right">GHC {{totalOrderDetails.amount}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="right"><b>Tax: </b></td>
-                                        <td class="right">GHC {{totalOrderDetails.tax_amount}}</td>
-                                    </tr>                                    
-                                    <tr>
-                                        <td class="right"><b>Discount:</b></td>
-                                        <td class="right">- GHC {{totalOrderDetails.discount_amount}}</td>
-                                    </tr>                                    
-                                    <tr>
-                                        <td class="right"><b>Total:</b></td>
-                                        <td class="right">GHC {{totalOrderDetails.payable_amount}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <div class="right"><a class="button cart" href="#" id="cart" ng-click="getUserAddress()">Proceed To Checkout</a></div>
-                        <div class="left"><a class="button" href="<?php echo $this->basePath() . '/application' ?>">Continue Shopping</a></div>
-                    </div>
+                </form>
+                <!--h2 style="font-size:16px">What would you like to do next?</h2-->
+                <!--div class="content">
+                    <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+                    <table class="radio table-hover">
+                        <tbody>
+                            <tr class="highlight">
+                                <td><input type="radio" id="show_coupon" value="valuable" name="next" onClick="showcoupon()"></td>
+                                <td><label for="show_coupon">Use Coupon Code</label></td>
+                            </tr>
+                            <tr class="highlight">
+                                <td><input type="radio" id="show_voucher" value="valuable" name="next" onClick="showvoucher()"></td>
+                                <td><label for="use_voucher">Use Gift Voucher</label></td>
+                            </tr>
+                            <tr class="highlight hidden-xs">
+                                <td><input type="radio" id="shipping_estimate" value="valuable" name="next" onClick="showestimate()"></td>
+                                <td><label for="shipping_estimate">Estimate Shipping &amp; Taxes</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div-->
+            </div>
+            <div class="wrapper-cart-total">
+                <div class="cart-total clearfix">
+                    <table id="total">
+                        <tbody>
+                            <tr>
+                                <td class="right"><b>Sub-Total: </b></td>
+                                <td class="right">GHC {{totalOrderDetails.amount}}</td>
+                            </tr>
+                            <tr>
+                                <td class="right"><b>Tax: </b></td>
+                                <td class="right">GHC {{totalOrderDetails.tax_amount}}</td>
+                            </tr>                                    
+                            <tr>
+                                <td class="right"><b>Discount:</b></td>
+                                <td class="right">- GHC {{totalOrderDetails.discount_amount}}</td>
+                            </tr>                                    
+                            <tr>
+                                <td class="right"><b>Total:</b></td>
+                                <td class="right">GHC {{totalOrderDetails.payable_amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-    <div class="content">
-                <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
-                <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
-                <h1>Shipping Address <span class="pull-right"><i class="fa fa-edit" id="edit-shipping"></i></span></h1>
-                <div class="checkout wrapper no-margin none" id="shippingbox">
-                    <div class="col-md-8 col-sm-8 col-xs-12" ng-show="createAddress">
-                        <h4>Add New Address</h4>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <h5 class="mb10">Nick Name</h5>
-                                <input type="text" ng-model="address.address_nickname" value="<?= $this->user_details['name']?>" placeholder="Nick Name" class="checkout"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <h5 class="mb10">Full Name</h5>
-                                <input type="text" ng-model="address.contact_name" value="<?= $this->user_details['name']?>" placeholder="Nick Name" class="checkout"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <h5 class="mb10">City</h5>
-                                <select id="cityname" class="form-control select2" style="width: 100%;">
-                                <?php
-                                    foreach ($GLOBALS['city_list'] as $key => $value) {
-                                        echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
-                                    }
-                                ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <h5 class="mb10">House No. &amp; Details</h5>
-                                <input type="text" ng-model="address.house_number" placeholder="eg:Flat 201, Block B, 2nd Floor" class="checkout"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Area</h5>
-                                <input type="text" ng-model="address.area" placeholder="110059" class="checkout"/>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Pin Code</h5>
-                                <input type="text" ng-model="address.zipcode" placeholder="110059" class="checkout"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Street Details</h5>
-                                <input type="text" ng-model="address.street_detail" placeholder="near HDFC Bank" class="checkout"/>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <h5 class="mb10">Contact Landmark</h5>
-                                <input type="text" ng-model="address.landmark" placeholder="near HDFC Bank" class="checkout"/>
-                            </div>
-                        </div>
-                        <div class="row mb10">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="submit" ng-click="savenewaddress(address)" value="SUBMIT" >
-                            </div>
-                        </div>
-                        <div class="clearfix mb10"></div>
-                    </div>
-                    <div class="col-md-2 col-sm-12 col-xs-12" style=" padding:8px;">
-                        <span ng-repeat="data in userAddress">
-                            <input type="radio" ng-checked="{{$first}}" id="show_coupon" value="valuable" name="next" onclick="showcoupon()">{{data.address_nickname}} , {{data.area}} ,{{data.city_name}} , {{data.zipcode}}
-                        
-                        </span>
-                    </div>
-                    <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style="background:#E4E8E9; padding:8px;">
-                        <h4 class="font-size--medium">
-                            <input type="checkbox">
-                            &nbsp; Primary Address is same as parmanent address.</h4>
-                        <a href="#" ng-click="openNewAddress()" style="color:#00CC33; font-size:16px;"><i class="fa fa-plus-square"></i> Create  New Address</a> </div>
-                        <div class="row mb10" ng-show="!createAddress && AddressLeng > 0">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{userAddress.length}}
-                                <input type="submit"  value="SUBMIT" id="shipping1">
-                            </div>
-                        </div>
-                    <div class="clearfix"> </div>
-                </div>
+            <div class="buttons">
+                <div class="right"><a class="button cart" id="cart" ng-click="getUserAddress()">Proceed To Checkout</a></div>
+                <div class="left"><a class="button" href="<?php echo $this->basePath() . '/application' ?>">Continue Shopping</a></div>
             </div>
-            <div class="clearfix"> </div>
-            <div class="content">
-                <h1>Payment Method </h1>
-                <div class="checkout wrapper no-margin none" id="paybox">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <h5 class="mb10 fs24"><a href="#"> <i aria-hidden="true" class="fa fa-truck"></i> &nbsp;Cash On Delivery</a></h5>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <h5 class="mb10 fs24"><a href="#"> <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  Banking / Online</a></h5>
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <h5 class="mb10 fs24"><a href="#"> <i aria-hidden="true" class="fa fa-paypal"></i> &nbsp;Pay Through Wallet</a></h5>
-                            </div>
-                        </div>
-                        <div class="clearfix mb10"></div>
-                    </div>
-                    <div class="clearfix mb10"></div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <!-- //about-page -->
-        <!-- footer-top -->
-        <div class="w3agile-ftr-about">
-            <div class="container">
-                <div class="ftr-toprow">
-                    <div class="col-md-4 ftr-top-grids">
-                        <div class="ftr-top-left"> <i class="fa fa-truck" aria-hidden="true"></i> </div>
-                        <div class="ftr-top-right">
-                            <h4>FREE DELIVERY</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="col-md-4 ftr-top-grids">
-                        <div class="ftr-top-left"> <i class="fa fa-user" aria-hidden="true"></i> </div>
-                        <div class="ftr-top-right">
-                            <h4>CUSTOMER CARE</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="col-md-4 ftr-top-grids">
-                        <div class="ftr-top-left"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </div>
-                        <div class="ftr-top-right">
-                            <h4>GOOD QUALITY</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-            </div>
-        </div>
-        <!-- //footer-top -->
-        <!-- subscribe -->
-        <div class="subscribe">
-            <div class="container">
-                <div class="col-md-6 social-icons w3-agile-icons">
-                    <h4>Keep in touch</h4>
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-                        <li><a href="#" class="fa fa-rss icon rss"> </a></li>
-                    </ul>
-                    <ul class="apps">
-                        <li>
-                            <h4>Download Our app : </h4>
-                        </li>
-                        <li><a href="#" class="fa fa-apple"></a></li>
-                        <li><a href="#" class="fa fa-windows"></a></li>
-                        <li><a href="#" class="fa fa-android"></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6 subscribe-right">
-                    <h4>Sign up for email and get 25%off!</h4>
-                    <form action="#" method="post">
-                        <input type="text" name="email" placeholder="Enter your Email..." required="">
-                        <input type="submit" value="Subscribe">
-                    </form>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-        <!-- //subscribe -->
-        <!-- footer -->
-        <!-- //footer -->
-        <div class="copy-right">
-            <div class="container">
-                <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
-            </div>
-        </div>
-        <!-- cart-js -->
-        <script src="js/minicart.js"></script>
-        <!-- menu js aim -->
-        <script src="js/jquery.menu-aim.js"></script>
-        <script src="js/main.js"></script>
-        <!-- Resource jQuery -->
-        <script type="text/javascript">
-                          function showcoupon() {
-                              $("#show-me").css('display', 'block');
-                              $("#voucher-div").css('display', 'none');
-                              $("#estimate-div").css('display', 'none');
-                          }
-                          function showvoucher() {
-                              $("#voucher-div").css('display', 'block');
-                              $("#show-me").css('display', 'none');
-                              $("#estimate-div").css('display', 'none');
-                          }
-                          function showestimate() {
-                              $("#estimate-div").css('display', 'block');
-                              $("#show-me").css('display', 'none');
-                              $("#voucher-div").css('display', 'none');
-                          }
-                          $("#edit-cart").hide();
-                          $("#edit-shipping").hide();
-                          $(".cart").click(function () {
-                              $("#cartbox").fadeOut();
-                              $("#shippingbox").fadeIn();
-                              $("#paybox").fadeOut();
-                              $("#edit-cart").fadeIn();
-                          });
-                          $("#shipping").click(function () {
-                              $("#cartbox").fadeOut();
-                              $("#shippingbox").fadeOut();
-                              $("#paybox").fadeIn();
-
-                              $("#edit-cart").fadeIn();
-                              $("#edit-shipping").fadeIn();
-                          });
-                          $("#shipping1").click(function () {
-                              $("#cartbox").fadeOut();
-                              $("#shippingbox").fadeOut();
-                              $("#paybox").fadeIn();
-
-                              $("#edit-cart").fadeIn();
-                              $("#edit-shipping").fadeIn();
-                          });
-                          $("#edit-cart").click(function () {
-                              $("#cartbox").fadeIn("slow");
-                              $("#paybox").fadeOut();
-                              $("#shippingbox").fadeOut();
-                          });
-                          $("#edit-shipping").click(function () {
-                              $("#shippingbox").fadeIn("slow");
-                              $("#paybox").fadeOut();
-                          });
-
-        </script>
-        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
-            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
         </div>
     </div>
+    <div class="content">
+        <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
+        <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
+        <h1>Shipping Address <span class="pull-right"><i class="fa fa-edit" id="edit-shipping"></i></span></h1>
+        <div class="checkout wrapper no-margin none" id="shippingbox">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <h4>Registered Address</h4>
+                <div class="row">                    
+                    <div class="col-md-6 col-sm-6 col-xs-12"  ng-repeat="data in userAddress">
+                        <div class="address-cont">
+                            <h4><input type="radio" name="shipping_address_id" value="{{data.id}}" ng-model="placeOrderData.shipping_address_id" ng-click="selectShipingAddress()"> {{data.address_nickname}}</h4>
+                            <p>
+                                <span ng-if="data.house_number">
+                                    {{data.contact_name}}, 
+                                </span>
+                                <span ng-if="data.house_number">
+                                    {{data.house_number}}, 
+                                </span>
+                                <span ng-if="data.street_detail">
+                                    {{data.street_detail}}, 
+                                </span>
+                                <span ng-if="data.landmark">
+                                    {{data.landmark}}, 
+                                </span>
+                                <span ng-if="data.zipcode">
+                                    {{data.zipcode}}, 
+                                </span>
+                                <span ng-if="data.city_name">
+                                    {{data.city_name}}, 
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="address-cont">
+                            <h4 class="font-size--medium"><input type="checkbox"> &nbsp; Primary Address is same as parmanent address.</h4>
+                            <a href="#" ng-click="openNewAddress()" style="color:#00CC33; font-size:16px; margin-top:1rem; float:left;"><i class="fa fa-plus-square"></i> Create  New Address</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <h4>Deleiver Time Slot</h4>
+                    <div class="col-md-6 col-sm-6 col-xs-12"  ng-repeat="(key, deliveryTimeSlot) in deliverTimeSlotList">
+                        <div class="row">
+                            <h4>{{key}} </h4>
+                            <div class="address-cont col-md-6 col-sm-6 col-xs-12" ng-repeat="deliveryTime in deliveryTimeSlot">
+                                <h4><input type="radio" name="timeslot" ng-click="selectTimeSlot(key, deliveryTime.id)"/> {{deliveryTime.start_time_slot}} - {{deliveryTime.end_time_slot}}</h4>
+                            </div>
+                        </div>
+                    </div>                
+            </div>            
+            <div class="col-md-6 col-sm-12 col-xs-12" ng-show="createAddress">
+                <h4>Add New Address</h4>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Nick Name</h5>
+                        <input type="text" ng-model="address.address_nickname" value="<?= $this->user_details['name'] ?>" placeholder="Nick Name" class="checkout"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Full Name</h5>
+                        <input type="text" ng-model="address.contact_name" value="<?= $this->user_details['name'] ?>" placeholder="Nick Name" class="checkout"/>
+                    </div>                   
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">City</h5>
+                        <select id="cityname" class="form-control select2" style="width: 100%;">
+                            <?php
+                            foreach ($GLOBALS['city_list'] as $key => $value) {
+                                echo'<option value="' . $value['id'] . '">' . $value['city_name'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>                     
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">House No. &amp; Details</h5>
+                        <input type="text" ng-model="address.house_number" placeholder="eg:Flat 201, Block B, 2nd Floor" class="checkout"/>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Area</h5>
+                        <input type="text" ng-model="address.area" placeholder="110059" class="checkout"/>
+                    </div>                    
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Pin Code</h5>
+                        <input type="text" ng-model="address.zipcode" placeholder="110059" class="checkout"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Street Details</h5>
+                        <input type="text" ng-model="address.street_detail" placeholder="near HDFC Bank" class="checkout"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <h5 class="mb10">Contact Landmark</h5>
+                        <input type="text" ng-model="address.landmark" placeholder="near HDFC Bank" class="checkout"/>
+                    </div>
+                </div>
+                <div class="row mb10">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="submit" ng-click="savenewaddress(address)" value="SUBMIT" >
+                    </div>
+                </div>
+                <div class="clearfix mb10"></div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="buttons" ng-if="placeOrderData.shipping_address_id && placeOrderData.time_slot_id">
+                <div class="right"><a class="button" id="shipping" ng-click="SelectPaymentMethod()">CONTINUE</a></div>
+            </div>            
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+    <div class="content">
+        <h1>Payment Method </h1>
+        <div class="checkout wrapper no-margin none" id="paybox">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <h5 class="mb10 fs24"><input type="radio" name="payment_type" value="cash_on_delevery" ng-model="placeOrderData.payment_type"> &nbsp;Cash On Delivery</a></h5>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <h5 class="mb10 fs24"><a href="#"> <input type="radio" name="payment_type" value="ezeepay" ng-model="placeOrderData.payment_type"> &nbsp;  Ezzepay</a></h5>
+                    </div>
+                </div>
+                <div class="buttons" ng-if="placeOrderData.payment_type">
+                    <div class="right"><a class="button" id="shipping" ng-click="PlaceOrder()">place order</a></div>
+                </div>                
+                <div class="clearfix mb10"></div>
+            </div>
+            <div class="clearfix mb10"></div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- //about-page -->
+<!-- footer-top -->
+<!-- //footer-top -->
+<!-- subscribe -->
+<!--div class="subscribe">
+    <div class="container">
+        <div class="col-md-6 social-icons w3-agile-icons">
+            <h4>Keep in touch</h4>
+            <ul>
+                <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
+                <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
+                <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
+                <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
+                <li><a href="#" class="fa fa-rss icon rss"> </a></li>
+            </ul>
+            <ul class="apps">
+                <li>
+                    <h4>Download Our app : </h4>
+                </li>
+                <li><a href="#" class="fa fa-apple"></a></li>
+                <li><a href="#" class="fa fa-windows"></a></li>
+                <li><a href="#" class="fa fa-android"></a></li>
+            </ul>
+        </div>
+        <div class="col-md-6 subscribe-right">
+            <h4>Sign up for email and get 25%off!</h4>
+            <form action="#" method="post">
+                <input type="text" name="email" placeholder="Enter your Email..." required="">
+                <input type="submit" value="Subscribe">
+            </form>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //subscribe -->
+<!-- footer -->
+<!-- //footer -->
+<div class="copy-right">
+    <div class="container">
+        <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
+    </div>
+</div>
+<!-- cart-js -->
+<script src="js/minicart.js"></script>
+<!-- menu js aim -->
+<script src="js/jquery.menu-aim.js"></script>
+<script src="js/main.js"></script>
+<!-- Resource jQuery -->
+<script type="text/javascript">
+                        function showcoupon() {
+                            $("#show-me").css('display', 'block');
+                            $("#voucher-div").css('display', 'none');
+                            $("#estimate-div").css('display', 'none');
+                        }
+                        function showvoucher() {
+                            $("#voucher-div").css('display', 'block');
+                            $("#show-me").css('display', 'none');
+                            $("#estimate-div").css('display', 'none');
+                        }
+                        function showestimate() {
+                            $("#estimate-div").css('display', 'block');
+                            $("#show-me").css('display', 'none');
+                            $("#voucher-div").css('display', 'none');
+                        }
+                        $("#edit-cart").hide();
+                        $("#edit-shipping").hide();
+                        $(".cart").click(function () {
+                            $("#cartbox").fadeOut();
+                            $("#shippingbox").fadeIn();
+                            $("#paybox").fadeOut();
+                            $("#edit-cart").fadeIn();
+                        });
+                        $("#shipping1").click(function () {
+                            $("#cartbox").fadeOut();
+                            $("#shippingbox").fadeOut();
+                            $("#paybox").fadeIn();
+
+                            $("#edit-cart").fadeIn();
+                            $("#edit-shipping").fadeIn();
+                        });
+                        $("#edit-cart").click(function () {
+                            $("#cartbox").fadeIn("slow");
+                            $("#paybox").fadeOut();
+                            $("#shippingbox").fadeOut();
+                        });
+                        $("#edit-shipping").click(function () {
+                            $("#shippingbox").fadeIn("slow");
+                            $("#paybox").fadeOut();
+                        });
+
+</script>
+<div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+    <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
+</div>
+</div>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/checkout.js' ?>">
 </script>
