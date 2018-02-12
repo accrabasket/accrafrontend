@@ -306,9 +306,23 @@ class IndexController extends AbstractActionController
         exit;
     }
      
+    public function getdeliverytimeAction() {
+        $postParams['method'] = 'deliveryTimeSlotList';
+        $deliveryTimeList = $this->commonObj->curlhitApi($postParams,'application');
+        echo $deliveryTimeList;
+        exit;        
+    }
+    public function placeorderAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $postParams['method'] = 'placeorder';
+        $response = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $response;
+        exit;        
+    }    
     public function saveaddressAction(){
         $postParams = (array) $this->getRequest()->getPost();
-        $postParams['method'] = 'getaddresslist';
+        $postParams['method'] = 'addeditdeliveryaddress';
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $addressList;

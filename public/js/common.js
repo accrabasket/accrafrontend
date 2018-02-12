@@ -21,6 +21,14 @@ function fillInAddress() {
     scope.locationData.lat = place.geometry.location.lat();
     scope.locationData.lng = place.geometry.location.lng();
 }
+$(document).ready(function() {
+    $("#w3view-cart").click(function() {
+        $(".w3view-cart-menu").show('fast'); 
+    });
+             $(".w3view-cart-close").click(function() {
+        $(".w3view-cart-menu").hide('slow');
+    });
+});
     
 var app = angular.module('app', []);
 
@@ -40,7 +48,8 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             }
         });        
     }
-    $rootScope.addToCart = function(inventory_id, product_name, action, number_of_item) {
+    $rootScope.addToCart = function(inventory_id, product_name, action, number_of_item, checkoutpage) {
+        $rootScope.ajaxLoadingData = true;
         $scope.addToCartData = {};
         $scope.addToCartData.merchant_inventry_id = inventory_id;
         $scope.addToCartData.item_name = product_name;
@@ -52,13 +61,18 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             data: ObjecttoParams($scope.addToCartData),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
+            if(checkoutpage==1) {
+              $rootScope.getcartdata();  
+            }else{
+                $scope.cartList();
+            }
+            $rootScope.ajaxLoadingData = false;
             if (response.status == 'success') {
                 $scope.successMsg = response.msg;
                 $scope.successShow = true;
                 $timeout(function(){
                     $scope.successShow = false;
                 },2000);                
-                $scope.cartList();
             }
         });        
     }    

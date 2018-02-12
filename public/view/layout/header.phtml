@@ -98,10 +98,12 @@
                     </ul>
                     <?php }?>
                 </div>
-                <div class="cart dropdown" ng-controller="cartcontroller"> 
-                    <button ng-click="cartList()" class="w3view-cart dropdown-toggle" data-toggle="dropdown" ng-click="view"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button> My Cart
-                    <ul class="dropdown-menu multi-column columns-5 pull-right">
+                <div class="cart" ng-controller="cartcontroller"> 
+                    <a ng-click="cartList()" class="w3view-cart" id="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
+                     My Cart
+                    <ul class="dropdown-menu  multi-column columns-5 pull-right w3view-cart-menu">
                         <div class="row">
+                            <a href="#" class="w3view-cart-close">X</a>
                             <div class="cart-gd-img">
                                 <ul class="cart-column-dropdown">
                                     <li ng-repeat="cartItem in cartResponse.data">
@@ -112,8 +114,8 @@
                                         </span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
                                     </li>
                                     <li ng-if="cartResponse.data">
-                                        <a class="button conti" href="index.html">Continue Shopping</a> 
-					<a class="button proceed" href="#" class="cart" id="cart" >Proceed To Checkout</a>
+                                        <a class="button conti" href="<?= $this->basePath() ?>">Continue Shopping</a> 
+					<a class="button proceed" href="<?= $this->basePath() ?>/application/index/checkout" class="cart" id="cart" >Proceed To Checkout</a>
 				  </li>                                    
                                 </ul>
                             </div>	

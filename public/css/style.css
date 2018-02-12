@@ -227,6 +227,8 @@ float: left;
     border-right: 1px solid #6495ed;
     float: left;
 	font-size: 1.2em;
+	margin-top:1.2rem;
+	position:relative;
 } 
 .w3view-cart {
     background:#fff;
@@ -243,6 +245,7 @@ float: left;
 	border:1px solid #689f39;
 	transition:all 0.5s ease 0s;
 	margin-right:6px;
+	padding:12px;
 }
 .w3view-cart  i.fa {
     font-size: 1.4em;
@@ -257,6 +260,7 @@ float: left;
     color: #ffffff;
 	vertical-align: middle;
 }
+.w3view-cart-menu{display:none;}
 /*-- //cart-box --*/
 .my-account {
     float: right;
@@ -4088,12 +4092,13 @@ ul.cart-column-dropdown h6 {
 .cart-column-dropdown li span.title{line-height: normal;
     color: #999 !important; width:140px; display:inline-block;}
 
-.cart-column-dropdown li span.title .fa{font-weight:bold; margin-top:8px; margin-right:10px; cursor:pointer;}	
+.cart-column-dropdown li span.title .fa{font-weight:bold; margin-top:8px; margin-right:10px; cursor:pointer;}
+.cart-column-dropdown li span.title .item-quant{font-size:14px; float:left; margin-right:12px; margin-top:6px; font-weight:700;}	
 .cart-column-dropdown li .conti{float:left; width:100%; color:#fff !important; margin-bottom:10px !important; text-align:center;}
 .cart-column-dropdown li .proceed{float:left; width:100%; color:#fff !important; margin-bottom:10px !important; text-align:center;}
-.red-text{color:#FF3300;}
+.red-text{color:#FF3300; border:1px solid #999; border-radius:100%; padding: 3px 5px;}
 
-.green-text{color: #009933;}
+.green-text{color: #009933; border:1px solid #999; border-radius:100%;padding: 3px 5px;}
 .cart-column-dropdown li span.price{font-weight:bold; float:right; margin-top:8px;}
 
 .cart-gd-img img {
@@ -4130,6 +4135,18 @@ ul.cart-column-dropdown h6 {
     margin-left: 0px;
 }
 .map-grids{height:25em;}
+.checkout .address-cont{border:2px dashed #999999; padding:10px; margin:0 0 15px; background:#f2f2f2;; min-height:125px;}
+.checkout .address-cont h4{margin:0 0 4px; padding:0; font-size:16px; font-weight:bold;}
+.checkout .address-cont p{margin:0 0 0px; padding:0; font-size:14px; font-weight:300;}
+.w3view-cart-close{background:#e2e2e2;padding: 5px 10px;
+    border-radius: 100% !important;
+    width: 30px;
+    border-radius: 110px;
+    height: 30px;
+    float: right;
+    position: absolute;
+    right: -8px;
+    top: -12px;}
 button, input, select, textarea {
 	border: 1px solid #e2e2e2;
 	padding: 5px;
