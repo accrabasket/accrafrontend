@@ -1,0 +1,170 @@
+<div class="content-wrapper" ng-controller="orderController" ng-cloak="true" ng-init="getOrderList()">
+
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!--                    <div class="box-header">
+                                            <h3 class="box-title"> Order List</h3>
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('current_order')" class="btn btn-info"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                            </div>
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('cancelled')" class="btn btn-info"> Cancelled</a>
+                                            </div>
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('completed')" class="btn btn-info"> Completed</a>
+                                            </div>
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('dispatched')" class="btn btn-info"> Dispatched </a>
+                                            </div>                        
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('assigned_to_rider')" class="btn btn-info"> Assigned To Riders</a>
+                                            </div>                        
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('ready_to_dispatch')" class="btn btn-info"> Ready To Dispatch</a>
+                                            </div>
+                                            <div class="pull-right"> 
+                                                &nbsp;<a ng-click="shortUsingStatus('order_placed')" class="btn btn-info"> Placed</a>
+                                            </div> 
+                                            
+                                        </div>-->
+                    <!--                     /.box-header -->
+                    <!--                    <div class="col-sm-10 col-lg-10  no-rpad">
+                                            <label class="ml10">Search By</label></div>
+                                        <div class="col-sm-8 col-lg-8  no-rpad">
+                                        <form name="searchLogFrm" id="searchLogFrm" ng-submit="querySearch()" class="ng-valid ng-dirty ng-valid-parse ng-submitted"> 
+                                        <div class="alert alert-danger alert-dismissable col-md-12 ng-binding ng-hide" ng-show="errorStatus">{{errorMsg}}</div>
+                                        <div class="full-width fl">
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <input ng-model="filterText" type="text" class="form-control search-input ng-valid ng-touched ng-dirty ng-valid-parse" aria-label="..." placeholder="Search By Order id" value="">
+                                                   
+                                                </div>
+                                            </div>  
+                                        </div>   
+                                        </form>
+                                        </div>
+                                        <div class="col-sm-2">
+                                             <a ng-click="querySearch()" class="btn btn-info"><i class="fa fa-search search-end-inp"></i></a>
+                                        </div>
+                                        <div class="col-sm-2 no-lpad">
+                                            <a href="#" ng-click="refresh()"><i class="fa fa-refresh" aria-hidden="true" ></i></a>
+                                            <button class="btn btn-default pull-right" type="button" id="show-attribute"><i class="fa fa-align-left"></i> Search Filter</button>
+                                        </div>
+                                        <div class=" col-lg-12" id="add-attribute" style="display: none;">
+                                            <div class="full-width pull-left">
+                                                <div class="col-lg-5 col-sm-6 col-xs-12 mt10">
+                                                    <div class="form-group">
+                                                        <label>Merchant</label>
+                                                        <select class="form-control " style="width: 100%;" tabindex="-1" aria-hidden="true" ng-model="filter.merchant_id" data-live-search="true" data-size="3">
+                                                            <option selected="selected" value="">Select Merchant</option>
+                                                            <option ng-repeat="data in merchantList" value="{{data.user_id}}">{{data.first_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-2 col-sm-6 col-xs-12 mt10">
+                                                    <div class="form-group">
+                                                        <label>&nbsp;</label>
+                                                        <button class="btn btn-block btn-primary" type="button" ng-click="getOrderList()">Filter</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="full-width pull-left border-top">&nbsp;</div>
+                                        </div>
+                                        <div class="clearfix"></div>-->
+
+                    <div class="box-body">
+                        <p class="danger showMsg" style="color:green">
+                            <?php
+                            if (!empty($this->flashMessenger()->getMessages())) {
+                                $msg = $this->flashMessenger()->getMessages();
+                                echo $msg[0];
+                            }
+                            ?>                         
+                        </p>                        
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover dataTable" id="example2" role="grid" aria-describedby="example2_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Order id</th>
+                                                
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Shipping Address</th>
+                                  
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Amount</th>
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Order status</th>
+                                                
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
+                                                <th class="sorting" tabindex="0" rowspan="1">Order Date &nbsp;
+<!--                                                    <a href="#" ng-click="shortByDate('asc')"><i class="fa fa-sort-desc" aria-hidden="true"></i></a>
+                                                    &nbsp;|&nbsp;&nbsp;
+                                                    <a href="#" ng-click="shortByDate('desc')"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>-->
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr role="row" class="odd" ng-repeat="data in orderList">
+                                                <td class=""><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</td>
+                                            
+                                                <td class="">{{shipping_address_list[data.order_details.shipping_address_id].address_nickname}}
+                                                    {{shipping_address_list[data.order_details.shipping_address_id].house_number}}
+                                                    {{shipping_address_list[data.order_details.shipping_address_id].city}}</td>
+                                              
+                                                <td>{{data.order_details.payable_amount}}</td>
+                                                <td>{{data.order_details.order_status|underscoreless}}</td>
+                                                                                                
+                                                <td>
+                                                    <a style="color:red" ng-show="{{data.order_details.order_status == 'order_placed'}}" ng-click="cancelOrder(data.order_details.store_id, data.order_details.order_id)" href="javascript:void(0)" > 
+                                                        cancel order
+                                                    </a>
+
+                                                </td>
+                                                <td>{{data.order_details.created_date}}</td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Total {{numberOfRecord}} entries</div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                        <pagination  class="pagination pull-right mt0" ng-model="currentPage" total-items="numberOfRecord" max-size="3" boundary-links="true" ng-click="selectPage(currentPage)"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+        <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
+    </div> 
+</div>
+
+<script src="<?php echo $this->basePath() . '/public/js/frontend/currentorder.js' ?>"></script>
+<script>
+         var PAGE_COUNT = 5;
+         var PAGING_GAP = 3;
+         $(document).ready(function () {
+             $("#show-attribute").click(function () {
+                 $("#add-attribute").toggle();
+             });
+             $('.test').jfilestyle();
+         });
+
+</script>

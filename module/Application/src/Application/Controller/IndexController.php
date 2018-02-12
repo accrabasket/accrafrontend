@@ -315,93 +315,56 @@ class IndexController extends AbstractActionController
         exit;
     }
 	
-	public function createbookingAction(){
-		$request = (array) $this->getRequest()->getPost();
-		// create user
-		$user_id ;
-		$checkUserExist =  $this->commonObj->checkUserExist(array('email'=>$request['email']));
-		if(!empty($checkUserExist)){
-			foreach($checkUserExist as $value){
-				$user_id = $value['id'];
-			}
-		}
-		if(empty($user_id)){
-			$userArr = array();
-			$userArr['name'] = $request['first_name'];
-			if(!empty($request['last_name'])){
-			    $userArr['name'] = $request['first_name'].' '.$request['last_name'];
-			}
-			$userArr['email'] = $request['email'];
-			$userArr['number'] = $request['mobile'];
-			$userArr['password'] = 123;
-			$user_id = $this->commonObj->registration($userArr);
-		}
-		
-		
-        if (!empty($user_id)) {
-            $bookingArr = array();
-			$bookingArr['package_id'] = $request['package_id'];
-			$bookingArr['location_id'] = $request['location_id'];
-			$bookingArr['number_of_person'] = $request['number_of_person'];
-			$bookingArr['checkin_date'] = $request['checkin_date'];
-			$bookingArr['checkout_date'] = $request['checkout_date'];
-			$bookingArr['user_id'] = $user_id;
-			$bookingresponce = $this->commonObj->createBooking($bookingArr);
-			if($bookingresponce > 0){
-				$path = $GLOBALS['SITE_APP_URL'].'index/bookingconfirm?data=success';
-				header('Location:'.$path);exit;
-			}else{
-				$path = $GLOBALS['SITE_APP_URL'].'index/bookingconfirm?id=error';
-			     header('Location:'.$path);exit;
-			}
-        }else{
-				$path = $GLOBALS['SITE_APP_URL'].'index/bookingconfirm?id=error';
-			  header('Location:'.$path);exit;
-			}
-       
+    public function editprofileAction(){
+       $this->view->cityList = $this->session['city_list']; 
+       $this->view->user_details = $this->session['user']['data'][0];
+       return $this->view;
     }
 	
-	public function bookingconfirmAction(){
-		$id = $this->params()->fromQuery('data');
-        $this->view->msg = $id;
-        return $this->view;
+    public function updateuserAction(){
+	$postParams = (array) $this->getRequest()->getPost();
+        $data = array();
+        $data['method'] = 'addedituser';
+        $data['id'] = $this->session['user']['data'][0]['id'];
+        $data['name'] = $postParams['name'];
+        $data['email'] = $postParams['email'];
+        $data['mobile_number'] = $postParams['mobile_number'];
+        $data['city_id'] = $postParams['city_id'];
+        $addressList = $this->commonObj->curlhitApi($data,'application/customer');
+        echo $addressList;
+        exit;
     }    
 	
-    public function galleryAction(){
-		
+    public function currentorderAction(){
         return $this->view;
     }
-
-	public function detailAction(){
-		$packageList = array();
-		$id = $this->params()->fromQuery('data');
-		$this->view->id = $id;
-		$packageList = array();
-        if (!empty($id)) {
-            $getPackageList = $this->commonObj->getPackageList($id);
-            if (!empty($getPackageList)) {
-                foreach ($getPackageList as $key => $value) {
-                    $packageList[] = $value;
-                }
-                
-            }
+    
+    function getOrderListAction() {
+        $request = (array)$this->getRequest()->getPost();
+        $request['method'] = 'orderlist';
+        $request['pagination'] = 1;
+        if(!empty($request['page'])) {
+            $request['page'] = $request['page'];
         }
-		
-		$this->view->packageList = $packageList;
+        $request['user_id'] = $this->session['user']['data'][0]['id'];
+        $productList = $this->commonObj->curlhitApi($request,'application/customer');
+        $productList = json_decode($productList, true);
+        $productList['data'] = array_values($productList['data']);
+        echo json_encode($productList);
+        exit;
+    }
+
+    function pastorderAction() {
         return $this->view;
     }
 
-	public function userinfoAction(){
-		$request = (array) $this->getRequest()->getPost();
-		$start_date = $request['start_date'];
-		$date = str_replace('/', '-', $start_date);
-		$request['start_date'] = date('Y-m-d', strtotime($date));
-		$end_date = $request['end_date'];
-		$date = str_replace('/', '-', $end_date);
-		$request['end_date'] = date('Y-m-d', strtotime($date));
-		
-		$this->view->data = $request;
-
-        return $this->view;
+    function cancelorderAction() {
+        $request = (array)$this->getRequest()->getPost();
+        $request['method'] = 'cancelorder';
+        $request['user_id'] = $this->session['user']['data'][0]['id'];
+        $productList = $this->commonObj->curlhitApi($request,'application/customer');
+        $productList = json_decode($productList, true);
+        echo $productList;
+        exit;
     } 
 }
