@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-    <div ng-controller="index" ng-cloak="true">
+    <div >
         <!-- header -->
 
         <!-- //header -->	
@@ -84,338 +84,61 @@
                 </div>  	
             </div>  	
         </div>  
-        <div class="container">
+        <div class="container" ng-controller="index" ng-cloak="true">
             <section id="demos">
                 <div class="row">
                     <div style="width: 100%;">
                         <h1 class="slider-header">Most Popular
-                            <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                            <!--<a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>-->
                         <div class="products products--inline">
                             <div class="owl-carousel owl-theme">
+                             <?php 
+                                    foreach ($this->newOfferList['data'] as $key => $value) {
+                                                                 
+                                ?>
                                 <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
+
+                                        <div class="plp-product product_wrapper">
+                                            <?php 
+                                            $img = $this->newOfferList['imageRootPath'].'/product/'.$value['product_id'].'/'.$this->newOfferList['productImageData'][$value['product_id']][0]['image_name'];
+                                                if(!empty($value[discount_value])){
+                                                    echo'<div class="plp-product_offer display">GHC '.$value['discount_value'].' Off</div>';
+                                                }
+                                                
+                                            ?>
+                                            
+                                            <div  class="plp-product_img ">
+                                                <img class="img animated fadeIn" alt="<?=  ucfirst($value['product_name'])?>" src="<?= $img.'?time='.  time() ?>">
+                                            </div>
+                                            <div  title="<?=  ucfirst($value['product_name'])?>" class="plp-product_name ">
+                                                <div  class="LinesEllipsis  plp-product_name--box">
+                                                    <a href="<?php echo $this->basePath()?>/application/index/productdetails?id=<?=$value['product_id']?>"><?=  ucfirst($value['product_name'])?></a>
                                                 </div>
                                             </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
+                                            <div title="<?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>" class="plp-product_quantity">
+                                                <span>
+                                                    <?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>
+                                                </span>
+                                            </div>
                                             <div  class="plp-product_price">
                                                 <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
+                                                    <!--<div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>-->
+                                                    <div class="plp-product_price--new display--inline-block@mobile">GHC <?=$value['attribute'][$value['product_id']]['price']?></div>
                                                 </div>
                                             </div>
                                             <div class="plp-product_add-to-cart">
                                                 <div class="add-to-cart">
                                                     <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
+                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block" ng-click="addToCart(<?=$value['attribute'][$value['product_id']]['id']?>, '<?=$value['product_name']?>', 'add', 1)">Add To Cart</button>
                                                     <button data-test-id="plus-button" class="add-to-cart_inc"></button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    
                                 </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                <?php }?>
+                                   
+                                
                             </div>  
 
                         </div>
@@ -425,333 +148,55 @@
                     <div style="width: 100%;">
 
                         <h1 class="slider-header">DEALS OF THE DAY 
-                            <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                            <!--<a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>-->
                         <div class="products products--inline">
                             <div class="owl-carousel owl-theme">
+                                <?php 
+                                    foreach ($this->hotDealList['data'] as $key => $value) {
+                                                                 
+                                ?>
                                 <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" <?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
+
+                                        <div class="plp-product product_wrapper">
+                                            <?php 
+                                            $img = $this->hotDealList['imageRootPath'].'/product/'.$value['product_id'].'/'.$this->hotDealList['productImageData'][$value['product_id']][0]['image_name'];
+                                                if(!empty($value[discount_value])){
+                                                    echo'<div class="plp-product_offer display">GHC '.$value['discount_value'].' Off</div>';
+                                                }
+                                                
+                                            ?>
+                                            
+                                            <div  class="plp-product_img ">
+                                                <img class="img animated fadeIn" alt="<?=  ucfirst($value['product_name'])?>" src="<?= $img.'?time='.  time() ?>">
+                                            </div>
+                                            <div  title="<?=  ucfirst($value['product_name'])?>" class="plp-product_name ">
+                                                <div  class="LinesEllipsis  plp-product_name--box">
+                                                    <a href="<?php echo $this->basePath()?>/application/index/productdetails?id=<?=$value['product_id']?>"><?=  ucfirst($value['product_name'])?></a>
                                                 </div>
                                             </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
+                                            <div title="<?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>" class="plp-product_quantity">
+                                                <span>
+                                                    <?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>
+                                                </span>
+                                            </div>
                                             <div  class="plp-product_price">
                                                 <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
+                                                    <!--<div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>-->
+                                                    <div class="plp-product_price--new display--inline-block@mobile">GHC <?=$value['attribute'][$value['product_id']]['price']?></div>
                                                 </div>
                                             </div>
                                             <div class="plp-product_add-to-cart">
                                                 <div class="add-to-cart">
                                                     <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
+                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block" ng-click="addToCart(<?=$value['attribute'][$value['product_id']]['id']?>, '<?=$value['product_name']?>', 'add', 1)">Add To Cart</button>
                                                     <button data-test-id="plus-button" class="add-to-cart_inc"></button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    
                                 </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none"><!-- react-text: 151 -->₹<!-- react-text: 152 -->40<!-- react-text: 153 --> Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box"><!-- react-text: 159 -->Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile"><!-- react-text: 166 -->₹<!-- react-text: 167 -->330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile"><!-- react-text: 169 -->₹<!-- react-text: 170 -->290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a  href="#" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_offer">12% OFF</div>
-                                            <div class="plp-product_offer display--none">₹ 40 Off</div>
-                                            <div  class="plp-product_img "><img class="img animated fadeIn" alt="Aashirvaad Shudh Chakki Whole Wheat Atta" src="<?php echo $this->basePath() ?>/public/images/pro_333324.jpg?1475228410"></div>
-                                            <div  title="Aashirvaad Shudh Chakki Whole Wheat Atta" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">Aashirvaad Shudh Chakki Whole Wheat Atta
-                                                </div>
-                                            </div>
-                                            <div title="10 kg" class="plp-product_quantity"><span>10 kg</span></div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>
-                                                    <div class="plp-product_price--new display--inline-block@mobile">₹ 290</div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                                <?php }?>
+                                
                             </div>  
 
                         </div>
@@ -838,63 +283,9 @@
         </div> 
 
 
-        <div class="" id="city-box" style="display: none;"> 
-            <div class="location__shake-container animated">
-                
-<!--                <div class="location">
-                    <div>
-                        <div class="location-body">
-                            <div class="location-body__top-container">
-                                <div class="location-helper weight--semibold text-center">Where do you want the delivery?</div>
-                                <div class="location__selected"><img class="img animated fadeIn location-body__selected-image" alt="Gurugram / Faridabad" src="<?php echo $this->basePath() ?>/public/images/gurugram-ff049a38d323a7bf38f44435af2e61ed.png">
-                                    <div class="location-body__selected-body">
-                                        <div class="location-body__selected-title"> react-text: 1114 Deliver in  /react-text <span class="weight--semibold">Gurugram / Faridabad</span></div>
-                                        <span class="location-body__right-arrow" data-test-id="location-right-arrow"></span></div>
-                                </div>
-                            </div>
-                            <div class="location-body__bottom-container">
-                                <div class="location-body__bottom-wrapper">
-                                    <div class="location__separator"><span class="separator-text">Or Select your city</span></div>
-                                    <div class="cities-container">
-                                        <div class="cities-container__title">Top Searched Cities</div>
-                                        <div class="cities-container-list">
-                                            <div class="cities-container-list__item">
-                                                <select class="form-control select2" style="width: 100%;">
-                                                <?php
-                                                    foreach ($this->cityList as $key => $value) {
-//                                                        echo'<div class="cities-container-list__item-name">'.$value['city_name'].'</div>';
-                                                        echo'<option >'.$value['city_name'].'</option>';
-                                                    }
-                                                ?>
-                                                </select>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="location-autosuggest">
-                                        <div class="location-autosuggest__select-container" data-test-id="location-input-box">
-                                            <div class="relative"><span class="location-autosuggest__select-icon"></span>
-                                                <div class="Select location-autosuggest__select Select--single is-searchable">
-                                                    <div class="Select-control"><span class="Select-multi-value-wrapper" id="react-select-2--value">
-                                                            <div class="Select-placeholder">Type your city (e.g Chennai, Pune)</div>
-                                                            <div class="Select-input" style="display: inline-block;">
-                                                                <input role="combobox" aria-expanded="false" aria-owns="" aria-haspopup="false" aria-activedescendant="react-select-2--value" value="" style="width: 17px; box-sizing: content-box;">
-                                                                <div style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre;"></div>
-                                                            </div>
-                                                        </span><span class="Select-arrow-zone"><span class="Select-arrow"></span></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="location-autosuggest__button-container"><a class="location-autosuggest__button"><span class="location-autosuggest__button-icon"></span><span class="display--inline-block weight--normal">Detect</span></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
+        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
         </div>
-
     </div>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/index.js' ?>">
 </script>

@@ -111,13 +111,13 @@
                                         </thead>
                                         <tbody>
                                             <tr role="row" class="odd" ng-repeat="data in orderList">
-                                                <td class=""><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</td>
+                                                <td class=""><a href="<?php echo $this->basePath()?>/application/index/orderdetails?order_id={{data.order_details.order_id}}"><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</a></td>
                                             
                                                 <td class="">{{shipping_address_list[data.order_details.shipping_address_id].address_nickname}}
                                                     {{shipping_address_list[data.order_details.shipping_address_id].house_number}}
                                                     {{shipping_address_list[data.order_details.shipping_address_id].city}}</td>
                                               
-                                                <td>{{data.order_details.payable_amount}}</td>
+                                                <td>GHC {{data.order_details.payable_amount}}</td>
                                                 <td>{{data.order_details.order_status|underscoreless}}</td>
                                                                                                 
                                                 <td>
