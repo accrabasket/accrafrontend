@@ -12,21 +12,26 @@ app.controller('product', function ($scope, $http, $sce, $timeout, categoryId) {
     if(productData == ''){
         $scope.no_record = 'No Data Available.';
     }
-    
-    $scope.productlist = function () {
+    $scope.currentPage = 1;
+    $scope.productlist = function () {        
         $http({
             method: 'POST',
             url: serverAppUrl + '/productlist',
             data: ObjecttoParams($scope.searchProductParams),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
-            $scope.totalNumberOfProduct = response.totalNumberOFRecord;
             if (response.status == 'success') {
+                $scope.numberOfRecord = response.totalNumberOFRecord;
                 $scope.allProductListResponse = response;
                 $scope.productDataList = response.data;
+            }else{
+                $scope.numberOfRecord = 0;
             }
         });
     }
-    
+    $scope.selectPage = function(page_number) {
+        $scope.currentPage = $scope.searchProductParams.page = page_number;
+        $scope.productlist();
+    };    
     $scope.productlist();
 });

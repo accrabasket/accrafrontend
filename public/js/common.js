@@ -30,7 +30,7 @@ $(document).ready(function() {
     });
 });
     
-var app = angular.module('app', []);
+var app = angular.module('app', ['ui.bootstrap']);
 
 app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.cartResponse = {};
