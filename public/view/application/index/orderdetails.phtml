@@ -1,0 +1,82 @@
+<div class="content-wrapper">
+
+<section class="content container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"> Order Details</h3>
+                            
+            </div>
+            <!-- /.box-header -->            
+            <div class="box-body">
+                                
+              <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row"> 
+                  <div class="col-sm-6"></div>
+                  <div class="col-sm-6"></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-bordered table-hover dataTable" id="example2" role="grid" aria-describedby="example2_info">
+                      <thead>
+                        <tr role="row">
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Product Name</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> Quantity </th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Product amount</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Product Des.</th>
+
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Discount amount</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Tax amount</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Shipping address</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Product Image</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <?php
+                                if(!empty($this->productDetails)){
+                                    foreach ($this->productDetails['data'] as $key => $value) {
+                                        foreach ($value['orderitem'] as $keys => $orderitem) {
+                                            $imgpath = $this->productDetails['imageRootPath'].'/'.$orderitem['product_dump']['product_image_data'][0]['type'].'/'.$orderitem['product_dump']['product_details']['product_id'].'/'.$orderitem['product_dump']['product_image_data'][0]['image_name'];
+
+                            ?>
+
+                              <tr role="row" class="odd">
+                                        <td class="">
+                                            <?=$orderitem['product_dump']['product_details']['product_name']?>
+                                        </td>
+                                        <td>
+                                            <?=$orderitem['number_of_item']?>
+                                        </td>
+                                        <td class="">GHC <?=$orderitem['amount']?></td>
+                                        <td class=""><?=$orderitem['product_dump']['product_details']['product_desc']?></td>
+                                        
+                                        <td class="">GHC <?=$orderitem['discount_amount']?></td>
+                                        <td class="">GHC <?=$orderitem['tax_amount']?></td>
+                                        <td class=""><?=$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['house_number'].' '
+                                                    .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['street_detail'].' '
+                                                    .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['area'].' '
+                                                    .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['city_name'].' '
+                                                    .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['zipcode']?></td>
+                                        <td class=""><img src="<?=$imgpath?>"  height="60" width="60"></td>
+                                    </tr>
+                            <?php            
+                                    }
+                                }
+                            }
+
+                            ?>
+                      </tbody>
+                      
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+

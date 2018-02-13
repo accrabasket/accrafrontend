@@ -34,12 +34,20 @@ class IndexController extends AbstractActionController
         if(empty($this->session['banner'])){
             $this->session['banner'] = $this->banner();
         }
+        if(empty($this->session['hot_deal'])){
+            $this->session['hot_deal'] = $this->hotDeal();
+        }
+        if(empty($this->session['new_offer'])){
+            $this->session['new_offer'] = $this->newOffer();
+        }
     }
     public function indexAction()
     { 
         $this->view->cityList = $this->session['city_list'];
         $this->view->marchantList = $this->session['marchant_list'];
         $this->view->categoryList = $this->session['category_list'];
+        $this->view->hotDealList = $this->session['hot_deal'];
+        $this->view->newOfferList = $this->session['new_offer'];
         $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]:0;
         $this->view->banner = $this->session['banner'];
         return $this->view;
@@ -374,11 +382,47 @@ class IndexController extends AbstractActionController
 
     function cancelorderAction() {
         $request = (array)$this->getRequest()->getPost();
-        $request['method'] = 'cancelorder';
+        $request['method'] = 'updateOrderstatus';
+        $request['order_status'] = 'cancelled';
         $request['user_id'] = $this->session['user']['data'][0]['id'];
         $productList = $this->commonObj->curlhitApi($request,'application/customer');
         $productList = json_decode($productList, true);
         echo $productList;
         exit;
     } 
+    
+    function orderdetailsAction() {
+       $request = (array) $this->getRequest()->getQuery();
+       if (!empty($request['order_id'])) {
+            $request['method'] = 'orderlist';
+            $productList = $this->commonObj->curlhitApi($request,'application/customer');
+            $productList = json_decode($productList,true);
+            if(!empty($productList['data'])){
+                $this->view->productDetails = $productList;
+            }
+        }
+       return $this->view;
+    }
+    
+    function hotDeal(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $hotDealList  = array();
+        $postParams['method'] = 'productlist';
+        $postParams['city_id'] = '1';
+        $postParams['product_type'] = 'hotdeals';
+        $hotDealList = $this->commonObj->curlhitApi($postParams,'application/product');
+        $hotDealList = json_decode($hotDealList,true);
+        return $hotDealList;
+    }
+    
+    function newOffer(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $newOfferList  = array();
+        $postParams['method'] = 'productlist';
+        $postParams['city_id'] = '1';
+        $postParams['product_type'] = 'new_offer';
+        $newOfferList = $this->commonObj->curlhitApi($postParams,'application/product');
+        $newOfferList = json_decode($newOfferList,true);
+        return $newOfferList;
+    }
 }
