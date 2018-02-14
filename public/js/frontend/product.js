@@ -4,7 +4,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, categoryId) {
     $scope.successShow = false;
     $scope.no_record = '';
     $scope.searchProductParams = {};
-    $scope.quantity = [];
+    $scope.quantity = {};
     $scope.searchProductParams.category_id = categoryId;
     $scope.searchProductParams.page = 1;
     $scope.allProductListResponse = {};
@@ -21,6 +21,11 @@ app.controller('product', function ($scope, $http, $sce, $timeout, categoryId) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             if (response.status == 'success') {
+                angular.forEach(response.data, function(product, key){
+                    angular.forEach(product.attribute, function(attributedata, key){
+                        $scope.quantity[product.product_id] = key;
+                    });
+                });
                 $scope.numberOfRecord = response.totalNumberOFRecord;
                 $scope.allProductListResponse = response;
                 $scope.productDataList = response.data;

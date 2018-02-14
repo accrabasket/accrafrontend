@@ -43,7 +43,7 @@
                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
                 <div class="plp-product_quantity">                    
                     <select style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
-                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="$index==0">
+                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
                             {{setAttribute(attributeDetails, $index)}}
                             {{attributeDetails.quantity}} {{attributeDetails.unit}}
                         </option>

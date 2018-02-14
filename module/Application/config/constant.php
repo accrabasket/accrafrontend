@@ -8,4 +8,4 @@ define('NODE_API', 'http://localhost:3000/');
 define('BASKET_API', '54.233.182.212/basketapi/');
 $GLOBALS['PRODUCTIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'accrabasket/product_img';
 $GLOBALS['ATTRIBUTEIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'/accrabasket/attribute_img';
-$GLOBALS['LEFT_MENU_ALLOW'] = array('index','product');
+$GLOBALS['LEFT_MENU_ALLOW'] = array('product');

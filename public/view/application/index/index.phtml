@@ -1,291 +1,361 @@
+<!-- welcome -->
+<div class="welcome"> 
+    <div class="container">
+        <div class="welcome-info">
+            <div class="prev-circle"><i class="fa fa-angle-left"></i></div>
+            <div class="bs-example bs-example-tabs category_main_div" role="tabpanel" data-example-id="togglable-tabs" style='overflow: hidden;'>
 
-<!DOCTYPE html>
-
-    <div >
-        <!-- header -->
-
-        <!-- //header -->	
-        <!-- banner -->
-        <div class="banner">
-            <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
-                <!-- Wrapper-for-Slides -->
-                <div class="carousel-inner" role="listbox">
-                     <?php
-                        if(!empty($this->banner['data'])){
-                            foreach ($this->banner['data'] as $key => $value) {
-                                $imageName = $value['image_name'];
-                                $path = $this->banner['imageRootPath'].'/'.$imageName;
-                    ?>
-                    <!--<a href="<?= !empty($value['link'])?$value['link']:'javascript:void(0)' ?>">-->
-                    <div class="item <?= $key==0?'active':''?>" style="height:350px">
-                        <img src="<?php echo $path; ?>" alt="" class="img-responsive"/>
-                        <div class="carousel-caption kb_caption kb_caption_center">
-                            <h4 data-animation="animated fadeInLeft"><?= $value['description']?></h4>
-                        </div>
-                    </div>
-                     <!--</a>-->
+                <ul id="myTab" class=" nav-tabs" role="tablist" style='width: 20000px;float:left;'>
                     <?php
-                        }}else{
-                    ?>
-                    <div class="item active"> First-Slide 
-                        <img src="<?php echo $this->basePath() ?>/public/images/banner1.jpg" alt="" class="img-responsive" />
-                        <div class="carousel-caption kb_caption kb_caption_right">
-                         </div> 
-                    </div>
-                        <?php }?>
-                </div> 
-                <!-- Left-Button -->
-                <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
-                    <span class="fa fa-angle-left kb_icons" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a> 
-                <!-- Right-Button -->
-                <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
-                    <span class="fa fa-angle-right kb_icons" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a> 
-            </div>
-            <script src="<?php echo $this->basePath() ?>/public/js/custom.js"></script>
-        </div>
-        <!-- //banner -->  
-        <!---728x90---> 
-        <!-- welcome -->
-        <div class="welcome"> 
-            <div class="container"> 
-                <div class="welcome-info">
-                    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class=" nav-tabs" role="tablist">
-                            <?php
-                                foreach ($this->categoryList['data'] as $key => $value) {
-                            ?>
-                            <li role="presentation" class="active">
-                                <a href="<?=$this->basePath()?>/application/index/product?id=<?=$key?>" >
-                                    <!--<i class="fa fa-laptop" aria-hidden="true"></i> -->
-                                    <?php
-                                        if(!empty($this->categoryList['images'][$key])){
-                                            $type = $this->categoryList['images'][$key][0]['type'];
-                                            $name = $this->categoryList['images'][$key][0]['image_name'];
-                                            $path = $this->categoryList['imageRootPath'];
-                                            $image = $path.'/'.$type.'/'.$key.'/'.$name;
-                                            echo'<img src="'.$image.'" style="height: 140px;width:200px;"/>';
-                                        
-                                        }else{
-                                            echo'<img src="'.$this->basePath().'/public/images/newimg/noimage.png" style="height: 140px;width:200px;"/>';
-                                        }
-                                           
-                                    ?>   
-                                    <h5><?=$value['category_name']?></h5>
-                                </a>
-                            </li>
-                                <?php }?>
-                        </ul>
-                        <div class="clearfix"> </div>                            
-                    </div>  
-                </div>  	
-            </div>  	
-        </div>  
-        <div class="container" ng-controller="index" ng-cloak="true">
-            <section id="demos">
-                <div class="row">
-                    <div style="width: 100%;">
-                        <h1 class="slider-header">Most Popular
-                            <!--<a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>-->
-                        <div class="products products--inline">
-                            <div class="owl-carousel owl-theme">
-                             <?php 
-                                    foreach ($this->newOfferList['data'] as $key => $value) {
-                                                                 
-                                ?>
-                                <div class="item">
-
-                                        <div class="plp-product product_wrapper">
-                                            <?php 
-                                            $img = $this->newOfferList['imageRootPath'].'/product/'.$value['product_id'].'/'.$this->newOfferList['productImageData'][$value['product_id']][0]['image_name'];
-                                                if(!empty($value[discount_value])){
-                                                    echo'<div class="plp-product_offer display">GHC '.$value['discount_value'].' Off</div>';
-                                                }
-                                                
-                                            ?>
-                                            
-                                            <div  class="plp-product_img ">
-                                                <img class="img animated fadeIn" alt="<?=  ucfirst($value['product_name'])?>" src="<?= $img.'?time='.  time() ?>">
-                                            </div>
-                                            <div  title="<?=  ucfirst($value['product_name'])?>" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">
-                                                    <a href="<?php echo $this->basePath()?>/application/index/productdetails?id=<?=$value['product_id']?>"><?=  ucfirst($value['product_name'])?></a>
-                                                </div>
-                                            </div>
-                                            <div title="<?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>" class="plp-product_quantity">
-                                                <span>
-                                                    <?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>
-                                                </span>
-                                            </div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <!--<div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>-->
-                                                    <div class="plp-product_price--new display--inline-block@mobile">GHC <?=$value['attribute'][$value['product_id']]['price']?></div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block" ng-click="addToCart(<?=$value['attribute'][$value['product_id']]['id']?>, '<?=$value['product_name']?>', 'add', 1)">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                </div>
-                                <?php }?>
-                                   
-                                
-                            </div>  
-
-                        </div>
-                    </div>
-
-
-                    <div style="width: 100%;">
-
-                        <h1 class="slider-header">DEALS OF THE DAY 
-                            <!--<a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>-->
-                        <div class="products products--inline">
-                            <div class="owl-carousel owl-theme">
-                                <?php 
-                                    foreach ($this->hotDealList['data'] as $key => $value) {
-                                                                 
-                                ?>
-                                <div class="item">
-
-                                        <div class="plp-product product_wrapper">
-                                            <?php 
-                                            $img = $this->hotDealList['imageRootPath'].'/product/'.$value['product_id'].'/'.$this->hotDealList['productImageData'][$value['product_id']][0]['image_name'];
-                                                if(!empty($value[discount_value])){
-                                                    echo'<div class="plp-product_offer display">GHC '.$value['discount_value'].' Off</div>';
-                                                }
-                                                
-                                            ?>
-                                            
-                                            <div  class="plp-product_img ">
-                                                <img class="img animated fadeIn" alt="<?=  ucfirst($value['product_name'])?>" src="<?= $img.'?time='.  time() ?>">
-                                            </div>
-                                            <div  title="<?=  ucfirst($value['product_name'])?>" class="plp-product_name ">
-                                                <div  class="LinesEllipsis  plp-product_name--box">
-                                                    <a href="<?php echo $this->basePath()?>/application/index/productdetails?id=<?=$value['product_id']?>"><?=  ucfirst($value['product_name'])?></a>
-                                                </div>
-                                            </div>
-                                            <div title="<?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>" class="plp-product_quantity">
-                                                <span>
-                                                    <?=  $value['attribute'][$value['product_id']]['quantity'] .' '. $value['attribute'][$value['product_id']]['unit']?>
-                                                </span>
-                                            </div>
-                                            <div  class="plp-product_price">
-                                                <div  class="plp-product_price--container">
-                                                    <!--<div class="plp-product_price--old display--inline-block@mobile">₹ 330</div>-->
-                                                    <div class="plp-product_price--new display--inline-block@mobile">GHC <?=$value['attribute'][$value['product_id']]['price']?></div>
-                                                </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                    <button data-test-id="minus-button" class="add-to-cart_dec"></button>
-                                                    <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block" ng-click="addToCart(<?=$value['attribute'][$value['product_id']]['id']?>, '<?=$value['product_name']?>', 'add', 1)">Add To Cart</button>
-                                                    <button data-test-id="plus-button" class="add-to-cart_inc"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                </div>
-                                <?php }?>
-                                
-                            </div>  
-
-                        </div>
-                    </div>
-
-                    <div style="width: 100%;">
-
-                        <h1 class="slider-header">Merchant
-                            <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
-                        <div class="products products--inline">
-                            <div class="owl-carousel owl-theme">
-                                <?php 
-                                    foreach ($this->marchantList as $key => $value) {
-                                ?>
-                                <div class="item">
-                                    <a  href="<?=$this->basePath()?>/application/index/product?merchant=<?=$value['id']?>" class="product_wrapper">
-                                        <div class="plp-product">
-                                            <div  class="plp-product_img merchant">
-                                                <img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg"></div>
-                                            <div  title="<?= $value['first_name']?>" class="plp-product_name ">
-                                                <div  class="merchant_name"><?= $value['first_name']?> </div>
-                                            </div>
-                                            <div class="plp-product_add-to-cart">
-                                                <div class="add-to-cart">
-                                                   <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+                    //print_r($this->categoryList);die;
+                    foreach ($this->categoryList['data'] as $categoryId => $category) {
+                        ?>
+                        <li role="presentation" class="active categoryslider">
+                            <a href="<?=$this->basePath()?>/application/index/product?id=<?=$categoryId?>" style='cursor:pointer;'>
                                 <?php
+                                if (!empty($this->categoryList['images'][$categoryId][0]['image_name'])) {
+                                    ?>
+                                    <div class='categorysliderimage'>
+                                        <img src="<?= $this->categoryList['imageRootPath'] . '/' . $this->categoryList['images'][$categoryId][0]['type'] . '/' . $categoryId . '/' . $this->categoryList['images'][$categoryId][0]['image_name'] ?>"/>
+                                    </div>
+                                    <?php
                                 }
                                 ?>
-                            </div>  
+                                <h5><?= $category['category_name'] ?></h5>
+                            </a>
+                        </li>
+                        <?php
+                    }
+                    ?>
 
-                        </div>
+
+                </ul>
+                <div class="clearfix"> </div>                            
+            </div>
+            <div class="next-circle"><i class="fa fa-angle-right"></i></div>
+        </div>  	
+    </div>  	
+</div>
+<div class="banner">
+    <div class="container">
+        <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
+            <!-- Wrapper-for-Slides -->
+            <div class="carousel-inner" role="listbox">  
+                <div class="item active"><!-- First-Slide -->
+                    <img src="<?= $this->basePath() . '/public/images/banner1.jpg' ?>" alt="" class="img-responsive" />
+                    <!--<div class="carousel-caption kb_caption kb_caption_right">
+                        <h3 data-animation="animated flipInX">Flat <span>50%</span> Discount</h3>
+                        <h4 data-animation="animated flipInX">Hot Offer Today Only</h4>
+                    </div> -->
+                </div>  
+                <div class="item"> <!-- Second-Slide -->
+                    <img src="<?= $this->basePath() . '/public/images/banner2.jpg' ?>" alt="" class="img-responsive" />
+                    <!--<div class="carousel-caption kb_caption kb_caption_right">
+                        <h3 data-animation="animated fadeInDown">Our Latest Fashion Editorials</h3>
+                        <h4 data-animation="animated fadeInUp">cupidatat non proident</h4>
+                    </div> -->
+                </div>
+
+                <div class="item"><!-- Third-Slide -->
+                    <img src="<?= $this->basePath() . '/public/images/banner3.jpg' ?>" alt="" class="img-responsive"/>
+                    <div class="carousel-caption kb_caption kb_caption_center">
+                        <h3 data-animation="animated fadeInLeft">End Of Season Sale</h3>
+                        <h4 data-animation="animated flipInX">cupidatat non proident</h4>
                     </div>
                 </div>
-            </section>
 
-            <div class="w3agile-ftr-top"><img src="<?php echo $this->basePath() ?>/public/images/shop1.jpg" class="img-responsive"/></div>
-            <div class="w3agile-ftr-top subscribe-right"><img src="<?php echo $this->basePath() ?>/public/images/shop.jpg" class="img-responsive"/> 
-            </div>
+            </div>  
+            <!-- Left-Button -->
+            <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
+                <span class="fa fa-angle-left kb_icons" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a> 
+            <!-- Right-Button -->
+            <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
+                <span class="fa fa-angle-right kb_icons" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a> 
         </div>
-        <!-- //footer-top --> 
-        <!-- subscribe -->
-        <div class="subscribe"> 
-            <div class="container">
-                <div class="col-md-6 social-icons w3-agile-icons">
-                    <h4>Keep in touch</h4>  
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-                    </ul> 
-                    <ul class="apps"> 
-                        <li><h4>Download Our app : </h4> </li>
-                        <li><a href="#" class="fa fa-apple"></a></li>
-                        <li><a href="#" class="fa fa-windows"></a></li>
-                        <li><a href="#" class="fa fa-android"></a></li>
-                    </ul> 
-                </div> 
-                <div class="col-md-6 subscribe-right no-rpad no-lpad">
-                    <h4>Sign up for email and get 25%off!</h4>  
-                    <form action="#" method="post"> 
-                        <input type="text" name="email" placeholder="Enter your Email..." required="">
-                        <input type="submit" value="Subscribe">
-                    </form>
-                    <div class="clearfix"> </div> 
+    </div> </div>   
+<div class="container" ng-controller="index" ng-cloak="true">
+    <section id="demos">
+        <div class="row">
+            <div style="width: 100%;">
+
+                <h1 class="slider-header">Most Popular
+                    <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                <div class="products products--inline">
+                    <div class="owl-carousel owl-theme">
+                        <div class="product_wrapper" ng-repeat="product in productDataList">
+                            <div class="plp-product">
+                                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">%</span> OFF</div>
+                                <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type == 'flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type == 'percent'">%</span> OFF</div>
+                                <div class="plp-product_offer display--none"></div>
+                                <div class="plp-product_img ">
+                                    <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
+                                </div>
+                                <div class="plp-product_name " title="Economy Dhuli Moong Dal">
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}">{{product.product_name}}</a><wbr></wbr>
+                                    </div>
+                                </div>
+                                <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
+                                <div class="plp-product_quantity">                    
+                                    <select style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
+                                            {{setAttribute(attributeDetails, $index)}}
+                                            {{attributeDetails.quantity}} {{attributeDetails.unit}}
+                                        </option>
+                                    </select>  
+                                </div>                
+                                <div class="plp-product_price">
+                                    <div class="plp-product_price--container">
+                                        <div class="plp-product_price--old display--inline-block@mobile"></div>
+                                        <div class="plp-product_price--new display--inline-block@mobile">GHC {{product.attribute[quantity[product.product_id]].price}} </div>
+                                    </div>
+                                </div>
+                                <div class="plp-product_add-to-cart">
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
+                                        <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
                 </div>
-                <div class="clearfix"> </div>
+            </div>
+
+            <div style="width: 100%;">
+
+                <h1 class="slider-header">DEALS OF THE DAY 
+                    <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                <div class="products products--inline">
+                    <div class="owl-carousel owl-theme">
+                        <div class="product_wrapper" ng-repeat="product in productDataList">
+                            <div class="plp-product">
+                                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">%</span> OFF</div>
+                                <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type == 'flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type == 'percent'">%</span> OFF</div>
+                                <div class="plp-product_offer display--none"></div>
+                                <div class="plp-product_img ">
+                                    <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
+                                </div>
+                                <div class="plp-product_name " title="Economy Dhuli Moong Dal">
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}">{{product.product_name}}</a><wbr></wbr>
+                                    </div>
+                                </div>
+                                <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
+                                <div class="plp-product_quantity">                    
+                                    <select style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
+                                            {{setAttribute(attributeDetails, $index)}}
+                                            {{attributeDetails.quantity}} {{attributeDetails.unit}}
+                                        </option>
+                                    </select>  
+                                </div>                
+                                <div class="plp-product_price">
+                                    <div class="plp-product_price--container">
+                                        <div class="plp-product_price--old display--inline-block@mobile"></div>
+                                        <div class="plp-product_price--new display--inline-block@mobile">GHC {{product.attribute[quantity[product.product_id]].price}} </div>
+                                    </div>
+                                </div>
+                                <div class="plp-product_add-to-cart">
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
+                                        <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+            <div style="width: 100%;">
+
+                <h1 class="slider-header">Merchant
+                    <a href="#" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                <div class="products products--inline">
+                    <div class="owl-carousel owl-theme">
+                        <?php
+                        foreach ($this->marchantList as $key => $value) {
+                            ?>
+                            <div class="item">
+                                <a  href="<?= $this->basePath() ?>/application/index/product?merchant=<?= $value['id'] ?>" class="product_wrapper">
+                                    <div class="plp-product">
+                                        <div  class="plp-product_img merchant">
+                                            <img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg"></div>
+                                        <div  title="<?= $value['first_name'] ?>" class="plp-product_name ">
+                                            <div  class="merchant_name"><?= $value['first_name'] ?> </div>
+                                        </div>
+                                        <div class="plp-product_add-to-cart">
+                                            <div class="add-to-cart">
+                                                <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>  
+
+                </div>
             </div>
         </div>
-        <!-- //subscribe --> 
-        <!-- footer -->
-
-        <!-- //footer -->		
-        <div class="copy-right"> 
-            <div class="container">
-                <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
-            </div>
+    </section>
+</div>
+<!-- //footer-top --> 
+<!-- subscribe -->
+<div class="subscribe"> 
+    <div class="container">
+        <div class="col-md-6 social-icons w3-agile-icons">
+            <h4>Keep in touch</h4>  
+            <ul>
+                <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
+                <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
+                <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
+                <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
+                <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
+            </ul> 
+            <ul class="apps"> 
+                <li><h4>Download Our app : </h4> </li>
+                <li><a href="#" class="fa fa-apple"></a></li>
+                <li><a href="#" class="fa fa-windows"></a></li>
+                <li><a href="#" class="fa fa-android"></a></li>
+            </ul> 
         </div> 
-
-
-        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
-            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
+        <div class="col-md-6 subscribe-right no-rpad no-lpad">
+            <h4>Sign up for email and get 25%off!</h4>  
+            <form action="#" method="post"> 
+                <input type="text" name="email" placeholder="Enter your Email..." required="">
+                <input type="submit" value="Subscribe">
+            </form>
+            <div class="clearfix"> </div> 
         </div>
+        <div class="clearfix"> </div>
     </div>
+</div>
+<!-- //subscribe --> 
+<!-- footer -->
+
+<!-- //footer -->		
+<div class="copy-right"> 
+    <div class="container">
+        <p>© 2017 Afro Basket . All rights reserved | Design by <a href="#"> Designer Rakesh.</a></p>
+    </div>
+</div> 
+
+
+<div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+    <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
+</div>
 <script src="<?php echo $this->basePath() . '/public/js/frontend/index.js' ?>">
+</script>
+<style> 
+    .owl-nav{position: absolute; top: 0; left: 0;width: 100%; margin: 0;}
+    .owl-carousel .owl-nav .owl-prev{position: absolute;left: -5px; top: 0; height: 300px; width: 30px; margin: 0; }
+    .owl-carousel .owl-nav .owl-next{position: absolute;right: 0px; top: 0; height: 300px; width: 30px; margin: 0;}
+    .owl-carousel .owl-item .merchant img{width: 80%;}
+    .merchant_name{font-size: 16px;}
+    .prev-circle{position: absolute;left: 10px; top: 50px; height: 50px; width: 50px; margin: 0; border-radius:100px;
+                 color: #FFF; background: #D6D6D6;display: inline-block;cursor: pointer; font-size:34px;}
+    .prev-circle:hover{background:#869791;color:#FFF;text-decoration:none}
+
+    .next-circle{position: absolute;right: 10px; top: 50px; height: 50px; width: 50px; margin: 0; border-radius:100px;
+                 color: #FFF; background: #D6D6D6;display: inline-block;cursor: pointer; font-size:34px;}
+    .next-circle:hover{background:#869791;color:#FFF;text-decoration:none}
+    .categoryslider{
+        float:left!important;
+    }
+    .category_main_div{
+        overflow: hidden;
+        width: 88%;
+        margin: auto;
+    }
+    .categorysliderimage{
+        height: 85px;
+    }
+    .products--inline{
+        height:auto !important;
+        border:0px;
+    }
+
+</style>
+<script>
+            $(document).ready(function () {
+    $('.owl-carousel').owlCarousel({
+    loop: true,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+            0: {
+            items: 1,
+                    nav: true
+            },
+                    480: {
+                    items: 2,
+                            nav: false
+                    },
+                    600: {
+                    items: 3,
+                            nav: false
+                    },
+                    1000: {
+                    items: 5,
+                            nav: true,
+                            loop: false,
+                            margin: 0
+                    }
+            }
+    })
+            $('.owl-carousel-circle').owlCarousel({
+    loop: true,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+            0: {
+            items: 1,
+                    nav: true
+            },
+                    480: {
+                    items: 2,
+                            nav: false
+                    },
+                    600: {
+                    items: 3,
+                            nav: false
+                    },
+                    1000: {
+                    items: 5,
+                            nav: true,
+                            loop: false,
+                            margin: 0
+                    }
+            }
+    })
+    })
+
+            $(document).ready(function() {
+
+    var owl = $("#owl-demo2");
+            owl.owlCarousel({
+
+            itemsCustom : [
+                    [0, 2],
+                    [450, 4],
+                    [600, 7],
+                    [700, 9],
+                    [1000, 10],
+                    [1200, 12],
+                    [1400, 13],
+                    [1600, 15]
+                    ],
+                    navigation : true
+
+                    });
+            });
 </script>

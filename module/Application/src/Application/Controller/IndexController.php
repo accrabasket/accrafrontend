@@ -28,28 +28,14 @@ class IndexController extends AbstractActionController
         if(empty($this->session['category_list'])){
             $this->session['category_list'] = $this->categoryList();
         }
-        if(empty($this->session['marchant_list'])){
-            $this->session['marchant_list'] = $this->getMarchantList();
-        }
-        if(empty($this->session['banner'])){
-            $this->session['banner'] = $this->banner();
-        }
-        if(empty($this->session['hot_deal'])){
-            $this->session['hot_deal'] = $this->hotDeal();
-        }
-        if(empty($this->session['new_offer'])){
-            $this->session['new_offer'] = $this->newOffer();
-        }
     }
     public function indexAction()
     { 
+        $this->view->marchantList = $this->getMarchantList();
+        $this->view->banner = $this->banner();       
         $this->view->cityList = $this->session['city_list'];
-        $this->view->marchantList = $this->session['marchant_list'];
         $this->view->categoryList = $this->session['category_list'];
-        $this->view->hotDealList = $this->session['hot_deal'];
-        $this->view->newOfferList = $this->session['new_offer'];
-        $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]:0;
-        $this->view->banner = $this->session['banner'];
+        
         return $this->view;
     }
     
@@ -71,13 +57,10 @@ class IndexController extends AbstractActionController
     }
     
     public function productlistAction(){
-        $request = (array) $this->getRequest()->getPost();
+        $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'productlist';
-        if(!empty($request['category_id'])){
-            $postParams['category_id'] = $request['category_id'];
-        }
-        if(!empty($request['merchant'])){
-            $postParams['merchant_id'] = $request['merchant'];
+        if(!empty($postParams['merchant'])){
+            $postParams['merchant_id'] = $postParams['merchant'];
         }
         $postParams['pagination'] = 1;
         $postParams['page'] = !empty($request['page'])?$request['page']:1;
@@ -413,14 +396,14 @@ class IndexController extends AbstractActionController
         $hotDealList = $this->commonObj->curlhitApi($postParams,'application/product');
         $hotDealList = json_decode($hotDealList,true);
         return $hotDealList;
-    }
+}
     
     function newOffer(){
         $postParams = (array) $this->getRequest()->getPost();
         $newOfferList  = array();
         $postParams['method'] = 'productlist';
         $postParams['city_id'] = '1';
-        $postParams['product_type'] = 'new_offer';
+        $postParams['product_type'] = 'offers';
         $newOfferList = $this->commonObj->curlhitApi($postParams,'application/product');
         $newOfferList = json_decode($newOfferList,true);
         return $newOfferList;
