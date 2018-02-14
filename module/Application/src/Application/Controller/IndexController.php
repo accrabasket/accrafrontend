@@ -58,7 +58,11 @@ class IndexController extends AbstractActionController
     
     public function productlistAction(){
         $postParams = (array) $this->getRequest()->getPost();
+        if(!empty($postParams['product_type'])) {
+            $postParams['product_type'] = explode(',', $postParams['product_type']);
+        }
         $postParams['method'] = 'productlist';
+        
         if(!empty($postParams['merchant'])){
             $postParams['merchant_id'] = $postParams['merchant'];
         }

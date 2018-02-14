@@ -3,7 +3,7 @@ app.controller('index', function ($scope, $http,$timeout) {
     $scope.quantity = {};
     $scope.searchProductParams.page = 1;    
     $scope.productlist = function (produtType) {        
-        $scope.searchProductParams.product_type = produtType;
+        $scope.searchProductParams.product_type = $scope.productType;
         $http({
             method: 'POST',
             url: serverAppUrl + '/productlist',
@@ -24,6 +24,6 @@ app.controller('index', function ($scope, $http,$timeout) {
             }
         });
     }
-    $scope.productlist('offers');
-    //$scope.productlist('hotdeals');
+    $scope.productType = ['offers', 'hotdeals'];
+    $scope.productlist($scope.productType);
 });
