@@ -75,5 +75,5 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
                 },2000);                
             }
         });        
-    }    
+    } 
 });

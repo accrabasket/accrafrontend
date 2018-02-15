@@ -49,10 +49,17 @@ class IndexController extends AbstractActionController
    
     
     public function productAction() {
+        $searchParams = array();
         $request = (array) $this->getRequest()->getQuery();
         $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
-        $this->view->categoryId = $request['id'];
+        if(!empty($request['id'])){
+            $searchParams['category_id'] = $request['id'];
+        }
+        if(!empty($request['merchant'])){
+            $searchParams['merchant_id'] = $request['merchant'];
+        }
         
+        $this->view->searchBy = $searchParams;
         return $this->view;
     }
     
@@ -412,4 +419,8 @@ class IndexController extends AbstractActionController
         $newOfferList = json_decode($newOfferList,true);
         return $newOfferList;
     }
+    
+    public function hotdealsAction(){
+        return $this->view;
+    }  
 }
