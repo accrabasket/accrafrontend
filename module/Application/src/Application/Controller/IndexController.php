@@ -422,5 +422,18 @@ class IndexController extends AbstractActionController
     
     public function hotdealsAction(){
         return $this->view;
-    }  
+    }
+    
+    public function merchantlistAction(){
+        return $this->view;
+    }
+    
+    function getmerchantlistAction(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $marchantList  = array();
+        $postParams['method'] = 'getMarchantList';
+        $marchantList = $this->commonObj->curlhitApi($postParams);
+        echo $marchantList;
+        exit;
+    }
 }
