@@ -27,3 +27,22 @@ app.controller('index', function ($scope, $http,$timeout) {
     $scope.productType = ['offers', 'hotdeals'];
     $scope.productlist($scope.productType);
 });
+
+var slidingWidth = 0;
+var liWidth = $("#myTab li").width()+10;
+var licount = $("#myTab li:last").index();
+var totalWidth = liWidth*(licount+1);
+$(".next-circle").click(function(){
+    slidingWidth = slidingWidth+$(".category_main_div").width();
+    if(slidingWidth<totalWidth){
+        var resSpaceForSlide = totalWidth-slidingWidth;
+        if(resSpaceForSlide<slidingWidth){
+            slidingWidth = resSpaceForSlide;
+        }
+        $("#myTab").animate({left:-slidingWidth+'px'});
+    }    
+})
+$(".prev-circle").click(function(){
+    slidingWidth = 0;
+    $("#myTab").animate({left:-slidingWidth+'px'});
+})
