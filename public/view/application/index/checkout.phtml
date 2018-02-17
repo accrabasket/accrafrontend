@@ -23,7 +23,10 @@
                     <span  ng-repeat="data in userAddress">
                         <div class="col-md-4 col-xs-12 ">
                             <div class="delivery-addr_label pull-left">
-                                <div class="pull-right"><i class="fa fa-edit"></i></div>
+                                <div class="pull-right">
+                                    <i class="fa fa-edit" title="Edit Address" data-toggle="modal" data-target="#modal-default" ng-click="editAddress(data,data.id)"></i>
+                                    <i class="fa fa-trash" title="Delete Address" ng-click="deleteAddress(data.id)"></i>
+                                </div>
                                 <div class="checkout-address-item"><strong>{{data.address_nickname}}</strong></div>
                                 <div class="checkout-address-item weight--normal"> <span class="capitalize">{{data.contact_name}}</span></div>
                                 <div class="checkout-address-item addr-lines text-truncate">{{data.city_name}}, {{data.street_detail}} , {{data.landmark}}</div>
@@ -102,7 +105,7 @@
                         </div><div class="float-right text--dark-gray" data-test-id="payable-amount-value">
                             GHC {{totalOrderDetails.payable_amount}}
                         </div><div class="clearfix"></div></div>
-                            
+
                 </div>
 
                 <div class="payment__promo-container payment__promo-bottom-margin" data-test-id="promo-code-text"><span class="payment__promo-icon"></span><span>Promo code &amp; Bank offers</span></div>
