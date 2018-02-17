@@ -51,21 +51,6 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
             }
         }); 
     }
-    
-    $scope.getUserAddress = function(){
-        $scope.getDeliveryTime();
-        $scope.ajaxLoadingData = true;
-        $http({
-            method: 'POST',
-            url: serverAppUrl + '/getUserAddress',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        }).success(function (response) {
-            $scope.ajaxLoadingData = false;
-            if (response.status == 'success') {
-                $scope.userAddress = response.data;
-            }
-        });
-    }
     $scope.getDeliveryTime = function(){
         $http({
             method: 'POST',
@@ -77,16 +62,45 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 $scope.deliverTimeSlotList = response.datewisetimeslot;
             }
         });
-    }   
+    }    
+    $scope.getUserAddress = function(){
+        $scope.getDeliveryTime();
+        $scope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/getUserAddress',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+            $scope.ajaxLoadingData = false;
+            if (response.status == 'success') {
+                $scope.userAddress = response.data;
+            }
+        });
+    }
+    $scope.getUserAddress();   
     $scope.placeOrderData = {};
-    $scope.selectTimeSlot = function(deliveryDate, deliveryTimeSlot) {
+    $scope.selectDeliveryDate = function(deliveryDate){
         $scope.placeOrderData.delivery_date =  deliveryDate;
+        $scope.placeOrderData.time_slot_id = '';
+        $scope.payment = 0;
+        $(".timeslotradioclass").prop('checked', false);
+    }
+    
+    $scope.selectTimeSlot = function(deliveryTimeSlot) {
         $scope.placeOrderData.time_slot_id =  deliveryTimeSlot;
-        console.log($scope.placeOrderData);
+        $scope.payment = 0;
     }
-    $scope.selectShipingAddress = function() {
-        $scope.createAddress = false;
+    $scope.selectShipingAddress = function(shipping_address_id) {
+        $scope.placeOrderData.shipping_address_id = shipping_address_id;
+        $scope.show_shipping_address = 0;
+        //$scope.createAddress = false;
     }
+    $scope.showAddress = function() {
+        $scope.show_shipping_address = 1;
+        $scope.payment = 0;
+    }
+    
     $scope.openNewAddress = function(){
         $scope.createAddress = true;
         $scope.placeOrderData.shipping_address_id = 0;
@@ -107,6 +121,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         }
         address.city_id = $('#cityname').val();
         address.city_name = $("#cityname option:selected").text();
+        $scope.ajaxLoadingData = true;
         if (error == ' ') {
             $http({
                 method: 'POST',
@@ -114,6 +129,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 data: ObjecttoParams(address),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
+                $scope.ajaxLoadingData = hide;
                 if (response.status == 'success') {
                     $scope.successShow = true;
                     $scope.successMsg = response.msg ;
@@ -172,6 +188,13 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
             }
         });
         
+    }
+    
+    $scope.makepayment = function() {
+        $scope.payment = 1;
+    }
+    $scope.editDeliveryTime = function() {
+        $scope.payment = 0;
     }
 
 

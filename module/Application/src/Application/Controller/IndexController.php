@@ -25,9 +25,9 @@ class IndexController extends AbstractActionController
         if(empty($this->session['city_list'])){
             $this->session['city_list'] = $this->getCityList();
         }
-        if(empty($this->session['category_list'])){
+        //if(empty($this->session['category_list'])){
             $this->session['category_list'] = $this->categoryList();
-        }
+        //}
     }
     public function indexAction()
     { 
