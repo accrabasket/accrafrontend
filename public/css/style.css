@@ -1006,7 +1006,7 @@ p {
 /*-- footer --*/
 .footer {
     padding-top: 5em;
-    background: url(../images/bg.png)#42d406 no-repeat;
+    background: #689f39;
     background-size: cover;
 }
 .footer-logo.header-logo {
@@ -1066,7 +1066,7 @@ p {
     display: block;
     font-size: 1em;
     margin:	0.6em 0 0;
-    color: #05b2da;
+    color: #fff;
 }
 .footer-grids ul li i.fa {
     margin-right: 7px;
