@@ -436,4 +436,13 @@ class IndexController extends AbstractActionController
         echo $marchantList;
         exit;
     }
+    
+    function deleteShippingAddressAction(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'deleteshippingaddress';
+        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $response = $this->commonObj->curlhitApi($postParams,'application/customer');
+        echo $response;
+        exit;
+    }
 }

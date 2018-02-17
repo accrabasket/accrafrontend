@@ -113,7 +113,11 @@
                 <div class="row">                    
                     <div class="col-md-6 col-sm-6 col-xs-12"  ng-repeat="data in userAddress">
                         <div class="address-cont">
-                            <h4><input type="radio" name="shipping_address_id" value="{{data.id}}" ng-model="placeOrderData.shipping_address_id" ng-click="selectShipingAddress()"> {{data.address_nickname}}</h4>
+                            <h4>
+                                <input type="radio" name="shipping_address_id"  value="{{data.id}}" ng-model="placeOrderData.shipping_address_id" ng-click="selectShipingAddress()"> {{data.address_nickname}}
+                                <i class="fa fa-edit" title="Edit address"  id="edit-address" style="display: inline-block;margin-left: 20px" ng-click="editAddress(data,data.id)"></i>
+                                <i class="fa fa-trash" title="Delete address"  style="display: inline-block;margin-left: 20px" ng-click="deleteAddress(data.id)"></i>
+                            </h4>
                             <p>
                                 <span ng-if="data.house_number">
                                     {{data.contact_name}}, 
@@ -189,7 +193,7 @@
                     </div>                    
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <h5 class="mb10">Pin Code</h5>
-                        <input type="text" ng-model="address.zipcode" placeholder="110059" class="checkout"/>
+                        <input type="text" ng-model="address.zipcode" placeholder="110059" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" class="checkout"/>
                     </div>
                 </div>
                 <div class="row">
