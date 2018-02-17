@@ -361,7 +361,7 @@ h3.w3ls-title {
 .welcome .bs-example-tabs ul.nav-tabs li {
     display: inline-block;
     float: none;
-	margin: 0 0.4em;
+	margin-right:10px;
 	width:130px;
 } 
 .welcome .bs-example-tabs ul.nav-tabs li a {
@@ -3425,6 +3425,7 @@ h3.w3ls-title.w3ls-title1 {
 .welcome .bs-example.bs-example-tabs .nav-tabs {
     border: none;
     margin: 0;
+    position: relative;
 }
 #PPsbmincart {
     left: 27%;
