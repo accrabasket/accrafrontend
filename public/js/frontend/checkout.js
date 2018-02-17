@@ -101,9 +101,13 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         $scope.payment = 0;
     }
     
-    $scope.openNewAddress = function(){
+    $scope.openNewAddress = function(id){
         $scope.createAddress = true;
-        $scope.placeOrderData.shipping_address_id = 0;
+        $scope.placeOrderData.shipping_address_id = id;
+        if(id == undefined){
+            $scope.placeOrderData.shipping_address_id = 0;
+        }
+        
     }
     $scope.getcartdata();
 
@@ -129,7 +133,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 data: ObjecttoParams(address),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
-                $scope.ajaxLoadingData = hide;
+                $scope.ajaxLoadingData = false;
+                $('#modal-default').modal('hide');
                 if (response.status == 'success') {
                     $scope.successShow = true;
                     $scope.successMsg = response.msg ;
@@ -190,6 +195,26 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         
     }
     
+
+    $scope.editAddress = function(data,id){
+        $scope.address = data;
+        $scope.openNewAddress(id)
+    }
+    
+    $scope.deleteAddress = function(id){
+        var data = {};
+        $scope.ajaxLoadingData = true;
+        data.id = id;
+        $http({
+            method: 'POST',
+            data:ObjecttoParams(data),
+            url: serverAppUrl + '/deleteShippingAddress',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            $scope.ajaxLoadingData = false;
+            $scope.getUserAddress();
+        });
+    }
     $scope.makepayment = function() {
         $scope.payment = 1;
     }
