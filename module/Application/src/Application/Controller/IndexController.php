@@ -51,6 +51,7 @@ class IndexController extends AbstractActionController
     public function productAction() {
         $searchParams = array();
         $request = (array) $this->getRequest()->getQuery();
+        $postParams = (array) $this->getRequest()->getPost();
         $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
         if(!empty($request['id'])){
             $searchParams['category_id'] = $request['id'];
@@ -58,7 +59,9 @@ class IndexController extends AbstractActionController
         if(!empty($request['merchant'])){
             $searchParams['merchant_id'] = $request['merchant'];
         }
-        
+        if(!empty($postParams['search'])){
+            $searchParams['product_name'] = $postParams['search'];
+        }
         $this->view->searchBy = $searchParams;
         return $this->view;
     }
