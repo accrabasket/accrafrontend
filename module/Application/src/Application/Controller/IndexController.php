@@ -109,7 +109,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getQuery();
         if (!empty($postParams)) {
             $params['method'] = 'productlist';
-            $params['city_id'] = 1;
+            $params['city_id'] = $this->session->city;
             $params['product_id'] = $postParams['id'];
             $response = $this->commonObj->curlhitApi($params, 'application/product');
             $product_details = json_decode($response,true);
@@ -409,7 +409,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $hotDealList  = array();
         $postParams['method'] = 'productlist';
-        $postParams['city_id'] = '1';
+        $postParams['city_id'] = $this->session->city;
         $postParams['product_type'] = 'hotdeals';
         $hotDealList = $this->commonObj->curlhitApi($postParams,'application/product');
         $hotDealList = json_decode($hotDealList,true);
@@ -420,7 +420,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $newOfferList  = array();
         $postParams['method'] = 'productlist';
-        $postParams['city_id'] = '1';
+        $postParams['city_id'] = $this->session->city;
         $postParams['product_type'] = 'offers';
         $newOfferList = $this->commonObj->curlhitApi($postParams,'application/product');
         $newOfferList = json_decode($newOfferList,true);
