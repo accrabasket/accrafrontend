@@ -24,6 +24,7 @@ class IndexController extends AbstractActionController
         $this->commonObj = new common();
         if(empty($this->session['city_list'])){
             $this->session['city_list'] = $this->getCityList();
+            $GLOBALS['city_list'] = $this->session['city_list'];
         }
         //if(empty($this->session['category_list'])){
             $this->session['category_list'] = $this->categoryList();
