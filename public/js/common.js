@@ -28,6 +28,10 @@ $(document).ready(function() {
              $(".w3view-cart-close").click(function() {
         $(".w3view-cart-menu").hide('slow');
     });
+    $('#selectcity').modal({
+        backdrop: 'static',
+        keyboard: false
+    });    
 });
     
 var app = angular.module('app', ['ui.bootstrap']);
@@ -75,5 +79,22 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
                 },2000);                
             }
         });        
-    } 
+    }
+    
+    $rootScope.setCity = function(){
+        var params = {};
+        params.city = $scope.city;
+        $rootScope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/setcity',
+            data: ObjecttoParams(params),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            if(response>0){
+                $("#selectcity").modal('hide');
+                location.reload();
+            }
+        });        
+    }
 });

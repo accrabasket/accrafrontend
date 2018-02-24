@@ -76,6 +76,9 @@ class IndexController extends AbstractActionController
         if(!empty($postParams['merchant'])){
             $postParams['merchant_id'] = $postParams['merchant'];
         }
+        if(!empty($this->session->city)){
+            $postParams['city_id'] = $this->session->city;
+        }   
         $postParams['pagination'] = 1;
         $postParams['page'] = !empty($request['page'])?$request['page']:1;
         $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
@@ -446,6 +449,13 @@ class IndexController extends AbstractActionController
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $response = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $response;
+        exit;
+    }
+    
+    function setcityAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $this->session['city'] = $postParams['city'];
+        echo $postParams['city'];
         exit;
     }
 }

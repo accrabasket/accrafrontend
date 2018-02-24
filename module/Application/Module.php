@@ -34,6 +34,10 @@ class Module
         }    
         if ($session->offsetExists('city_list')) {
             $GLOBALS['city_list'] = $session->city_list;
+        }   
+        $GLOBALS['city'] = 0;
+        if ($session->offsetExists('city')) {
+            $GLOBALS['city'] = $session->city;
         }        
         if ($session->offsetExists('category_list')) {
             $GLOBALS['category_list'] = $session->category_list;

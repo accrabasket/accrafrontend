@@ -48,7 +48,7 @@
                 </a>
             </div>	
             <div class="header-city">
-                <select class="form-control select2" style="width: 100%;">
+                <select class="form-control select2" ng-model="city" style="width: 100%;" ng-change="setCity()" ng-init="city=<?=$GLOBALS['city']?>">
                     <?php
                         foreach ($GLOBALS['city_list'] as $key => $value) {
                             echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
@@ -127,26 +127,34 @@
             <div class="clearfix"> </div>
         </div>		
     </div><!-- //header-two -->
-<div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <?php
+        if(empty($GLOBALS['city'])) {
+    ?>
+    <div class="modal" tabindex="-1" role="dialog" id="selectcity">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <select class="form-control select2" style="width: 100%;" ng-model="city" ng-change="setCity()" ng-init="city=<?=$GLOBALS['city']?>">
+                        <option value="0">Select City</option>
+                    <?php
+                        foreach ($GLOBALS['city_list'] as $key => $value) {
+                            echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                        }
+                    ?>
+                    </select>
+                </div>    
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    <?php
+        }
+    ?>
 </div>
 <script>
     var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
+    var city = 0;
 </script>
