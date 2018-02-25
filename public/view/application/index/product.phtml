@@ -28,12 +28,13 @@
         <div ng-show="no_record != ''"> 
             <h4 style="color:red;"> {{no_record}}</h4>
         </div>
-        <div class="product_wrapper" ng-repeat="product in productDataList">
+        <div class="product_wrapper col-sm-4 col-md-4 col-lg-4" ng-repeat="product in productDataList track by $index">
             <div class="plp-product">
-                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
+                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value && product.attribute[quantity[product.product_id]].discount_value!='0'">
+                    <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
                 <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
                 <div class="plp-product_offer display--none"></div>
-                <div class="plp-product_img ">
+                <div class="plp-product_img">
                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                 </div>
                 <div class="plp-product_name " title="Economy Dhuli Moong Dal">
@@ -63,6 +64,7 @@
                     </div>
                 </div>
             </div>
+            <div class="clearfix" ng-if="$index%4==3"></div>
         </div>               
     </div> 
     <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">

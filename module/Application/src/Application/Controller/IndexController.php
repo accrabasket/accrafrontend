@@ -81,7 +81,7 @@ class IndexController extends AbstractActionController
             $postParams['city_id'] = $this->session->city;
         }   
         $postParams['pagination'] = 1;
-        $postParams['page'] = !empty($request['page'])?$request['page']:1;
+        $postParams['page'] = !empty($postParams['page'])?$postParams['page']:1;
         $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
         
         echo $getProduct;

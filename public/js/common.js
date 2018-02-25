@@ -37,6 +37,7 @@ $(document).ready(function() {
 var app = angular.module('app', ['ui.bootstrap']);
 
 app.controller('cartcontroller', function ($scope, $http, $rootScope) {
+    $scope.totalItemInCart = 0;
     $scope.cartResponse = {};
     $scope.cartResponse.productImageData = {};
     $scope.cartItem = {};
@@ -48,10 +49,18 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
         }).success(function (response) {
             if(response.status=='success') {
                 $scope.cartResponse = response; 
-                console.log($scope.cartResponse);
+                $scope.countItemInCart();
             }
         });        
     }
+    $scope.cartList();
+    $scope.countItemInCart = function() {
+        $scope.totalItemInCart = 0;
+        angular.forEach($scope.cartResponse.data, function(value, key){
+            $scope.totalItemInCart = $scope.totalItemInCart+value.number_of_item
+        });        
+    }
+    
     $rootScope.addToCart = function(inventory_id, product_name, action, number_of_item, checkoutpage) {
         $rootScope.ajaxLoadingData = true;
         $scope.addToCartData = {};

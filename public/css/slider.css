@@ -2778,11 +2778,13 @@ margin-right:0!important
 @media screen and (min-width:1020px) and (max-width:1260px) {
 .plp-product_img, .plp-product_img .img {
 	height:140px
+        max-width:199px;
 }
 }
 @media screen and (min-width:1260px) {
 .plp-product_img, .plp-product_img .img {
 	height:140px
+        max-width:200px;
 }
 }
 .img-loader--plp {

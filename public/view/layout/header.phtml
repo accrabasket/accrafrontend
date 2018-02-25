@@ -99,7 +99,8 @@
                     <?php }?>
                 </div>
                 <div class="cart" ng-controller="cartcontroller"> 
-                    <a ng-click="cartList()" class="w3view-cart" id="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
+                    <a ng-click="cartList()" class="w3view-cart" id="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true"><span ng-if="totalItemInCart"> {{totalItemInCart}}</span></i>
+                     </a>
                      My Cart
                     <ul class="dropdown-menu  multi-column columns-5 pull-right w3view-cart-menu">
                         <div class="row">
