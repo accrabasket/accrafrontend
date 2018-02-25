@@ -1,5 +1,5 @@
 //var app = angular.module('app', []);
-app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page) {
+app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page, $rootScope) {
     $scope.errorShow = false;
     $scope.successShow = false;
     $scope.no_record = '';
@@ -38,6 +38,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             $scope.ajaxLoadingData = false;
+            $scope.productDataList = {};
             if (response.status == 'success') {
                 angular.forEach(response.data, function(product, key){
                     angular.forEach(product.attribute, function(attributedata, key){
@@ -54,6 +55,13 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
     }
     $scope.selectPage = function(page_number) {
         $scope.currentPage = $scope.searchProductParams.page = page_number;
+        $scope.productlist();
+    };    
+    $rootScope.getCategoryWiseProduct = function(category_id) {
+        $scope.currentPage = $scope.searchProductParams.page = 1;
+        $scope.searchProductParams.category_id = category_id;
+        $scope.searchProductParams.merchant_id = 0; 
+        $scope.searchProductParams.product_name = '';
         $scope.productlist();
     };    
     $scope.productlist();

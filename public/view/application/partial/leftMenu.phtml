@@ -10,7 +10,7 @@
                    
                     <h3 onclick="expendButton('<?=$i?>')" class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-<?=$i?>" aria-controls="ui-id-<?=$i+1?>" aria-selected="false" aria-expanded="false" tabindex="-1">
                         <span class="ui-accordion-header-icon ui-icon <?= $value['id'] == $this->productId ? 'ui-icon-minusthick':'ui-icon-plusthick'?>" id="span_<?=$i?>"></span>
-                        <a href="<?=$this->basePath()?>/application/index/product?id=<?=$value['id']?>"> <?=$value['category_name']?></a>
+                        <a ng-click="getCategoryWiseProduct(<?=$value['id']?>)"> <?=$value['category_name']?></a>
                     </h3>
                     <?php 
                         if($value['id'] == $this->productId){
@@ -27,7 +27,7 @@
                                 foreach ($value['child'] as $keys => $values) {
                             ?>
                             <li class="category-list_sub-item">
-                                <a href="<?=$this->basePath()?>/application/index/product?id=<?=$values['id']?>">
+                                <a  ng-click="getCategoryWiseProduct(<?=$values['id']?>)">
                                     <div class="category-item-details"><span class="name"><span><?=$values['category_name']?></span></span></div>
                                 </a>
                             </li>
