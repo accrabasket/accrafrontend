@@ -6,6 +6,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
     $scope.searchProductParams = {};
     $scope.quantity = {};
     $scope.ajaxLoadingData = false;
+    $scope.shortByData = 'relevence';
     
     if(searchBy != undefined && searchBy != ''){
         if(searchBy.category_id != undefined && searchBy.category_id != ''){
@@ -29,7 +30,8 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         $scope.no_record = 'No Data Available.';
     }
     $scope.currentPage = 1;
-    $scope.productlist = function () {  
+    $scope.productlist = function () { 
+//        $("#selectBox option[text='']").remove();
         $scope.ajaxLoadingData = true;
         $http({
             method: 'POST',
@@ -48,6 +50,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
                 $scope.numberOfRecord = response.totalNumberOFRecord;
                 $scope.allProductListResponse = response;
                 $scope.productDataList = response.data;
+//                $("#selectBox option[text='']").remove();
             }else{
                 $scope.numberOfRecord = 0;
             }
@@ -57,12 +60,24 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         $scope.currentPage = $scope.searchProductParams.page = page_number;
         $scope.productlist();
     };    
-    $rootScope.getCategoryWiseProduct = function(category_id) {
+    $rootScope.getCategoryWiseProduct = function(category_id,category_name) {
         $scope.currentPage = $scope.searchProductParams.page = 1;
         $scope.searchProductParams.category_id = category_id;
         $scope.searchProductParams.merchant_id = 0; 
         $scope.searchProductParams.product_name = '';
+        $scope.categoryName = category_name;
         $scope.productlist();
     };    
     $scope.productlist();
+    
+    $scope.shortBy = function() {
+        if($scope.shortByData != 'relevence'){
+            $scope.searchProductParams.short_by = 'price';
+            $scope.searchProductParams.order_by = $scope.shortByData;
+        }else{
+            delete $scope.searchProductParams.short_by;
+            delete $scope.searchProductParams.order_by;
+        }
+        $scope.productlist();
+    };
 });
