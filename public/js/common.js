@@ -106,4 +106,12 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             }
         });        
     }
+    
+    $rootScope.delete = function(id){
+        var select = document.getElementById("selectBox_"+id);
+        if(select.options[0].text == ''){
+            select.options[0] = null;
+        }
+	
+    }
 });

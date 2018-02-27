@@ -1,16 +1,16 @@
 <div class="right-panel"  ng-cloak="true" ng-controller="product">
     <div class="full-width"> 
         <ol class="breadcrumb breadcrumb1 relative pdp_top-container" >
-            <li><a href="#">Home</a></li>
-            <li class="active"><?= $this->categoryName ?></li>	
+            <li><a href="<?=$this->basePath()?>">Home</a></li>
+            <li class="active">{{categoryName}}</li>	
             <div class="pull-right">
                 <div class="plp-sort-dd">                  
                     <label class="dropdown_title-label" for="dd-title-label">Sort by</label>
-                    <select>
-                        <option>Relevance</option>
-                        <option>Low to High</option>
-                        <option>High to Low</option>
-                        <option>Name (A To Z)</option>
+                    <select ng-change="shortBy()" ng-model="shortByData">
+                        <option value="relevence">Relevance</option>
+                        <option value="asc">Low to High</option>
+                        <option value="desc">High to Low</option>
+                        <!--<option>Name (A To Z)</option>-->
                     </select>
                 </div>
             </div>		
@@ -34,16 +34,16 @@
                     <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
                 <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
                 <div class="plp-product_offer display--none"></div>
-                <div class="plp-product_img">
+                <div class="plp-product_img" style="cursor: default">
                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                 </div>
-                <div class="plp-product_name " title="Economy Dhuli Moong Dal">
+                <div class="plp-product_name " title="{{product.product_name}}">
                     <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/application/index/productdetails?id={{product.product_id}}">{{product.product_name}}</a><wbr></wbr>
                     </div>
                 </div>
                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
                 <div class="plp-product_quantity">                    
-                    <select style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                    <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
                         <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
                             {{setAttribute(attributeDetails, $index)}}
                             {{attributeDetails.quantity}} {{attributeDetails.unit}}
@@ -103,4 +103,5 @@
     var PAGING_GAP = 3;    
     app.value('searchBy', <?php echo json_encode($this->searchBy); ?>);
     app.value('page', 'product');
+   
 </script>

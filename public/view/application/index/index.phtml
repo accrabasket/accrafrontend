@@ -91,16 +91,16 @@
                                 <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type == 'percent'">%</span> OFF</div>
                                 <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type == 'flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type == 'percent'">%</span> OFF</div>
                                 <div class="plp-product_offer display--none"></div>
-                                <div class="plp-product_img ">
+                                <div class="plp-product_img " style="cursor: default">
                                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                                 </div>
-                                <div class="plp-product_name " title="Economy Dhuli Moong Dal">
+                                <div class="plp-product_name " title="{{product.product_name}}">
                                     <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}">{{product.product_name}}</a><wbr></wbr>
                                     </div>
                                 </div>
                                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
                                 <div class="plp-product_quantity">                    
-                                    <select style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                    <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
                                         <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
                                             {{setAttribute(attributeDetails, $index)}}
                                             {{attributeDetails.quantity}} {{attributeDetails.unit}}
