@@ -65,6 +65,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         $scope.searchProductParams.category_id = category_id;
         $scope.searchProductParams.merchant_id = 0; 
         $scope.searchProductParams.product_name = '';
+        $scope.searchProductParams.product_type = '';
         $scope.categoryName = category_name;
         $scope.productlist();
     };    

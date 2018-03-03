@@ -29,7 +29,7 @@ class IndexController extends AbstractActionController
         //if(empty($this->session['category_list'])){
             $this->session['category_list'] = $this->categoryList();
         //}
-    }
+        }
     public function indexAction()
     { 
         $this->view->marchantList = $this->getMarchantList();
