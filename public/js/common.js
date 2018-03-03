@@ -57,7 +57,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.countItemInCart = function() {
         $scope.totalItemInCart = 0;
         angular.forEach($scope.cartResponse.data, function(value, key){
-            $scope.totalItemInCart = $scope.totalItemInCart+value.number_of_item
+            $scope.totalItemInCart = $scope.totalItemInCart+1
         });        
     }
     
