@@ -89,6 +89,15 @@
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
                                     <?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?>
+                                    <?php
+                                    if(!empty($this->productDetails['bullet_desc'])) {
+                                        echo "<ul style='margin-left:15px;'>";
+                                        foreach($this->productDetails['bullet_desc'] as $bullets) {
+                                            echo "<li> $bullets</li>";
+                                        }
+                                        echo "</ul>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
