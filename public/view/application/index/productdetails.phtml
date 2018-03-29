@@ -33,7 +33,7 @@
                         <div class="col-md-6 single-top-right">
                             <h3 class="item_name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?></h3>
                             <!--<p>Processing Time: Item will be shipped out within 1 working days. </p>-->
-                            <div class="single-rating">
+                            <!--div class="single-rating">
                                 <ul>
                                     <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                                     <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
@@ -43,7 +43,7 @@
                                     <li class="rating">20 reviews</li>
                                     <li><a href="#">Add your review</a></li>
                                 </ul> 
-                            </div>
+                            </div-->
                             <div class="single-price">
                                 <?php 
                                     if(!empty($this->productDetails['attribute'])){
@@ -57,7 +57,6 @@
                                     <li>GHC <?= $price?></li> 
                                     <!--<li><span class="w3off">10% OFF</span></li>--> 
                                     <!--<li>Ends on: Dec,5th</li>-->
-                                    <li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i> Coupon</a></li>
                                 </ul>	
                             </div> 
                             <p class="single-price-text"><?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?> </p>

@@ -11,6 +11,7 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
     if(searchBy != undefined && searchBy != ''){
         if(searchBy.category_id != undefined && searchBy.category_id != ''){
             $scope.searchProductParams.category_id = searchBy.category_id;
+            $scope.categoryName = searchBy.category_name;
         }
         
         if(searchBy.merchant_id != undefined && searchBy.merchant_id != ''){
@@ -60,13 +61,15 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         $scope.currentPage = $scope.searchProductParams.page = page_number;
         $scope.productlist();
     };    
-    $rootScope.getCategoryWiseProduct = function(category_id,category_name) {
+    $rootScope.getCategoryWiseProduct = function(category_id,category_name, parent_category_id, parent_category_name) {
         $scope.currentPage = $scope.searchProductParams.page = 1;
         $scope.searchProductParams.category_id = category_id;
         $scope.searchProductParams.merchant_id = 0; 
         $scope.searchProductParams.product_name = '';
         $scope.searchProductParams.product_type = '';
         $scope.categoryName = category_name;
+        $scope.parent_category_id = parent_category_id;
+        $scope.parent_category_name = parent_category_name;
         $scope.productlist();
     };    
     $scope.productlist();

@@ -2760,7 +2760,6 @@ margin-right:0!important
 }
 }
 .plp-product_img {
-	height:100px;
 	overflow:hidden;
 	padding-top:15px;
         /*width: 225px;*/
@@ -2821,21 +2820,19 @@ margin-right:0!important
 .plp-product_name {
 	color:#666;
 	font-size:14px;
-	margin-left:12px;
-	margin-right:12px;
-	margin-top:0;
-	word-break:break-word
+	text-align: center;
+        margin-top:30px;
 }
 @media screen and (min-width:1020px) and (max-width:1260px) {
 .plp-product_name {
-	margin-left:26px;
-	margin-right:26px
+	text-align: center;
+        margin-top:30px;
 }
 }
 @media screen and (min-width:1260px) {
 .plp-product_name {
-	margin-left:26px;
-	margin-right:26px
+	text-align: center;
+        margin-top:30px;
 }
 }
 .plp-product_name--box {
@@ -2847,23 +2844,25 @@ margin-right:0!important
 	line-height:normal;
 	margin-left:12px;
 	margin-right:12px;
-	margin-top:5px;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	white-space:nowrap
+	white-space:nowrap;
+        position: absolute;
+        bottom:75px;
 }
 @media screen and (min-width:1020px) and (max-width:1260px) {
 .plp-product_quantity {
-	margin-left:26px;
+	margin-left:38px;
 	margin-right:26px;
 	margin-top:10px
 }
 }
 @media screen and (min-width:1260px) {
 .plp-product_quantity {
-	margin-left:26px;
+	margin-left:38px;
 	margin-right:26px;
-	margin-top:10px
+	position: absolute;
+        bottom: 75px;
 }
 }
 .plp-product_variant {

@@ -29,7 +29,7 @@ class IndexController extends AbstractActionController
         //if(empty($this->session['category_list'])){
             $this->session['category_list'] = $this->categoryList();
         //}
-        }
+    }
     public function indexAction()
     { 
         $this->view->marchantList = $this->getMarchantList();
@@ -56,6 +56,7 @@ class IndexController extends AbstractActionController
         $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
         if(!empty($request['id'])){
             $searchParams['category_id'] = $request['id'];
+            $searchParams['category_name'] = $this->session['category_list']['data'][$request['id']]['category_name'];
         }
         if(!empty($request['merchant'])){
             $searchParams['merchant_id'] = $request['merchant'];

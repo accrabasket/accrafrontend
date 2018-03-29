@@ -27,7 +27,7 @@
                                 foreach ($value['child'] as $keys => $values) {
                             ?>
                             <li class="category-list_sub-item">
-                                <a  ng-click="getCategoryWiseProduct(<?=$values['id']?>,'<?=$values['category_name']?>')">
+                                <a  ng-click="getCategoryWiseProduct(<?=$values['id']?>,'<?=$values['category_name']?>', '<?=$value['id']?>', '<?=$value['category_name']?>')">
                                     <div class="category-item-details"><span class="name"><span><?=$values['category_name']?></span></span></div>
                                 </a>
                             </li>
