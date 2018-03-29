@@ -56,7 +56,19 @@ class IndexController extends AbstractActionController
         $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
         if(!empty($request['id'])){
             $searchParams['category_id'] = $request['id'];
-            $searchParams['category_name'] = $this->session['category_list']['data'][$request['id']]['category_name'];
+            if(!empty($this->session['category_list']['data'][$request['id']])) {
+                $searchParams['category_name'] = $this->session['category_list']['data'][$request['id']]['category_name'];
+            }else{
+                foreach($this->session['category_list']['data'] as $categoryDetails) {   
+                    $childCategoryArr = array_keys($categoryDetails['child']);
+                    if(in_array($request['id'], $childCategoryArr)){
+                        $searchParams['parent_category_name'] = $categoryDetails['category_name'];
+                        $searchParams['parent_category_id'] = $categoryDetails['id'];
+                        $searchParams['category_name'] = $categoryDetails['child'][$request['id']]['category_name'];
+                        break;
+                    }
+                }
+            }
         }
         if(!empty($request['merchant'])){
             $searchParams['merchant_id'] = $request['merchant'];

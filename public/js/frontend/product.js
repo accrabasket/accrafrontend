@@ -12,6 +12,10 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         if(searchBy.category_id != undefined && searchBy.category_id != ''){
             $scope.searchProductParams.category_id = searchBy.category_id;
             $scope.categoryName = searchBy.category_name;
+            if(searchBy.parent_category_name) {
+                $scope.parent_category_name = searchBy.parent_category_name;
+                $scope.parent_category_id = searchBy.parent_category_id;
+            }
         }
         
         if(searchBy.merchant_id != undefined && searchBy.merchant_id != ''){
@@ -62,15 +66,24 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         $scope.productlist();
     };    
     $rootScope.getCategoryWiseProduct = function(category_id,category_name, parent_category_id, parent_category_name) {
-        $scope.currentPage = $scope.searchProductParams.page = 1;
-        $scope.searchProductParams.category_id = category_id;
-        $scope.searchProductParams.merchant_id = 0; 
-        $scope.searchProductParams.product_name = '';
-        $scope.searchProductParams.product_type = '';
-        $scope.categoryName = category_name;
-        $scope.parent_category_id = parent_category_id;
-        $scope.parent_category_name = parent_category_name;
-        $scope.productlist();
+        var currentLocation = window.location.href;
+        var locationarr = currentLocation.split("/");
+        var lastIndex = locationarr.length-1;
+        if(locationarr[lastIndex] == 'hotdeals'){
+            locationarr.splice(lastIndex, 1);
+            currentLocation = window.location.href=locationarr.join("/")+"/product?id="+category_id;
+            window.location.href = currentLocation;
+        }else{
+            $scope.currentPage = $scope.searchProductParams.page = 1;
+            $scope.searchProductParams.category_id = category_id;
+            $scope.searchProductParams.merchant_id = 0; 
+            $scope.searchProductParams.product_name = '';
+            $scope.searchProductParams.product_type = '';
+            $scope.categoryName = category_name;
+            $scope.parent_category_id = parent_category_id;
+            $scope.parent_category_name = parent_category_name;
+            $scope.productlist();
+        }
     };    
     $scope.productlist();
     
