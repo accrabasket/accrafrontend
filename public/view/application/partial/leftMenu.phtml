@@ -101,8 +101,11 @@ if(!empty($GLOBALS['category_id']) && !empty($GLOBALS['category_list']['data'][$
     function expendButton(id){
         $('#'+id).css('display','block');
         $('#span_'+id).removeClass( "ui-icon-plusthick" ).addClass( "ui-icon-minusthick" );
-        $('#'+lastId).css('display','none');
-        $('#span_'+lastId).removeClass( "ui-icon-minusthick" ).addClass( "ui-icon-plusthick" );;
+        if(lastId != id){
+            $('#'+lastId).css('display','none');
+            $('#span_'+lastId).removeClass( "ui-icon-minusthick" ).addClass( "ui-icon-plusthick" );
+        }
+        
         lastId = id;
     }
     expendButton(1)
