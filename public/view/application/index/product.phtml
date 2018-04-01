@@ -60,7 +60,12 @@
                 <div class="plp-product_add-to-cart">
                     <div class="add-to-cart">
                         <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                        <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                        <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                        <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                        <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                        <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                        <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                        </span>
                         <button class="add-to-cart_inc" data-test-id="plus-button"></button>
                     </div>
                 </div>

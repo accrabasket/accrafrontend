@@ -5,8 +5,26 @@
     <div ng-controller="productdetails">
         <div class="container subscribe-right"> 
             <ol class="breadcrumb breadcrumb1">
-                <li>Home</li>
-                <li class="active">Product</li>
+                <li><a href="<?php echo $this->basePath();?>">Home</a></li>
+                <?php
+                    if(!empty($this->breadcrum['parent_category_name'])) {
+                ?>
+                <li>
+                    <a href="<?php echo $this->basePath()."/application/index/product?id=".$this->breadcrum['parent_category_id']?>"><?=$this->breadcrum['parent_category_name']?></a>
+                </li>
+                <?php
+                    }
+                    if(!empty($this->breadcrum['category_name'])) {
+                ?>
+                <li>
+                    <a href="<?php echo $this->basePath()."/application/index/product?id=".$this->breadcrum['category_id']?>"><?=$this->breadcrum['category_name']?></a>
+                </li>
+                <?php
+                    }
+                ?>
+                <li>
+                    <?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?>
+                </li>
             </ol> 
             <div class="clearfix"> </div>
         </div>

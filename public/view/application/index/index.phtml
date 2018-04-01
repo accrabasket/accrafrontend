@@ -126,7 +126,7 @@
                         foreach ($this->marchantList as $key => $value) {
                             ?>
                             <div class="item">
-                                <a  href="<?= $this->basePath() ?>/application/index/product?merchant=<?= $value['id'] ?>" class="product_wrapper">
+                                <a  href="<?= $this->basePath() ?>/application/index/product?merchant=<?= $value['user_id'] ?>" class="product_wrapper">
                                     <div class="plp-product">
                                         <div  class="plp-product_img merchant">
                                             <img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg"></div>

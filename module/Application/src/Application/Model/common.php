@@ -25,7 +25,10 @@ class common{
         $data['parameters'] = $queryStr;
         $url = BASKET_API.$controller;
         $parametes = http_build_query($data);        
-       // echo $url = $url.'?'.$parametes;die;
+        if($params['method']=='productlist') {
+            //echo $url = $url.'?'.$parametes;die;
+        }        
+        
         return $this->cObj->callPostCurl($url, $parametes);
     }
     

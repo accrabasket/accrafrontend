@@ -38,8 +38,8 @@ var app = angular.module('app', ['ui.bootstrap']);
 
 app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.totalItemInCart = 0;
-    $scope.cartResponse = {};
-    $scope.cartResponse.productImageData = {};
+    $rootScope.cartResponse = {};
+    $rootScope.cartResponse.productImageData = {};
     $scope.cartItem = {};
     $scope.cartList = function(){
         $http({
@@ -48,7 +48,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             if(response.status=='success') {
-                $scope.cartResponse = response; 
+                $rootScope.cartResponse = response; 
                 $scope.countItemInCart();
             }
         });        
@@ -56,7 +56,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.cartList();
     $scope.countItemInCart = function() {
         $scope.totalItemInCart = 0;
-        angular.forEach($scope.cartResponse.data, function(value, key){
+        angular.forEach($rootScope.cartResponse.data, function(value, key){
             $scope.totalItemInCart = $scope.totalItemInCart+1
         });        
     }

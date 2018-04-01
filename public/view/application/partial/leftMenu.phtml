@@ -4,7 +4,10 @@
             <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
                     <?php 
                          $i = 0;
-                        foreach($GLOBALS['category_list']['data'] as $key => $value) {
+                        //foreach($GLOBALS['category_list']['data'] as $key => $value)
+                         $value = $GLOBALS['category_list']['data'][$GLOBALS['category_id']]; 
+                         
+                        {
                              $i++;
                     ?>
                    
@@ -50,4 +53,5 @@
         $('#span_'+lastId).removeClass( "ui-icon-minusthick" ).addClass( "ui-icon-plusthick" );;
         lastId = id;
     }
+    expendButton(1)
 </script>

@@ -60,7 +60,11 @@ class IndexController extends AbstractActionController
                 $searchParams['category_name'] = $this->session['category_list']['data'][$request['id']]['category_name'];
             }else{
                 foreach($this->session['category_list']['data'] as $categoryDetails) {   
-                    $childCategoryArr = array_keys($categoryDetails['child']);
+                    //$childCategoryArr = array_keys($categoryDetails['child']);
+                    $childCategoryArr = array();
+                    if(!empty($categoryDetails['child'])) {
+                        $childCategoryArr = array_keys($categoryDetails['child']);
+                    }                    
                     if(in_array($request['id'], $childCategoryArr)){
                         $searchParams['parent_category_name'] = $categoryDetails['category_name'];
                         $searchParams['parent_category_id'] = $categoryDetails['id'];
@@ -69,6 +73,11 @@ class IndexController extends AbstractActionController
                     }
                 }
             }
+        }
+        if(!empty($searchParams['parent_category_id'])) {
+            $GLOBALS['category_id'] = $searchParams['parent_category_id'];
+        }else{
+            $GLOBALS['category_id'] = $searchParams['category_id'];
         }
         if(!empty($request['merchant'])){
             $searchParams['merchant_id'] = $request['merchant'];
@@ -126,12 +135,37 @@ class IndexController extends AbstractActionController
             $params['product_id'] = $postParams['id'];
             $response = $this->commonObj->curlhitApi($params, 'application/product');
             $product_details = json_decode($response,true);
+            $breadcrum = array();
+            foreach($this->session['category_list']['data'] as $categoryDetails) {   
+                $childCategoryArr = array();
+                if(!empty($categoryDetails['child'])) {
+                    $childCategoryArr = array_keys($categoryDetails['child']);
+                }
+                if(in_array($product_details['data'][$postParams['id']]['category_id'], $childCategoryArr)){
+                    $breadcrum['parent_category_name'] = $categoryDetails['category_name'];
+                    $breadcrum['parent_category_id'] = $categoryDetails['id'];
+                    $breadcrum['category_name'] = $categoryDetails['child'][$product_details['data'][$postParams['id']]['category_id']]['category_name'];
+                    $breadcrum['category_id'] =  $categoryDetails['child'][$product_details['data'][$postParams['id']]['category_id']]['id'];
+                    break;
+                }else if($product_details['data'][$postParams['id']]['category_id'] == $categoryDetails['id']){
+                    $breadcrum['category_name'] = $categoryDetails['category_name'];
+                    $breadcrum['category_id'] =  $categoryDetails['id'];
+                    break;
+                }
+            }
             if(!empty($product_details['data'])){
                 $this->view->productDetails = $product_details['data'][$postParams['id']];
+                
+                if(!empty($product_details['productImageData']) && !empty($product_details['imageRootPath'].'/product/'.$postParams['id'].'/'.$product_details['productImageData'][$postParams['id']][0]['image_name'])) {
                 $this->view->productImage = $product_details['imageRootPath'].'/product/'.$postParams['id'].'/'.$product_details['productImageData'][$postParams['id']][0]['image_name'];
+                }else{
+                    $this->view->productImage = '';
+                }
             }
         }
 //        print_r($this->view->productDetails);die;
+        $this->view->breadcrum = $breadcrum;
+        
         return $this->view;
     }
     
