@@ -47,6 +47,8 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             url: serverAppUrl + '/viewcart',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
+            $rootScope.cartResponse = {};
+            $scope.totalItemInCart = 0;
             if(response.status=='success') {
                 $rootScope.cartResponse = response; 
                 $scope.countItemInCart();
