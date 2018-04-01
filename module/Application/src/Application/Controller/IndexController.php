@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
         }
         if(!empty($searchParams['parent_category_id'])) {
             $GLOBALS['category_id'] = $searchParams['parent_category_id'];
-        }else{
+        }else if(!empty($searchParams['category_id'])){
             $GLOBALS['category_id'] = $searchParams['category_id'];
         }
         if(!empty($request['merchant'])){
