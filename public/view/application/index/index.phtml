@@ -42,9 +42,15 @@
             <!-- Wrapper-for-Slides -->
             <div class="carousel-inner" role="listbox">  
                 <?php
+                    $counter = 0;
                     foreach($this->banner['data'] as $banner) {
+                        $active = '';
+                        if($counter==0){
+                            $active = 'active';
+                        }
+                        $counter++;
                 ?>
-                <div class="item active"><!-- First-Slide -->
+                <div class="item <?=$active?>"><!-- First-Slide -->
                     <img src="<?=$this->banner['imageRootPath'].'/'.$banner['image_name']?>" alt="" class="img-responsive" />
                     <!--<div class="carousel-caption kb_caption kb_caption_right">
                         <h3 data-animation="animated flipInX">Flat <span>50%</span> Discount</h3>
