@@ -67,12 +67,13 @@
                                     if(!empty($this->productDetails['attribute'])){
                                         foreach ($this->productDetails['attribute'] as $key => $value) {
                                             $price = $value['price'];
+                                            $actualPrice = $value['actual_price'];
                                             $id = $value['id'];
                                         }
                                     }
                                 ?>
                                 <ul>
-                                    <li>GHC <?= $price?></li> 
+                                    <li><strike>GHC <?= $price?></strike> GHC <?= $actualPrice?></li> 
                                     <!--<li><span class="w3off">10% OFF</span></li>--> 
                                     <!--<li>Ends on: Dec,5th</li>-->
                                 </ul>	

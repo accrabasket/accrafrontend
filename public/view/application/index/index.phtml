@@ -106,7 +106,15 @@
                                 <div class="plp-product_price">
                                     <div class="plp-product_price--container">
                                         <div class="plp-product_price--old display--inline-block@mobile"></div>
-                                        <div class="plp-product_price--new display--inline-block@mobile">GHC {{product.attribute[quantity[product.product_id]].price}} </div>
+                                        <div class="plp-product_price--new display--inline-block@mobile">
+                                            <span ng-if="product.attribute[quantity[product.product_id]].price == product.attribute[quantity[product.product_id]].actual_price">
+                                                GHC {{product.attribute[quantity[product.product_id]].price}} 
+                                            </span>
+                                            <span ng-if="product.attribute[quantity[product.product_id]].price != product.attribute[quantity[product.product_id]].actual_price">
+                                                <strike>GHC {{product.attribute[quantity[product.product_id]].price}} </strike><br/>
+                                                GHC {{product.attribute[quantity[product.product_id]].actual_price}}
+                                            </span>                                            
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="plp-product_add-to-cart">
