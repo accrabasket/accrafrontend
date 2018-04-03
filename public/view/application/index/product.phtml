@@ -33,7 +33,7 @@
             <div class="plp-product">
                 <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value && product.attribute[quantity[product.product_id]].discount_value!='0'">
                     <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
-                <div class="plp-product_offer" ng-if="product.discount_value && !product.attribute[quantity[product.product_id]].discount_value"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
+                <div class="plp-product_offer" ng-if="product.discount_value && product.attribute[quantity[product.product_id]].discount_value=='0' && product.discount_value!='0'"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
                 <div class="plp-product_offer display--none"></div>
                 <div class="plp-product_img" style="cursor: default">
                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
