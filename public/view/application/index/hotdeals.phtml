@@ -26,7 +26,7 @@
                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                 </div>
                 <div class="plp-product_name " title="Economy Dhuli Moong Dal">
-                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/application/index/productdetails?id={{product.product_id}}">{{product.product_name}}</a><wbr></wbr>
+                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}</a><wbr></wbr>
                     </div>
                 </div>
                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
