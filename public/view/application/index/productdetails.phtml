@@ -65,11 +65,11 @@
                             <div class="single-price">
                                 <?php 
                                     if(!empty($this->productDetails['attribute'])){
-                                        foreach ($this->productDetails['attribute'] as $key => $value) {
-                                            $price = $value['price'];
-                                            $actualPrice = $value['actual_price'];
-                                            $id = $value['id'];
-                                        }
+//                                        foreach ($this->productDetails['attribute'][$this->selectedAttr] as $key => $value) {
+                                            $price = $this->productDetails['attribute'][$this->selectedAttr]['price'];
+                                            $actualPrice = $this->productDetails['attribute'][$this->selectedAttr]['actual_price'];
+                                            $id = $this->productDetails['attribute'][$this->selectedAttr]['id'];
+//                                        }
                                     }
                                 ?>
                                 <ul>

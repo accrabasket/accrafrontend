@@ -132,7 +132,9 @@ class IndexController extends AbstractActionController
         if (!empty($postParams)) {
             $params['method'] = 'productlist';
             $params['city_id'] = $this->session->city;
-            $params['product_id'] = $postParams['id'];
+            $productIdAndAtt = explode('-', $postParams['id']);
+            $this->view->selectedAttr = $productIdAndAtt['1'];
+            $params['product_id']= $postParams['id'] = $productIdAndAtt['0'];
             $response = $this->commonObj->curlhitApi($params, 'application/product');
             $product_details = json_decode($response,true);
             $breadcrum = array();
