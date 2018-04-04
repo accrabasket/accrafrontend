@@ -121,7 +121,12 @@
                                 <div class="plp-product_add-to-cart">
                                     <div class="add-to-cart">
                                         <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                                        <button class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                                        <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                                        <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                                        <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                                        <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                                        <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                                        </span>
                                         <button class="add-to-cart_inc" data-test-id="plus-button"></button>
                                     </div>
                                 </div>
@@ -131,6 +136,67 @@
 
                 </div>
             </div>
+            <div style="width: 100%;">
+
+                <h1 class="slider-header">New Arrivals
+                    <a href="<?= $this->basePath() ?>/application/index/product?product_type=new_arrival" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                <div class="products products--inline">
+                    <div class="owl-carousel owl-theme">
+                        <div class="product_wrapper" ng-repeat="product in newArrivalproductDataList">
+                            <div class="plp-product">
+                                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value && product.attribute[quantity[product.product_id]].discount_value!='0'">
+                                    <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
+                                <div class="plp-product_offer" ng-if="product.discount_value && product.attribute[quantity[product.product_id]].discount_value=='0' && product.discount_value!='0'"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
+                                <div class="plp-product_offer display--none"></div>
+                                <div class="plp-product_img " style="cursor: default">
+                                    <img class="img animated fadeIn" src="{{newArrivalAllProductListResponse.imageRootPath}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].image_name}}">
+                                </div>
+                                <div class="plp-product_name " title="{{product.product_name}}">
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}</a><wbr></wbr>
+                                    </div>
+                                </div>
+                                <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
+                                <div class="plp-product_quantity">                    
+                                    <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
+                                            {{setAttribute(attributeDetails, $index)}}
+                                            {{attributeDetails.quantity}} {{attributeDetails.unit}}
+                                        </option>
+                                    </select>  
+                                </div>                
+                                <div class="plp-product_price">
+                                    <div class="plp-product_price--container">
+                                        <div class="plp-product_price--old display--inline-block@mobile"></div>
+                                        <div class="plp-product_price--new display--inline-block@mobile">
+                                            <span ng-if="product.attribute[quantity[product.product_id]].price == product.attribute[quantity[product.product_id]].actual_price">
+                                                GHC {{product.attribute[quantity[product.product_id]].price}} 
+                                            </span>
+                                            <span ng-if="product.attribute[quantity[product.product_id]].price != product.attribute[quantity[product.product_id]].actual_price">
+                                                <strike>GHC {{product.attribute[quantity[product.product_id]].price}} </strike><br/>
+                                                GHC {{product.attribute[quantity[product.product_id]].actual_price}}
+                                            </span>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="plp-product_add-to-cart">
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
+                                        <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
+                                        <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                                        <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                                        <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                                        <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                                        </span>
+                                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+            
             <div style="width: 100%;">
 
                 <h1 class="slider-header">Merchant

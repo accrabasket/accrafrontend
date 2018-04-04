@@ -25,6 +25,9 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         if(searchBy.product_name != undefined && searchBy.product_name != ''){
             $scope.searchProductParams.product_name = searchBy.product_name;
         } 
+        if(searchBy.product_type != undefined && searchBy.product_type != ''){
+            $scope.searchProductParams.product_type = [searchBy.product_type];
+        }        
     }else if(page != 'product'){
         $scope.searchProductParams.product_type = ['offers', 'hotdeals'];
     }

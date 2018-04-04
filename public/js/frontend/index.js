@@ -3,7 +3,7 @@ app.controller('index', function ($scope, $http,$timeout) {
     $scope.quantity = {};
     $scope.searchProductParams.page = 1;    
     $scope.productlist = function (produtType) {        
-        $scope.searchProductParams.product_type = $scope.productType;
+        $scope.searchProductParams.product_type = produtType;
         $http({
             method: 'POST',
             url: serverAppUrl + '/productlist',
@@ -17,8 +17,14 @@ app.controller('index', function ($scope, $http,$timeout) {
                     });
                 });
                 $scope.numberOfRecord = response.totalNumberOFRecord;
-                $scope.allProductListResponse = response;
-                $scope.productDataList = response.data;
+                
+                if(produtType[0] == 'new_arrival') {
+                    $scope.newArrivalproductDataList = response.data;
+                    $scope.newArrivalAllProductListResponse = response;
+                }else{
+                    $scope.productDataList = response.data;
+                    $scope.allProductListResponse = response;
+                }
             }else{
                 $scope.numberOfRecord = 0;
             }
@@ -26,6 +32,7 @@ app.controller('index', function ($scope, $http,$timeout) {
     }
     $scope.productType = ['offers', 'hotdeals'];
     $scope.productlist($scope.productType);
+    $scope.productlist(['new_arrival']);    
 });
 
 var slidingWidth = 0;
