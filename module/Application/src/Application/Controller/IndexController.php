@@ -27,7 +27,7 @@ class IndexController extends AbstractActionController
             $GLOBALS['city_list'] = $this->session['city_list'];
         }
         //if(empty($this->session['category_list'])){
-            $this->session['category_list'] = $this->categoryList();
+            $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
         //}
     }
     public function indexAction()
@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
         $this->view->banner = $this->banner();       
         $this->view->cityList = $this->session['city_list'];
         $this->view->categoryList = $this->session['category_list'];
-        
+        $GLOBALS['hidemenu'] = 1;
         return $this->view;
     }
     

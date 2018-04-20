@@ -92,7 +92,9 @@
                                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                                 </div>
                                 <div class="plp-product_name " title="{{product.product_name}}">
-                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}</a><wbr></wbr>
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
+                                        <none ng-if="product.brand_name">({{product.brand_name}})</none>
+                                        </a><wbr></wbr>
                                     </div>
                                 </div>
                                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
@@ -152,7 +154,9 @@
                                     <img class="img animated fadeIn" src="{{newArrivalAllProductListResponse.imageRootPath}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].image_name}}">
                                 </div>
                                 <div class="plp-product_name " title="{{product.product_name}}">
-                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}</a><wbr></wbr>
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
+                                        <none ng-if="product.brand_name">({{product.brand_name}})</none>
+                                        </a><wbr></wbr>
                                     </div>
                                 </div>
                                 <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->

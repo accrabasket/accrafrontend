@@ -120,13 +120,10 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         if (address.area == undefined || address.area == '') {
             error = 'Area name should not empty';
         }
-        if (address.zipcode == undefined || address.zipcode == '') {
-            error = 'Zipcode name should not empty';
-        }
         address.city_id = $('#cityname').val();
         address.city_name = $("#cityname option:selected").text();
-        $scope.ajaxLoadingData = true;
         if (error == ' ') {
+            $scope.ajaxLoadingData = true;
             $http({
                 method: 'POST',
                 url: serverAppUrl + '/saveaddress',

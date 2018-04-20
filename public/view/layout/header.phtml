@@ -30,6 +30,7 @@
         .owl-carousel .owl-nav .owl-next{position: absolute;right: 0px; top: 0; height: 300px; width: 30px; margin: 0;}
         .owl-carousel .owl-item .merchant img{width: 80%;}
         .merchant_name{font-size: 16px;}
+		.cart-column-dropdown{overflow:auto; height:300px;}		
     </style>
 </head>
 <div ng-app="app">
@@ -125,10 +126,137 @@
                 </div>
                 <div class="clearfix"> </div> 
             </div> 
+			
             <div class="clearfix"> </div>
+
         </div>		
     </div><!-- //header-two -->
+	
+<div class="clearfix"> </div>
+<?php
+if(empty($GLOBALS['hidemenu'])) {
+?>
+				<style>
+.show {
+    display: block;
+}
+.sub-header {
+    background-color: #f9f9f9;
+    position: fixed;
+    margin-top: 0px;
+    transition: -webkit-transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
+    transition: transform .5s ease-in-out,-webkit-transform .5s ease-in-out;
+    width: 100%;
+    z-index: 900;
+}
+.sub-header__wrapper {
+    background-color: #fff;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.15);
+    position: relative;
+}
+@media screen and (min-width: 1260px)
+.footer, .wrapper {
+    width: 1220px;
+}
+
+.footer, .gr-centered, .wrapper {
+    display: block!important;
+    float: none!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    clear: both!important;
+}
+
+.sub-header__section--left {
+    width: 104px;
+    max-width: 260px;
+}
+.sub-header__section--left, .sub-header__section--right {
+    display: table-cell;
+}
+
+.sub-header-details {
+    border-right: 1px solid #eee;
+    color: #333;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 46px;
+    margin-right: -1px;
+    padding-left: 36px;
+    padding-right: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-inline, .list-unstyled {
+    list-style: none;
+    padding-left: 0;
+}
+.list-unstyled {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.cat-0-list {
+    color: #666;
+    font-size: 14px;
+    height: 47px;
+    margin-left: 17px!important;
+}
+.list-inline>li {
+    display: inline-block;
+}
+.cat-0-list__item {
+    cursor: pointer;
+    line-height: normal;
+    position: relative;display:inline-block;
+}
+.cat-0-list__item--name {
+    display: block;
+    padding: 14px 13px;font-size:14px;
+}
+.cat-0-list__item:hover{background-color:#f7f7f7}
+.cat-0-list__item--hidden{height:0;visibility:hidden}
+ 
+.cat-0-list__more-btn:after{content:"u";font-family:IconFont;font-style:normal;cursor:pointer;font-size:12px;margin-left:5px;vertical-align:sub}
+.cat-0-list__more-category{
+-webkit-overflow-scrolling:touch;background-color:#fff;border-bottom-left-radius:3px;border-bottom-right-radius:3px;box-shadow:0 2px 4px 0 rgba(0,0,0,.5);max-height:calc(100vh - 137px);overflow:scroll;position:absolute;right:0;width:200px;z-index:900; overflow-x:hidden;}
+
+.cat-0-list__more-category .more-child{border-top:1px solid #f2f2f2; width:100%;}
+.cat-0-list__more-category .more-child--first{border-top:0}.cat-0-list__more-category .more-child:last-child{border-bottom-left-radius:3px;border-bottom-right-radius:3px}.cat-0-list__more-category .cat-0-list__item--name{padding:14px 20px; font-size:14px;}
+.slider__arrow{background-color:transparent;border:none;bottom:0;color:#6e6e6e;cursor:pointer;font-size:20px;height:100%;margin:auto 0;outline:none;padding:0;position:absolute;top:0;z-index:1}
+.slider__arrow--nav{width:28px;height:28px}
+.slider__arrow--nav:before{left:50%;position:absolute;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
+.slider__arrow--circle{background-color:#ccc;cursor:pointer;font-size:10px;height:28px;opacity:.7;width:28px;background-clip:padding-box;border-radius:100%;-moz-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%}
+.slider__arrow--circle:before{color:#fff;display:inline-block}
+@media screen and (min-width:1020px) and (max-width:1260px){.slider__arrow--circle{font-size:20px;height:42px;width:42px}}
+@media screen and (min-width:1260px){.slider__arrow--circle{font-size:20px;height:42px;width:42px}}
+.slider__arrow--bars{background-color:#ccc;color:#fff;cursor:pointer;font-size:25px;height:100%;opacity:.7;transition:background-color .1s ease-out;width:26px}
+.slider__arrow--bars.slider__arrow--right{border-bottom-right-radius:2px;border-top-right-radius:2px}
+.slider__arrow--bars.slider__arrow--left{border-bottom-left-radius:2px;border-top-left-radius:2px}
+.slider__arrow--bars:hover{background-color:rgba(0,0,0,.5);color:#fff}
+</style>
+<div class="sub-header hide@mobile">
+  <div class="sub-header__wrapper">
+    <div class="wrapper">
+      <div class="sub-header__section--left"><a class="sub-header-details" title="" href="/"><span>&nbsp;</span></a></div>
+      <div class="sub-header__section--right">
+        <?php
+            foreach($GLOBALS['category_list']['data'] as $categoryId=>$category) {
+        ?>
+        <div class="cat-0-list__item"><a class="cat-0-list__item--name" href="<?=$this->basePath()?>/application/index/product?id=<?=$categoryId?>"><?=$category['category_name']?></a></div>  
+        <?php
+            }
+        ?>
+      </div>
+    </div>
+  </div>
+</div>
+
     <?php
+}
         if(empty($GLOBALS['city'])) {
     ?>
     <div class="modal" tabindex="-1" role="dialog" id="selectcity">
@@ -158,4 +286,13 @@
 <script>
     var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
     var city = 0;
+</script>
+<script>
+	$(document).ready(
+    function() {
+	$(".cat-0-list__more-category").hide();
+        $("#morelist").click(function() {
+            $(".cat-0-list__more-category").toggle('fast'); 
+        });
+     });
 </script>

@@ -1534,7 +1534,7 @@ background-color:#fff
 	right:4px;
 	height:inherit
 }
-.product-cont{display:table; width: 100%;box-shadow: 0 2px 4px 0 rgba(0,0,0,.22); padding: 1em; margin-top: 1em; }
+.product-cont{display:table; width: 100%;box-shadow: 0 2px 4px 0 rgba(0,0,0,.22); padding: 1em; margin-top: 3em; }
 .product-cont .left-panel{width: 24%; display: table-cell; margin-top: 1em; float: left; margin-right: 0.1em;border: 1px solid #c5c5c5;}
 .product-cont .right-panel{width: 75%; display: table-cell; margin-top: 0.1em; float: left; border: 0px solid #ededed; padding: 1em;}
 
