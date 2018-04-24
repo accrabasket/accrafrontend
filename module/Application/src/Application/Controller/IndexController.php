@@ -511,4 +511,10 @@ class IndexController extends AbstractActionController
         echo $postParams['city'];
         exit;
     }
+    function thankyouAction(){
+        $searchParams = array();
+        $request = (array) $this->getRequest()->getQuery();        
+        $this->view->orderDetails = $request;
+        return $this->view;
+    }
 }
