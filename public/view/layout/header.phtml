@@ -44,7 +44,7 @@
     <div class="header-two"> 
         <div class="container no-lpad no-rpad">
             <div class="header-logo">
-                <a href="<?=$this->basePath()?>/index.php/application/index/">
+                <a href="<?=$this->basePath()?>/index.php/application/index">
                 <img src="<?php echo $this->basePath() ?>/public/images/logo-big.png" alt="logo"/> 
                 </a>
             </div>	
@@ -116,7 +116,7 @@
                                         </span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
                                     </li>
                                     <li ng-if="cartResponse.data">
-                                        <a class="button conti" href="<?= $this->basePath() ?>/index.php/application/index/">Continue Shopping</a> 
+                                        <a class="button conti" href="<?= $this->basePath() ?>/index.php/application/index">Continue Shopping</a> 
 					<a class="button proceed" href="<?= $this->basePath() ?>/index.php/application/index/checkout" class="cart" id="cart" >Proceed To Checkout</a>
 				  </li>                                    
                                 </ul>
