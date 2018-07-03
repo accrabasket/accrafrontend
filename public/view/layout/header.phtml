@@ -117,7 +117,7 @@
                                     </li>
                                     <li ng-if="cartResponse.data">
                                         <a class="button conti" href="<?= $this->basePath() ?>">Continue Shopping</a> 
-					<a class="button proceed" href="<?= $this->basePath() ?>/application/index/checkout" class="cart" id="cart" >Proceed To Checkout</a>
+					<a class="button proceed" href="<?= $this->basePath() ?>/index.php/application/index/checkout" class="cart" id="cart" >Proceed To Checkout</a>
 				  </li>                                    
                                 </ul>
                             </div>	
@@ -246,7 +246,7 @@ if(empty($GLOBALS['hidemenu'])) {
         <?php
             foreach($GLOBALS['category_list']['data'] as $categoryId=>$category) {
         ?>
-        <div class="cat-0-list__item"><a class="cat-0-list__item--name" href="<?=$this->basePath()?>/application/index/product?id=<?=$categoryId?>"><?=$category['category_name']?></a></div>  
+        <div class="cat-0-list__item"><a class="cat-0-list__item--name" href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$categoryId?>"><?=$category['category_name']?></a></div>  
         <?php
             }
         ?>
