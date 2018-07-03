@@ -11,7 +11,7 @@
                     foreach ($this->categoryList['data'] as $categoryId => $category) {
                         ?>
                         <li role="presentation" class="active categoryslider">
-                            <a href="<?=$this->basePath()?>/application/index/product?id=<?=$categoryId?>" style='cursor:pointer;'>
+                            <a href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$categoryId?>" style='cursor:pointer;'>
                                 <?php
                                 if (!empty($this->categoryList['images'][$categoryId][0]['image_name'])) {
                                     ?>
@@ -79,7 +79,7 @@
             <div style="width: 100%;">
 
                 <h1 class="slider-header">OFFERS AND HOT DEALS
-                    <a href="<?= $this->basePath() ?>/application/index/hotdeals" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                    <a href="<?= $this->basePath() ?>/index.php/application/index/hotdeals" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
                 <div class="products products--inline">
                     <div class="owl-carousel owl-theme">
                         <div class="product_wrapper" ng-repeat="product in productDataList">
@@ -141,7 +141,7 @@
             <div style="width: 100%;">
 
                 <h1 class="slider-header">New Arrivals
-                    <a href="<?= $this->basePath() ?>/application/index/product?product_type=new_arrival" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                    <a href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=new_arrival" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
                 <div class="products products--inline">
                     <div class="owl-carousel owl-theme">
                         <div class="product_wrapper" ng-repeat="product in newArrivalproductDataList">
@@ -154,7 +154,7 @@
                                     <img class="img animated fadeIn" src="{{newArrivalAllProductListResponse.imageRootPath}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{newArrivalAllProductListResponse.productImageData[product.product_id][0].image_name}}">
                                 </div>
                                 <div class="plp-product_name " title="{{product.product_name}}">
-                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
+                                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
                                         <none ng-if="product.brand_name">({{product.brand_name}})</none>
                                         </a><wbr></wbr>
                                     </div>
@@ -204,14 +204,14 @@
             <div style="width: 100%;">
 
                 <h1 class="slider-header">Merchant
-                    <a href="<?= $this->basePath() ?>/application/index/merchantlist" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
+                    <a href="<?= $this->basePath() ?>/index.php/application/index/merchantlist" class="btn btn--link float-right weight--semibold product-slider-show-all-link push--right">View all</a></h1>
                 <div class="products products--inline">
                     <div class="owl-carousel owl-theme">
                         <?php
                         foreach ($this->marchantList as $key => $value) {
                             ?>
                             <div class="item">
-                                <a  href="<?= $this->basePath() ?>/application/index/product?merchant=<?= $value['user_id'] ?>" class="product_wrapper">
+                                <a  href="<?= $this->basePath() ?>/index.php/application/index/product?merchant=<?= $value['user_id'] ?>" class="product_wrapper">
                                     <div class="plp-product">
                                         <div  class="plp-product_img merchant">
                                             <img class="img animated fadeIn" alt="" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg"></div>

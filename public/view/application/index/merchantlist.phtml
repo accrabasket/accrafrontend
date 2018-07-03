@@ -35,13 +35,13 @@
                     <img class="img animated fadeIn" src="<?php echo $this->basePath() ?>/public/images/newimg/noimagemerchant.jpeg">
                 </div>
                 <div class="plp-product_name " title="{{data.first_name}}">
-                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/application/index/product?merchant={{data.user_id}}">{{data.first_name}}</a><wbr></wbr>
+                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?= $this->basePath() ?>/index.php/application/index/product?merchant={{data.user_id}}">{{data.first_name}}</a><wbr></wbr>
                     </div>
                 </div>
                 
                 <div class="plp-product_add-to-cart">
                     <div class="add-to-cart">
-                        <a href="<?= $this->basePath() ?>/application/index/product?merchant={{data.user_id}}">
+                        <a href="<?= $this->basePath() ?>/index.php/application/index/product?merchant={{data.user_id}}">
                             <button data-test-id="add-button" class="add-to-cart_add-btn display--inline-block">Shop Now</button>
                         </a>
 

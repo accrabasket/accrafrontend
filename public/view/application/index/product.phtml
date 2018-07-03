@@ -2,7 +2,7 @@
     <div class="full-width"> 
         <ol class="breadcrumb breadcrumb1 relative pdp_top-container" >
             <li><a href="<?=$this->basePath()?>">Home</a></li>
-            <li ng-show="parent_category_name"><a href="<?=$this->basePath()?>/application/index/product?id={{parent_category_id}}">{{parent_category_name}}</a></li>
+            <li ng-show="parent_category_name"><a href="<?=$this->basePath()?>/index.php/application/index/product?id={{parent_category_id}}">{{parent_category_name}}</a></li>
             <li class="active" ng-show="categoryName">{{categoryName}}</li>	
             <div class="pull-right">
                 <div class="plp-sort-dd">                  
@@ -39,7 +39,7 @@
                     <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
                 </div>
                 <div class="plp-product_name " title="{{product.product_name}}">
-                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
+                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
                             <none ng-if="product.brand_name">({{product.brand_name}})</none>
                         </a><wbr></wbr>
                     </div>

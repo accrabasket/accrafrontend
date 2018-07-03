@@ -111,7 +111,7 @@
                                         </thead>
                                         <tbody>
                                             <tr role="row" class="odd" ng-repeat="data in orderList">
-                                                <td class=""><a href="<?php echo $this->basePath()?>/application/index/orderdetails?order_id={{data.order_details.order_id}}"><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</a></td>
+                                                <td class=""><a href="<?php echo $this->basePath()?>/index.php/application/index/orderdetails?order_id={{data.order_details.order_id}}"><i class="fa fa-close red"></i> &nbsp;{{data.order_details.order_id}}</a></td>
                                             
                                                 <td class="">{{shipping_address_list[data.order_details.shipping_address_id].address_nickname}}
                                                     {{shipping_address_list[data.order_details.shipping_address_id].house_number}}
