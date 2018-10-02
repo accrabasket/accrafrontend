@@ -1,10 +1,68 @@
-<div class="jumbotron text-xs-center">
-  <h1 class="display-3">Thank You!</h1>
-  
-  <p>
-    You order has been placed successfully. Your order id is- <?php echo $this->orderDetails['order']?>.
-  </p>
-  <p class="lead">
-    <a class="btn btn-primary btn-sm" href="<?=$this->basePath()?>" role="button">Continue to homepage</a>
-  </p>
+<?php 
+if(!empty($this->productDetails)){
+foreach ($this->productDetails['data'] as $key => $value) {
+        //print_r($value);
+        $orderid = $value['order_details']['order_id'];   
+		$deliverydate  = $value['order_details']['delivery_date'];
+		$payable_amount  = $value['order_details']['payable_amount'];
+		$numberifitme =  count($value['orderitem']);
+		 $idexoftimeslot = $value['order_details']['time_slot_id'];
+		$timeslot = $this->productDetails['time_slot_list'][$idexoftimeslot]['start_time_slot']." To ".$this->productDetails['time_slot_list'][$idexoftimeslot]['end_time_slot'];
+		$indexofshiping = $value['order_details']['shipping_address_id'];
+		$shipping = $this->productDetails['shipping_address_list'][$indexofshiping];
+}
+}
+?>
+<style>
+.mb10{margin-bottom: 10px !important; }
+.fs12 {
+	font-size: 14px;
+}
+.font18{font-size:18px;}
+/*Thankyoupage css start here	*/
+	.thank-logo{width:30%; margin:0 auto 30px;padding:0px;}
+	.thank-logo img{width:100%; height:100%; margin:0;padding:0px;}	
+	.mt20{margin-top:20px;}
+</style>
+<div class="container checkout pt0" style="padding-top:0px;margin-top: 128px;">
+  <div class="col-md-6 col-sm-6 col-xs-12" style="margin:0 auto; float:none;">
+    <div class="thank-logo"><img src="<?php echo $this->basePath() ?>/public/images/logo-big.png"/></div>
+    <div style="background:#FFFFFF;  border:1px solid #ccc; padding:10px; box-shadow:0px 0px 6px #ccc;">
+      <div class="col-md-12 col-xs-12">
+        <h3 class="mt20 mb10 text-center"><em>Thanks for Shopping with Us</em></h3>
+        <div class="clearfix mb10"></div>
+        <h3 class="mt20 font18 mb10 text-center">Order Id: <?php echo $orderid;?></em></h3>
+        <div class="clearfix mb10"></div>
+        <div class="mt20  payment__promo-container payment__promo-bottom-margin font18" style="background:#fefefe;">
+          <p><?php echo $shipping['contact_name'];?>,</p>
+          <p><?php echo $shipping['city_name'];?></p>
+        </div>
+        <div class="clearfix mb10"></div>
+        <div class="payment-invoice" style="background:#fefefe;">
+          <div class="payment-invoice__row">
+            <div class="float-left" data-test-id="total-amount-text">Total Amount Payable</div>
+            <div class="float-right" data-test-id="total-amount-value">GHC <?php echo $payable_amount;?></div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="payment-invoice__row">
+            <div class="float-left" data-test-id="delivery-charge-text">Number of Items</div>
+            <div class="float-right text--danger" data-test-id="delivery-charge-value"><?php echo $numberifitme;?></div>
+            <div class="clearfix"></div>
+          </div>
+		  <div class="payment-invoice__row">
+            <div class="float-left" data-test-id="delivery-charge-text">Time of Delivery</div>
+            <div class="float-right text--danger" data-test-id="delivery-charge-value">
+			<p><?php echo $timeslot;?></p>
+			<p>(<?php echo  date("D, m Y", strtotime($deliverydate));?>)</p>
+			</div>
+            <div class="clearfix"></div>
+          </div>
+   
+        </div>
+      </div>
+      <div class="clearfix h10"></div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+  </div>
+  <div class="clearfix mb10"></div>
 </div>

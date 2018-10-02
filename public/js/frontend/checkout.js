@@ -176,7 +176,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 $scope.ajaxLoadingData = false;
                 console.log(response.data.tokenResponse);
                 if(response.data.tokenResponse !=undefined && response.data.tokenResponse.TokenId != undefined) {
-                    window.location.href = "http://52.35.53.106/gateway/checkout?token="+response.data.tokenResponse.TokenId+"&returnurl=http://54.233.182.212/basketapi/application/cron/updatepaymentstatus";
+                    window.location.href = "https://payments.ezeepaygh.com/checkout?token="+response.data.tokenResponse.TokenId+"&returnurl=http://54.233.182.212/basketapi/application/cron/updatepaymentstatus";
                 }else{
                     window.location.href=serverAppUrl+'/thankyou?order='+response.data.order_id;
                 }

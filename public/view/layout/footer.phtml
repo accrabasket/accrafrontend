@@ -21,20 +21,20 @@
                 <div class="col-md-4 footer-grids">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="<?=$this->basePath()?>/application/index/about">About Us</a></li>
-                        <!--li><a href="<?=$this->basePath()?>/application/index/marketplace">Marketplace</a></li>  
-                        <li><a href="<?=$this->basePath()?>/application/index/values">Core Values</a></li>  
-                        <li><a href="<?=$this->basePath()?>/application/index/privacy">Privacy Policy</a></li-->
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/about">About Us</a></li>
+                        <!--li><a href="<?=$this->basePath()?>/index.php/application/index/marketplace">Marketplace</a></li>  
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/values">Core Values</a></li>  
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/privacy">Privacy Policy</a></li-->
                     </ul>
                 </div>
                 <div class="col-md-4 footer-grids">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="<?=$this->basePath()?>/application/index/contact">Contact Us</a></li>
-                        <!--li><a href="<?=$this->basePath()?>/application/index/login">Returns</a></li> 
-                        <li><a href="<?=$this->basePath()?>/application/index/faq">FAQ</a></li>
-                        <li><a href="<?=$this->basePath()?>/application/index/sitemap">Site Map</a></li>
-                        <li><a href="<?=$this->basePath()?>/application/index/login">Order Status</a></li-->
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/contact">Contact Us</a></li>
+                        <!--li><a href="<?=$this->basePath()?>/index.php/application/index/login">Returns</a></li> 
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/faq">FAQ</a></li>
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/sitemap">Site Map</a></li>
+                        <li><a href="<?=$this->basePath()?>/index.php/application/index/login">Order Status</a></li-->
                     </ul> 
                 </div>
                 <div class="col-md-4 footer-grids">
@@ -84,7 +84,7 @@
 
             summary.scrollToFixed({
                 marginTop: $('.header-two').outerHeight(true) + 10,
-                zIndex: 999
+                zIndex: 100
             });
         });
     });
@@ -92,12 +92,37 @@
 <!-- start-smooth-scrolling -->
 <script type="text/javascript" src="<?php echo $this->basePath() ?>/public/js/move-top.js"></script>
 <script type="text/javascript" src="<?php echo $this->basePath() ?>/public/js/easing.js"></script>	
-
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCneJAKb3o_UqKuVoIBPcTlWJLzNt6lTqo&libraries=places"></script>
+<script>
+function initializemap() {
+          var input = document.getElementById('searchTextField');
+		  var query = {componentRestrictions: {country: "gh"}};
+          var autocomplete = new google.maps.places.Autocomplete(input,query);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+             $.ajax({
+            method: 'POST',
+            url: serverAppUrl + '/setcity',
+            data: {'lattitude':place.geometry.location.lat(),'langitude':place.geometry.location.lng(),'city':place.formatted_address},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+		jQuery('#locatonerror').remove();
+            if(response>0){
+                $("#selectcity").modal('hide');
+                location.reload();
+            }else{
+			jQuery('#searchTextField').after("<div class='error' id='locatonerror'>service not available these area. choose to another place</div>");
+			}
+        });        
+  
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initializemap);
+		</script>
 <!-- //end-smooth-scrolling -->
 <!-- smooth-scrolling-of-move-up -->
 <script type="text/javascript">
     $(document).ready(function () {
-
         var defaults = {
             containerID: 'toTop', // fading element id
             containerHoverID: 'toTopHover', // fading element hover id

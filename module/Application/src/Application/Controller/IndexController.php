@@ -28,6 +28,7 @@ class IndexController extends AbstractActionController
         }
         //if(empty($this->session['category_list'])){
             $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
+			$GLOBALS['fcityaddress'] = $this->session['fcityaddress'];
         //}
     }
     public function indexAction()
@@ -48,6 +49,9 @@ class IndexController extends AbstractActionController
         return $this->view;
     }
    
+   public function verifyOptAction() {
+        return $this->view;
+    }
     
     public function productAction() {
         $searchParams = array();
@@ -251,16 +255,17 @@ class IndexController extends AbstractActionController
     }    
     public function viewcartAction()
     {
+	header('Content-type: application/json');
         $postParams = (array) $this->getRequest()->getPost();
-        $cartList  = array();
+        //$cartList  = array();
         $postParams['method'] = 'getitemintocart';
         if(!empty($this->session['user']['data'][0]['id'])){
             $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         }else{
             $postParams['guest_user_id'] = session_id();
         }
-        $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
-        echo $cartList;
+       $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
+	echo $cartList;
         exit();
     }    
     public function createuserAction() {
@@ -504,17 +509,44 @@ class IndexController extends AbstractActionController
         echo $response;
         exit;
     }
-    
+    /*
     function setcityAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $this->session['city'] = $postParams['city'];
         echo $postParams['city'];
         exit;
     }
+	*/
+	function setcityAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        //$this->session['city'] = $postParams['city'];
+		$postParamsr = ['method' => 'getCityIdByAddressOrLatLng', 'address' => $postParams['city'], 'lat' => $postParams['lattitude'], 'lng' => $postParams['langitude']];
+		$response = $this->commonObj->curlhitApi($postParamsr,'application/index');
+		$response = json_decode($response,true);
+		if($response['data']['id']){
+		$this->session['city'] = $response['data']['id'];
+		$this->session['fcityaddress'] = $postParams['city'];
+		echo "1";
+		}else{
+		echo "0";
+		}
+		exit;
+		    }
     function thankyouAction(){
         $searchParams = array();
-        $request = (array) $this->getRequest()->getQuery();        
-        $this->view->orderDetails = $request;
+        $request = (array) $this->getRequest()->getQuery();       
+        //$this->view->orderDetails = $request;
+		if (!empty($request['order'])) {
+            $request['method'] = 'orderlist';
+			$request['order_id'] = $request['order'];
+			unset($request['order']);
+            $productList = $this->commonObj->curlhitApi($request,'application/customer');
+            $productList = json_decode($productList,true);
+			if(!empty($productList['data'])){
+                $this->view->productDetails = $productList;
+            }
+        }
+
         return $this->view;
     }
 }

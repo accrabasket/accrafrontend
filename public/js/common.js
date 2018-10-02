@@ -27,10 +27,6 @@ $(document).ready(function() {
     });
              $(".w3view-cart-close").click(function() {
         $(".w3view-cart-menu").hide('slow');
-    });
-    $('#selectcity').modal({
-        backdrop: 'static',
-        keyboard: false
     });    
 });
     
@@ -45,7 +41,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
         $http({
             method: 'POST',
             url: serverAppUrl + '/viewcart',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            headers: {'Content-Type': 'application/json'},
         }).success(function (response) {
             $rootScope.cartResponse = {};
             $scope.totalItemInCart = 0;

@@ -95,8 +95,8 @@ ul.cd-dropdown-content li {
 /*-- //header --*/ 
 /*-- header-two --*/
 .header-two.scroll-to-fixed-fixed {
-    /*background: #fff;*/
-	background: #689f39;;
+    background: #fff;
+	/*background: #689f39;*/
     padding: .3em 0 0.3em;
 	-webkit-box-shadow: 0px 0px 5px 1px #d2d2d2;
 	-moz-box-shadow: 0px 0px 5px 1px #d2d2d2;
@@ -120,7 +120,11 @@ ul.cd-dropdown-content li {
     height: 36px; 
 }
 .header-two.scroll-to-fixed-fixed .header-cart { 
-    margin: 1em 0 0;
+    margin: 1px 0 0;
+}
+section#demos .row{
+    margin-right: -1px !important;
+    margin-left: 0px !important;
 }
 .header-two {
        padding: 0.3em 0; 
@@ -188,9 +192,9 @@ placeholder{color:#fff;}
     width: 100%;
     padding: 0.8em 5em 0.8em 1em;
     font-size: 1em;
-    color: #ffffff;
+    color: #888;
     outline: none;
-    border: 1px solid #fff;
+    border: 1px solid #689f39;
     background: none;
     -webkit-appearance: none;
     transition: 0.5s all;
@@ -198,7 +202,12 @@ placeholder{color:#fff;}
     -moz-transition: 0.5s all;
 }
 .header-search input[type="search"]:focus {
-    border-color: #fff;
+    border-color: #689f39;
+}
+.header-city select {
+    border-radius: 0px;
+    height: 38px;
+    border: 1px solid #689f39;
 }
 .header-search .btn-default {
     border: none;
@@ -209,7 +218,7 @@ placeholder{color:#fff;}
     height: 36px;
     outline: none;
     box-shadow: none;
-    background: #434343/*689f39*/;
+    background: #689f39;
     padding: 0;
     border-radius: inherit;
     -webkit-appearance: none;
@@ -228,30 +237,58 @@ placeholder{color:#fff;}
 /*-- cart-box --*/ 
 .cart {
     margin-right: 1em;
+    height: 60px;
     padding-right: 1em;
     border-right: 1px solid #fff;
     float: left;
-	font-size: 1.2em;
-	margin-top:0.2rem;
-	position:relative;
-	color:#fff;
-} 
+    font-size: 1.2em;
+    position: relative;
+    color: #fff;
+    margin-top: 0.2rem;
+    position: relative;
+    color: #fff;
+    background-image: url(/public/images/shopping-cart.png);
+    background-repeat: no-repeat;
+    ackground-position: center;
+    background-position-y: 11px;
+    background-size: 28% 50%;
+}
+/*
+ .w3view-cart:after {
+    content: '\f07a';
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 27px;
+    color: #689f39;
+    top: 10%;
+    right: 75%;
+}
+ */
+.products {
+    margin-top: 36px;
+}
+body > div > div:nth-child(4) {
+    margin-top: 88px;
+}
 .w3view-cart {
-    background:#fff;
+        /* background: #fff; */
     border: none;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	-o-border-radius: 50%;
-	-ms-border-radius: 50%;
-    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    -ms-border-radius: 50%;
+    /* border-radius: 50%; */
     width: 34px;
     height: 34px;
     text-align: center;
     outline: none;
-	border:1px solid #689f39;
-	transition:all 0.5s ease 0s;
-	margin-right:6px;
-	padding:10px;
+    /* border: 1px solid #689f39; */
+    transition: all 0.5s ease 0s;
+    margin-right: 6px;
+    padding: 10px;
+}
+.w3view-cart span {
+    color: #689f39;
 }
 .w3view-cart  i.fa {
     font-size: 1.4em;
@@ -259,22 +296,15 @@ placeholder{color:#fff;}
 	vertical-align: middle;
 	
 }
-.w3view-cart:hover {background:#689f39;transition:all 0.5s ease 0s;}
-
-.w3view-cart:hover  i.fa {
-    font-size: 1.4em;
-    color: #ffffff;
-	vertical-align: middle;
-}
 .w3view-cart-menu{display:none;}
 /*-- //cart-box --*/
 .my-account {
     float: right;
-    margin: 0.1em 2em 0 0.4em ;
+    margin: 10px 0 0.4em;
 } 
 .my-account a {
     font-size: 1.2em;
-    color: #fff;
+    color: #00000094;
 	-webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
@@ -363,7 +393,7 @@ h3.w3ls-title {
     display: inline-block;
     float: none;
 	margin-right:10px;
-	width:130px;
+	width:133px;
 } 
 .welcome .bs-example-tabs ul.nav-tabs li a {
     display: block; 
@@ -2939,7 +2969,7 @@ h4.clrchg {
     font-size: 0.9em; 
 }
 .header-two.scroll-to-fixed-fixed .header-cart {
-    margin: 1.6em 0 0;
+    margin: 1px 0 0;
 } 
 .faq-w3agile ul.faq {
     padding-left: 3em;
@@ -4526,3 +4556,7 @@ a.button:active, a.button:focus, a.button:hover, input.button:active, input.butt
     margin-right: 30px;
 }
 }
+.modal{
+z-index : 102 !important
+}
+.modal-backdrop{z-index:100 !important;}
