@@ -29,8 +29,8 @@ app.controller('login', function ($scope, $http, $timeout) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
                 if (response.status == 'success') {
-//                    $scope.successShow = true;
-                    //$scope.successMsg = response.msg ;
+                    $scope.successShow = true;
+                    $scope.successMsg = response.msg ;
                     $timeout(function(){
                         var path = serverAppUrl + '/index';
                         window.location.href = path;

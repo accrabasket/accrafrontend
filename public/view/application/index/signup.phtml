@@ -11,7 +11,8 @@
                     <form method="post">
                         <input type="text" ng-model="signupData.name" class="user" name="name" placeholder="Enter your Name" required="">
                         <input type="text" ng-model="signupData.email" class="user" name="email" placeholder="Enter your email" required="">
-                        <input type="text" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" class="user" name="mobile" placeholder="Enter your mobile number" required="">
+						<input type="text" ng-model="signupData.phonecode" class="user" name="phonecode_de" style="width: 20%;float: left;border-right: none;" placeholder="+233" ng-readonly="true">
+                        <input type="text" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" class="user" name="mobile" placeholder="Enter your mobile number" required="" style="width:80%;">
                         <select class="form-control select2 user" style="width: 100%;" ng-model="signupData.city_id">
                             <option value=""> Select City</option>
                         <?php

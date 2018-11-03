@@ -29,6 +29,7 @@ class IndexController extends AbstractActionController
         //if(empty($this->session['category_list'])){
             $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
 			$GLOBALS['fcityaddress'] = $this->session['fcityaddress'];
+			$GLOBALS['fcityaddresstmp'] = $this->session['fcityaddresstmp'];
         //}
     }
     public function indexAction()
@@ -48,7 +49,9 @@ class IndexController extends AbstractActionController
     public function aboutAction() {
         return $this->view;
     }
-   
+    public function termandconditionsAction() {
+        return $this->view;
+    }   
    public function verifyOptAction() {
         return $this->view;
     }
@@ -270,8 +273,13 @@ class IndexController extends AbstractActionController
     }    
     public function createuserAction() {
         $postParams = (array) $this->getRequest()->getPost();
+		$postParams['mobile_number'] = $postParams['phonecode'].$postParams['mobile_number'];
         $postParams['method'] = 'addedituser';
+		$this->session['tmpuser'] = $postParams;
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
+		$gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'mobile_number'=>$postParams['mobile_number']);
+	    $this->commonObj->curlhitApi($gotpdata,'application/customer');
+
         echo $response;
         exit;
     }
@@ -388,6 +396,10 @@ class IndexController extends AbstractActionController
     }    
     public function saveaddressAction(){
         $postParams = (array) $this->getRequest()->getPost();
+		unset($postParams['city_id']);
+		unset($postParams['city_name']);
+		$postParams['city_id']= (int)$this->session['city_tmp'];
+		$postParams['city_name']= $this->session['fcityaddresstmp'];
         $postParams['method'] = 'addeditdeliveryaddress';
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
@@ -413,8 +425,25 @@ class IndexController extends AbstractActionController
         $addressList = $this->commonObj->curlhitApi($data,'application/customer');
         echo $addressList;
         exit;
-    }    
-	
+    }  
+	public function verifyotpAction(){
+	return $this->view;
+	}  
+	public function submitotpAction(){
+	      	  $postParams = (array) $this->getRequest()->getPost();
+              $data = array();
+			  $data['otp'] = $postParams['otp'];
+			  $data['method'] = 'verifyotp';
+			  $data['otp_type'] = 'register';
+			  $data['mobile_number'] = $this->session['tmpuser']['mobile_number'];
+			  $addressList = $this->commonObj->curlhitApi($data,'application/customer');
+			  echo $addressList;
+			  exit;
+	}
+function genrateotp($mobileno){
+$gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'mobile_number'=>$mobileno);
+echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer');
+}
     public function currentorderAction(){
         return $this->view;
     }
@@ -427,6 +456,7 @@ class IndexController extends AbstractActionController
             $request['page'] = $request['page'];
         }
         $request['user_id'] = $this->session['user']['data'][0]['id'];
+		unset($request['order_status']); 
         $productList = $this->commonObj->curlhitApi($request,'application/customer');
         $productList = json_decode($productList, true);
         $productList['data'] = array_values($productList['data']);
@@ -517,6 +547,25 @@ class IndexController extends AbstractActionController
         exit;
     }
 	*/
+	
+	
+	function setcitytmpAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        //$this->session['city'] = $postParams['city'];
+		$postParamsr = ['method' => 'getCityIdByAddressOrLatLng', 'address' => $postParams['city'], 'lat' => $postParams['lattitude'], 'lng' => $postParams['langitude']];
+		$response = $this->commonObj->curlhitApi($postParamsr,'application/index');
+		$response = json_decode($response,true);
+		if($response['data']['id']){
+		$this->session['city_tmp'] = $response['data']['id'];
+		$this->session['fcityaddresstmp'] = $postParams['city'];
+		echo "1";
+		}else{
+		echo "0";
+		}
+		exit;
+		    }
+    
+	
 	function setcityAction() {
         $postParams = (array) $this->getRequest()->getPost();
         //$this->session['city'] = $postParams['city'];

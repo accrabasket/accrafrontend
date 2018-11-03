@@ -12,8 +12,8 @@
                 </div>
                 <ul>
                     <li><i class="fa fa-map-marker"></i> No.6, First Floor, Oxford Street Above GCB bank Net to Barclays Bank Osu, Accra Ghana.</li>
-                    <li><i class="fa fa-mobile"></i> 333 222 3333 </li>
-                    <li><i class="fa fa-phone"></i> +222 11 4444 </li>
+                    <!--<li><i class="fa fa-mobile"></i> 333 222 3333 </li>-->
+                    <li><i class="fa fa-phone"></i> +233 553 251 740 </li>
                     <li><i class="fa fa-envelope-o"></i> <a href="mailto:example@mail.com"> mail@example.com</a></li>
                 </ul> 
             </div>
@@ -31,6 +31,7 @@
                     <h3>Services</h3>
                     <ul>
                         <li><a href="<?=$this->basePath()?>/index.php/application/index/contact">Contact Us</a></li>
+						<li><a href="<?=$this->basePath()?>/index.php/application/index/termandconditions">Terms and Conditions</a></li>
                         <!--li><a href="<?=$this->basePath()?>/index.php/application/index/login">Returns</a></li> 
                         <li><a href="<?=$this->basePath()?>/index.php/application/index/faq">FAQ</a></li>
                         <li><a href="<?=$this->basePath()?>/index.php/application/index/sitemap">Site Map</a></li>
@@ -99,11 +100,12 @@ function initializemap() {
 		  var query = {componentRestrictions: {country: "gh"}};
           var autocomplete = new google.maps.places.Autocomplete(input,query);
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                var place = autocomplete.getPlace();
+                var placeg = autocomplete.getPlace();
+				console.log(placeg);
              $.ajax({
             method: 'POST',
             url: serverAppUrl + '/setcity',
-            data: {'lattitude':place.geometry.location.lat(),'langitude':place.geometry.location.lng(),'city':place.formatted_address},
+            data: {'lattitude':placeg.geometry.location.lat(),'langitude':placeg.geometry.location.lng(),'city':placeg.formatted_address},
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
 		jQuery('#locatonerror').remove();
@@ -117,7 +119,30 @@ function initializemap() {
   
             });
         }
+function initializemap1() {
+          var input = document.getElementById('cityname2');
+		  var query = {componentRestrictions: {country: "gh"}};
+          var autocomplete = new google.maps.places.Autocomplete(input,query);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var placeg = autocomplete.getPlace();
+				console.log(placeg);
+             $.ajax({
+            method: 'POST',
+            url: serverAppUrl + '/setcitytmp',
+            data: {'lattitude':placeg.geometry.location.lat(),'langitude':placeg.geometry.location.lng(),'city':placeg.formatted_address},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+		jQuery('#locatonerror1').remove();
+            if(response>0){
+            }else{
+			jQuery('#searchTextField').after("<div class='error' id='locatonerror1'>service not available these area. choose to another place</div>");
+			}
+        });        
+  
+            });
+        }
         google.maps.event.addDomListener(window, 'load', initializemap);
+		google.maps.event.addDomListener(window, 'load', initializemap1);
 		</script>
 <!-- //end-smooth-scrolling -->
 <!-- smooth-scrolling-of-move-up -->

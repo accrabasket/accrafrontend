@@ -60,7 +60,7 @@
                 <!--<a class="cd-dropdown-trigger" href="#" id="city-link"  style="color:#000000;">Select Your City</a>-->
             </div>
             <div class="header-search">
-                <form action="<?=$this->basePath()?>index.php/application/index/product" method="post">
+                <form action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
                     <input type="search" name="search" placeholder="Search for a Product..." required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <i class="fa fa-search" aria-hidden="true"> </i>                            
@@ -79,7 +79,7 @@
                                 <ul class="multi-column-dropdown">
                                     <li><a href="<?=$this->basePath()?>/index.php/application/index/editprofile">Account Setting</a></li>
                                     <li><a href="<?=$this->basePath()?>/index.php/application/index/currentorder">My Order</a></li>
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/pastorder">Past Order </a></li>
+                                    <!--<li><a href="<?=$this->basePath()?>/index.php/application/index/pastorder">Past Order </a></li>-->
                                     <li><a href="<?=$this->basePath()?>/index.php/application/index/changepassword">Change Password</a></li> 
                                     <li><a href="<?=$this->basePath()?>/index.php/application/index/logout">Log-out</a></li> 
                                 </ul>
@@ -293,12 +293,14 @@ if(empty($GLOBALS['hidemenu'])) {
 </script>
 <script>
 	$(document).ready(
-	<?php if(empty($GLOBALS['city'])) { ?>
-	setTimeout(opencity(), 3000)
-	
-	<?php } ?>
 	
     function() {
+        <?php if(empty($GLOBALS['city'])) { ?>
+    setTimeout( function() 
+        {opencity();}, 3000)
+    
+    <?php } ?>
+    
 	$(".cat-0-list__more-category").hide();
         $("#morelist").click(function() {
             $(".cat-0-list__more-category").toggle('fast'); 
