@@ -5,6 +5,7 @@ app.controller('login', function ($scope, $http, $timeout) {
     $scope.loginData = {};
 
     $scope.login = function (loginData) {
+        console.log(loginData)
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         var error = ' ';

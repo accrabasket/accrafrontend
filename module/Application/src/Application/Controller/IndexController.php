@@ -167,6 +167,8 @@ class IndexController extends AbstractActionController
             }
             if(!empty($product_details['data'])){
                 $this->view->productDetails = $product_details['data'][$postParams['id']];
+                $this->view->productImageList = $product_details['productImageData'][$postParams['id']];
+                $this->view->imageRootPath = $product_details['imageRootPath'];
                 
                 if(!empty($product_details['productImageData']) && !empty($product_details['imageRootPath'].'/product/'.$postParams['id'].'/'.$product_details['productImageData'][$postParams['id']][0]['image_name'])) {
                 $this->view->productImage = $product_details['imageRootPath'].'/product/'.$postParams['id'].'/'.$product_details['productImageData'][$postParams['id']][0]['image_name'];

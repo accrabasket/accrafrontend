@@ -24,7 +24,7 @@ function fillInAddress() {
     
 var app = angular.module('app', ['ui.bootstrap']);
 
-/*app.controller('cartcontroller', function ($scope, $http, $rootScope) {
+app.controller('cartcontroller', function ($scope, $http, $rootScope) {
     $scope.totalItemInCart = 0;
     $rootScope.cartResponse = {};
     $rootScope.cartResponse.productImageData = {};
@@ -104,4 +104,4 @@ var app = angular.module('app', ['ui.bootstrap']);
         }
 	
     }
-});*/
+});
