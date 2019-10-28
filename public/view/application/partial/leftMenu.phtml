@@ -1,112 +1,128 @@
-<div class="container">
-    <div class="product-cont">
-<?php 
-if(!empty($GLOBALS['category_id']) && !empty($GLOBALS['category_list']['data'][$GLOBALS['category_id']])){
-?>
-<div class="left-panel">
-            <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
-                    <?php 
-                         $i = 0;
-                        //foreach($GLOBALS['category_list']['data'] as $key => $value)
-                         $value = $GLOBALS['category_list']['data'][$GLOBALS['category_id']]; 
-                             
-                        {
-                             $i++;
+<aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated"> 
+        <!-- BEGIN SIDE-NAV-CATEGORY -->
+        <div class="side-nav-categories">
+          <div class="block-title"> Categories </div>
+          <!--block-title--> 
+          <!-- BEGIN BOX-CATEGORY -->
+          <div class="box-content box-category">
+            <ul>
+                <?php
+                $expandClass = '';
+                $display = '';
+                foreach ($GLOBALS['category_list']['data'] as $category){    
+                    if (!empty($category['category_name'])) {
+                        if($GLOBALS['category_id'] == $category['id']) {
+                            $expandClass = 'minus';
+                            $display = 'block';   
+                        }
                     ?>
-                   
-                    <h3 onclick="expendButton('<?=$i?>')" class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-<?=$i?>" aria-controls="ui-id-<?=$i+1?>" aria-selected="false" aria-expanded="false" tabindex="-1">
-                        <span class="ui-accordion-header-icon ui-icon <?= $value['id'] == $this->productId ? 'ui-icon-minusthick':'ui-icon-plusthick'?>" id="span_<?=$i?>"></span>
-                        <a ng-click="getCategoryWiseProduct(<?=$value['id']?>,'<?=$value['category_name']?>')"> <?=$value['category_name']?></a>
-                    </h3>
-                    <?php 
-                        if($value['id'] == $this->productId){
-                    ?>
-                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style=" height: 289px;">
-                    <?php 
-                        }else{
-                    ?>
-                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style="display: none; height: 289px;">
-                    <?php }?>
-                        <ul class="category-sub-list list-unstyled">
-                            <?php 
-                            if(!empty($value['child'])){
-                                foreach ($value['child'] as $keys => $values) {
+                        <li> <a class="active" href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$category['id']?>"><?=$category['category_name'];?></a>
+                            <?php
+                                if(!empty($category['child'])) {
                             ?>
-                            <li class="category-list_sub-item">
-                                <a  ng-click="getCategoryWiseProduct(<?=$values['id']?>,'<?=$values['category_name']?>', '<?=$value['id']?>', '<?=$value['category_name']?>')">
-                                    <div class="category-item-details"><span class="name"><span><?=$values['category_name']?></span></span></div>
-                                </a>
-                            </li>
-                            <?php }}?> 
-                        </ul>  
-                    </div>
-                     <?php  
-                     $i++;
-                    }?>
-                   
-                    
-                </div>
-                </div>        
-<?php        
-}else{
-?>
-<div class="left-panel">
-            <div id="accordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
-                    <?php 
-                         $i = 0;
-                        foreach($GLOBALS['category_list']['data'] as $key => $value)
-                             
-                        {
-                             $i++;
-                    ?>
-                   
-                    <h3 onclick="expendButton('<?=$i?>')" class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-<?=$i?>" aria-controls="ui-id-<?=$i+1?>" aria-selected="false" aria-expanded="false" tabindex="-1">
-                        <span class="ui-accordion-header-icon ui-icon <?= $value['id'] == $this->productId ? 'ui-icon-minusthick':'ui-icon-plusthick'?>" id="span_<?=$i?>"></span>
-                        <a ng-click="getCategoryWiseProduct(<?=$value['id']?>,'<?=$value['category_name']?>')"> <?=$value['category_name']?></a>
-                    </h3>
-                    <?php 
-                        if($value['id'] == $this->productId){
-                    ?>
-                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style=" height: 289px;">
-                    <?php 
-                        }else{
-                    ?>
-                    <div id="<?=$i?>" class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-<?=$i+1?>" aria-labelledby="ui-id-<?=$i?>" role="tabpanel" aria-hidden="true" style="display: none; height: 289px;">
-                    <?php }?>
-                        <ul class="category-sub-list list-unstyled">
-                            <?php 
-                            if(!empty($value['child'])){
-                                foreach ($value['child'] as $keys => $values) {
+                                <span class="subDropdown <?=$expandClass?>"></span>
+                                <ul class="level0_415" style="display:<?=$display?>">
+                                    <?php
+                                        foreach($category['child'] as $childcategory){
+                                    ?>
+                                            <li> <a href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$childcategory['id']?>"> <?=$childcategory['category_name']?></a> 
+
+                                              <!--level1--> 
+                                            </li>                   
+                                    <?php
+                                        }
+                                    ?>
+                                </ul> 
+                            <?php
+                                }
                             ?>
-                            <li class="category-list_sub-item">
-                                <a  ng-click="getCategoryWiseProduct(<?=$values['id']?>,'<?=$values['category_name']?>', '<?=$value['id']?>', '<?=$value['category_name']?>')">
-                                    <div class="category-item-details"><span class="name"><span><?=$values['category_name']?></span></span></div>
-                                </a>
-                            </li>
-                            <?php }}?> 
-                        </ul>  
-                    </div>
-                     <?php  
-                     $i++;
-                    }?>
-                   
-                    
-                </div>
-                </div>
-<?php
-}
-?>
-<script>
-    var lastId = 0;
-    function expendButton(id){
-        $('#'+id).css('display','block');
-        $('#span_'+id).removeClass( "ui-icon-plusthick" ).addClass( "ui-icon-minusthick" );
-        if(lastId != id){
-            $('#'+lastId).css('display','none');
-            $('#span_'+lastId).removeClass( "ui-icon-minusthick" ).addClass( "ui-icon-plusthick" );
-        }
+                        </li>
+                    <?php
+                    }
+                    $expandClass = 'plus';
+                    $display = "none";
+                }
+                ?>     
+              
+            </ul>
+          </div>
+          <!--box-content box-category--> 
+        </div>
+        <!--side-nav-categories-->
         
-        lastId = id;
-    }
-    expendButton(1)
-</script>
+        <div class="custom-slider">
+          <div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="item active"><img src="images/slide3.jpg" alt="slide3">
+                  <div class="carousel-caption">
+                    <h3><a title=" Sample Product" href="product-detail.html">50% OFF</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <a class="link" href="#">Buy Now</a></div>
+                </div>
+                <div class="item"><img src="images/slide1.jpg" alt="slide1">
+                  <div class="carousel-caption">
+                    <h3><a title=" Sample Product" href="product-detail.html">Hot collection</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="item"><img src="images/slide2.jpg" alt="slide2">
+                  <div class="carousel-caption">
+                    <h3><a title=" Sample Product" href="product-detail.html">Summer collection</a></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only">Next</span> </a></div>
+          </div>
+        </div>
+       
+        <div class="block block-list block-cart">
+          <div class="block-title"> My Cart </div>
+          <div class="block-content">
+            <div class="summary">
+              <p class="amount">There is <a href="#">1 item</a> in your cart.</p>
+              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$299.00</span> </p>
+            </div>
+            <div class="ajax-checkout">
+              <button type="button" title="Checkout" class="button button-checkout" onClick="#"> <span>Checkout</span> </button>
+            </div>
+            <p class="block-subtitle">Recently added item(s)</p>
+            <ul id="cart-sidebar" class="mini-products-list">
+              <li class="item">
+                <div class="item-inner"> <a href="#" class="product-image"><img src="public/products-images/p1.jpg" width="80" alt="product"></a>
+                  <div class="product-details">
+                    <div class="access"> <a href="#" class="btn-remove1">Remove</a> 
+                    <a href="" title="Edit item" class="btn-edit">
+                    <i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                    <!--access--> 
+                    
+                    <strong>1</strong> x <span class="price">$299.00</span>
+                    <p class="product-name"><a href="#">RETIS LAPEN CASEN</a></p>
+                  </div>
+                  <!--product-details-bottoms--> 
+                </div>
+              </li>
+              <li class="item  last1">
+                <div class="item-inner"> <a href="#" class="product-image"><img src="public/products-images/p2.jpg" width="80" alt="product"></a>
+                  <div class="product-details">
+                    <div class="access"> <a href="#" class="btn-remove1">Remove</a> 
+                    <a href="" title="Edit item" class="btn-edit">
+                    <i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                    <!--access--> 
+                    
+                    <strong>1</strong> x <span class="price">$299.00</span>
+                    <p class="product-name"><a href="#">RETIS LAPEN CASEN</a></p>
+                  </div>
+                  <!--product-details-bottoms--> 
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>

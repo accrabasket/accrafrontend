@@ -1,43 +1,51 @@
-<?php 
-echo $this->doctype(); ?>
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
-        <?php 
-            echo $this->headScript()
-                ->prependFile($this->basePath() . '/public/js/common.js')
-                ->prependFile($this->basePath() . '/public/js/ui-bootstrap-tpls-0.12.1.min.js')
-                ->prependFile($this->basePath().'/public/js/angular.min.js')
-                ->prependFile($this->basePath() . '/public/js/bootstrap.min.js')
-                ->prependFile($this->basePath() . '/public/js/jquery-ui.js')
-                ->prependFile($this->basePath() . '/public/js/jquery.min.js');
-        ?>        
-    </head>
-   
-    <?php
+<?php
         echo $this->partial('layout/header');
-    ?>
+        if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
+            ?>
+        <div class="page-heading">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>כ </span> </li>
+                                <li class="category1599"> <a href="grid.html" title="">Salad</a> <span>כ </span> </li>
+                                <li class="category1600"> <a href="grid.html" title="">Bread Salad</a> <span>כ </span> </li>
+                                <li class="category1601"> <strong>Dakos</strong> </li>
+                            </ul>
+                        </div>
+                        <!--col-xs-12--> 
+                    </div>
+                    <!--row--> 
+                </div>
+                <!--container--> 
+            </div>
+            <div class="page-title">
+                <h2>Cappon Magro</h2>
+            </div>
+        </div>    
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <div class="container"> 
+                <div class="row">
     <?php
+        }
+       echo $this->content; 
        if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
            echo $this->partial('application/partial/leftMenu.phtml');
+        ?>
+                </div>
+            </div>
+        </section>
+        <?php
        }
        
     ?>    
-        
-        
-            <?php 
-            echo $this->content; ?>
+      
             <?php
-    echo $this->partial('layout/footer');
+            
+            echo $this->partial('layout/footer');
     ?>        
                
-        <?php echo $this->inlineScript() ?>
+        <?php //echo $this->inlineScript() ?>
  
 </html>

@@ -1,286 +1,34 @@
-<head>
-    <title>Afro Basket an E-commerce Online Shopping Category</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Afro Basket Responsive web template" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- Custom Theme files -->
-    <link href="<?php echo $this->basePath() ?>/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo $this->basePath() ?>/public/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo $this->basePath() ?>/public/css/style.css" rel="stylesheet" type="text/css" media="all" /> 
-    <link href="<?php echo $this->basePath() ?>/public/css/menu.css" rel="stylesheet" type="text/css" media="all" /> <!-- menu style --> 
-    <link href="<?php echo $this->basePath() ?>/public/css/ken-burns.css" rel="stylesheet" type="text/css" media="all" /> <!-- banner slider --> 
-    <link href="<?php echo $this->basePath() ?>/public/css/animate.min.css" rel="stylesheet" type="text/css" media="all" /> 
-    <link href="<?php echo $this->basePath() ?>/public/css/owl.carousel.css" rel="stylesheet" type="text/css" media="all"> <!-- carousel slider -->  
-    <link href="<?php echo $this->basePath() ?>/public/css/slider.css" rel="stylesheet" type="text/css" media="all">    
-    <link href="<?php echo $this->basePath() ?>/public/css/location.css" rel="stylesheet" type="text/css" media="all">   
-     <link href="<?php echo $this->basePath() ?>/public/css/jquery-ui.css" rel="stylesheet" type="text/css" media="all">   
-    <!-- //Custom Theme files -->
-    <!-- font-awesome icons -->
-    <link href="<?php echo $this->basePath() ?>/public/css/font-awesome.css" rel="stylesheet"> 
-    <!-- //font-awesome icons -->
-    <!-- js -->
-    <!-- //js --> 
-    <!-- web-fonts -->
-    <!-- web-fonts --> 
-    <style> 
-        .owl-nav{position: absolute; top: 0; left: 0;width: 100%; margin: 0;}
-        .owl-carousel .owl-nav .owl-prev{position: absolute;left: -5px; top: 0; height: 300px; width: 30px; margin: 0; }
-        .owl-carousel .owl-nav .owl-next{position: absolute;right: 0px; top: 0; height: 300px; width: 30px; margin: 0;}
-        .owl-carousel .owl-item .merchant img{width: 80%;}
-        .merchant_name{font-size: 16px;}
-		.cart-column-dropdown{overflow:auto; height:300px;}
-		div.header-city > input {
-    border: 1px solid #689f39;
-    border-radius: 0;
-    padding: 11px;
-    height: 39px
-}
-		
-    </style>
-</head>
-<div ng-app="app">
-<div class="header">
-<!--    <div class="w3ls-header">header-one 
-        <div class="w3ls-header-left">
-            <p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="<?= $this->basePath() ?>/application/index/products">SHOP NOW</a></p>
-        </div>                
-        <div class="clearfix"> </div> 
-    </div>-->
-    <div class="header-two"> 
-        <div class="container no-lpad no-rpad">
-            <div class="header-logo">
-                <a href="<?=$this->basePath()?>/index.php/application/index">
-                <img src="<?php echo $this->basePath() ?>/public/images/logo-big.png" alt="logo"/> 
-                </a>
-            </div>	
-            <div class="header-city">
-                	<input type="text" name="address" value="<?php echo $GLOBALS['fcityaddress'];?>" onkeypress="opencity()" placeholder="select your location" class="form-control select2"  />
-                <!--<a class="cd-dropdown-trigger" href="#" id="city-link"  style="color:#000000;">Select Your City</a>-->
-            </div>
-            <div class="header-search">
-                <form action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
-                    <input type="search" name="search" placeholder="Search for a Product..." required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <i class="fa fa-search" aria-hidden="true"> </i>                            
-                    </button>
-                </form>
-            </div>
-            <div class="header-cart"> 
-                <div class="dropdown my-account">
-                    <?php
-                        if(!empty($GLOBALS['user'])){
-                    ?>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> My Account <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-column columns-3 pull-right">
-                        <div class="row">
-                            <div class="multi-gd-img">
-                                <ul class="multi-column-dropdown">
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/editprofile">Account Setting</a></li>
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/currentorder">My Order</a></li>
-                                    <!--<li><a href="<?=$this->basePath()?>/index.php/application/index/pastorder">Past Order </a></li>-->
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/changepassword">Change Password</a></li> 
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/logout">Log-out</a></li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </ul>
-                    <?php }else{ ?>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Your Account  <b class="caret"></b></a>
-                    <ul class="dropdown-menu multi-column columns-3 pull-right">
-                        <div class="row">
-                            <div class="multi-gd-img">
-                                <ul class="multi-column-dropdown">
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/signup">Signup</a></li>
-                                    <li><a href="<?=$this->basePath()?>/index.php/application/index/login">Login</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </ul>
-                    <?php }?>
-                </div>
-                <div class="cart" ng-controller="cartcontroller"> 
-                    <a ng-click="cartList()" class="w3view-cart" id="w3view-cart">
-					<span ng-if="totalItemInCart"> {{totalItemInCart}}</span>
-                     </a>
-                     My Cart
-                    <ul class="dropdown-menu  multi-column columns-5 pull-right w3view-cart-menu">
-                        <div class="row">
-                            <a href="#" class="w3view-cart-close">X</a>
-                            <div class="cart-gd-img">
-                                <ul class="cart-column-dropdown">
-                                    <li ng-repeat="cartItem in cartResponse.data">
-                                        <img src="{{cartResponse.imageRootPath}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].type}}/{{cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].image_name}}"/>
-                                        <span class="title">{{cartItem.item_name}}<br>
-                                            <span class="item-quant">Item:  {{cartItem.number_of_item}}</span>
-                                            <i class="fa fa-plus green-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'add', 1)"></i> <i class="fa fa-minus red-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'delete', 1)"></i>
-                                        </span> <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
-                                    </li>
-                                    <li ng-if="cartResponse.data">
-                                        <a class="button conti" href="<?= $this->basePath() ?>/index.php/application/index">Continue Shopping</a> 
-					<a class="button proceed" href="<?= $this->basePath() ?>/index.php/application/index/checkout" class="cart" id="cart" >Proceed To Checkout</a>
-				  </li>                                    
-                                </ul>
-                            </div>	
-                        </div>
-                    </ul>
-                </div>
-                <div class="clearfix"> </div> 
-            </div> 
-			
-            <div class="clearfix"> </div>
 
-        </div>		
-    </div><!-- //header-two -->
-	
-<div class="clearfix"> </div>
-<?php
-if(empty($GLOBALS['hidemenu'])) {
-?>
-				<style>
-.show {
-    display: block;
-}
-.sub-header {
-    background-color: #f9f9f9;
-    position: fixed;
-    margin-top: -12px;
-    transition: -webkit-transform .5s ease-in-out;
-    transition: transform .5s ease-in-out;
-    transition: transform .5s ease-in-out,-webkit-transform .5s ease-in-out;
-    width: 100%;
-    z-index: 92;
-}
-.sub-header__wrapper {
-    background-color: #fff;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,.15);
-    position: relative;
-}
-@media screen and (min-width: 1260px)
-.footer, .wrapper {
-    width: 1220px;
-}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Organ Home Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="description" content="Default Description">
+        <meta name="keywords" content="fashion, store, E-commerce">
+        <meta name="robots" content="*">
+        <link rel="icon" href="#" type="image/x-icon">
+        <link rel="shortcut icon" href="#" type="image/x-icon">
 
-.footer, .gr-centered, .wrapper {
-    display: block!important;
-    float: none!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    clear: both!important;
-}
+        <!-- CSS Style -->
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/font-awesome.css" media="all">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/revslider.css" >
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/owl.theme.css">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/jquery.bxslider.css">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/jquery.mobile-menu.css">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/style.css" media="all">
+        <link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/responsive.css" media="all">
 
-.sub-header__section--left {
-    width: 104px;
-    max-width: 260px;
-}
-.sub-header__section--left, .sub-header__section--right {
-    display: table-cell;
-}
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
 
-.sub-header-details {
-    border-right: 1px solid #eee;
-    color: #333;
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 46px;
-    margin-right: -1px;
-    padding-left: 36px;
-    padding-right: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.list-inline, .list-unstyled {
-    list-style: none;
-    padding-left: 0;
-}
-.list-unstyled {
-    margin-bottom: 0;
-    margin-top: 0;
-}
-.cat-0-list {
-    color: #666;
-    font-size: 14px;
-    height: 47px;
-    margin-left: 17px!important;
-}
-.list-inline>li {
-    display: inline-block;
-}
-.cat-0-list__item {
-    cursor: pointer;
-    line-height: normal;
-    position: relative;display:inline-block;
-}
-.cat-0-list__item--name {
-    display: block;
-    padding: 14px 13px;font-size:14px;
-}
-.cat-0-list__item:hover{background-color:#f7f7f7}
-.cat-0-list__item--hidden{height:0;visibility:hidden}
- 
-.cat-0-list__more-btn:after{content:"u";font-family:IconFont;font-style:normal;cursor:pointer;font-size:12px;margin-left:5px;vertical-align:sub}
-.cat-0-list__more-category{
--webkit-overflow-scrolling:touch;background-color:#fff;border-bottom-left-radius:3px;border-bottom-right-radius:3px;box-shadow:0 2px 4px 0 rgba(0,0,0,.5);max-height:calc(100vh - 137px);overflow:scroll;position:absolute;right:0;width:200px;z-index:900; overflow-x:hidden;}
-
-.cat-0-list__more-category .more-child{border-top:1px solid #f2f2f2; width:100%;}
-.cat-0-list__more-category .more-child--first{border-top:0}.cat-0-list__more-category .more-child:last-child{border-bottom-left-radius:3px;border-bottom-right-radius:3px}.cat-0-list__more-category .cat-0-list__item--name{padding:14px 20px; font-size:14px;}
-.slider__arrow{background-color:transparent;border:none;bottom:0;color:#6e6e6e;cursor:pointer;font-size:20px;height:100%;margin:auto 0;outline:none;padding:0;position:absolute;top:0;z-index:1}
-.slider__arrow--nav{width:28px;height:28px}
-.slider__arrow--nav:before{left:50%;position:absolute;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
-.slider__arrow--circle{background-color:#ccc;cursor:pointer;font-size:10px;height:28px;opacity:.7;width:28px;background-clip:padding-box;border-radius:100%;-moz-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%}
-.slider__arrow--circle:before{color:#fff;display:inline-block}
-@media screen and (min-width:1020px) and (max-width:1260px){.slider__arrow--circle{font-size:20px;height:42px;width:42px}}
-@media screen and (min-width:1260px){.slider__arrow--circle{font-size:20px;height:42px;width:42px}}
-.slider__arrow--bars{background-color:#ccc;color:#fff;cursor:pointer;font-size:25px;height:100%;opacity:.7;transition:background-color .1s ease-out;width:26px}
-.slider__arrow--bars.slider__arrow--right{border-bottom-right-radius:2px;border-top-right-radius:2px}
-.slider__arrow--bars.slider__arrow--left{border-bottom-left-radius:2px;border-top-left-radius:2px}
-.slider__arrow--bars:hover{background-color:rgba(0,0,0,.5);color:#fff}
-</style>
-<div class="sub-header hide@mobile">
-  <div class="sub-header__wrapper">
-    <div class="wrapper">
-      <div class="sub-header__section--left"><a class="sub-header-details" title="" href="/"><span>&nbsp;</span></a></div>
-      <div class="sub-header__section--right">
-        <?php
-            foreach($GLOBALS['category_list']['data'] as $categoryId=>$category) {
-        ?>
-        <div class="cat-0-list__item"><a class="cat-0-list__item--name" href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$categoryId?>"><?=$category['category_name']?></a></div>  
-        <?php
-            }
-        ?>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <?php
-}
-        //if(empty($GLOBALS['city'])) {
-    ?>
-    <div class="modal" tabindex="-1" role="dialog" id="selectcity">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-				<input id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server" />  
-				<input type="hidden" id="city2" name="city2" />
-				<input type="hidden" id="cityLat" name="cityLat" />
-				<input type="hidden" id="cityLng" name="cityLng" />
-		     </div>    
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <?php
-        //}
-    ?>
-</div>
+        
+        
+        
 <script>
     var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
     var city = 0;
@@ -291,19 +39,395 @@ if(empty($GLOBALS['hidemenu'])) {
     });
 	}
 </script>
-<script>
-	$(document).ready(
-	
-    function() {
-        <?php if(empty($GLOBALS['city'])) { ?>
-    setTimeout( function() 
-        {opencity();}, 3000)
-    
-    <?php } ?>
-    
-	$(".cat-0-list__more-category").hide();
-        $("#morelist").click(function() {
-            $(".cat-0-list__more-category").toggle('fast'); 
-        });
-     });
-</script>
+        
+        
+        
+        
+        
+             
+        <!--javascript-->
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/angular.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/parallax.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/revslider.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/common.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/custom-common.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="<?=$this->basePath()?>/public/js/jquery.mobile-menu.min.js"></script>
+    </head>
+    <body>
+        <div id="mobile-menu">
+            <ul>
+                <li>
+                    <div class="home"><a href="#"><i class="icon-home"></i>Home</a> </div>
+                </li>
+                <li><a href="#">Pages</a>
+                    <ul>
+                        <li><a href="grid.html">Grid</a></li>
+                        <li> <a href="list.html">List</a></li>
+                        <li> <a href="product-detail.html">Product Detail</a></li>
+                        <li> <a href="shopping-cart.html">Shopping Cart</a></li>
+                        <li><a href="checkout.html">Checkout</a>
+                            <ul>
+                                <li><a href="checkout-method.html">Checkout Method</a></li>
+                                <li><a href="checkout-billing-info.html">Checkout Billing Info</a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="wishlist.html">Wishlist</a></li>
+                        <li> <a href="dashboard.html">Dashboard</a></li>
+                        <li> <a href="multiple-addresses.html">Multiple Addresses</a></li>
+                        <li> <a href="about-us.html">About us</a></li>
+                        <li><a href="blog.html">Blog</a>
+                            <ul>
+                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                        <li><a href="404error.html">404 Error Page</a></li>
+                    </ul>
+                </li>
+                <li><a href="grid.html">Salads?</a>
+                    <ul>
+                        <li><a href="grid.html"><span>Bread Salads?</span></a>         
+                            <ul>
+                                <li> <a href="grid.html"><span>Cappon Magro</span></a> </li>
+                                <li> <a href="grid.html"><span>Dakos</span></a> </li>
+                                <li> <a href="grid.html"><span>Fattoush</span></a> </li>
+                                <li> <a href="grid.html"><span>Panzanella</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Fruit Salads?</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Candle Salad</span></a> </li>
+                                <li> <a href="grid.html"><span>Frogeye Salad</span></a> </li>
+                                <li> <a href="grid.html"><span>Green Papaya Salad</span></a> </li>
+                                <li> <a href="grid.html"><span>Waldorf salad</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Salad Dressings</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Louis Dressings</span></a> </li>
+                                <li> <a href="grid.html"><span>French Dressings</span></a> </li>
+                                <li> <a href="grid.html"><span>Gingner Dressings</span></a> </li>
+                                <li> <a href="grid.html"><span>Italian Dressings</span></a> </li>
+                            </ul>         
+                        </li>       
+                        <li> <a href="grid.html"><span>Leaf Vegetable</span></a>          
+                            <ul>
+                                <li> <a href="grid.html"><span>Fenugreek</span></a> </li>            
+                                <li> <a href="grid.html"><span>Spinach</span></a> </li>            
+                                <li> <a href="grid.html"><span>Malva</span></a> </li>            
+                                <li> <a href="grid.html"><span>Cabbage</span></a> </li>            
+                            </ul>        
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="grid.html">Soups</a>
+                    <ul>
+                        <li> <a href="grid.html"><span>Cold Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Red Bean Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Fruit Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Naengguk</span></a> </li>
+                                <li> <a href="grid.html"><span>Borscht</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Cream Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Chowder</span></a> </li>
+                                <li> <a href="grid.html"><span>Asparagus Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Broccoli Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Mushroom Soup</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Vegitable Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>French Onion Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Leek Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Minestrone</span></a> </li>
+                                <li> <a href="grid.html"><span>Spring Soup</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Bean Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Bouneschlupp</span></a> </li>
+                                <li> <a href="grid.html"><span>J󫡩 Bean Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Kwati Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Senate bean</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Bread Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Tomato Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Manchow Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Sweet Corn Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Shorba Soup</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Chinese Soups</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Hot & Sour</span></a> </li>
+                                <li> <a href="grid.html"><span>Noodle Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Corn Crab Soup</span></a> </li>
+                                <li> <a href="grid.html"><span>Sago Soup</span></a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="grid.html">Fast Food</a>
+                    <ul>
+                        <li> <a href="grid.html"><span>Indian</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Aloo Chaat</span></a> </li>
+                                <li> <a href="grid.html"><span>Batata Vada</span></a> </li>
+                                <li> <a href="grid.html"><span>Kachori</span></a> </li>
+                                <li> <a href="grid.html"><span>Panipuri</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Pizza</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Greek Pizza</span></a> </li>
+                                <li> <a href="grid.html"><span>Pizza Rolls</span></a> </li>
+                                <li> <a href="grid.html"><span>Grilled Pizza</span></a> </li>
+                                <li> <a href="grid.html"><span>Pizza Strips</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>McDonald's</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Kiwiburger</span></a> </li>
+                                <li> <a href="grid.html"><span>Happy Meal</span></a> </li>
+                                <li> <a href="grid.html"><span>McMuffin</span></a> </li>
+                                <li> <a href="grid.html"><span>McGriddles</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Wendy's Foods</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Bacon Deluxe</span></a> </li>
+                                <li> <a href="grid.html"><span>Baconator</span></a> </li>
+                                <li> <a href="grid.html"><span>Frescata</span></a> </li>
+                                <li> <a href="grid.html"><span>Frosty</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Burger King</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Big King</span></a> </li>
+                                <li> <a href="grid.html"><span>TenderCrisp</span></a> </li>
+                                <li> <a href="grid.html"><span>Whopper</span></a> </li>
+                                <li> <a href="grid.html"><span>Kuro Burger</span></a> </li>
+                            </ul>
+                        </li>
+                        <li> <a href="grid.html"><span>Sandwiches</span></a>
+                            <ul>
+                                <li> <a href="grid.html"><span>Hamburgers</span></a> </li>
+                                <li> <a href="grid.html"><span> Hot Dogs?</span></a> </li>
+                                <li> <a href="grid.html"><span>American Sandwiches</span></a> </li>
+                                <li> <a href="grid.html"><span>Chilean Sandwiches</span></a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>   
+                <li><a href="grid.html">Sandwiches?</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+            </ul>
+        </div>    
+        <div id="page"  ng-app="app">
+            <header>
+                <div class="header-banner">
+                    <div class="assetBlock">
+                        <div style="height: 20px; overflow: hidden;" id="slideshow">
+                            <p style="display: block;">HOT DAYS! - <span>50%</span> GET READY FOR SUMMER! &gt;</p>
+                            <p style="display: none;">SALE UP TO <span>40%</span> HURRY LIMITED OFFER! &gt;</p>
+                        </div>
+                    </div>
+                </div> 
+                <div id="header">
+                    <div class="header-container container">
+                        <div class="row">
+                            <div class="logo"> <a href="index.html" title="Organ HTML">
+                                    <div><img src="<?=$this->basepath()?>/public/images/logo.png" alt="Organ Store"></div>
+                                </a> </div>
+                           
+                            <div class="fl-nav-menu">
+
+                                <nav>
+                                    <div class="mm-toggle-wrap">
+                                        <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label">Menu</span> </div>
+                                    </div>
+                                    
+                                    <div class="nav-inner">
+                                        <!-- BEGIN NAV -->
+                                        <ul id="nav" class="hidden-xs">
+                                        
+                                            <?php
+                                            $counter = 0;
+                                            foreach ($GLOBALS['category_list']['data'] as $category){
+                                                $categoryImageDetails = $GLOBALS['category_list']['images'][$category['id']][0];
+                                                $categoryImagePath = $GLOBALS['category_list']['imageRootPath'].'/'.$categoryImageDetails['type'].'/'.$categoryImageDetails['image_id'].'/'.$categoryImageDetails['image_name'];                                                
+                                                if (!empty($category['category_name'])) {
+                                                    $counter++;
+                                                    if ($counter == 6) {
+                                                        break;
+                                                    }
+                                                    ?> 
+                                                    <li class="mega-menu"> 
+                                                        <a class="level-top" href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$category['id']?>">
+                                                            <span>
+                                                                <?php
+                                                                echo $category['category_name'];
+                                                                ?>
+                                                            </span>
+                                                        </a>
+                                                        <?php
+                                                        if(!empty($category['child'])) {
+                                                        ?>
+                                                        <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
+                                                            <div class="container">
+                                                                <div class="level0-wrapper2">
+                                                                    <div class="col-1">
+                                                                        <div class="nav-block nav-block-center">
+                                                                            <!--mega menu-->
+                                                                            <ul class="level0">
+                                                                                <?php
+                                                                                foreach($category['child'] as $childcategory){
+                                                                                 ?>  
+                                                                                <li class="level3 nav-6-1 parent item"> <a href="<?=$this->basePath()?>/index.php/application/index/product?id=<?=$childcategory['id']?>"><span><?=$childcategory['category_name']?></span></a>
+                                                                                    
+                                                                                </li>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
+                                                                                
+                                                                            </ul>
+                                                                            <!--level0-->
+                                                                        </div>
+                                                                        <!--nav-block nav-block-center-->
+                                                                    </div>
+                                                                    <!--col-1-->
+                                                                    <div class="col-2">
+                                                                        
+                                                                        
+                                                                        <div class="menu_image"><a title="" href="grid.html"><img alt="menu_image" src="<?=$categoryImagePath?>"></a></div>
+
+                                                                    </div>
+                                                                    <!--col-2-->
+                                                                </div>
+                                                                <!--level0-wrapper2-->
+                                                            </div>
+                                                            <!--container-->
+                                                        </div> 
+                                                                                
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+                                        <!--nav-->
+                                    </div>
+                                </nav>
+                            </div>
+
+
+
+
+                            <!--row-->
+
+
+                            <div class="fl-header-right">
+                                <div class="fl-links">
+                                    <div class="no-js"> <a title="Company" class="clicker"></a>
+                                        <div class="fl-nav-links">
+                                            <div class="language-currency">
+                                                <div class="fl-language">
+                                                    <ul class="lang">
+                                                        <li><a href="#"> <img src="public/images/english.png" alt="English"> <span>English</span> </a></li>
+                                                        <li><a href="#"> <img src="public/images/francais.png" alt="French"> <span>French</span> </a></li>
+                                                        <li><a href="#"> <img src="public/images/german.png" alt="German"> <span>German</span> </a></li>
+                                                    </ul>
+                                                </div>
+                                                <!--fl-language-->
+                                                <!-- END For version 1,2,3,4,6 -->
+                                                <!-- For version 1,2,3,4,6 -->
+                                                <div class="fl-currency">
+                                                    <ul class="currencies_list">
+                                                        <li><a href="#" title="EGP"> �</a></li>
+                                                        <li><a href="#" title="EUR"> �</a></li>
+                                                        <li><a href="#" title="USD"> $</a></li>
+                                                    </ul>
+                                                </div>
+                                                <!--fl-currency-->
+                                                <!-- END For version 1,2,3,4,6 -->
+                                            </div>
+                                            <ul class="links">
+                                                <li><a href="dashboard.html" title="My Account">My Account</a></li>
+                                                <li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
+                                                <li><a href="checkout.html" title="Checkout">Checkout</a></li>
+                                                <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
+                                                <li class="last"><a href="login.html" title="Login"><span>Login</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fl-cart-contain">
+                                    <div class="mini-cart">
+                                        <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
+                                        <div class="fl-mini-cart-content" style="display: none;">
+                                            <div class="block-subtitle">
+                                                <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
+                                                <!--top-subtotal-->
+                                                <!--pull-right-->
+                                            </div>
+                                            <!--block-subtitle-->
+                                            <ul class="mini-products-list" id="cart-sidebar">
+                                                <li class="item first">
+                                                    <div class="item-inner"><a class="product-image" title="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" href="#l"><img alt="timi &amp; leslie Sophia Diaper Bag, Lemon Yellow/Shadow White" src="public/products-images/p4.jpg"></a>
+                                                        <div class="product-details">
+                                                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                                                            <!--access-->
+                                                            <strong>1</strong> x <span class="price">$179.99</span>
+                                                            <p class="product-name"><a href="product-detail.html">timi &amp; leslie Sophia Diaper Bag...</a></p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="item last">
+                                                    <div class="item-inner"><a class="product-image" title="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" href="#"><img alt="JP Lizzy Satchel Designer Diaper Bag - Slate Citron" src="public/products-images/p3.jpg"></a>
+                                                        <div class="product-details">
+                                                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                                                            <!--access-->
+                                                            <strong>1</strong> x <span class="price">$80.00</span>
+                                                            <p class="product-name"><a href="product-detail.html">JP Lizzy Satchel Designer Diaper Ba...</a></p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="actions">
+                                                <button class="btn-checkout" title="Checkout" type="button" onClick="window.location = checkout.html"><span>Checkout</span></button>
+                                            </div>
+                                            <!--actions-->
+                                        </div>
+                                        <!--fl-mini-cart-content-->
+                                    </div>
+                                </div>
+                                <!--mini-cart-->
+                                <div class="collapse navbar-collapse">
+                                    <form class="navbar-form" role="search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
+                                            </span> </div>
+                                    </form>
+                                </div>
+                                <!--links-->
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+
+            </header>

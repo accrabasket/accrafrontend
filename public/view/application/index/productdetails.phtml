@@ -1,152 +1,642 @@
-    <style>
-            .products--grid .product_wrapper{width:100%;}
-            .com-marg{margin-bottom:2.4em;}
-        </style>
-    <div ng-controller="productdetails">
-        <div class="container subscribe-right"> 
-            <ol class="breadcrumb breadcrumb1">
-                <li><a href="<?php echo $this->basePath();?>">Home</a></li>
-                <?php
-                    if(!empty($this->breadcrum['parent_category_name'])) {
-                ?>
-                <li>
-                    <a href="<?php echo $this->basePath()."/application/index/product?id=".$this->breadcrum['parent_category_id']?>"><?=$this->breadcrum['parent_category_name']?></a>
-                </li>
-                <?php
-                    }
-                    if(!empty($this->breadcrum['category_name'])) {
-                ?>
-                <li>
-                    <a href="<?php echo $this->basePath()."/application/index/product?id=".$this->breadcrum['category_id']?>"><?=$this->breadcrum['category_name']?></a>
-                </li>
-                <?php
-                    }
-                ?>
-                <li>
-                    <?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?>
-                </li>
-            </ol> 
-            <div class="clearfix"> </div>
-        </div>
-        <!-- //breadcrumbs -->
-        <!-- products -->
-        <div class="products">	 
-            <div class="container">
-                <div class="single-page">
-                    <div class="single-page-row" id="detail-21">
-                        <div class="col-md-6 single-top-left">
-                            <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
-                             <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
-                            <div class="flexslider">
-                                <ul class="slides">
-                                    <li data-thumb="images/si-1.jpg">
-                                        <div class="thumb-image detail_images"> <img src="images/si-1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                    </li>
-                                    <li data-thumb="images/si.jpg">
-                                        <div class="thumb-image"> <img src="<?=$this->productImage?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6 single-top-right">
-                            <h3 class="item_name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?></h3>
-                            <!--<p>Processing Time: Item will be shipped out within 1 working days. </p>-->
-                            <!--div class="single-rating">
-                                <ul>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li class="rating">20 reviews</li>
-                                    <li><a href="#">Add your review</a></li>
-                                </ul> 
-                            </div-->
-                            <div class="single-price">
-                                <?php 
-                                    if(!empty($this->productDetails['attribute'])){
+  <div class="main-container col1-layout wow bounceInUp animated">
+    <div class="main">
+      <div class="col-main">
+        <!-- Endif Next Previous Product -->
+        <div class="product-view wow bounceInUp animated" itemscope="" itemtype="http://schema.org/Product" itemid="#product_base">
+          <div id="messages_product_view"></div>
+          <!--product-next-prev-->
+          <div class="product-essential container">
+            <div class="row">
+              <div class="product-next-prev"> <a class="product-next" title="Next" href="#"><span></span></a> <a class="product-prev" title="Previous" href="#"><span></span></a> </div>
+              <form action="" method="post" id="product_addtocart_form">
+                <!--End For version 1, 2, 6 -->
+                <!-- For version 3 -->
+                <div class="product-img-box col-sm-6 col-xs-12">
+                  <div class="new-label new-top-left"> New </div>
+                  <div class="product-image">
+                    <div class="large-image"> <a href="<?=$this->basePath()?>/public/images/p15.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img src="<?=$this->basePath()?>/public/images/p15.jpg"> </a> </div>
+                    <div class="flexslider flexslider-thumb">
+                      <ul class="previews-list slides">
+                        <li><a href='products-images/p15.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p15.jpg' "><img src="<?=$this->basePath()?>/public/images//p15.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='products-images/p10.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p10.jpg' "><img src="<?=$this->basePath()?>/public/images/p10.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/p3.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p3.jpg' "><img src="<?=$this->basePath()?>/public/images/p3.jpg" alt = "Thumbnail 1"/></a></li>
+                        <li><a href='products-images/p4.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p4.jpg' "><img src="<?=$this->basePath()?>/public/images/p4.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/p5.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p5.jpg' "><img src="<?=$this->basePath()?>/public/images/p5.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/p8.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p8.jpg' "><img src="<?=$this->basePath()?>/public/images/p8.jpg" alt = "Thumbnail 2"/></a></li>
+                        <li><a href='products-images/p10.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?=$this->basePath()?>/public/images/p10.jpg' "><img src="<?=$this->basePath()?>/public/images/p10.jpg" alt = "Thumbnail 2"/></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- end: more-images -->
+                </div>
+                <!--End For version 1,2,6-->
+                <!-- For version 3 -->
+                <div class="product-shop col-sm-6 col-xs-12">
+                
+                  <div class="product-name">
+                    <h1 itemprop="name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?></h1>
+                  </div>
+                  <!--product-name-->
+                  <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                  <div class="rating">
+                    <div class="ratings">
+                      <div class="rating-box">
+                        <div class="rating" style="width:50%"></div>
+                      </div>
+                      <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                    </div>
+                  </div>
+                  </span>
+                <?php 
+                    if(!empty($this->productDetails['attribute'])){
 //                                        foreach ($this->productDetails['attribute'][$this->selectedAttr] as $key => $value) {
-                                            $price = $this->productDetails['attribute'][$this->selectedAttr]['price'];
-                                            $actualPrice = $this->productDetails['attribute'][$this->selectedAttr]['actual_price'];
-                                            $id = $this->productDetails['attribute'][$this->selectedAttr]['id'];
+                            $price = $this->productDetails['attribute'][$this->selectedAttr]['price'];
+                            $actualPrice = $this->productDetails['attribute'][$this->selectedAttr]['actual_price'];
+                            $id = $this->productDetails['attribute'][$this->selectedAttr]['id'];
 //                                        }
-                                    }
-                                ?>
-                                <ul>
-                                    <li><!--<strike>GHC <?= $price?></strike>--> GHC <?= $actualPrice?></li> 
-                                    <!--<li><span class="w3off">10% OFF</span></li>--> 
-                                    <!--<li>Ends on: Dec,5th</li>-->
-                                </ul>	
-                            </div> 
-                            <p class="single-price-text"><?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?> </p>
+                    }
+                ?>                  
+                  <div class="price-block">
+                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price">GHC<?= $actualPrice?></span> </span> </div>
+                    <p class="availability in-stock">
+                      <link itemprop="availability" href="http://schema.org/InStock">
+                      <span>In stock</span></p>
+                  </div>
+                  <!--price-block-->
+                  <div class="short-description">
+                    <p><?= !empty($this->productDetails['product_desc'])?"<h2>Quick Overview</h2>".$this->productDetails['product_desc']:''?></p>
+                  </div>
+                  <div class="add-to-box">
+                    <div class="add-to-cart">
+                      <div class="pull-left">
+                        <div class="custom pull-left">
                             <form >
                                 <input type="hidden" name="number_of_item" value="1" />
                                 <input type="hidden" name="action" value="add" /> 
                                 <input type="hidden" name="item_name" value="<?=$this->productDetails['product_name']?>" /> 
                                 <input type="hidden" name="merchant_inventry_id" value="<?=$id?>" /> 
-                                <input type="hidden" name="gotoproductpage" value="<?=$this->productDetails['category_id']?>" /> 
-                                <button type="button" class="w3ls-cart" ng-click="addtocart('<?=$this->productDetails['product_id']?>','<?=$this->productDetails['product_name']?>','<?=$id?>')" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
-                            </form>
-                            <button class="w3ls-cart " ng-click="proceedtocheckout()"><i class="fa fa-heart-o" aria-hidden="true"></i> Proceed To Checkout</button>
+                                <input type="hidden" name="gotoproductpage" value="<?=$this->productDetails['category_id']?>" />                                 
+                                <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"  ng-click="addtocart('<?=$this->productDetails['product_id']?>','<?=$this->productDetails['product_name']?>','<?=$id?>')" ><i class="icon-plus">&nbsp;</i></button>
+                                <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="icon-minus">&nbsp;</i></button>
+                            </form>                            
                         </div>
-                        <div class="clearfix"> </div>  
+                        <!--custom pull-left-->
+                      </div>
+                        <button type="button" ng-click="addtocart('<?=$this->productDetails['product_id']?>','<?=$this->productDetails['product_name']?>','<?=$id?>')" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
+                      <!--pull-left-->                      
                     </div>
-                </div> 
-                <!-- collapse-tabs -->
-                <div class="collpse tabs">
-                    <h3 class="w3ls-title">About this item</h3> 
-                    <div class="panel-group collpse" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <i class="fa fa-file-text-o fa-icon" aria-hidden="true"></i> Description <span class="fa fa-angle-down fa-arrow" aria-hidden="true"></span> <i class="fa fa-angle-up fa-arrow" aria-hidden="true"></i>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <?= !empty($this->productDetails['product_desc'])?$this->productDetails['product_desc']:''?>
-                                    <?php
-                                    if(!empty($this->productDetails['bullet_desc'])) {
-                                        echo "<ul style='margin-left:15px;'>";
-                                        foreach($this->productDetails['bullet_desc'] as $bullets) {
-                                            echo "<li> $bullets</li>";
-                                        }
-                                        echo "</ul>";
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="collapsed pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <i class="fa fa-info-circle fa-icon" aria-hidden="true"></i> additional information <span class="fa fa-angle-down fa-arrow" aria-hidden="true"></span> <i class="fa fa-angle-up fa-arrow" aria-hidden="true"></i>
-                                    </a> 
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <?php
-                                    if(!empty($this->productDetails['custom_info'])){
-                                        foreach ($this->productDetails['custom_info'] as $key => $value) {
-                                            echo $key .' : ' .$value.'<br>';
-                                        }
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
+                    <!--add-to-cart-->
+                    <div class="email-addto-box">
+                      <p class="email-friend"><a href="#" title="Email to a Friend"><span>Email to a Friend</span></a></p>
+                      <ul class="add-to-links">
+                        <li> <a class="link-wishlist" href="wishlist.html" onClick="" title="Add To Wishlist"><span>Add To Wishlist</span></a> </li>
+                        <li> <span class="separator">|</span> <a class="link-compare" href="Compare.html" title="Add To Compare"><span>Add To Compare</span></a> </li>
+                      </ul>
+                      <!--add-to-links-->
                     </div>
+                    <!--email-addto-box-->
+                  </div>
+                  <!--add-to-box-->
+                  <!-- thm-mart Social Share-->
+                  <!--div class="social">
+                    <ul class="link">
+                      <li class="fb"> <a href="http://www.facebook.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="linkedin"> <a href="http://www.linkedin.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="tw"> <a href="http://twitter.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="pintrest"> <a href="http://pinterest.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                      <li class="googleplus"> <a href="https://plus.google.com/" rel="nofollow" target="_blank" style="text-decoration:none;"> </a> </li>
+                    </ul>
+                  </div-->
+                  <!-- thm-mart Social Share Close-->
                 </div>
-                
+                <!--product-shop-->
+                <!--Detail page static block for version 3-->
+              </form>
             </div>
+          </div>
+          <!--product-essential-->
+          <div class="product-collateral container">
+            <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+              <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Product Description </a> </li>
+              <li><a href="#product_tabs_tags" data-toggle="tab">Tags</a></li>
+              <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
+              <li> <a href="#product_tabs_custom" data-toggle="tab">Additional Info</a> </li>              
+            </ul>
+            <div id="productTabContent" class="tab-content">
+              <div class="tab-pane fade in active" id="product_tabs_description">
+                <div class="std">
+                  <p><?= !empty($this->productDetails['product_desc']) ? $this->productDetails['product_desc'] : '' ?></p>                                    
+                  <?php
+                  if (!empty($this->productDetails['bullet_desc'])) {
+                      echo "<ul style='margin-left:15px;'>";
+                      foreach ($this->productDetails['bullet_desc'] as $bullets) {
+                          echo "<li> $bullets</li>";
+                      }
+                      echo "</ul>";
+                  }
+                  ?>                  
+                </div>
+              </div>
+              <div class="tab-pane fade" id="product_tabs_tags">
+                <div class="box-collateral box-tags">
+                  <div class="tags">
+                    <form id="addTagForm" action="#" method="get">
+                      <div class="form-add-tags">
+                        <label for="productTagName">Add Tags:</label>
+                        <div class="input-box">
+                          <input class="input-text" name="productTagName" id="productTagName" type="text">
+                          <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span>Add Tags</span> </button>
+                        </div>
+                        <!--input-box--> 
+                      </div>
+                    </form>
+                  </div>
+                  <!--tags-->
+                  <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="reviews_tabs">
+                <div class="box-collateral box-reviews" id="customer-reviews">
+                  <div class="box-reviews1">
+                    <div class="form-add">
+                      <form id="review-form" method="post" action="">
+                        <h3>Write Your Own Review</h3>
+                        <fieldset>
+                          <h4>How do you rate this product? <em class="required">*</em></h4>
+                          <span id="input-message-box"></span>
+                          <table id="product-review-table" class="data-table">
+                            <colgroup>
+                            <col>
+                            <col width="1">
+                            <col width="1">
+                            <col width="1">
+                            <col width="1">
+                            <col width="1">
+                            </colgroup>
+                            <thead>
+                              <tr class="first last">
+                                <th>&nbsp;</th>
+                                <th><span class="nobr">1 *</span></th>
+                                <th><span class="nobr">2 *</span></th>
+                                <th><span class="nobr">3 *</span></th>
+                                <th><span class="nobr">4 *</span></th>
+                                <th><span class="nobr">5 *</span></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="first odd">
+                                <th>Price</th>
+                                <td class="value"><input type="radio" class="radio" value="11" id="Price_1" name="ratings[3]"></td>
+                                <td class="value"><input type="radio" class="radio" value="12" id="Price_2" name="ratings[3]"></td>
+                                <td class="value"><input type="radio" class="radio" value="13" id="Price_3" name="ratings[3]"></td>
+                                <td class="value"><input type="radio" class="radio" value="14" id="Price_4" name="ratings[3]"></td>
+                                <td class="value last"><input type="radio" class="radio" value="15" id="Price_5" name="ratings[3]"></td>
+                              </tr>
+                              <tr class="even">
+                                <th>Value</th>
+                                <td class="value"><input type="radio" class="radio" value="6" id="Value_1" name="ratings[2]"></td>
+                                <td class="value"><input type="radio" class="radio" value="7" id="Value_2" name="ratings[2]"></td>
+                                <td class="value"><input type="radio" class="radio" value="8" id="Value_3" name="ratings[2]"></td>
+                                <td class="value"><input type="radio" class="radio" value="9" id="Value_4" name="ratings[2]"></td>
+                                <td class="value last"><input type="radio" class="radio" value="10" id="Value_5" name="ratings[2]"></td>
+                              </tr>
+                              <tr class="last odd">
+                                <th>Quality</th>
+                                <td class="value"><input type="radio" class="radio" value="1" id="Quality_1" name="ratings[1]"></td>
+                                <td class="value"><input type="radio" class="radio" value="2" id="Quality_2" name="ratings[1]"></td>
+                                <td class="value"><input type="radio" class="radio" value="3" id="Quality_3" name="ratings[1]"></td>
+                                <td class="value"><input type="radio" class="radio" value="4" id="Quality_4" name="ratings[1]"></td>
+                                <td class="value last"><input type="radio" class="radio" value="5" id="Quality_5" name="ratings[1]"></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <input type="hidden" value="" class="validate-rating" name="validate_rating">
+                          <div class="review1">
+                            <ul class="form-list">
+                              <li>
+                                <label class="required" for="nickname_field">Nickname<em>*</em></label>
+                                <div class="input-box">
+                                  <input type="text" class="input-text" id="nickname_field" name="nickname">
+                                </div>
+                              </li>
+                              <li>
+                                <label class="required" for="summary_field">Summary<em>*</em></label>
+                                <div class="input-box">
+                                  <input type="text" class="input-text" id="summary_field" name="title">
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="review2">
+                            <ul>
+                              <li>
+                                <label class="required label-wide" for="review_field">Review<em>*</em></label>
+                                <div class="input-box">
+                                  <textarea rows="3" cols="5" id="review_field" name="detail"></textarea>
+                                </div>
+                              </li>
+                            </ul>
+                            <div class="buttons-set">
+                              <button class="button submit" title="Submit Review" type="submit"><span>Submit Review</span></button>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="box-reviews2">
+                    <h3>Customer Reviews</h3>
+                    <div class="box visible">
+                      <ul>
+                        <li>
+                          <table class="ratings-table">
+                            <colgroup>
+                            <col width="1">
+                            <col>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th>Value</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Quality</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Price</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="review">
+                            <h6><a href="#">Excellent</a></h6>
+                            <small>Review by <span>Leslie Prichard </span>on 1/3/2014 </small>
+                            <div class="review-txt"> I have purchased shirts from Minimalism a few times and am never disappointed. The quality is excellent and the shipping is amazing. It seems like it's at your front door the minute you get off your pc. I have received my purchases within two days - amazing.</div>
+                          </div>
+                        </li>
+                        <li class="even">
+                          <table class="ratings-table">
+                            <colgroup>
+                            <col width="1">
+                            <col>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th>Value</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Quality</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Price</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:80%;"></div>
+                                  </div></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="review">
+                            <h6><a href="#/catalog/product/view/id/60/">Amazing</a></h6>
+                            <small>Review by <span>Sandra Parker</span>on 1/3/2014 </small>
+                            <div class="review-txt"> Minimalism is the online ! </div>
+                          </div>
+                        </li>
+                        <li>
+                          <table class="ratings-table">
+                            <colgroup>
+                            <col width="1">
+                            <col>
+                            </colgroup>
+                            <tbody>
+                              <tr>
+                                <th>Value</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Quality</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:100%;"></div>
+                                  </div></td>
+                              </tr>
+                              <tr>
+                                <th>Price</th>
+                                <td><div class="rating-box">
+                                    <div class="rating" style="width:80%;"></div>
+                                  </div></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="review">
+                            <h6><a href="#/catalog/product/view/id/59/">Nicely</a></h6>
+                            <small>Review by <span>Anthony  Lewis</span>on 1/3/2014 </small>
+                            <div class="review-txt"> Unbeatable service and selection. This store has the best business model I have seen on the net. They are true to their word, and go the extra mile for their customers. I felt like a purchasing partner more than a customer. You have a lifetime client in me. </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="actions"> <a class="button view-all" id="revies-button" href="#"><span><span>View all</span></span></a> </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="product_tabs_custom">
+                <div class="product-tabs-content-inner clearfix">
+                    <p>
+                        <?php
+                        if(!empty($this->productDetails['custom_info'])){
+                            foreach ($this->productDetails['custom_info'] as $key => $value) {
+                                echo $key .' : ' .$value.'<br>';
+                            }
+                        }
+                        ?>                        
+                    </p>                 
+                </div>
+              </div>
+            </div>
+          </div>
+     
+      
+          <!--product-collateral-->
+          <div class="box-additional">
+            <!-- BEGIN RELATED PRODUCTS -->
+            <div class="related-pro container">
+              <div class="slider-items-products">
+                <div class="new_title center">
+                  <h2>Related Products</h2>
+                </div>
+                <div id="related-slider" class="product-flexslider hidden-buttons">
+                  <div class="slider-items slider-width-col4 products-grid">
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p1.jpg" alt="Retis lapen casen"></a>
+                                  <div class="new-label new-top-left">New</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          
+          <!-- Item -->
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p2.jpg" alt="Retis lapen casen"></a>
+                                  <div class="new-label new-top-left">New</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          <!-- End Item --> 
+          
+          <!-- Item -->
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p3.jpg" alt="Retis lapen casen"></a>
+                                  <div class="sale-label sale-top-left">Sale</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          <!-- End Item -->
+          
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p4.jpg" alt="Retis lapen casen"></a>
+                                  <div class="new-label new-top-left">New</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          
+          <!-- Item -->
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p5.jpg" alt="Retis lapen casen"></a>
+                                  <div class="new-label new-top-left">New</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          <!-- End Item --> 
+          
+          <!-- Item -->
+          <div class="item">
+                            <div class="item-inner">
+                              <div class="item-img">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="products-images/p6.jpg" alt="Retis lapen casen"></a>
+                                  <div class="new-label new-top-left">New</div>
+                                  <div class="item-box-hover">
+                                    <div class="box-inner">
+                                      <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="item-info">
+                                <div class="info-inner">
+                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-content">
+                                    <div class="rating">
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div class="rating" style="width:80%"></div>
+                                        </div>
+                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                      </div>
+                                    </div>
+                                    <div class="item-price">
+                                      <div class="price-box"><span class="regular-price" id="product-price-1"><span class="price">$125.00</span> </span> </div>
+                                    </div>
+									<div class="add_cart">
+                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          <!-- End Item --> 
         </div>
-        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
-            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
+                </div>
+              </div>
+            </div>
+            <!-- end related product -->
+            
+          </div>
+          <!-- end related product -->
         </div>
+        <!--box-additional-->
+        <!--product-view-->
+      </div>
     </div>
+    <!--col-main-->
+  </div>
+<link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/public/stylesheet/flexslider.css" media="all">
+
+  <!--main-container-->
+  <script type="text/javascript" src="<?=$this->basePath()?>/public/js/jquery.flexslider.js"></script>
+  <script type="text/javascript" src="<?=$this->basePath()?>/public/js/cloud-zoom.js"></script>
+  
     <script src="<?php echo $this->basePath() . '/public/js/frontend/productdetails.js' ?>">
 </script>

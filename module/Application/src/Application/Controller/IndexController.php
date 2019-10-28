@@ -27,15 +27,15 @@ class IndexController extends AbstractActionController
             $GLOBALS['city_list'] = $this->session['city_list'];
         }
         //if(empty($this->session['category_list'])){
-            $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
-			$GLOBALS['fcityaddress'] = $this->session['fcityaddress'];
-			$GLOBALS['fcityaddresstmp'] = $this->session['fcityaddresstmp'];
+        $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
+	$GLOBALS['fcityaddress'] = $this->session['fcityaddress'];
+	$GLOBALS['fcityaddresstmp'] = $this->session['fcityaddresstmp'];
         //}
     }
     public function indexAction()
     { 
         $this->view->marchantList = $this->getMarchantList();
-        $this->view->banner = $this->banner();       
+        $this->view->banner = $this->banner();
         $this->view->cityList = $this->session['city_list'];
         $this->view->categoryList = $this->session['category_list'];
         $GLOBALS['hidemenu'] = 1;
@@ -85,7 +85,7 @@ class IndexController extends AbstractActionController
             $GLOBALS['category_id'] = $searchParams['parent_category_id'];
         }else if(!empty($searchParams['category_id'])){
             $GLOBALS['category_id'] = $searchParams['category_id'];
-        }
+        }        
         if(!empty($request['merchant'])){
             $searchParams['merchant_id'] = $request['merchant'];
         }

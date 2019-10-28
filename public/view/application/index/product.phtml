@@ -1,113 +1,104 @@
-<div class="right-panel"  ng-cloak="true" ng-controller="product">
-    <div class="full-width"> 
-        <ol class="breadcrumb breadcrumb1 relative pdp_top-container" >
-            <li><a href="<?=$this->basePath()?>/">Home</a></li>
-            <li ng-show="parent_category_name"><a href="<?=$this->basePath()?>/index.php/application/index/product?id={{parent_category_id}}">{{parent_category_name}}</a></li>
-            <li class="active" ng-show="categoryName">{{categoryName}}</li>	
-            <div class="pull-right">
-                <div class="plp-sort-dd">                  
-                    <label class="dropdown_title-label" for="dd-title-label">Sort by</label>
-                    <select ng-change="shortBy()" ng-model="shortByData">
-                        <option value="relevence">Relevance</option>
-                        <option value="asc">Low to High</option>
-                        <option value="desc">High to Low</option>
-                        <!--<option>Name (A To Z)</option>-->
-                    </select>
+<div class="col-main col-sm-9 col-sm-push-3 product-grid" ng-cloak="true" ng-controller="product">
+    <div class="pro-coloumn">
+        <article class="col-main">
+            <div class="toolbar">
+                <div class="sorter">
+                    
                 </div>
-            </div>		
-        </ol>
-
-        <div class="clearfix"> </div>
-    </div>
-
-    <div class="category-navs">
-        <div class="clearfix com-marg"> </div>
-        <p class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</p>
-        <p class="danger" style="color:green" ng-show="successShow">{{successMsg}}</p>
-    </div>
-    <div class="products products--grid">   
-        <div ng-show="no_record != ''"> 
-            <h4 style="color:red;"> {{no_record}}</h4>
-        </div>
-        <div class="product_wrapper col-sm-4 col-md-4 col-lg-4" ng-repeat="product in productDataList track by $index">
-            <div class="plp-product">
-                <div class="plp-product_offer" ng-if="product.attribute[quantity[product.product_id]].discount_value && product.attribute[quantity[product.product_id]].discount_value!='0'">
-                    <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>{{product.attribute[quantity[product.product_id]].discount_value}}<span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF</div>
-                <div class="plp-product_offer" ng-if="product.discount_value && product.attribute[quantity[product.product_id]].discount_value=='0' && product.discount_value!='0'"><span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} <span ng-if="product.discount_type=='percent'">%</span> OFF</div>
-                <div class="plp-product_offer display--none"></div>
-                <div class="plp-product_img" style="cursor: default">
-                    <img class="img animated fadeIn" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
-                </div>
-                <div class="plp-product_name " title="{{product.product_name}}">
-                    <div class="LinesEllipsis  plp-product_name--box"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}">{{product.product_name}}
-                            <none ng-if="product.brand_name">({{product.brand_name}})</none>
-                        </a><wbr></wbr>
+                <div id="sort-by">
+                    <label class="left">Sort By: </label>
+                    <ul>
+                        <li><a href="#">Position<span class="right-arrow"></span></a>
+                            <ul>
+                                <li><a href="#">Name</a></li>
+                                <li><a href="#">Price</a></li>
+                                <li><a href="#">Position</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
+                <div class="pager">                    
+                    <div class="pages">
+                        <label>Page:</label>
+                            <pagination  class="pagination pull-right mt0" ng-model="currentPage" total-items="numberOfRecord" max-size="3" boundary-links="true" ng-click="selectPage(currentPage)"></pagination>
+                                           
                     </div>
                 </div>
-                <!--div class="plp-product_quantity" title="1 kg"><span>1 kg</span></div-->
-                <div class="plp-product_quantity">                    
-                    <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
-                        <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
-                            {{setAttribute(attributeDetails, $index)}}
-                            {{attributeDetails.quantity}} {{attributeDetails.unit}}
-                        </option>
-                    </select>  
-                </div>                
-                <div class="plp-product_price">
-                    <div class="plp-product_price--container">
-                        <div class="plp-product_price--old display--inline-block@mobile"></div>
-                        <div class="plp-product_price--new display--inline-block@mobile">
-                            <span ng-if="product.attribute[quantity[product.product_id]].price == product.attribute[quantity[product.product_id]].actual_price">
-                                GHC {{product.attribute[quantity[product.product_id]].price}} 
-                            </span>
-                            <span ng-if="product.attribute[quantity[product.product_id]].price != product.attribute[quantity[product.product_id]].actual_price">
-                                <strike>GHC {{product.attribute[quantity[product.product_id]].price}} </strike><br/>
-                                GHC {{product.attribute[quantity[product.product_id]].actual_price}}
-                            </span>
+            </div>
+            <div class="category-products">
+                <ul class="products-grid">
+                    <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in productDataList track by $index">
+                        <div class="item-inner">
+                            <div class="item-img">
+                                <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="Retis lapen casen" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
+
+                                    <div class="item-box-hover">
+                                        <div class="box-inner">
+                                            <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
+                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info">
+                                <div class="info-inner">
+                                    <div class="item-title">
+                                        <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}">
+                                            {{product.product_name}}
+                                            <none ng-if="product.brand_name">({{product.brand_name}})</none>
+                                        </a> 
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="rating">
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div class="rating" style="width:80%"></div>
+                                                </div>
+                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                            </div>
+                                        </div>
+                                        <div>                    
+                                            <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                                <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
+                                                    {{setAttribute(attributeDetails, $index)}}
+                                                    {{attributeDetails.quantity}} {{attributeDetails.unit}}
+                                                </option>
+                                            </select>  
+                                        </div>                                        
+                                        <div class="add_cart">                                            
+                                            <div class="price-box">
+                                                <span ng-if="product.attribute[quantity[product.product_id]].discount_value && product.attribute[quantity[product.product_id]].discount_value!='0'">(
+                                                    <span ng-if="product.attribute[quantity[product.product_id]].discount_type!='percent'">GHC </span>
+                                                        {{product.attribute[quantity[product.product_id]].discount_value}}
+                                                    <span ng-if="product.attribute[quantity[product.product_id]].discount_type=='percent'">%</span> OFF
+                                                    )
+                                                </span>  
+                                                <span ng-if="product.discount_value && product.attribute[quantity[product.product_id]].discount_value=='0' && product.discount_value!='0'">
+                                                    (
+                                                    <span ng-if="product.discount_type=='flat'">GHC </span>{{product.discount_value}} 
+                                                    <span ng-if="product.discount_type=='percent'">%</span> OFF
+                                                    )
+                                                </span>                                                
+                                                <span class="regular-price" id="product-price-1"><span class="price">GHC {{product.attribute[quantity[product.product_id]].actual_price}}</span> </span> 
+                                            </div>
+                                        </div>
+                                        <div class="add_cart">
+                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="plp-product_add-to-cart">
-                    <div class="add-to-cart">
-                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
-                        <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="add-to-cart_add-btn display--inline-block" data-test-id="add-button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)">Add To Cart</button>
-                        <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
-                        <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
-                        <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
-                        <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
-                        </span>
-                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix" ng-if="$index%4==3"></div>
-        </div>               
-    </div> 
-    <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
-        <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
-    </div>    
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Total {{numberOfRecord}} entries</div>
-            </div>
-            <div class="col-sm-8" ng-show="numberOfRecord>10">
-                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                    <pagination  class="pagination pull-right mt0" ng-model="currentPage" total-items="numberOfRecord" max-size="3" boundary-links="true" ng-click="selectPage(currentPage)"></pagination>
-                </div>
-            </div>
-        </div> 	    
-</div>
-</div>
-</div>
-<div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
-    <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
-</div>
 
-<!-- //subscribe --> 
-<!-- footer -->
-<!-- //footer -->		
-<script src="<?php echo $this->basePath() . '/public/js/frontend/product.js' ?>">
-</script>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </div>
+    <!--	///*///======    End article  ========= //*/// --> 
+</div>
+<script type="text/javascript" src="<?= $this->basePath() ?>/public/js/frontend/product.js"></script>
 <script>
     var PAGE_COUNT = 5;
     var PAGING_GAP = 3;    
