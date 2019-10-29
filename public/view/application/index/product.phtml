@@ -30,14 +30,9 @@
                     <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in productDataList track by $index">
                         <div class="item-inner">
                             <div class="item-img">
-                                <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="Retis lapen casen" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
+                                <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
 
                                     <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt" type="button"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -50,14 +45,7 @@
                                         </a> 
                                     </div>
                                     <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
+                                   
                                         <div>                    
                                             <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
                                                 <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
@@ -83,8 +71,15 @@
                                                 <span class="regular-price" id="product-price-1"><span class="price">GHC {{product.attribute[quantity[product.product_id]].actual_price}}</span> </span> 
                                             </div>
                                         </div>
-                                        <div class="add_cart">
-                                            <button class="button btn-cart" type="button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"><span>Add to Cart</span></button>
+                                        <div class="add_cart add-to-cart">
+                                            <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="button btn-cart" type="button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"><span>Add to Cart</span></button>
+                                            
+                                            <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                                            <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                                            <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                                            <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                                            </span>     
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -97,6 +92,9 @@
         </article>
     </div>
     <!--	///*///======    End article  ========= //*/// --> 
+</div>
+<div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+    <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
 </div>
 <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/frontend/product.js"></script>
 <script>

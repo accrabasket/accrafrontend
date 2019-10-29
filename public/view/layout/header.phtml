@@ -343,34 +343,22 @@
                                 <div class="fl-links">
                                     <div class="no-js"> <a title="Company" class="clicker"></a>
                                         <div class="fl-nav-links">
-                                            <div class="language-currency">
-                                                <div class="fl-language">
-                                                    <ul class="lang">
-                                                        <li><a href="#"> <img src="public/images/english.png" alt="English"> <span>English</span> </a></li>
-                                                        <li><a href="#"> <img src="public/images/francais.png" alt="French"> <span>French</span> </a></li>
-                                                        <li><a href="#"> <img src="public/images/german.png" alt="German"> <span>German</span> </a></li>
-                                                    </ul>
-                                                </div>
-                                                <!--fl-language-->
-                                                <!-- END For version 1,2,3,4,6 -->
-                                                <!-- For version 1,2,3,4,6 -->
-                                                <div class="fl-currency">
-                                                    <ul class="currencies_list">
-                                                        <li><a href="#" title="EGP"> �</a></li>
-                                                        <li><a href="#" title="EUR"> �</a></li>
-                                                        <li><a href="#" title="USD"> $</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!--fl-currency-->
-                                                <!-- END For version 1,2,3,4,6 -->
-                                            </div>
                                             <ul class="links">
-                                                <li><a href="dashboard.html" title="My Account">My Account</a></li>
-                                                <li><a href="wishlist.html" title="Wishlist">Wishlist</a></li>
-                                                <li><a href="checkout.html" title="Checkout">Checkout</a></li>
-                                                <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
-                                                <li class="last"><a href="login.html" title="Login"><span>Login</span></a></li>
+                                            <?php
+                                                if(!empty($GLOBALS['user'])){
+                                            ?>
+                                                <li><a href="<?=$this->basePath()?>/index.php/application/index/editprofile" title="My Account">My Account</a></li>                                                                                                
+                                                <li><a href="<?=$this->basePath()?>/index.php/application/index/changepassword">Change Password</a></li> 
+                                                <li><a href="<?=$this->basePath()?>/index.php/application/index/currentorder">My Order</a></li>
+                                                <li><a href="<?=$this->basePath()?>/index.php/application/index/checkout" title="Checkout">Checkout</a></li>
+                                                <li><a href="<?=$this->basePath()?>/index.php/application/index/logout">Log-out</a></li> 
+                                                 <?php }else{ ?>
                                             </ul>
+                                            <ul class="links">
+                                                 <li><a href="<?=$this->basePath()?>/index.php/application/index/signup">Signup</a></li>
+                                                <li class="last"><a href="<?=$this->basePath()?>/index.php/application/index/login" title="Login"><span>Login</span></a></li>
+                                            </ul>
+                                            <?php }?>
                                         </div>
                                     </div>
                                 </div>

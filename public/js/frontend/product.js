@@ -11,10 +11,10 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
     if(searchBy != undefined && searchBy != ''){
         if(searchBy.category_id != undefined && searchBy.category_id != ''){
             $scope.searchProductParams.category_id = searchBy.category_id;
-            $scope.categoryName = searchBy.category_name;
+            $rootScope.categoryName = searchBy.category_name;
             if(searchBy.parent_category_name) {
-                $scope.parent_category_name = searchBy.parent_category_name;
-                $scope.parent_category_id = searchBy.parent_category_id;
+                $rootScope.parent_category_name = searchBy.parent_category_name;
+                $rootScope.parent_category_id = searchBy.parent_category_id;
             }
         }
         
