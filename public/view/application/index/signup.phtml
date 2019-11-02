@@ -38,15 +38,42 @@
                             <p>If you have not an account with us, please Register.</p>
                             <ul class="form-list">
                                 <li>
-                                    <label for="email">Email Address<em class="required">*</em></label>
+                                    <label for="name">Enter your Name<em class="required">*</em></label>
                                     <div class="input-box">
-                                        <input type="text" name="email" ng-model="loginData.email" value="" id="email" class="input-text required-entry validate-email" title="Email Address">
+                                        <input type="text" name="name" ng-model="signupData.name" value="" id="name" class="input-text required-entry validate-name" title="">
                                     </div>
                                 </li>
                                 <li>
+                                    <label for="email">Email Address<em class="required">*</em></label>
+                                    <div class="input-box">
+                                        <input type="text" name="email" ng-model="signupData.email" value="" id="email" class="input-text required-entry validate-email" title="Email Address">
+                                    </div>
+                                </li>
+                                <li>
+                                    <label for="email">Enter your mobile number<em class="required">*</em></label>
+                                    <div class="input-box">
+                                        <input type="text" ng-model="signupData.phonecode" class=" input-text required-entry validate-number" name="phonecode_de" style="width: 20%;float: left;border-right: none;" placeholder="+233" ng-readonly="true">
+                                        <input type="text" name="number" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="" id="email" class="input-text required-entry validate-number" title="Email Address">
+                                    </div>
+                                </li>
+                                 <li>
+                                    <label for="email">Select City<em class="required">*</em></label>
+                                    <div class="input-box">
+                                       <select class="form-control select2 user" style="width: 100%;" ng-model="signupData.city_id">
+                                            <option value=""> Select City</option>
+                                        <?php
+                                            foreach ($this->cityList as $key => $value) {
+                                                echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                                            }
+                                        ?>
+                                         </select>
+                                    </div>
+                                </li>
+                                
+                                <li>
                                     <label for="pass">Password<em class="required">*</em></label>
                                     <div class="input-box">
-                                        <input type="password"  name="password" ng-model="loginData.password" class="input-text required-entry validate-password" id="pass" title="Password">
+                                        <input type="password"  name="password" ng-model="signupData.password" class="input-text required-entry validate-password" id="pass" title="Password">
                                     </div>
                                 </li>
                             </ul>
@@ -58,7 +85,7 @@
 
                             <div class="buttons-set">
 
-                                <button class="button login" title="Login" name="send" id="send2" ng-click="login(loginData)"><span>Regiter</span></button>
+                                <button class="button login" title="Login" name="send" id="send2" ng-click="createaccount(signupData)"><span>Regiter</span></button>
                                 
 
                                 
