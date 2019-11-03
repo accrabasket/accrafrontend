@@ -388,10 +388,21 @@
                                                             <p class="product-name"><a href="javascript::void(0)">{{cartItem.item_name}}</a></p>
                                                         </div>
                                                     </div>
+                                                     <div class="plp-product_add-to-cart">
+                                                    <div class="add-to-cart">
+                                                        <button class="add-to-cart_dec" data-test-id="minus-button"></button>
+                                                        <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                                                        <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                                                        <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                                                        <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                                                        </span>
+                                                        <button class="add-to-cart_inc" data-test-id="plus-button"></button>
+                                                    </div>
+                                                </div>
                                                 </li>
                                             </ul>
                                             <div class="actions">
-                                                <button class="btn-checkout" title="Checkout" type="button" onClick="window.location = checkout.html"><span>Checkout</span></button>
+                                                <button class="btn-checkout" title="Checkout" type="button" onClick="window.location = <?=$this->basePath()?>/index.php/application/index/checkout"><span>Checkout</span></button>
                                             </div>
                                             <!--actions-->
                                         </div>

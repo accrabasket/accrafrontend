@@ -37,8 +37,10 @@ class IndexController extends AbstractActionController
         $this->view->marchantList = $this->getMarchantList();
         $this->view->banner = $this->banner();
         $this->view->cityList = $this->session['city_list'];
-        $this->view->categoryList = $this->session['category_list'];
+        $postParams['product_type'] = array('offers','hotdeals'); 
+        $productData = $this->productlistAction($postParams);
         $GLOBALS['hidemenu'] = 1;
+        $this->view->productDataList = json_decode($productData, true);
         return $this->view;
     }
     
@@ -99,10 +101,12 @@ class IndexController extends AbstractActionController
         return $this->view;
     }
     
-    public function productlistAction(){
+    public function productlistAction($postParam = array()){
         $postParams = (array) $this->getRequest()->getPost();
         if(!empty($postParams['product_type'])) {
             $postParams['product_type'] = explode(',', $postParams['product_type']);
+        }else if(!empty($postParam['product_type'])) {
+            $postParams['product_type'] = $postParam['product_type'];
         }
         $postParams['method'] = 'productlist';
         
@@ -115,7 +119,9 @@ class IndexController extends AbstractActionController
         $postParams['pagination'] = 1;
         $postParams['page'] = !empty($postParams['page'])?$postParams['page']:1;
         $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
-        
+        if(!empty($postParams['product_type'])) {
+            return $getProduct;
+        }
         echo $getProduct;
         exit;
     }

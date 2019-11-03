@@ -31,8 +31,7 @@ app.controller('index', function ($scope, $http,$timeout) {
         });
     }
     $scope.productType = ['offers', 'hotdeals'];
-    $scope.productlist($scope.productType);
-    $scope.productlist(['new_arrival']);    
+    $scope.productlist($scope.productType);  
 });
 
 var slidingWidth = 0;

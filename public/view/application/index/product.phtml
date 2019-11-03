@@ -30,7 +30,7 @@
                     <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in productDataList track by $index">
                         <div class="item-inner">
                             <div class="item-img">
-                                <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
+                                <div class="item-img-info" style="height: 290px;"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
 
                                     <div class="item-box-hover">
                                     </div>
@@ -71,7 +71,7 @@
                                                 <span class="regular-price" id="product-price-1"><span class="price">GHC {{product.attribute[quantity[product.product_id]].actual_price}}</span> </span> 
                                             </div>
                                         </div>
-                                        <div class="add_cart add-to-cart">
+                                        <div class="add_cart add-to-cart" style="height:25px;">
                                             <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="button btn-cart" type="button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"><span>Add to Cart</span></button>
                                             
                                             <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                     </li>
                 </ul>
             </div>
