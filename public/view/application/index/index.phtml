@@ -91,42 +91,6 @@
     </div>
     <!--Category silder End--> 
 
-    <div id="top">
-        <div class="container">
-            <div class="row">
-                <ul>
-                    <li>
-                        <div>
-                            <a href="#" data-scroll-goto="1">
-                                <img src="public/images/speakers.png" alt="promotion-banner1">
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <a href="#" data-scroll-goto="2">
-                                <img src="public/images/schedule.png" alt="promotion-banner2">
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <a href="#" data-scroll-goto="3">
-                                <img src="public/images/details.png" alt="promotion-banner3">
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
     <!-- best Pro Slider -->
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
@@ -137,34 +101,35 @@
             <div id="best-seller" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 products-grid">
                     <?php
-                    foreach($this->productDataList['data'] as $row) {
+                    //echo "<pre>";print_r($this->productDataList);die;
+                    ///$this->productDataList[productImageData][$product[product_id][0][type]
+                    ///$product[product_id]/
+                    //$this->productDataList[productImageData][$product[product_id][0][image_name]
+                    foreach($this->productDataList['data'] as $product) {
+                        $productImageDetails = $this->productDataList['productImageData'][$product['product_id']][0];
                     ?>
                     <div class="item">
                             <div class="item-inner">
-                              <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image"><img src="<?=$this->basePath()?>/public/products-images/p6.jpg" alt="Retis lapen casen"></a>
+                              <div class="item-img" style="height:216px;overflow: hidden">
+                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image">
+                                        <img src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="Retis lapen casen"></a>
                                   <div class="new-label new-top-left">New</div>
-                                  <div class="item-box-hover">
-                                    <div class="box-inner">
-                                      <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                      <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                      
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
+                              </div>                                 
                               <div class="item-info">
                                 <div class="info-inner">
-                                  <div class="item-title"><a href="product-detail.html" title="Retis lapen casen">Retis lapen casen</a> </div>
+                                  <div class="item-title"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=$product['product_id']-quantity[$product['product_id']]" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
                                   <div class="item-content">
-                                    <div class="rating">
-                                      <div class="ratings">
-                                        <div class="rating-box">
-                                          <div class="rating" style="width:80%"></div>
-                                        </div>
-                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                      </div>
-                                    </div>
+                                      <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
+
+                                            <?php
+                                            foreach ($product['attribute'] as $value) {
+                                                echo "<option value=$value[attribute_id]>" . $value['quantity'] .$value['unit']. "</option>";
+                                            }
+                                            ?>
+                                                 
+                                          </select>
+                                    
                                     <div class="item-price">
                                       <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
                                     </div>
@@ -184,154 +149,6 @@
       </div>
     </div>
     </section>
-
-
-
-    <!-- Home Lastest Blog Block -->
-    <div class="latest-blog wow bounceInUp animated animated container">
-        <!--exclude For version 6 -->
-
-        <!--For version 1,2,3,4,5,6,8 -->
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4 blog-post">
-                <div class="blog_inner">
-                    <div class="blog-img"> <a href="blog-detail.html"> <img src="public/images/blog-img1.jpg" alt="blog image"> </a>
-                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                    </div>
-                    <!--blog-img-->
-                    <div class="blog-info">
-                        <div class="post-date">
-                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">14 <br> April</time>
-                        </div>
-                        <h3><a href="blog-detail.html">Lorem ipsum dolor sit amet, consectetur adipiscing</a></h3>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada ...</p>
-                        <a class="readmore" href="blog-detail.html">Read More</a> </div>
-                </div>
-                <!--blog_inner-->
-            </div>
-            <!--col-lg-4 col-md-4 col-xs-12 col-sm-4-->
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4 blog-post">
-                <div class="blog_inner">
-                    <div class="blog-img"> <a href="blog-detail.html"> <img src="public/images/blog-img2.jpg" alt="blog image"> </a>
-                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                    </div>
-                    <!--blog-img-->
-                    <div class="blog-info">
-                        <div class="post-date">
-                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">14 <br> April</time>
-                        </div>
-                        <h3><a href="blog-detail.html">Lorem ipsum dolor sit amet, consectetur adipiscing</a></h3>
-
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada ...</p>
-                        <a class="readmore" href="blog-detail.html">Read More</a> </div>
-                </div>
-                <!--blog_inner-->
-            </div>
-
-            <!--col-lg-4 col-md-4 col-xs-12 col-sm-4-->
-            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4 blog-post">
-                <div class="blog_inner">
-                    <div class="blog-img"> <a href="blog-detail.html"> <img src="public/images/blog-img3.jpg" alt="blog image"> </a>
-                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                    </div>
-                    <!--blog-img-->
-                    <div class="blog-info">
-                        <div class="post-date">
-                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">14 <br> April</time>
-                        </div>
-                        <h3><a href="blog-detail.html">Lorem ipsum dolor sit amet, consectetur adipiscing</a></h3>
-
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada ...</p>
-                        <a class="readmore" href="blog-detail.html">Read More</a> </div>
-                </div>
-                <!--blog_inner-->
-            </div>
-            <!--col-lg-4 col-md-4 col-xs-12 col-sm-4-->
-
-
-        </div>
-        <!--END For version 1,2,3,4,5,6,8 -->
-        <!--exclude For version 6 -->
-        <!--container-->
-    </div>
-
-    <!-- Logo Brand Block -->
-    <div class="brand-logo wow bounceInUp animated">
-        <div class="container">
-            <div class="row">
-                <div class="logo-brand col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="new_title">
-                        <h2>Brand Logo</h2>
-                    </div>
-                    <div class="slider-items-products">
-                        <div id="brand-slider" class="product-flexslider hidden-buttons">
-                            <div class="slider-items slider-width-col6">
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo7.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo2.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo1.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo4.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo5.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo6.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo3.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo2.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo1.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo4.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo5.png" alt="Image"></a></div>
-                                    <div class="logo-item"><a href="#"><img src="public/images/b-logo6.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 testimonials-section">
-                    <div class="offer-slider parallax parallax-2">
-                        <ul class="bxslider">
-                            <li>
-                                <div class="avatar"><img src="public/images/photo.jpg" alt="Image"></div>
-                                <div class="testimonials">"Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer."</div>
-                                <div class="clients_author">	Smith John	<span>Happy Customer</span>	</div>
-                            </li>
-                            <li>
-                                <div class="avatar"><img src="public/images/photo1.jpg" alt="Image"></div>
-                                <div class="testimonials">"Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer."</div>
-                                <div class="clients_author">	Karla Anderson	<span>Happy Customer</span>	</div>
-                            </li>
-                            <li>
-                                <div class="avatar"><img src="public/images/photo.jpg" alt="Image"></div>
-                                <div class="testimonials">"Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer."</div>
-                                <div class="clients_author">	Smith John	<span>Happy Customer</span>	</div>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function () {
