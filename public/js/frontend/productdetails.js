@@ -4,7 +4,7 @@ app.controller('productdetails', function ($scope, $http, $timeout) {
     $scope.ajaxLoadingData = false;
     $scope.loginData = {};
 
-    $scope.addtocart = function (product_id, product_name,merchant_inventry_id) {
+    /*$scope.addtocart = function (product_id, product_name,merchant_inventry_id) {
         var cartData = {};
         cartData.number_of_item = 1;
         cartData.action = 'add';
@@ -44,7 +44,7 @@ app.controller('productdetails', function ($scope, $http, $timeout) {
         }else{
             alert(error);
         }
-    }
+    }*/
     
     $scope.proceedtocheckout = function(){
         var path = serverAppUrl + '/checkout';

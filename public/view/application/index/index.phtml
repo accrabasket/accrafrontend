@@ -107,6 +107,8 @@
                     //$this->productDataList[productImageData][$product[product_id][0][image_name]
                     foreach($this->productDataList['data'] as $product) {
                         $productImageDetails = $this->productDataList['productImageData'][$product['product_id']][0];
+                        foreach ($product['attribute'] as $value) {
+                            //echo "<pre>";print_r($value);die;
                     ?>
                     <div class="item">
                             <div class="item-inner">
@@ -118,20 +120,19 @@
                               </div>                                 
                               <div class="item-info">
                                 <div class="info-inner">
-                                  <div class="item-title"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=$product['product_id']-quantity[$product['product_id']]" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
+                                  <div class="item-title"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
                                   <div class="item-content">
                                       <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
 
                                             <?php
-                                            foreach ($product['attribute'] as $value) {
+                                            
                                                 echo "<option value=$value[attribute_id]>" . $value['quantity'] .$value['unit']. "</option>";
-                                            }
                                             ?>
                                                  
                                           </select>
                                     
                                     <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                      <div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
                                     </div>
 									<div class="add_cart">
                                         <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
@@ -142,6 +143,7 @@
                             </div>
                           </div>
                     <?php
+                        }
                     }
                     ?>
           <!-- End Item --> 
