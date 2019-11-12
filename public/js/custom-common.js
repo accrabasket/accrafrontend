@@ -25,7 +25,7 @@ function fillInAddress() {
 var app = angular.module('app', ['ui.bootstrap']);
 
 app.controller('cartcontroller', function ($scope, $http, $rootScope) {
-    $scope.totalItemInCart = 0;
+    $rootScope.totalItemInCart = 0;
     $rootScope.cartResponse = {};
     $rootScope.cartResponse.productImageData = {};
     $scope.cartItem = {};
@@ -35,20 +35,24 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
             url: serverAppUrl + '/viewcart',
             headers: {'Content-Type': 'application/json'},
         }).success(function (response) {
+            $rootScope.totalPrice = 0;
             $rootScope.cartResponse = {};
-            $scope.totalItemInCart = 0;
+            $rootScope.totalItemInCart = 0;
             if(response.status=='success') {
                 $rootScope.cartResponse = response; 
                 $scope.countItemInCart();
             }
         });        
     }
-    $scope.cartList();
+    $scope.cartList();   
     $scope.countItemInCart = function() {
-        $scope.totalItemInCart = 0;
+        $rootScope.totalItemInCart = 0; 
+        var totalPrice = 0;
         angular.forEach($rootScope.cartResponse.data, function(value, key){
-            $scope.totalItemInCart = $scope.totalItemInCart+1
-        });        
+            $rootScope.totalItemInCart = $rootScope.totalItemInCart+1
+            totalPrice +=  value.number_of_item*$rootScope.cartResponse.productDetails.data[key].price;
+        });   
+        $rootScope.totalPrice = totalPrice.toFixed(2);
     }
     
     $rootScope.addToCart = function(inventory_id, product_name, action, number_of_item, checkoutpage) {
@@ -105,3 +109,4 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
 	
     }
 });
+

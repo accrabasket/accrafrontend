@@ -113,8 +113,8 @@
                     <div class="item">
                             <div class="item-inner">
                               <div class="item-img" style="height:216px;overflow: hidden">
-                                <div class="item-img-info"><a href="product-detail.html" title="Retis lapen casen" class="product-image">
-                                        <img src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="Retis lapen casen"></a>
+                                  <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>" class="product-image">
+                                        <img src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>
                                   <div class="new-label new-top-left">New</div>
                                 </div>
                               </div>                                 

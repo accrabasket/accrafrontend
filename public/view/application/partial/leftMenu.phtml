@@ -50,7 +50,7 @@
         </div>
         <!--side-nav-categories-->
         
-        <div class="custom-slider">
+<!--        <div class="custom-slider">
           <div>
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
@@ -80,16 +80,16 @@
               </div>
               <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only">Next</span> </a></div>
           </div>
-        </div>
+        </div>-->
        
-        <div class="block block-list block-cart"  ng-controller="cartcontroller" >
+        <div class="block block-list block-cart"   >
           <div class="block-title"> My Cart </div>
           <div class="block-content">
             <div class="summary">
-              <p class="amount">There is <a href="#">1 item</a> in your cart.</p>
-              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$299.00</span> </p>
+              <p class="amount">There is <a href="#">{{totalItemInCart}} item's</a> in your cart.</p>
+              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">GHC{{totalPrice}}</span> </p>
             </div>
-            <div class="ajax-checkout">
+            <div class="ajax-checkout" ng-if="totalItemInCart">
               <button type="button" title="Checkout" class="button button-checkout" onClick="window.location = '<?=$this->basePath()?>/index.php/application/index/checkout'"> <span>Checkout</span> </button>
             </div>
             <p class="block-subtitle">Recently added item(s)</p>
@@ -102,8 +102,8 @@
                     <i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                     <!--access--> 
                     
-                    <strong>1</strong> x <span class="price">$299.00</span>
-                    <p class="product-name"><a href="#">Name</a></p>
+                    <strong>{{cartItem.number_of_item}}</strong> x <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+                    <p class="product-name"><a href="javascript::void(0)">{{cartItem.item_name}}</a></p>
                   </div>
                   <!--product-details-bottoms--> 
                 </div>
