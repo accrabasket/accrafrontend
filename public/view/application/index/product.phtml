@@ -39,12 +39,25 @@
                         <h2 class="product-name">
                             <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}">{{product.product_name}}</a>
                         </h2>
+                          <div>                    
+                              <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                                  <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
+                                      {{setAttribute(attributeDetails, $index)}}
+                                      {{attributeDetails.quantity}} {{attributeDetails.unit}}
+                                  </option>
+                              </select>  
+                          </div> 
                         <div class="price-box">
-                          <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p>
-                          <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> $222.99 </span> </p>
+                            <p class="old-price" ng-if="product.attribute[quantity[product.product_id]].price != product.attribute[quantity[product.product_id]].actual_price"> <span class="price-label"></span> <span id="old-price-212" class="price">GHC {{product.attribute[quantity[product.product_id]].price}}</span> </p>
+                          <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> GHC {{product.attribute[quantity[product.product_id]].actual_price}} </span> </p>
                         </div>
                         <div class="actions">
-                          <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                            <button ng-if="!cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item" class="button btn-cart" type="button" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"><span>Add to Cart</span></button>
+                            <span ng-if="cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item">
+                                <i class="fa fa-plus green-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'add', 1)"></i> 
+                                <b>&nbsp;{{cartResponse.data[product.attribute[quantity[product.product_id]].id].number_of_item}}&nbsp;</b>
+                                <i class="fa fa-minus red-text" ng-click="addToCart(product.attribute[quantity[product.product_id]].id, product.product_name, 'delete', 1)"></i>                       
+                            </span>
                         </div>
                       </div>
                     </li>    
