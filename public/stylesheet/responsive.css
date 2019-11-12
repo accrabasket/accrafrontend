@@ -254,7 +254,7 @@ width:300px;
 	height: 25px;
 }
 .products-list .product-image {
-	width: 100%;
+	width: 30%;
 }
 .language-currency {
 	margin-left: 0;
@@ -625,7 +625,7 @@ top40%
 	display: none;
 }
 .products-list .product-shop {
-	width: 100%;
+	width: 65%;
 	margin: 10px 0;
 }
 .col-left .block-cart .block-content ul li .product-details {
