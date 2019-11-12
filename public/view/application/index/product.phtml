@@ -40,7 +40,7 @@
                             <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}">{{product.product_name}}</a>
                         </h2>
                           <div>                    
-                              <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" ng-model="quantity[product.product_id]">
+                              <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:145px;" ng-model="quantity[product.product_id]">
                                   <option ng-repeat="attributeDetails in product.attribute track by $index" ng-value="attributeDetails.attribute_id" ng-selected="1">
                                       {{setAttribute(attributeDetails, $index)}}
                                       {{attributeDetails.quantity}} {{attributeDetails.unit}}
