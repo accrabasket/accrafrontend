@@ -28,11 +28,35 @@
                 </div>
             </div>
             <div class="category-products">
-                <ul class="products-grid">
+                <ol class="products-list hidden-md hidden-lg" id="products-list">
+                    <li class="item first" ng-repeat="product in productDataList track by $index">
+                      <div class="product-image"> 
+                          <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}">
+                              <img class="small-image" src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}"> 
+                          </a> 
+                      </div>
+                      <div class="product-shop">
+                        <h2 class="product-name">
+                            <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}">{{product.product_name}}</a>
+                        </h2>
+                        <div class="price-box">
+                          <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p>
+                          <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> $222.99 </span> </p>
+                        </div>
+                        <div class="actions">
+                          <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                        </div>
+                      </div>
+                    </li>    
+                </ol>                
+                <ul class="products-grid hidden-xs hidden-sm">
                     <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6" ng-repeat="product in productDataList track by $index">
                         <div class="item-inner">
                             <div class="item-img">
-                                <div class="item-img-info" style="height: 290px;"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}" class="product-image"><img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}" alt="Retis lapen casen"></a>
+                                <div class="item-img-info" style="height: 290px;">
+                                    <a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id={{product.product_id}}-{{quantity[product.product_id]}}" title="{{product.product_name}}" class="product-image">
+                                        <img src="{{allProductListResponse.imageRootPath}}/{{allProductListResponse.productImageData[product.product_id][0].type}}/{{product.product_id}}/{{allProductListResponse.productImageData[product.product_id][0].image_name}}">
+                                    </a>
 
                                     <div class="item-box-hover">
                                     </div>
