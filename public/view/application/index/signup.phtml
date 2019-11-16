@@ -1,138 +1,57 @@
-  <div class="page-heading">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-     <div class="page-title">
-     <h2>Login or Create an Account</h2>
-  </div>
-        </div>
-        <!--col-xs-12-->
-      </div>
-      <!--row-->
-    </div>
-    <!--container-->
-  </div>
-<div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;" ng-controller="login">     
-
-    <div class="main">                     
-        <div class="account-login container">
-            <!--page-title-->
-
-            <form action="" method="post" id="login-form">
-                <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                <fieldset class="col2-set">
-                    <div class="col-1 new-users"> 
-                        <strong>Registered Customers</strong>    
-                        <div class="content">
-
-                            <p>By Login with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                            <div class="buttons-set">
-                                <button type="button" title="Login" class="button create-account"><a href="<?=$this->basePath()?>/index.php/application/index/login"><span>Login</span></a></button>
+<!DOCTYPE html>
+<html lang="en">
+    <body ng-app="app" ng-controller="signup" ng-cloak="true">
+        <div class="login-page">
+            <div class="container"> 
+                <h3 class="w3ls-title w3ls-title1">Create your account</h3>
+                <h4 class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</h4>
+                <h4 class="danger" style="color:green" ng-show="successShow">{{successMsg}}</h4> 
+                 <div class="clearfix"> </div>
+                 <div class="login-body">
+                    <form method="post">
+                        <input type="text" ng-model="signupData.name" class="user" name="name" placeholder="Enter your Name" required="">
+                        <input type="text" ng-model="signupData.email" class="user" name="email" placeholder="Enter your email" required="">
+						<input type="text" ng-model="signupData.phonecode" class="user" name="phonecode_de" style="width: 20%;float: left;border-right: none;" placeholder="+233" ng-readonly="true">
+                        <input type="text" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" class="user" name="mobile" placeholder="Enter your mobile number" required="" style="width:80%;">
+                        <select class="form-control select2 user" style="width: 100%;" ng-model="signupData.city_id">
+                            <option value=""> Select City</option>
+                        <?php
+                            foreach ($this->cityList as $key => $value) {
+                                echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
+                            }
+                        ?>
+                        </select>
+                        <input type="password" style="margin-top: 20px" ng-model="signupData.password" name="password" class="lock" placeholder="Password" required="">
+                        <input type="submit" value="Sign Up " ng-click="createaccount(signupData)">
+                        <div class="forgot-grid">
+                            <!--<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>-->
+                            <div class="forgot">
+                                <a href="#">Forgot Password?</a>
                             </div>
+                            <div class="clearfix"> </div>
                         </div>
-                    </div>
-                    <div class="col-2 registered-users">
-                        <strong>New Customers</strong>             
-                        <div class="content">
+                    </form>
+                </div>  
+                <h6>Already have an account? <a href="<?=$this->basePath()?>/application/index/login">Login Now »</a> </h6>  
 
-                            <p>If you have not an account with us, please Register.</p>
-                            <ul class="form-list">
-                                <li>
-                                    <label for="name">Enter your Name<em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="text" name="name" ng-model="signupData.name" value="" id="name" class="input-text required-entry validate-name" title="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <label for="email">Email Address<em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="text" name="email" ng-model="signupData.email" value="" id="email" class="input-text required-entry validate-email" title="Email Address">
-                                    </div>
-                                </li>
-                                <li>
-                                    <label for="email">Enter your mobile number<em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="text" ng-model="signupData.phonecode" class=" input-text required-entry validate-number" name="phonecode_de" style="width: 20%;float: left;border-right: none;" placeholder="+233" ng-readonly="true">
-                                        <input type="text" name="number" ng-model="signupData.mobile_number" maxlength="10" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="" id="email" class="input-text required-entry validate-number" title="Email Address">
-                                    </div>
-                                </li>
-                                 <li>
-                                    <label for="email">Select City<em class="required">*</em></label>
-                                    <div class="input-box">
-                                       <select class="form-control select2 user" style="width: 100%;" ng-model="signupData.city_id">
-                                            <option value=""> Select City</option>
-                                        <?php
-                                            foreach ($this->cityList as $key => $value) {
-                                                echo'<option value="'.$value['id'].'">'.$value['city_name'].'</option>';
-                                            }
-                                        ?>
-                                         </select>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <label for="pass">Password<em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="password"  name="password" ng-model="signupData.password" class="input-text required-entry validate-password" id="pass" title="Password">
-                                    </div>
-                                </li>
-                            </ul>
-                            
-
-                            <p class="required">* Required Fields</p>
-
-
-
-                            <div class="buttons-set">
-
-                                <button class="button login" title="Login" name="send" id="send2" ng-click="createaccount(signupData)"><span>Regiter</span></button>
-                                
-
-                                
-                            </div> <!--buttons-set-->
-                        </div> <!--content-->                               
-                    </div> <!--col-2 registered-users-->
-                </fieldset> <!--col2-set-->
-            </form>
-
-        </div> <!--account-login-->
-
-    </div><!--main-container-->
-
-</div> 
-
-
-
-
-<div class="our-features-box wow bounceInUp animated animated">
-    <div class="container">
-        <ul>
-            <li>
-                <div class="feature-box free-shipping">
-                    <div class="icon-truck"></div>
-                    <div class="content">FREE SHIPPING on order over $99</div>
+                <div class="login-page-bottom social-icons">
+                    <!--<h5>Recover your social account</h5>-->
+                    <ul>
+                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
+                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
+                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
+                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
+                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
+                    </ul> 
                 </div>
-            </li>
-            <li>
-                <div class="feature-box need-help">
-                    <div class="icon-support"></div>
-                    <div class="content">Need Help +1 800 123 1234</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box money-back">
-                    <div class="icon-money"></div>
-                    <div class="content">Money Back Guarantee</div>
-                </div>
-            </li>
-            <li class="last">
-                <div class="feature-box return-policy">
-                    <div class="icon-return"></div>
-                    <div class="content">30 days return Service</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-<script src="<?php echo $this->basePath() . '/public/js/frontend/login.js?v=0.01' ?>">
+            </div>
+        </div>
+        <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+            <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?=$this->basePath()?>/public/images/loading_cart.gif">
+        </div>
+        <!-- //login-page --> 
+    </body>
+</html>
+<link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/css/style.css">
+<script src="<?php echo $this->basePath() . '/public/js/frontend/signup.js' ?>">
 </script>

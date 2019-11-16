@@ -1206,6 +1206,9 @@ top40%
 .products-list .product-image {
 	width: 35%;
 }
+.product-shop select{
+    width:145px !important;
+}
 .footer-bottom .company-links li {
 	float: left;
 	margin: 8px 15px 0px 0;
