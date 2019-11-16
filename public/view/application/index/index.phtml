@@ -9,12 +9,12 @@
                             $bannerPath = $this->banner['imageRootPath'] . "/" . $bannerDetails['image_name'];
                             ?>
                             <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb="<?= $bannerPath ?>"><img src='<?= $bannerPath ?>'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image1" />
-                                <div class="info">
+<!--                                <div class="info">
                                     <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='180'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'><span>Get 50% off</span></div>
                                     <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>Simply <span>delicious</span></div>
                                     <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='550'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="buy-btn">Shop Now</a></div>
                                     <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Little things make a big difference</div>
-                                </div>
+                                </div>-->
                             </li> 
                             <?php
                         }
@@ -97,7 +97,6 @@
             <div class="new_title">
                 <h2>Best Seller</h2>
             </div>
-      <div class="cate-banner-img"><img src="<?=$this->basePath()?>/public/images/category-banner.jpg" alt="Retis lapen casen"></div>
             <div id="best-seller" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 products-grid">
                     <?php
@@ -134,8 +133,13 @@
                                     <div class="item-price">
                                       <div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
                                     </div>
-									<div class="add_cart">
-                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+				      <div class="add_cart">
+<!--                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?= $id ?>','<?= $this->productDetails['product_name'] ?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
+                                            <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
+                                                <i class="fa fa-plus green-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'add', 1)"></i> 
+                                                <b>&nbsp;{{cartResponse.data['<?= $id ?>'].number_of_item}}&nbsp;</b>
+                                                <i class="fa fa-minus red-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'delete', 1)"></i>                       
+                                            </span>-->
                                       </div>
                                   </div>
                                 </div>
@@ -210,6 +214,14 @@
         });
     });
 </script>
+<style>
+    .ex1{
+         margin-top:auto;
+/*        margin-right: 150px;
+        margin-bottom: 25px;
+        margin-left: 45px;*/
+    }
+</style>
 
 
 
