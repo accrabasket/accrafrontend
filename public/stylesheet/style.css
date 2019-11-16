@@ -672,9 +672,17 @@ ul#cart-sidebar .btn-edit {padding: 0px 0px; border:none; display:block; text-al
 	text-align: left;
 }
 .mini-products-list .product-details {
-	margin-left: 80px;
-	padding: 0;
+    margin-left: 27px;
+    padding: 0;
+    float: left;
 }
+.access {   
+    float: right;
+    margin-right: 5px;
+    margin-top :10px;
+}
+.green-text{color: #009933; border:1px solid #999; border-radius:100%;padding: 3px 5px;}
+.red-text{color:#FF3300; border:1px solid #999; border-radius:100%; padding: 3px 5px;}
 .fl-mini-cart-content .product-details .btn-remove {
 	position: absolute;
 	right: 10px;
@@ -9293,7 +9301,6 @@ button.button.coupon:before {
 .checkout {
 	color: #666666;
 	padding-top: 5px;
-	text-align: center;
 	list-style: none;
 	padding: 0;
 	margin: 0;

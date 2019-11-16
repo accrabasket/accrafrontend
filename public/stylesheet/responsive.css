@@ -433,9 +433,6 @@ ul.navmenu {
 	padding: 0px;
 	margin: auto;
 }
-.mini-cart .basket a span {
-	display: none;
-}
 .mini-cart .basket a {
 	margin: 0px;
 	font-size: 14px;
