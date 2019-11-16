@@ -4067,7 +4067,7 @@ h3.w3ls-title.w3ls-title1 {
     margin-bottom: 0px;
     border: 1px solid transparent;
 }
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+.nav1 .open > a, .nav1 .open > a:hover, .nav1 .open > a:focus {
     color: #fff;
 }
 .navbar-default {
@@ -4149,15 +4149,18 @@ ul.cart-column-dropdown h6 {
     width: 40px;
 }
 /*8-12-17 Css End Here */
-
-.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+.nav1{
+    list-style: none;
+    margin-right:20px;
+}
+.nav1 .open > a, .nav1 .open > a:hover, .nav1 .open > a:focus {
     background: none;
     border: none;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     background-color: transparent;
 }
-.nav > li > a:hover, .nav > li > a:focus {
+.nav1 > li > a:hover, .nav1 > li > a:focus {
     background: none;
 	color:#fff !important;
 }
@@ -4253,7 +4256,7 @@ a.button:active, a.button:focus, a.button:hover, input.button:active, input.butt
 .nav-tabs-custom > .nav-tabs > li {
   border-top: 3px solid transparent;
   margin-bottom: -2px;
-  margin-right: 5px;
+  margin-right: 25px;
 }
 .nav-tabs-custom > .nav-tabs > li.disabled > a {
   color: #777;

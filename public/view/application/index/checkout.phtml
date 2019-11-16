@@ -57,6 +57,7 @@
                     <ul class="nav1 nav-tabs">
                         <li ng-repeat="(key, deliveryTimeSlot) in deliverTimeSlotList" ng-class="$index==0?'active':''" ng-init="$index==0?selectDeliveryDate(key):''"><a href="#tab_1" data-toggle="tab" ng-click="selectDeliveryDate(key)">{{key}}</a></li>
                     </ul>
+                    <div class="clearfix"></div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
                             <ul class="delivery-slots-list">
