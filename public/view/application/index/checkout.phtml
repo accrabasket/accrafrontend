@@ -54,7 +54,7 @@
                 <h3 class="mb10 font18"><span class="green-circle"><i class="fa fa-check"></i></span> Delivery Date &amp; Time <div class="pull-right"><i ng-show="placeOrderData.time_slot_id" class="fa fa-edit" ng-click="editDeliveryTime()"></i></div></h3>
                 <div class="clearfix mb10"></div>
                 <div class="nav-tabs-custom" ng-show="placeOrderData.shipping_address_id && !payment && !show_shipping_address">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav1 nav-tabs">
                         <li ng-repeat="(key, deliveryTimeSlot) in deliverTimeSlotList" ng-class="$index==0?'active':''" ng-init="$index==0?selectDeliveryDate(key):''"><a href="#tab_1" data-toggle="tab" ng-click="selectDeliveryDate(key)">{{key}}</a></li>
                     </ul>
                     <div class="tab-content">
