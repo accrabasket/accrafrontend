@@ -11,7 +11,7 @@
                 $display = '';
                 foreach ($GLOBALS['category_list']['data'] as $category){    
                     if (!empty($category['category_name'])) {
-                        if($GLOBALS['category_id'] == $category['id']) {
+                        if(!empty($GLOBALS['category_id']) && $GLOBALS['category_id'] == $category['id']) {
                             $expandClass = 'minus';
                             $display = 'block';   
                         }

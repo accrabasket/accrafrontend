@@ -97,6 +97,7 @@ class IndexController extends AbstractActionController
         if(!empty($request['product_type'])){
             $searchParams['product_type'] = $request['product_type'];
         }        
+        		//print_r($searchParams);die;
         $this->view->searchBy = $searchParams;
         return $this->view;
     }

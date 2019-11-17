@@ -132,6 +132,7 @@ website:   	http://www.themesmart.net/
 .fullwidthbanner-container .fullwidthabanner {
 	width: 100%;
 	margin: auto;
+        margin-top:130px;
 }
 .tp-simpleresponsive .slotholder *, .tp-simpleresponsive img {
 }

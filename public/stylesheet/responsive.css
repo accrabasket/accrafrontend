@@ -25,6 +25,10 @@ website:   	http://www.themesmart.net/
     /* background-color: #fff; */
     clear: both;
 }
+.fullwidthbanner-container .fullwidthabanner {
+	width: 100%;
+	margin: auto;
+}
 
 #thm-mart-slideshow {margin:0px}
 #thm-mart-slideshow:before {left: -500px;}
@@ -954,6 +958,10 @@ footer .newsletter-row {
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 #fade{ display: none !important; }
+.fullwidthbanner-container .fullwidthabanner {
+	width: 100%;
+	margin: auto;
+}
 .logo {
     text-align: center;
     padding-bottom: 0px;

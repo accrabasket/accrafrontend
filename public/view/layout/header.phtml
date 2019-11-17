@@ -239,14 +239,14 @@
                                 </div>
                                 <!--mini-cart-->
                                 <div class="collapse navbar-collapse">
-                                    <form class="navbar-form" role="search">
+                                    <form class="navbar-form" role="search" action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search">
+                                            <input type="text" class="form-control" placeholder="Search" name="search">
                                             <span class="input-group-btn">
                                                 <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
                                             </span> </div>
                                     </form>
-                                </div>
+                                </div>   
                                 <!--links-->
                             </div>
                         </div>
