@@ -73,7 +73,10 @@
                                     $categoryImagePath = $GLOBALS['category_list']['imageRootPath'] . '/' . $categoryImageDetails['type'] . '/' . $categoryImageDetails['image_id'] . '/' . $categoryImageDetails['image_name'];
                                     ?>
                                     <div class="item">
-                                        <div class="pro-img"> <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>"><img src="<?= $categoryImagePath ?>"  alt="Retis lapen casen" </a>
+                                        <div class="pro-img">
+                                            <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
+                                                <img src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+                                            </a>
                                             <div class="pro-info"><?= $category['category_name'] ?></div>
                                         </div>
                                     </div>              
