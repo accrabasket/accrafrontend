@@ -170,6 +170,55 @@ jQuery(document).ready(function() {
     function deleteCartInSidebar() {
         return is_checkout_page > 0 ? !1 : void jQuery("#cart-sidebar a.btn-remove, #mini_cart_block a.btn-remove").each(function() {})
     }
+    
+    function initializemap() {
+          var input = document.getElementById('searchTextField');
+		  var query = {componentRestrictions: {country: "gh"}};
+          var autocomplete = new google.maps.places.Autocomplete(input,query);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var placeg = autocomplete.getPlace();
+				console.log(placeg);
+             jQuery.ajax({
+            method: 'POST',
+            url: serverAppUrl + '/setcity',
+            data: {'lattitude':placeg.geometry.location.lat(),'langitude':placeg.geometry.location.lng(),'city':placeg.formatted_address},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+		jQuery('#locatonerror').remove();
+            if(response>0){
+                jQuery("#selectcity").modal('hide');
+                location.reload();
+            }else{
+			jQuery('#searchTextField').after("<div class='error' id='locatonerror'>service not available these area. choose to another place</div>");
+			}
+        });        
+  
+            });
+        }
+function initializemap1() {
+          var input = document.getElementById('cityname2');
+		  var query = {componentRestrictions: {country: "gh"}};
+          var autocomplete = new google.maps.places.Autocomplete(input,query);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var placeg = autocomplete.getPlace();
+				console.log(placeg);
+             jQuery.ajax({
+            method: 'POST',
+            url: serverAppUrl + '/setcitytmp',
+            data: {'lattitude':placeg.geometry.location.lat(),'langitude':placeg.geometry.location.lng(),'city':placeg.formatted_address},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+		jQuery('#locatonerror1').remove();
+            if(response>0){
+            }else{
+			jQuery('#searchTextField').after("<div class='error' id='locatonerror1'>service not available these area. choose to another place</div>");
+			}
+        });        
+  
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initializemap);
+		google.maps.event.addDomListener(window, 'load', initializemap1);
 
 })
 
