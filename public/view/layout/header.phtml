@@ -58,16 +58,23 @@
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.bxslider.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/owl.carousel.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.mobile-menu.min.js"></script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCneJAKb3o_UqKuVoIBPcTlWJLzNt6lTqo&libraries=places"></script>
     </head>
     <body>    
         <div id="page"  ng-app="app">
             <header>
                 <div class="header-banner">
                     <div class="assetBlock">
-                        <div style="height: 20px; overflow: hidden;" id="slideshow">
+<!--                        <div style="height: 20px; overflow: hidden;" id="slideshow">
                             <p style="display: block;">HOT DAYS! - <span>50%</span> GET READY FOR SUMMER! &gt;</p>
                             <p style="display: none;">SALE UP TO <span>40%</span> HURRY LIMITED OFFER! &gt;</p>
-                        </div>
+                        </div>-->
+                      <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+				<input id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
+				<input type="hidden" id="city2" name="city2" />
+				<input type="hidden" id="cityLat" name="cityLat" />
+				<input type="hidden" id="cityLng" name="cityLng" />
+		     </div>   
                     </div>
                 </div> 
                 <div id="header">
@@ -250,7 +257,12 @@
                                 <!--links-->
                             </div>
                         </div>
-                    </div>	
+                    </div>
                 </div>
-
+   
             </header>
+            <script>
+    var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
+    var city = 0;
+</script>
+
