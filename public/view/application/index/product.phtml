@@ -5,9 +5,9 @@
                 <div class="sorter">
                     
                 </div>
-                <div id="sort-by">
-                    <label class="left">Sort By: </label>
-                  <ul>
+                <div id="sort-by" >
+                     <label class="left">Sort By:</label>
+                 <!--<ul>
                         <li><a href="#">Position<span class="right-arrow"></span></a>
                             <ul>
                                 <li><a href="#">Name</a></li>
@@ -15,10 +15,19 @@
                                 <li><a href="#">Position</a></li>
                             </ul>
                         </li>
-                    </ul>
-                       
+                    </ul>-->
+                    <select ng-change="shortBy()" ng-model="shortByData">
+                        <option value="relevence">Relevance</option>
+                        <option value="asc">Low to High</option>
+                        <option value="desc">High to Low</option>
+                        <!--<option>Name (A To Z)</option>-->
+                    </select>                       
 
-                    <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
+                    <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a>
+                </div>
+                <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">
+                    <img style="position: absolute; top: 40%; left: 45%; width: 250px; " alt="loader" src="<?= $this->basePath() ?>/public/images/loading_cart.gif">
+                </div>
                 <div class="pager">                    
                     <div class="pages">
                         <label>Page:</label>
