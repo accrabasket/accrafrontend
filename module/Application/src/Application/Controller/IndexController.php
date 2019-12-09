@@ -578,12 +578,20 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
 	function setcityAction() {
         $postParams = (array) $this->getRequest()->getPost();
         //$this->session['city'] = $postParams['city'];
+        if(empty($postParams['city'])) {
+            $postParams['city'] = '';
+        }
 		$postParamsr = ['method' => 'getCityIdByAddressOrLatLng', 'address' => $postParams['city'], 'lat' => $postParams['lattitude'], 'lng' => $postParams['langitude']];
 		$response = $this->commonObj->curlhitApi($postParamsr,'application/index');
-		$response = json_decode($response,true);
+		$response = json_decode($response,true);  
+                
+                if(!empty($postParams['city'])) {
+                    $this->session['fcityaddress'] = $postParams['city'];
+                }else {
+                    $this->session['fcityaddress'] = $response['data']['city'];
+                }
 		if($response['data']['id']){
-		$this->session['city'] = $response['data']['id'];
-		$this->session['fcityaddress'] = $postParams['city'];
+		$this->session['city'] = $response['data']['id'];		
 		echo "1";
 		}else{
 		echo "0";
