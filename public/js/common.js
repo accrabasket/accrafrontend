@@ -194,7 +194,7 @@ jQuery(document).ready(function() {
         });        
   
             });
-        }
+        }               
 function initializemap1() {
           var input = document.getElementById('cityname2');
 		  var query = {componentRestrictions: {country: "gh"}};
@@ -385,4 +385,23 @@ jQuery(window).on("load", function() {
                 })
             })
           
-    }(jQuery);    
+    }(jQuery);  
+    
+    function getcity(lat, lng) {
+    jQuery.ajax({
+        method: 'POST',
+        url: serverAppUrl + '/setcity',
+        data: {'lattitude': lat, 'langitude': lng},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }).success(function (response) {
+        jQuery('#locatonerror').remove();
+        if (response > 0) {
+            jQuery("#selectcity").modal('hide');
+            location.reload();
+        } else {
+            alert('service not available these area. choose to another place');
+            location.reload();
+            //jQuery('#searchTextField').after("<div class='error' id='locatonerror'>service not available these area. choose to another place</div>");
+        }
+    });
+} 
