@@ -40,8 +40,8 @@
               <div><a href="index.html"><img src="<?=$this->basePath()?>/public/images/logo-big.png" alt="footer logo"></a></div>
               <address>
               <div><em class="icon-location-arrow"></em> <span> No.6, First Floor, Oxford Street Above GCB bank Net to Barclays Bank Osu, Accra Ghana.</span></div>
-              <div> <em class="icon-mobile-phone"></em><span> +233 553 251 740</span></div>
-              <div> <em class="icon-envelope"></em><span>info@afrobaskets.com/</span></div>
+              <div> <em class="icon-mobile-phone"></em><span> +233553354848</span></div>
+              <div> <em class="icon-envelope"></em><span>customersupport@afrobaskets.com</span></div>
               </address>
               
             </div>
@@ -115,3 +115,17 @@
     <!--footer-bottom-->
     <!-- BEGIN SIMPLE FOOTER -->
   </footer>
+<script>
+    <?php 
+    if(empty($GLOBALS['fcityaddress'])) {
+        
+    ?>
+    var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
+    navigator.geolocation.getCurrentPosition(showPosition);
+    function showPosition(position) {
+        getcity(position.coords.latitude, position.coords.longitude);
+    }
+    <?php
+    }
+    ?>
+</script>
