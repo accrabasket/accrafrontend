@@ -590,6 +590,7 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
                 }else {
                     $this->session['fcityaddress'] = $response['data']['city'];
                 }
+                $this->session['city'] = 10000;
 		if($response['data']['id']){
 		$this->session['city'] = $response['data']['id'];		
 		echo "1";
