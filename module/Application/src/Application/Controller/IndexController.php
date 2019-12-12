@@ -282,7 +282,8 @@ class IndexController extends AbstractActionController
     }    
     public function createuserAction() {
         $postParams = (array) $this->getRequest()->getPost();
-		$postParams['mobile_number'] = $postParams['phonecode'].$postParams['mobile_number'];
+        $postParams['phone_number'] = $postParams['mobile_number'];
+        $postParams['mobile_number'] = $postParams['phonecode'].$postParams['mobile_number']; 
         $postParams['method'] = 'addedituser';
 		$this->session['tmpuser'] = $postParams;
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
@@ -444,7 +445,9 @@ class IndexController extends AbstractActionController
 			  $data['otp'] = $postParams['otp'];
 			  $data['method'] = 'verifyotp';
 			  $data['otp_type'] = 'register';
-			  $data['mobile_number'] = $this->session['tmpuser']['mobile_number'];
+			  $data['mobile_number'] = $this->session['tmpuser']['phone_number'];
+                          $data['country_code'] = $this->session['tmpuser']['phonecode'];
+                          
 			  $addressList = $this->commonObj->curlhitApi($data,'application/customer');
 			  echo $addressList;
 			  exit;
