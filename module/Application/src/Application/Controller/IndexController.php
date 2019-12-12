@@ -286,8 +286,8 @@ class IndexController extends AbstractActionController
         $postParams['method'] = 'addedituser';
 		$this->session['tmpuser'] = $postParams;
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
-		$gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'mobile_number'=>$postParams['mobile_number']);
-	    $this->commonObj->curlhitApi($gotpdata,'application/customer');
+		//$gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'mobile_number'=>$postParams['mobile_number']);
+	   // $this->commonObj->curlhitApi($gotpdata,'application/customer');
 
         echo $response;
         exit;
