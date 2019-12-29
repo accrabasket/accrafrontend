@@ -56,10 +56,13 @@
                             <p style="display: none;">SALE UP TO <span>40%</span> HURRY LIMITED OFFER! &gt;</p>
                         </div>-->
                       <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
-				<input id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
+                            <div class="btn-group">
+				<input  id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
+                                <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
 				<input type="hidden" id="city2" name="city2" />
 				<input type="hidden" id="cityLat" name="cityLat" />
 				<input type="hidden" id="cityLng" name="cityLng" />
+                            </div>    
 		     </div>   
                     </div>
                 </div> 
