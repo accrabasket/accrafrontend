@@ -84,7 +84,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         $scope.placeOrderData.delivery_date =  deliveryDate;
         $scope.placeOrderData.time_slot_id = '';
         $scope.payment = 0;
-        $(".timeslotradioclass").prop('checked', false);
+        //$(".timeslotradioclass").prop('checked', false);
     }
     
     $scope.selectTimeSlot = function(deliveryTimeSlot) {
@@ -120,8 +120,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         if (address.area == undefined || address.area == '') {
             error = 'Area name should not empty';
         }
-        address.city_id = $('#cityname').val();
-        address.city_name = $("#cityname option:selected").text();
+        address.city_id = jQuery('#cityname').val();
+        address.city_name = jQuery("#cityname option:selected").text();
         if (error == ' ') {
             $scope.ajaxLoadingData = true;
             $http({
@@ -131,7 +131,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
                 $scope.ajaxLoadingData = false;
-                $('#modal-default').modal('hide');
+                jQuery('#modal-default').modal('hide');
                 if (response.status == 'success') {
                     $scope.successShow = true;
                     $scope.successMsg = response.msg ;
@@ -156,12 +156,12 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     }
 
     $scope.SelectPaymentMethod = function () {
-        $("#cartbox").fadeOut();
-        $("#shippingbox").fadeOut();
-        $("#paybox").fadeIn();
+        jQuery("#cartbox").fadeOut();
+        jQuery("#shippingbox").fadeOut();
+        jQuery("#paybox").fadeIn();
 
-        $("#edit-cart").fadeIn();
-        $("#edit-shipping").fadeIn();
+        jQuery("#edit-cart").fadeIn();
+        jQuery("#edit-shipping").fadeIn();
     };
     
     $scope.PlaceOrder = function() {
