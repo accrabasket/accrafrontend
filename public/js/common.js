@@ -170,7 +170,10 @@ jQuery(document).ready(function() {
     function deleteCartInSidebar() {
         return is_checkout_page > 0 ? !1 : void jQuery("#cart-sidebar a.btn-remove, #mini_cart_block a.btn-remove").each(function() {})
     }
-    
+    jQuery("#searchclear").click(function(){
+        jQuery("#searchTextField").val('');
+        jQuery("#searchTextField").focus();
+    });    
     function initializemap() {
           var input = document.getElementById('searchTextField');
 		  var query = {componentRestrictions: {country: "gh"}};
