@@ -7,7 +7,7 @@ app.controller('changepassword', function ($scope, $http, $timeout) {
     $scope.changepassword = function (changepasswordData) {
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         var auth = '';
-        auth = $('#auth').val();
+        auth = jQuery('#auth').val();
         
         var error = ' ';
         if (changepasswordData.new_password != changepasswordData.confirm_password) {
