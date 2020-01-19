@@ -17,17 +17,25 @@ class common{
     
     public function curlhitApi($params=null, $controller='application') {
         $queryStr = '';
+        if(!empty($params['rqid'])) {
+            $rqid = $params['rqid'];
+            unset($params['rqid']);
+        }
         if(!empty($params)){
             $queryStr = json_encode($params);
 //            $queryStr = http_build_query($params);
 //            $queryStr = json_encode($queryStr);
         }
         $data['parameters'] = $queryStr;
-        $data['rqid'] = $this->genrateRqid($data['parameters']);
+        if(empty($rqid)){
+            $data['rqid'] = $this->genrateRqid($data['parameters']);
+        }else {
+            $data['rqid'] = $rqid;
+        }
         $url = BASKET_API.$controller;
         $parametes = http_build_query($data);        
-        if($params['method']=='productlist') {
-            //echo $url = $url.'?'.$parametes;die;
+        if($params['method']=='verifyotp') {
+            echo $url = $url.'?'.$parametes;die;
         }        
         
         return $this->cObj->callPostCurl($url, $parametes);
