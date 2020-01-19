@@ -35,7 +35,7 @@ class common{
         $url = BASKET_API.$controller;
         $parametes = http_build_query($data);        
         if($params['method']=='verifyotp') {
-            echo $url = $url.'?'.$parametes;die;
+            //echo $url = $url.'?'.$parametes;die;
         }        
         
         return $this->cObj->callPostCurl($url, $parametes);
