@@ -297,6 +297,16 @@ class IndexController extends AbstractActionController
     public function loginuserAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'login';
+        $redirectionFlag = 0;
+        if(!empty($postParams['email']) && !empty($postParams['mobile_number'])) {
+            if(empty($postParams['request_time'])) {
+                die('Invalid Request');
+            }
+            if(empty($postParams['rqid'])) {
+                die('Invalid Request');
+            }            
+            $redirectionFlag = 1;
+        }
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
         $user = json_decode($response,true);
         if($user['status'] == 'success'){
@@ -307,6 +317,9 @@ class IndexController extends AbstractActionController
             $response = $this->commonObj->curlhitApi($params, 'application/customer');
             $update = json_decode($response,true);
             $this->session['user'] = $data;
+            if($redirectionFlag) {
+                header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+            }
         }
         echo $response;
         exit;
