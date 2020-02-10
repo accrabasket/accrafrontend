@@ -299,15 +299,19 @@ class IndexController extends AbstractActionController
         if(empty($postParams)) {
             $postParams = (array) $this->getRequest()->getQuery();
         }
-        $postParams['method'] = 'login';
+        
         if(!empty($postParams['agentcode']) && !empty($postParams['tokenID'])) {
             
             $postParams = $this->loginUsingEzeepay($postParams);
+            
             if(!empty($postParams['data'])) {
-                $postParams['email'] = $postParams['data']['email'];
-                $postParams['password'] = $postParams['data']['email'].$postParams['data']['name'];
+                $postParams['data'] = array_values($postParams['data']);
+                $postParams['email'] = $postParams['data'][0]['email'];
+                $postParams['password'] = $postParams['data'][0]['email'].$postParams['data'][0]['name'];
             }
         }
+        $postParams['method'] = 'login';
+        
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
         $user = json_decode($response,true);
         if($user['status'] == 'success'){
@@ -348,10 +352,10 @@ class IndexController extends AbstractActionController
         $response['status'] = 'fail';
         if(!empty($ezeepayData['isSuccess']) || empty($ezeepayData['isSuccess'])) {
             $signupData = array();
-            $signupData['name'] = !empty($ezeepayData['result']['firstname'])?$ezeepayData['result']['firstname']:'test';
-            $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:898989898;
-            $signupData['email'] = !empty($ezeepayData['result']['emailid'])?$ezeepayData['result']['emailid']:'test@yopmail.com';
-            $signupData['password'] = $ezeepayData['result']['emailid'].$ezeepayData['result']['firstname'];
+            $signupData['name'] = !empty($ezeepayData['result']['firstname'])?$ezeepayData['result']['firstname']:'test2';
+            $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:8298989898;
+            $signupData['email'] = !empty($ezeepayData['result']['emailid'])?$ezeepayData['result']['emailid']:'test2@yopmail.com';
+            $signupData['password'] = $signupData['email'].$signupData['name'];
             $signupData['method'] = 'addedituser';
             $signupData['city_id'] = 1;
             $signupData['ezeepay_signup'] = 1;
