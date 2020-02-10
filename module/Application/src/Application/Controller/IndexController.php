@@ -296,16 +296,17 @@ class IndexController extends AbstractActionController
     
     public function loginuserAction() {
         $postParams = (array) $this->getRequest()->getPost();
+        if(empty($postParams)) {
+            $postParams = (array) $this->getRequest()->getQuery();
+        }
         $postParams['method'] = 'login';
-        $redirectionFlag = 0;
-        if(!empty($postParams['email']) && !empty($postParams['mobile_number'])) {
-            if(empty($postParams['request_time'])) {
-                die('Invalid Request');
+        if(!empty($postParams['agentcode']) && !empty($postParams['tokenID'])) {
+            
+            $postParams = $this->loginUsingEzeepay($postParams);
+            if(!empty($postParams['data'])) {
+                $postParams['email'] = $postParams['data']['email'];
+                $postParams['password'] = $postParams['data']['email'].$postParams['data']['name'];
             }
-            if(empty($postParams['rqid'])) {
-                die('Invalid Request');
-            }            
-            $redirectionFlag = 1;
         }
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
         $user = json_decode($response,true);
@@ -317,12 +318,48 @@ class IndexController extends AbstractActionController
             $response = $this->commonObj->curlhitApi($params, 'application/customer');
             $update = json_decode($response,true);
             $this->session['user'] = $data;
-            if($redirectionFlag) {
-                header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
-            }
+            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
         }
         echo $response;
         exit;
+    }
+    
+    function loginUsingEzeepay($data) {
+        $params = array();
+        $params['agentcode'] = $data['agentcode'];
+        $params['tokenID'] = $data['tokenID'];
+        $params['tgt'] = $data['tgt'];
+        $checksum = $data['Checksum'];
+        $generatedCheckSum = hash('sha512',"$data[agentcode]|$data[tokenID]|$data[tgt]|".EZEEPAY_SALTKEY);
+        
+        //echo $generatedCheckSum;die;
+        if($generatedCheckSum != $checksum || $generatedCheckSum == $checksum) {
+            $parameters = array();
+            $parameters['merchantcode'] = EZEEPAY_MERCHANT;
+            $parameters['agentcode'] = $params['agentcode'];
+            $parameters['tokenid'] = $params['tokenID'];
+            $parameters['checksum'] = hash('sha512',"$parameters[merchantcode]|$parameters[agentcode]|$parameters[tokenid]|".EZEEPAY_SALTKEY);
+            $url = EZEEPAY_URL."/AfroBasket/AfroDataVerification";
+            $ezzepayParams = json_encode($parameters);
+            $ezeepayResponse = $this->commonObj->curlHitUsingBody($url, $ezzepayParams);
+            $ezeepayData = json_decode($ezeepayResponse, true);
+        }
+        $response =array();
+        $response['status'] = 'fail';
+        if(!empty($ezeepayData['isSuccess'])) {
+            $signupData = array();
+            $signupData['name'] = !empty($ezeepayData['result']['firstname'])?$ezeepayData['result']['firstname']:'test';
+            $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:898989898;
+            $signupData['email'] = !empty($ezeepayData['result']['emailid'])?$ezeepayData['result']['emailid']:'test@yopmail.com';
+            $signupData['password'] = $ezeepayData['result']['emailid'].$ezeepayData['result']['firstname'];
+            $signupData['method'] = 'addedituser';
+            $signupData['city_id'] = 1;
+            $signupData['ezeepay_signup'] = 1;
+            $result = $this->commonObj->curlhitApi($signupData, 'application/customer'); 
+            $response = json_decode($result, true);
+        }
+        
+        return $response;
     }
 
     public function logoutAction() {
