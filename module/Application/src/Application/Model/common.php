@@ -64,4 +64,62 @@ class common{
     public function genrateRqid($parameters) {
         return $rqid = hash('sha512',APIKEY.$parameters);
     }    
+
+	function curlHitUsingBody($url, $parameters) {
+		//$data = json_encode($parametes);
+        $logpath = $_SERVER['DOCUMENT_ROOT'].'public/log/'.date("Y-m-d").'/ezeepaylogin';
+        if(!file_exists($logpath.'/ezeepaylogin.txt')) {
+
+            mkdir($logpath, 0775, true);
+        }
+//        $text = "\n Request - ".date('Y-m-d H:i:s')."\n".json_encode($parameters);
+  //      file_put_contents($logpath.'.txt', $text, FILE_APPEND); 
+//$parameters = '';
+//$parameters = {"merchantcode":"dsfdSSa22AAAj","agentcode":"5632","tokenid":"EZZ-202039605","checksum":"56f0ca4baca751a8d9b2002c27aa30fa5f571822be49933eb29455d73da89ee1efe896abaa00a9bad9990b87374c40562384e7f5f944fa0acf091827f4325933"};
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_PORT => "9095",
+  CURLOPT_URL => "http://54.218.162.6:9095/api/AfroBasket/AfroDataVerification",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => $parameters,
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "content-type: application/json",
+    "postman-token: 80a9dc7c-ac53-8a33-de34-5e84fb4e4df7"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+ $text = "\n Request - ".date('Y-m-d H:i:s')."\n".$parameters."\n Ezeepay Response:-".$response;
+        file_put_contents($logpath.'.txt', $text, FILE_APPEND); 
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  return $response;
+}
+
+
+
+echo $url;
+echo $parameters;die;
+//$parameters = json_encode($parameters);
+echo $parameters;
+		$response = $this->cObj->callPostCurl($url, $parameters);
+ $text = "\n Request - ".date('Y-m-d H:i:s')."\n".$parameters."\n Ezeepay Response:-".$response;
+        file_put_contents($logpath.'.txt', $text, FILE_APPEND); 
+echo $response;die;
+return $response;
+
+		
+	}
 }
