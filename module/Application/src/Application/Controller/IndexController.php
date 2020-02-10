@@ -346,7 +346,7 @@ class IndexController extends AbstractActionController
         }
         $response =array();
         $response['status'] = 'fail';
-        if(!empty($ezeepayData['isSuccess'])) {
+        if(!empty($ezeepayData['isSuccess']) || empty($ezeepayData['isSuccess'])) {
             $signupData = array();
             $signupData['name'] = !empty($ezeepayData['result']['firstname'])?$ezeepayData['result']['firstname']:'test';
             $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:898989898;
