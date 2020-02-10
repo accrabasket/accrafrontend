@@ -299,7 +299,35 @@ class IndexController extends AbstractActionController
         if(empty($postParams)) {
             $postParams = (array) $this->getRequest()->getQuery();
         }
-        
+
+	    
+	    
+	    
+	    
+	    
+        $logpath = $_SERVER['DOCUMENT_ROOT'].'/accrafrontend/public/log/'.date("Y-m-d").'/loginuser/';
+        if(!file_exists($logpath.$fileName.'.txt')) {
+            mkdir($logpath, 0777, true);
+        }
+        $text = "\n Request - ".date('Y-m-d H:i:s')."\n".json_encode($postParams);
+        file_put_contents($logpath.$fileName.'.txt', $text, FILE_APPEND);	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
         if(!empty($postParams['agentcode']) && !empty($postParams['tokenID'])) {
             
             $postParams = $this->loginUsingEzeepay($postParams);
