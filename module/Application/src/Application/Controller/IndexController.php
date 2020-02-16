@@ -361,8 +361,8 @@ class IndexController extends AbstractActionController
     
     function deductAmountFromEzeepayWallet($amount) {
         $response = array();
-        $response['isSuccess'] = false;
-        $response['message'] = 'User Vefication Failed';
+        $response['status'] = 'error';
+        $response['msg'] = 'User Vefication Failed';
         $params = array();
         $params['timeStamp'] = time();
         $params['userId'] = $this->session['user']['data'][0]['email'];
@@ -371,8 +371,11 @@ class IndexController extends AbstractActionController
         //{\"timeStamp\": \"10022020155132\",\n\"userId\": \"ashish@yopmail.com\",\n\"amount\": 1\n};
         
         $waletVerificationRespone = $this->commonObj->paymentWalletVerificationFromEzeepay($parameters);
+        //$waletVerificationRespone = rtrim($waletVerificationRespone, "\0");
+        //$waletVerificationRespone = trim($waletVerificationRespone, " ");
+       // $waletVerificationRespone = stripslashes(html_entity_decode($waletVerificationRespone));
         $walletVerificatonData = json_decode($waletVerificationRespone, true);
-        if($walletVerificatonData['isSuccess']) {
+        if(!empty($walletVerificatonData['isSuccess'])) {
             $deductAmountParams = array();
             $deductAmountParams['securityCode'] = $walletVerificatonData['result']['SecurityCode'];
             $deductAmountParams['timeStamp'] = time();
@@ -381,11 +384,16 @@ class IndexController extends AbstractActionController
             //{\n  \"securityCode\": \"F++G/VLQHUlb6lUK3XKC+w==\",\n  \"timeStamp\": \"10022020155132\",\n  \"otp\": null,\n  \"userId\":\"ashish@yopmail.com\"\n}",
 
             $walletDecutionParams = json_encode($deductAmountParams);
-            $paymentDeductinResponse = $this->commonObj->deductAmountFromWallet($waletVerificationRespone['result']['SessionId'], $walletDecutionParams);
+            $paymentDeductinResponse = $this->commonObj->deductAmountFromWallet($walletVerificatonData['result']['SessionId'], $walletDecutionParams);            
             $paymentDeductionResponseData = json_decode($paymentDeductinResponse, true);
-            if($paymentDeductionResponseData['isSuccess']) {
-                return $paymentDeductionResponseData;
+            if(!empty($paymentDeductionResponseData['isSuccess'])) {
+                $response['status'] = 'success';
+                $response['msg'] = 'payment Successfull';
+            }else {
+                $response['msg'] = $paymentDeductionResponseData['message'];
             }
+        }else {
+            $response['msg'] = $walletVerificatonData['message'];
         }
         
         return $response;
@@ -517,8 +525,20 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $postParams['method'] = 'placeorder';
-        $this->deductAmountFromEzeepayWallet(1);
-        $response = $this->commonObj->curlhitApi($postParams,'application/customer');
+        $this->session['agentcode'] = true;
+        if($this->session['agentcode']) {
+            $paymentResponse = $this->deductAmountFromEzeepayWallet($postParams['payableAmount']);
+        }
+        if(isset($paymentResponse) && $paymentResponse['status'] != 'success') {
+            $response = json_encode($paymentResponse);
+            
+        }else{
+            if(!empty($paymentResponse['status']) && $paymentResponse['status'] == 'success') {
+                $postParams['payemnt_status'] = 'paid';
+            }
+            
+            $response = $this->commonObj->curlhitApi($postParams,'application/customer');
+        }
         echo $response;
         exit;        
     }    
