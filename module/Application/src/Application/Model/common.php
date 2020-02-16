@@ -154,7 +154,7 @@ class common {
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo $response;
+            return $response;
         }
     }
 
@@ -187,7 +187,7 @@ class common {
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            echo $response;
+            return $response;
         }
     }
 
