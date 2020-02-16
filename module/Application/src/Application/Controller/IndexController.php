@@ -525,8 +525,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $postParams['method'] = 'placeorder';
-        $this->session['agentcode'] = true;
-        if($this->session['agentcode']) {
+        if(!empty($this->session['agentcode']) && $postParams['payment_type'] == 'ezeepay_wallet') {
             $paymentResponse = $this->deductAmountFromEzeepayWallet($postParams['payableAmount']);
         }
         if(isset($paymentResponse) && $paymentResponse['status'] != 'success') {
