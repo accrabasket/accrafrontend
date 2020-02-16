@@ -166,6 +166,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     
     $scope.PlaceOrder = function() {
         $scope.ajaxLoadingData = true;
+        $scope.placeOrderData.payableAmount = $scope.totalPrice;
         $http({
             method: 'POST',
             url: serverAppUrl + '/placeorder',
