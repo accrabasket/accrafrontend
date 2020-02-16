@@ -306,11 +306,11 @@ class IndexController extends AbstractActionController
 	    
 	    
         $logpath = $_SERVER['DOCUMENT_ROOT'].'/accrafrontend/public/log/'.date("Y-m-d").'/loginuser/';
-        if(!file_exists($logpath.$fileName.'.txt')) {
+        if(!file_exists($logpath.'loginuser'.'.txt')) {
             mkdir($logpath, 0777, true);
         }
         $text = "\n Request - ".date('Y-m-d H:i:s')."\n".json_encode($postParams);
-        file_put_contents($logpath.$fileName.'.txt', $text, FILE_APPEND);	    
+        file_put_contents($logpath.'loginuser'.'.txt', $text, FILE_APPEND);	    
 	    
 	    
 	    
