@@ -124,12 +124,18 @@
                             <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EzeePay
                         </h5>
                     </div>
+                    <?php
+                        if($this->agentCode) {
+                    ?>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="ezeepay_wallet" ng-model="placeOrderData.payment_type">
                             <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EzeePay Wallet
                         </h5>
-                    </div>                    
+                    </div> 
+                    <?php
+                        }
+                    ?>
                     <div class="clearfix"></div>
                 </div>
                 <button class="btn btn--full btn-select-address"  ng-if="placeOrderData.payment_type" ng-click="PlaceOrder()">Place Order</button>
