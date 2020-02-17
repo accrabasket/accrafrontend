@@ -491,6 +491,7 @@ class IndexController extends AbstractActionController
         }
         $this->view = new ViewModel();
         $this->view->user_details = $this->session['user']['data'][0];
+        $this->view->agentCode = !empty($this->session['agentcode'])?$this->session['agentcode']:'';
         return $this->view;
     } 
     
