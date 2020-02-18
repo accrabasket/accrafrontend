@@ -31,9 +31,6 @@ class Module
         $session = new Container('User');            
         if ($session->offsetExists('user')) {
             $GLOBALS['user'] = $session->user;
-            if($GLOBALS['action'] == 'login') {
-                header("location:".$GLOBALS['SITE_APP_URL']);
-            }
         }    
         if ($session->offsetExists('city_list')) {
             $GLOBALS['city_list'] = $session->city_list;
