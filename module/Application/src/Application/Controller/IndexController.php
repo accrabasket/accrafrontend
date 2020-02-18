@@ -354,6 +354,7 @@ class IndexController extends AbstractActionController
                 $this->session['agentcode'] = $postParams['agentcode'];
             }
             header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+            exit;
         }
         echo $response;
         exit;
