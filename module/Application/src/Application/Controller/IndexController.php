@@ -357,8 +357,6 @@ class IndexController extends AbstractActionController
             if(!empty($postParams['agentcode'])) {
                 $this->session['agentcode'] = $postParams['agentcode'];
             }
-            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
-            exit;
         }
         echo $response;
         exit;
