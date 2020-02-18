@@ -132,6 +132,10 @@ class IndexController extends AbstractActionController
     }
     
     public function loginAction(){
+        if(!empty($this->session['user'])) {
+            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+            exit;
+        }
         return $this->view;
     }
     
