@@ -331,15 +331,16 @@ class IndexController extends AbstractActionController
 	    
 	    
 	    
-	    
+	   
         if(!empty($postParams['agentcode']) && !empty($postParams['tokenID'])) {
-            
+            $agentCode =$postParams['agentcode']; 
             $postParams = $this->loginUsingEzeepay($postParams);
             
             if(!empty($postParams['data'])) {
                 $postParams['data'] = array_values($postParams['data']);
                 $postParams['email'] = $postParams['data'][0]['email'];
                 $postParams['password'] = $postParams['data'][0]['email'].$postParams['data'][0]['name'];
+                $postParams['agentcode'] = $agentCode;
             }
         }
         $postParams['method'] = 'login';
