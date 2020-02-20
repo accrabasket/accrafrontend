@@ -82,7 +82,6 @@ class common {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_PORT => "9095",
             CURLOPT_URL => "http://54.218.162.6:9095/api/AfroBasket/AfroDataVerification",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
@@ -130,8 +129,7 @@ class common {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_PORT => "9095",
-            CURLOPT_URL => "http://54.218.162.6:9095/api/AfroBasket/PaymentWalletVerification",
+            CURLOPT_URL => "https://apiref.ezipaygh.com/api/AfroBasket/PaymentWalletVerification",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -162,8 +160,7 @@ class common {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_PORT => "9095",
-            CURLOPT_URL => "http://54.218.162.6:9095/api/AfroBasket/PaymentByUserWallet",
+            CURLOPT_URL => "https://apiref.ezipaygh.com/api/AfroBasket/PaymentByUserWallet",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
