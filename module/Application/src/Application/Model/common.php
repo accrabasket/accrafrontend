@@ -82,7 +82,7 @@ class common {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://54.218.162.6:9095/api/AfroBasket/AfroDataVerification",
+            CURLOPT_URL => "https://apiref.ezipaygh.com/api/AfroBasket/AfroDataVerification",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
