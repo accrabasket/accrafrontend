@@ -540,7 +540,7 @@ class IndexController extends AbstractActionController
             
         }else{
             if(!empty($paymentResponse['status']) && $paymentResponse['status'] == 'success') {
-                $postParams['payemnt_status'] = 'paid';
+                $postParams['payment_status'] = 'paid';
             }
             
             $response = $this->commonObj->curlhitApi($postParams,'application/customer');
