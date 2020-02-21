@@ -95,6 +95,11 @@
                         <div class="float-right text--danger" data-test-id="delivery-charge-value">+ GHC {{totalOrderDetails.tax_amount}}</div>
                         <div class="clearfix"></div>
                     </div>
+                   <div class="payment-invoice__row">
+                        <div class="float-left" data-test-id="delivery-charge-text">Discount</div>
+                        <div class="float-right text--danger" data-test-id="delivery-charge-value">- GHC {{totalOrderDetails.discount_amount}}</div>
+                        <div class="clearfix"></div>
+                    </div>                    
                     <!--<div class="payment-invoice__row">
                         <div class="float-left" data-test-id="delivery-charge-text">Discount</div>
                         <div class="float-right text--danger" data-test-id="delivery-charge-value">- GHC {{totalOrderDetails.discount_amount}}</div>
@@ -115,13 +120,13 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="cash_on_delevery" ng-model="placeOrderData.payment_type">
-                            <i aria-hidden="true" class="fa fa-truck"></i> &nbsp;Cash On Delivery
+                            <i aria-hidden="true" class="fa fa-truck"></i> &nbsp;COD
                         </h5>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="ezeepay" ng-model="placeOrderData.payment_type">
-                            <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EzeePay
+                            <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EziPay 
                         </h5>
                     </div>
                     <?php
@@ -130,7 +135,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="ezeepay_wallet" ng-model="placeOrderData.payment_type">
-                            <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EzeePay Wallet
+                            <i aria-hidden="true" class="fa fa-credit-card"></i> &nbsp;  EziPay Wallet
                         </h5>
                     </div> 
                     <?php
