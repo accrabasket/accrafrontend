@@ -533,7 +533,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $postParams['method'] = 'placeorder';
-        if(!empty($this->session['agentcode']) && $postParams['payment_type'] == 'ezeepay_wallet') {
+        /*if(!empty($this->session['agentcode']) && $postParams['payment_type'] == 'ezeepay_wallet') {
             $paymentResponse = $this->deductAmountFromEzeepayWallet($postParams['payableAmount']);
         }
         if(isset($paymentResponse) && $paymentResponse['status'] != 'success') {
@@ -542,10 +542,10 @@ class IndexController extends AbstractActionController
         }else{
             if(!empty($paymentResponse['status']) && $paymentResponse['status'] == 'success') {
                 $postParams['payment_status'] = 'paid';
-            }
+            }*/
             
             $response = $this->commonObj->curlhitApi($postParams,'application/customer');
-        }
+        //}
         echo $response;
         exit;        
     }    
