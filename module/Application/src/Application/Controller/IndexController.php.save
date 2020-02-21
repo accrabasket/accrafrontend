@@ -132,10 +132,6 @@ class IndexController extends AbstractActionController
     }
     
     public function loginAction(){
-        if(!empty($this->session['user'])) {
-            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
-            exit;
-        }
         return $this->view;
     }
     
@@ -309,12 +305,11 @@ class IndexController extends AbstractActionController
 	    
 	    
 	    
-        $logpath = $_SERVER['DOCUMENT_ROOT'].'/accrafrontend/public/log/'.date("Y-m-d").'/loginuser/';
-        if(!file_exists($logpath.'loginuser'.'.txt')) {
-            mkdir($logpath, 0777, true);
-        }
+        $logpath = $_SERVER['DOCUMENT_ROOT'].'public/log/'.date("Y-m-d").'/loginuser';
+        
+
         $text = "\n Request - ".date('Y-m-d H:i:s')."\n".json_encode($postParams);
-        file_put_contents($logpath.'loginuser'.'.txt', $text, FILE_APPEND);	    
+        file_put_contents($logpath.$fileName.'.txt', $text, FILE_APPEND);	    
 	    
 	    
 	    
@@ -331,21 +326,19 @@ class IndexController extends AbstractActionController
 	    
 	    
 	    
-	   
-        if(!empty($postParams['agentcode']) && !empty($postParams['tokenid'])) {
-            $agentCode =$postParams['agentcode']; 
+	    
+        if(!empty($postParams['agentcode']) && !empty($postParams['tokenID'])) {
+            
             $postParams = $this->loginUsingEzeepay($postParams);
             
             if(!empty($postParams['data'])) {
                 $postParams['data'] = array_values($postParams['data']);
                 $postParams['email'] = $postParams['data'][0]['email'];
                 $postParams['password'] = $postParams['data'][0]['email'].$postParams['data'][0]['name'];
-                $postParams['agentcode'] = $agentCode;
-		
             }
         }
         $postParams['method'] = 'login';
-//        print_R($postParams);die;
+        
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
         $user = json_decode($response,true);
         if($user['status'] == 'success'){
@@ -356,54 +349,10 @@ class IndexController extends AbstractActionController
             $response = $this->commonObj->curlhitApi($params, 'application/customer');
             $update = json_decode($response,true);
             $this->session['user'] = $data;
-            if(!empty($postParams['agentcode'])) {
-                $this->session['agentcode'] = $postParams['agentcode'];
-                header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
-                exit;                
-            }
+            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
         }
         echo $response;
         exit;
-    }
-    
-    function deductAmountFromEzeepayWallet($amount) {
-        $response = array();
-        $response['status'] = 'error';
-        $response['msg'] = 'User Vefication Failed';
-        $params = array();
-        $params['timeStamp'] = time();
-        $params['userId'] = $this->session['user']['data'][0]['email'];
-        $params['amount'] = $amount;
-        $parameters = json_encode($params);
-        //{\"timeStamp\": \"10022020155132\",\n\"userId\": \"ashish@yopmail.com\",\n\"amount\": 1\n};
-        
-        $waletVerificationRespone = $this->commonObj->paymentWalletVerificationFromEzeepay($parameters);
-        //$waletVerificationRespone = rtrim($waletVerificationRespone, "\0");
-        //$waletVerificationRespone = trim($waletVerificationRespone, " ");
-       // $waletVerificationRespone = stripslashes(html_entity_decode($waletVerificationRespone));
-        $walletVerificatonData = json_decode($waletVerificationRespone, true);
-        if(!empty($walletVerificatonData['isSuccess'])) {
-            $deductAmountParams = array();
-            $deductAmountParams['securityCode'] = $walletVerificatonData['result']['SecurityCode'];
-            $deductAmountParams['timeStamp'] = time();
-            $deductAmountParams['otp'] = null;
-            $deductAmountParams['userId'] = $this->session['user']['data'][0]['email'];
-            //{\n  \"securityCode\": \"F++G/VLQHUlb6lUK3XKC+w==\",\n  \"timeStamp\": \"10022020155132\",\n  \"otp\": null,\n  \"userId\":\"ashish@yopmail.com\"\n}",
-
-            $walletDecutionParams = json_encode($deductAmountParams);
-            $paymentDeductinResponse = $this->commonObj->deductAmountFromWallet($walletVerificatonData['result']['SessionId'], $walletDecutionParams);            
-            $paymentDeductionResponseData = json_decode($paymentDeductinResponse, true);
-            if(!empty($paymentDeductionResponseData['isSuccess'])) {
-                $response['status'] = 'success';
-                $response['msg'] = 'payment Successfull';
-            }else {
-                $response['msg'] = $paymentDeductionResponseData['message'];
-            }
-        }else {
-            $response['msg'] = $walletVerificatonData['message'];
-        }
-        
-        return $response;
     }
     
     function loginUsingEzeepay($data) {
@@ -431,12 +380,13 @@ class IndexController extends AbstractActionController
         if(!empty($ezeepayData['isSuccess']) || empty($ezeepayData['isSuccess'])) {
             $signupData = array();
             $signupData['name'] = !empty($ezeepayData['result']['firstname'])?$ezeepayData['result']['firstname']:'test2';
-            $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:8298989898;
+            $signupData['mobile_number'] = !empty($ezeepayData['result']['mobile'])?$ezeepayData['result']['mobile']:8298989891;
             $signupData['email'] = !empty($ezeepayData['result']['emailid'])?$ezeepayData['result']['emailid']:'test2@yopmail.com';
             $signupData['password'] = $signupData['email'].$signupData['name'];
             $signupData['method'] = 'addedituser';
             $signupData['city_id'] = 1;
             $signupData['ezeepay_signup'] = 1;
+	  $signupData['request_params'] = $data;
             $result = $this->commonObj->curlhitApi($signupData, 'application/customer'); 
             $response = json_decode($result, true);
         }
@@ -498,7 +448,6 @@ class IndexController extends AbstractActionController
         }
         $this->view = new ViewModel();
         $this->view->user_details = $this->session['user']['data'][0];
-        $this->view->agentCode = !empty($this->session['agentcode'])?$this->session['agentcode']:'';
         return $this->view;
     } 
     
@@ -533,19 +482,7 @@ class IndexController extends AbstractActionController
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['user_id'] = $this->session['user']['data'][0]['id'];
         $postParams['method'] = 'placeorder';
-        if(!empty($this->session['agentcode']) && $postParams['payment_type'] == 'ezeepay_wallet') {
-            $paymentResponse = $this->deductAmountFromEzeepayWallet($postParams['payableAmount']);
-        }
-        if(isset($paymentResponse) && $paymentResponse['status'] != 'success') {
-            $response = json_encode($paymentResponse);
-            
-        }else{
-            if(!empty($paymentResponse['status']) && $paymentResponse['status'] == 'success') {
-                $postParams['payment_status'] = 'paid';
-            }
-            
-            $response = $this->commonObj->curlhitApi($postParams,'application/customer');
-        }
+        $response = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $response;
         exit;        
     }    
