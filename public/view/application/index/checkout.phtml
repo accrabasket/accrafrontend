@@ -117,12 +117,18 @@
                 <!--div class="payment__promo-container payment__promo-bottom-margin" data-test-id="promo-code-text"><span class="payment__promo-icon"></span><span>Promo code &amp; Bank offers</span></div-->
 
                 <div class="payment-invoice">
+                    <?php
+                        if(!$this->agentCode) {
+                    ?>                    
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="cash_on_delevery" ng-model="placeOrderData.payment_type">
                             <i aria-hidden="true" class="fa fa-truck"></i> &nbsp;COD
                         </h5>
                     </div>
+                    <?php
+                        }
+                    ?>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <h5 class="mb10 fs24">
                             <input type="radio" name="payment_type" value="ezeepay" ng-model="placeOrderData.payment_type">
