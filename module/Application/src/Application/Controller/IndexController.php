@@ -337,17 +337,14 @@ class IndexController extends AbstractActionController
             $postParams = $this->loginUsingEzeepay($postParams);
             
             if(!empty($postParams['data'])) {
-                $postParams['data'] = array_values($postParams['data']);
-                $postParams['email'] = $postParams['data'][0]['email'];
-                $postParams['password'] = $postParams['data'][0]['email'].$postParams['data'][0]['name'];
-                $postParams['agentcode'] = $agentCode;
-		
+                 $user = $postParams;
             }
         }
         $postParams['method'] = 'login';
-//        print_R($postParams);die;
-        $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
-        $user = json_decode($response,true);
+        if(empty($user)) {
+            $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
+            $user = json_decode($response,true);
+        }
         if($user['status'] == 'success'){
             $data['data'] = array_values($user['data']);
             $params['method'] = 'updatecart';
@@ -356,8 +353,8 @@ class IndexController extends AbstractActionController
             $response = $this->commonObj->curlhitApi($params, 'application/customer');
             $update = json_decode($response,true);
             $this->session['user'] = $data;
-            if(!empty($postParams['agentcode'])) {
-                $this->session['agentcode'] = $postParams['agentcode'];
+            if(!empty($agentCode)) {
+                $this->session['agentcode'] = $agentCode;
                 header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
                 exit;                
             }
