@@ -205,6 +205,8 @@ function initializemap1() {
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 var placeg = autocomplete.getPlace();
 				console.log(placeg);
+		    $("#lat").val(placeg.geometry.location.lat());
+		    		    $("#lng").val(placeg.geometry.location.lng());
              jQuery.ajax({
             method: 'POST',
             url: serverAppUrl + '/setcitytmp',
@@ -213,6 +215,7 @@ function initializemap1() {
         }).success(function (response) {
 		jQuery('#locatonerror1').remove();
             if(response>0){
+		    
             }else{
 			jQuery('#searchTextField').after("<div class='error' id='locatonerror1'>service not available these area. choose to another place</div>");
 			}
