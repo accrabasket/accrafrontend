@@ -211,7 +211,9 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">City</h5>
-                                <input type="text" id="cityname2" name="cityname" value=""  placeholder="select your location" class="form-control select2"  />
+                                <input type="text" id="cityname2" name="cityname" value=""  placeholder="select your location" class="form-control select2"  ng-model="address.city_name"/>
+				<input type="hidden" id="lat" ng-model="address.lat"/>    
+				<input type="hidden" id="lng" ng-model="address.lng"/>     
                             </div>
                             <div class="clearfix"></div>
 
