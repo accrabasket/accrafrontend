@@ -4560,6 +4560,6 @@ a.button:active, a.button:focus, a.button:hover, input.button:active, input.butt
 }
 }
 .modal{
-z-index : 102 !important
+z-index : 9999999 !important
 }
 .modal-backdrop{z-index:100 !important;}
