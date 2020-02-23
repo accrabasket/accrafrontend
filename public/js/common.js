@@ -205,8 +205,8 @@ function initializemap1() {
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
                 var placeg = autocomplete.getPlace();
 				console.log(placeg);
-		    $("#lat").val(placeg.geometry.location.lat());
-		    		    $("#lng").val(placeg.geometry.location.lng());
+		    jQuery("#lat").val(placeg.geometry.location.lat());
+		    		    jQuery("#lng").val(placeg.geometry.location.lng());
 		    console.log("latitude"+placeg.geometry.location.lat())
              jQuery.ajax({
             method: 'POST',
