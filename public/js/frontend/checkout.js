@@ -220,6 +220,6 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     $scope.editDeliveryTime = function() {
         $scope.payment = 0;
     }
-
+google.maps.event.addDomListener(window, 'load', initializemap1);
 
 });
