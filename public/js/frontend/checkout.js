@@ -120,8 +120,9 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         if (address.area == undefined || address.area == '') {
             error = 'Area name should not empty';
         }
-        address.city_id = jQuery('#cityname').val();
-        address.city_name = jQuery("#cityname option:selected").text();
+        address.city_name = jQuery('#cityname2').val();
+        address.lat = jQuery('#lat').val();
+        address.lng = jQuery('#lng').val();
         if (error == ' ') {
             $scope.ajaxLoadingData = true;
             $http({
