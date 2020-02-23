@@ -200,6 +200,7 @@ jQuery(document).ready(function() {
         }               
 function initializemap1() {
           var input = document.getElementById('cityname2');
+	alert('ss');
 		  var query = {componentRestrictions: {country: "gh"}};
           var autocomplete = new google.maps.places.Autocomplete(input,query);
             google.maps.event.addListener(autocomplete, 'place_changed', function () {
