@@ -41,7 +41,7 @@
                     {{userAddress[placeOrderData.shipping_address_id].address_nickname}},
                     {{userAddress[placeOrderData.shipping_address_id].contact_name}},
                     {{userAddress[placeOrderData.shipping_address_id].city_name}},
-                    {{userAddress[placeOrderData.shipping_address_id].street_detail}},
+                    <none ng-if="userAddress[placeOrderData.shipping_address_id].street_detail">{{userAddress[placeOrderData.shipping_address_id].street_detail}},</none>
                     {{userAddress[placeOrderData.shipping_address_id].landmark}},
                     {{userAddress[placeOrderData.shipping_address_id].house_number}}
                 </div>
@@ -199,12 +199,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="row">
+                        <!--div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <h5 class="mb10">Nick Name</h5>
                                 <input type="text" placeholder="Nick Name" class="checkout" ng-model="address.address_nickname">
                             </div>
-                        </div>
+                        </div-->
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Full Name</h5>
@@ -220,10 +220,10 @@
                                 <h5 class="mb10">House No. &amp; Details</h5>
                                 <input type="text" placeholder="eg:Flat 201, Block B, 2nd Floor" class="checkout" ng-model="address.house_number">
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <!--div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Contact Residential Complex</h5>
                                 <input type="text" placeholder="eg: DLF Apparment" class="checkout" ng-model="address.street_detail">
-                            </div>                             
+                            </div-->                             
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <h5 class="mb10">Area</h5>
                                 <input type="text" placeholder="eg: DLF Apparment" class="checkout" ng-model="address.area">
