@@ -37,7 +37,7 @@ class common {
         }
         $url = BASKET_API . $controller;
         $parametes = http_build_query($data);
-        if ($params['method'] == 'verifyotp') {
+        if ($params['method'] == 'placeorder') {
 //echo $url = $url.'?'.$parametes;die;
         }
 
