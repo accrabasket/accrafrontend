@@ -65,7 +65,7 @@ ul.dropdown-menu {
 	min-width: 120px; 
     font-size: 1em;
 	top: 100%;
-	z-index: 99999;
+	z-index: 101;
 }
 ul.cd-dropdown-content li {
     display: block;
@@ -103,7 +103,7 @@ ul.cd-dropdown-content li {
 	-o-box-shadow: 0px 0px 5px 1px #d2d2d2;
 	-ms-box-shadow: 0px 0px 5px 1px #d2d2d2;
     box-shadow: 0px 0px 5px 1px #d2d2d2;
-    z-index: 999;
+    z-index: 101;
 }
 .header-two.scroll-to-fixed-fixed .header-logo h1 {
     font-size: 2.5em;
@@ -2023,7 +2023,7 @@ nav.sitemap-tabs.scroll-to-fixed-fixed {
 .affix {
 	top:0;
 	width: 100%;
-	z-index: 9999 !important;
+	z-index: 102 !important;
 }
 .navbar {
 	margin-bottom: 0px;
@@ -2288,7 +2288,7 @@ p.single-price-text {
 } 
 .sbmincart-showing #PPsbmincart {
     display: block;
-    z-index: 9999; 
+    z-index: 102; 
     -webkit-animation: zoomIn .3s ease;
 	-moz-animation: zoomIn .3s ease;
 	-o-animation: zoomIn .3s ease;
@@ -4560,6 +4560,6 @@ a.button:active, a.button:focus, a.button:hover, input.button:active, input.butt
 }
 }
 .modal{
-z-index : 9999999 !important
+z-index : 103 !important
 }
 .modal-backdrop{z-index:100 !important;}
