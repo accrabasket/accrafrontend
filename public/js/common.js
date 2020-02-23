@@ -207,6 +207,7 @@ function initializemap1() {
 				console.log(placeg);
 		    $("#lat").val(placeg.geometry.location.lat());
 		    		    $("#lng").val(placeg.geometry.location.lng());
+		    console.log("latitude"+placeg.geometry.location.lat())
              jQuery.ajax({
             method: 'POST',
             url: serverAppUrl + '/setcitytmp',
