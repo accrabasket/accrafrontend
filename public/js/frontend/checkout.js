@@ -12,6 +12,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         $http({
             method: 'POST',
             url: serverAppUrl + '/getcheckoutdetail',
+            data: ObjecttoParams($scope.placeOrderData),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {
             console.log(response);
