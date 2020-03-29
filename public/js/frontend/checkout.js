@@ -218,6 +218,31 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     }
     $scope.makepayment = function() {
         $scope.payment = 1;
+        $scope.ajaxLoadingData = true;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/getcheckoutdetail',
+            data: ObjecttoParams($scope.placeOrderData),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            console.log(response);
+            if (response.status == 'success') {
+                $scope.totalOrderDetails = response.data.totalOrderDetails;
+                $scope.cartData = response.cartitems;
+                $scope.productDataList = $scope.cartData.productDetails.data;
+                $scope.product = $scope.cartData.data;
+                $scope.productImage = $scope.cartData.imageRootPath;
+                $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
+                $scope.ajaxLoadingData = false;
+            } else {
+                $scope.ajaxLoadingData = false;
+                $scope.errorShow = true;
+                $scope.errorMsg = response.msg == undefined ? 'somthing went wrong ' : response.msg;
+                $timeout(function () {
+                    $scope.errorShow = false;
+                }, 2000);
+            }
+        });        
     }
     $scope.editDeliveryTime = function() {
         $scope.payment = 0;
