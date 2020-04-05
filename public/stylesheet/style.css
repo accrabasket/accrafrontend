@@ -7236,7 +7236,6 @@ ol#compare-items li:last-child {
 	margin: 0 10px 0 0;
 	padding: 0;
 	float: right;
-	width: 45%;
 }
 .pager .amount, .sorter .amount {
 	padding-left: 10px;
