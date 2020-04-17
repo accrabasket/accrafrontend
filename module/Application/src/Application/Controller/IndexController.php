@@ -287,7 +287,7 @@ class IndexController extends AbstractActionController
     public function createuserAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['phone_number'] = $postParams['mobile_number'];
-        $postParams['mobile_number'] = $postParams['phonecode'].$postParams['mobile_number']; 
+        $postParams['mobile_number'] = $postParams['mobile_number']; 
         $postParams['method'] = 'addedituser';
 		$this->session['tmpuser'] = $postParams;
         $response = $this->commonObj->curlhitApi($postParams, 'application/customer');
