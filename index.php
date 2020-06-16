@@ -13,3 +13,13 @@ require 'init_autoloader.php';
 
 // Run the application!
 Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169326469-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-169326469-1');
+</script>

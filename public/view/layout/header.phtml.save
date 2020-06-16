@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Afrobaskets</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="description" content="Default Description">
+        <meta name="keywords" content="fashion, store, E-commerce">
+        <meta name="robots" content="*">
+        <link rel="icon" href="#" type="image/x-icon">
+        <link rel="shortcut icon" href="#" type="image/x-icon">
+
+        <!-- CSS Style -->
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/font-awesome.css" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/revslider.css" >
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/owl.carousel.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/owl.theme.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.bxslider.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.mobile-menu.css">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/style.css?v=1" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/responsive.css" media="all">
+
+        <!--link href='<?= $this->basePath() ?>/public/css/googlecss1.css' rel='stylesheet' type='text/css'>
+        <link href='<?= $this->basePath() ?>/public/css/googlecss2.css' rel='stylesheet' type='text/css'>
+        <link href='<?= $this->basePath() ?>/public/css/googlecss3.css' rel='stylesheet' type='text/css'-->
+        <?php
+        $GLOBALS['str'] = '';
+        ?>
+
+
+
+
+
+        <!--javascript-->
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/angular.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/parallax.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/revslider.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/common.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/custom-common.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.mobile-menu.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCneJAKb3o_UqKuVoIBPcTlWJLzNt6lTqo&libraries=places"></script>
+    </head>
+    <body>    
+        <div id="page"  ng-app="app">
+            <header>
+                <div class="header-banner">
+                    <div class="assetBlock">
+<!--                        <div style="height: 20px; overflow: hidden;" id="slideshow">
+                            <p style="display: block;">HOT DAYS! - <span>50%</span> GET READY FOR SUMMER! &gt;</p>
+                            <p style="display: none;">SALE UP TO <span>40%</span> HURRY LIMITED OFFER! &gt;</p>
+                        </div>-->
+                      <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
+                            <div class="btn-group">
+				<input  id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
+                                <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+				<input type="hidden" id="city2" name="city2" />
+				<input type="hidden" id="cityLat" name="cityLat" />
+				<input type="hidden" id="cityLng" name="cityLng" />
+                            </div>    
+		     </div>   
+                    </div>
+                </div> 
+                <div id="header">
+                    <div class="header-container container">
+                        <div class="row">
+                            <div class="logo"> <a href="https://afrobaskets.com">
+                                    <img src="<?= $this->basePath() ?>/public/images/logo-big.png" alt="afrobaskets Store">
+                                </a> </div>
+
+                            <div class="fl-nav-menu">
+
+                                <nav>
+                                    <div class="mm-toggle-wrap">
+                                        <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label">Menu</span> </div>
+                                    </div>
+
+                                    <div class="nav-inner">
+                                        <!-- BEGIN NAV -->
+                                        <ul id="nav" class="hidden-xs">
+
+                                            <?php
+                                            $counter = 0;
+                                            foreach ($GLOBALS['category_list']['data'] as $category) {
+                                                $categoryImageDetails = $GLOBALS['category_list']['images'][$category['id']][0];
+                                                $categoryImagePath = $GLOBALS['category_list']['imageRootPath'] . '/' . $categoryImageDetails['type'] . '/' . $categoryImageDetails['image_id'] . '/' . $categoryImageDetails['image_name'];
+                                                if (!empty($category['category_name'])) {
+                                                    $counter++;
+
+                                                    if ($counter == 6) {
+                                                        break;
+                                                    }
+                                                    ?> 
+                                                    <li class="mega-menu"> 
+                                                        <a class="level-top" href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
+                                                            <span>
+                                                                <?php
+                                                                echo $category['category_name'];
+                                                                ?>
+                                                            </span>
+                                                        </a>
+                                                        <?php
+                                                        $GLOBALS['str'] .= '<li> <a href="' . $this->basePath() . '/index.php/application/index/product?id=' . $category['id'] . '"><span>' . $category['category_name'] . '</span></a>';
+                                                        if (!empty($category['child'])) {
+                                                            ?>
+                                                            <div class="level0-wrapper dropdown-6col" style="left: 0px; display: none;">
+                                                                <div class="container">
+                                                                    <div class="level0-wrapper2">
+                                                                        <div class="col-1">
+                                                                            <div class="nav-block nav-block-center">
+                                                                                <!--mega menu-->
+                                                                                <ul class="level0">
+                                                                                    <?php
+                                                                                    $GLOBALS['str'] .= "<ul>";
+
+                                                                                    foreach ($category['child'] as $childcategory) {
+                                                                                        $GLOBALS['str'] .= '<li> <a href="' . $this->basePath() . '/index.php/application/index/product?id=' . $childcategory['id'] . '"><span>' . $childcategory['category_name'] . '</span></a> </li>';
+                                                                                        ?>  
+                                                                                        <li class="level3 nav-6-1 parent item"> <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $childcategory['id'] ?>"><span><?= $childcategory['category_name'] ?></span></a>
+
+                                                                                        </li>
+                                                                                        <?php
+                                                                                    }
+                                                                                    ?>
+
+                                                                                </ul>
+                                                                                <!--level0-->
+                                                                            </div>
+                                                                            <!--nav-block nav-block-center-->
+                                                                        </div>
+                                                                        <!--col-1-->
+                                                                        <div class="col-2">
+
+
+                                                                            <div class="menu_image"><a title="" href="grid.html"><img alt="menu_image" src="<?= $categoryImagePath ?>"></a></div>
+
+                                                                        </div>
+                                                                        <!--col-2-->
+                                                                    </div>
+                                                                    <!--level0-wrapper2-->
+                                                                </div>
+                                                                <!--container-->
+                                                            </div> 
+
+                                                            <?php
+                                                            $GLOBALS['str'] .= "</ul></li>";
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+                                        <!--nav-->
+                                    </div>
+                                </nav>
+                            </div>
+
+
+
+
+                            <!--row-->
+
+
+                            <div class="fl-header-right">
+                                <div class="fl-links">
+                                    <div class="no-js"> <a title="Company" class="clicker"></a>
+                                        <div class="fl-nav-links">
+                                            <ul class="links">
+                                                <?php
+                                                if (!empty($GLOBALS['user'])) {
+                                                    ?>
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/editprofile" title="My Account">My Account</a></li>                                                                                                
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/changepassword">Change Password</a></li> 
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/currentorder">My Order</a></li>
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/checkout" title="Checkout">Checkout</a></li>
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/logout">Log-out</a></li> 
+                                                <?php } else { ?>
+                                                </ul>
+                                                <ul class="links">
+                                                    <li><a href="<?= $this->basePath() ?>/index.php/application/index/signup">Signup</a></li>
+                                                    <li class="last"><a href="<?= $this->basePath() ?>/index.php/application/index/login" title="Login"><span>Login</span></a></li>
+                                                </ul>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fl-cart-contain" ng-controller="cartcontroller">
+                                    <div class="mini-cart">
+                                        <div class="basket"> <a href="javascript:void(0);"><span> {{totalItemInCart}} </span></a> </div>
+                                        <div class="fl-mini-cart-content" style="display: none;">
+                                            <div class="block-subtitle">
+                                                <div class="top-subtotal">{{totalItemInCart}} items, <span class="price">GHC{{totalPrice}}</span> </div>
+                                                <!--top-subtotal-->
+                                                <!--pull-right-->
+                                            </div>
+                                            <!--block-subtitle-->
+                                            <ul class="mini-products-list" id="cart-sidebar">
+                                                <li class="item first" ng-repeat="cartItem in cartResponse.data">
+
+                                                    <div class="item-inner">
+                                                        <a class="product-image" href="javascript:void(0);">
+                                                            <img src="{{cartResponse.imageRootPath}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].type}}/{{cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id}}/{{cartResponse.productDetails.productImageData[cartResponse.productDetails.data[cartItem.merchant_inventry_id].product_id][0].image_name}}"/>
+                                                        </a>
+                                                        <div class="product-details">
+                                                            <!--access-->
+                                                            <strong>{{cartItem.number_of_item}}</strong> x <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+
+                                                            <p class="product-name"><a href="javascript::void(0)">{{cartItem.item_name}}</a></p>
+                                                            
+                                                        </div>
+                                                        <div class="access">
+<!--                                                                <a class="btn-remove1" title="Remove This Item" href="javascript:void(0);"></a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> -->
+                                                        <i class="fa fa-plus green-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'add', 1)"></i> 
+                                                        {{cartItem.number_of_item}}
+                                                        <i class="fa fa-minus red-text" ng-click="addToCart(cartItem.merchant_inventry_id, cartItem.item_name, 'delete', 1)"></i>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </li>
+
+                                            </ul>
+                                            <div class="actions" ng-if="totalItemInCart">
+                                                <button class="btn-checkout"  type="button" onClick="window.location = '<?= $this->basePath() ?>/index.php/application/index/checkout'"> <span>Checkout</span> </button>
+                                            </div>
+                                            <!--actions-->
+                                        </div>
+                                        <!--fl-mini-cart-content-->
+                                    </div>
+                                </div>
+                                <!--mini-cart-->
+                                <div class="navbar-collapse">
+                                    <form class="navbar-form" role="search" action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search" name="search">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
+                                            </span> </div>
+                                    </form>
+                                </div>   
+                                <!--links-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   
+            </header>
+            <script>
+    var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
+    var city = 0;
+</script>
+

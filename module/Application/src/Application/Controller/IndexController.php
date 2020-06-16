@@ -280,6 +280,7 @@ class IndexController extends AbstractActionController
         }else{
             $postParams['guest_user_id'] = session_id();
         }
+
        $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
 	echo $cartList;
         exit();
@@ -599,6 +600,11 @@ $gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'m
 echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer');
 }
     public function currentorderAction(){
+        if(empty($this->session['user']['data'][0]['id'])){
+            $path = $GLOBALS['SITE_APP_URL'].'/login';
+            header('Location: '.$path);
+            exit;
+        }
         return $this->view;
     }
     
