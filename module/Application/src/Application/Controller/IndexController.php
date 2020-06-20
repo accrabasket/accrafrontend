@@ -768,4 +768,18 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
 
         return $this->view;
     }
+    
+    function applyCouponAction() {
+        $postParams = (array) $this->getRequest()->getPost();
+        $cartList  = array();
+        $postParams['method'] = 'applycoupon';
+        if(!empty($this->session['user']['data'][0]['id'])) {
+            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        }
+        $postParams['coupon_code'] = $postParams['coupon_name'];
+        $applyCouponResponse = $this->commonObj->curlhitApi($postParams,'application/customer');
+        
+        echo $applyCouponResponse;
+        die;
+    }
 }

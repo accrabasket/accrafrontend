@@ -100,6 +100,11 @@
                         <div class="float-right text--danger" data-test-id="delivery-charge-value">- GHC {{totalOrderDetails.discount_amount}}</div>
                         <div class="clearfix"></div>
                     </div>                    
+                    <div class="payment-invoice__row" ng-if="totalOrderDetails.coupon_discount_amount">
+                        <div class="float-left" data-test-id="delivery-charge-text">Coupon Discount</div>
+                        <div class="float-right text--danger" data-test-id="delivery-charge-value">- GHC {{totalOrderDetails.coupon_discount_amount}}</div>
+                        <div class="clearfix"></div>
+                    </div>                     
                     <!--<div class="payment-invoice__row">
                         <div class="float-left" data-test-id="delivery-charge-text">Discount</div>
                         <div class="float-right text--danger" data-test-id="delivery-charge-value">- GHC {{totalOrderDetails.discount_amount}}</div>
@@ -111,6 +116,13 @@
                         </div><div class="float-right text--dark-gray" data-test-id="payable-amount-value">
                             GHC {{totalOrderDetails.payable_amount}}
                         </div><div class="clearfix"></div></div>
+                    <div class="payment-invoice__row">
+                        <div class="float-left" data-test-id="delivery-charge-text">Delivery Charges</div>
+                        <div class="float-right text--danger">
+                            <input type="text" name="coupon" ng-model="couponData.coupon_name" > <button type="button" ng-click="applyCoupon()">Apply Coupon</button>
+                        </div>						
+                        <div class="clearfix"></div>
+                    </div>                        
 
                 </div>
 

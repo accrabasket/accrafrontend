@@ -6,7 +6,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
     $scope.ajaxLoadingData = false;
     $scope.createAddress = false;
     $scope.address = {};
-    
+    $scope.couponData = {};
+    $scope.couponData.coupon_name = '';
     $rootScope.getcartdata = function () {
         $scope.ajaxLoadingData = true;
         $http({
@@ -234,6 +235,7 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 $scope.productImage = $scope.cartData.imageRootPath;
                 $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
                 $scope.ajaxLoadingData = false;
+                $scope.couponData.coupon_name = $scope.totalOrderDetails.coupon_code;
             } else {
                 $scope.ajaxLoadingData = false;
                 $scope.errorShow = true;
@@ -243,6 +245,37 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 }, 2000);
             }
         });        
+    }
+    $scope.applyCoupon = function() {        
+        if(!$scope.couponData.coupon_name) {
+            $scope.errorShow = 1;
+            $scope.errorMsg = 'Enter Coupon Name';        
+        } else {
+            $scope.ajaxLoadingData = true;
+            $http({
+                method: 'POST',
+                url: serverAppUrl + '/applyCoupon',
+                data: ObjecttoParams($scope.couponData),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (response) {
+                if (response.status == 'success') {
+                    $scope.totalOrderDetails = response.data.totalOrderDetails;
+                    $scope.cartData = response.cartitems;
+                    $scope.productDataList = $scope.cartData.productDetails.data;
+                    $scope.product = $scope.cartData.data;
+                    $scope.productImage = $scope.cartData.imageRootPath;
+                    $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
+                    $scope.ajaxLoadingData = false;
+                } else {
+                    $scope.ajaxLoadingData = false;
+                    $scope.errorShow = true;
+                    $scope.errorMsg = response.msg == undefined ? 'somthing went wrong ' : response.msg;
+                    $timeout(function () {
+                        $scope.errorShow = false;
+                    }, 2000);
+                }
+            });   
+        }
     }
     $scope.editDeliveryTime = function() {
         $scope.payment = 0;
