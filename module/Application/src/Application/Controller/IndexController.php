@@ -280,6 +280,7 @@ class IndexController extends AbstractActionController
         }else{
             $postParams['guest_user_id'] = session_id();
         }
+
        $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
 	echo $cartList;
         exit();

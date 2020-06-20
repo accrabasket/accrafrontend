@@ -1,0 +1,49 @@
+<?php
+        echo $this->partial('layout/header');
+        if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
+            ?>
+        <div class="page-heading">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="home"> <a href="https://afrobaskets.com">Home</a><span>—›</span></li>
+                                <li class="category1599" ng-show="parent_category_name"><a href="<?=$this->basePath()?>/index.php/application/index/product?id={{parent_category_id}}">{{parent_category_name}}</a><span>—›</span></li>
+                                <li class="active" ng-show="categoryName">{{categoryName}}</li>	
+                            </ul>
+                        </div>
+                        <!--col-xs-12--> 
+                    </div>
+                    <!--row--> 
+                </div>
+                <!--container--> 
+            </div>
+            <div class="page-title">
+            </div>
+        </div>    
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <div class="container"> 
+                <div class="row">
+    <?php
+        }
+       echo $this->content; 
+       if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
+           echo $this->partial('application/partial/leftMenu.phtml');
+        ?>
+                </div>
+            </div>
+        </section>
+        <?php
+       }
+       
+    ?>    
+      
+            <?php
+            
+            echo $this->partial('layout/footer');
+    ?>        
+               
+        <?php //echo $this->inlineScript() ?>
+ 
+</html>
