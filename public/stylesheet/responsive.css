@@ -16,6 +16,18 @@ website:   	http://www.themesmart.net/
 /* body RobotoSlab,Arial,sans-serif /*/
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  width: 264px;
+  right: 0;
+  left:-173px !important;
+}    
 .navbar-collapse form[role="search"].active input {
     display: table-cell;
     opacity: 1;
@@ -997,6 +1009,18 @@ footer .newsletter-row {
 #fade{ display: none !important; }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  width: 264px !important;
+  right: 0;
+  left:-173px !important;
+}    
 #fade{ display: none !important; }
 .fullwidthbanner-container .fullwidthabanner {
 	width: 100%;
@@ -1825,6 +1849,18 @@ footer .newsletter-row {
 
 }
 @media (min-width: 768px) and (max-width: 991px) {
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  width: 264px !important;
+  right: 0;
+  left:-173px !important;
+}    
 	
 #nav li.drop-menu:hover ul {top:50px}	
 	

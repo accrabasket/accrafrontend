@@ -237,9 +237,10 @@
                                 <div class="navbar-collapse">
                                     <form class="navbar-form" role="search" action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="search">
+                                            <input type="text" id="myInput" class="form-control" placeholder="Search" ng-model="searchItem" name="search" ng-change="getProductList()" autocomplete="off">
+                                            
                                             <span class="input-group-btn">
-                                                <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
+                                                <button type="submit" id="searchBtn" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
                                             </span> </div>
                                     </form>
                                 </div>   
@@ -255,3 +256,55 @@
     var city = 0;
 </script>
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;  
+}
+
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: -314px;
+  width: 391px;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+</style>
