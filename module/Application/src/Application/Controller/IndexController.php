@@ -109,6 +109,7 @@ class IndexController extends AbstractActionController
         }else if(!empty($postParam['product_type'])) {
             $postParams['product_type'] = $postParam['product_type'];
         }
+//print_r($postParams);die;
         $postParams['method'] = 'productlist';
         
         if(!empty($postParams['merchant'])){
@@ -120,7 +121,7 @@ class IndexController extends AbstractActionController
         $postParams['pagination'] = 1;
         $postParams['page'] = !empty($postParams['page'])?$postParams['page']:1;
         $getProduct = $this->commonObj->curlhitApi($postParams,'application/product');
-        if(!empty($postParams['product_type'])) {
+        if(!empty($postParam)) {
             return $getProduct;
         }
         echo $getProduct;
