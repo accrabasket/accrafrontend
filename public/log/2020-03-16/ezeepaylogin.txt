@@ -1,0 +1,4 @@
+
+ Request - 2020-03-16 14:25:57
+{"merchantcode":"dsfdSSa22AAAj","agentcode":"9623","tokenid":null,"checksum":"c3f876f03be3f8366b40289302c46c7ff1c1cb51c5c240a104315cefc26f19a456ea4b1c9844964480bf771d3f10b91250dcf6464155e316708114cb7919bd73"}
+ Ezeepay Response:-{"isSuccess":true,"message":"Data received successfully.","status":200,"result":{"address":"Plot 3, dade link off of dade street, Cantonments, Accra-Ghana","companyname":"Ezipaygh","city":"GHANA","contactphone":"9044935796","country":null,"emailid":"palmer.allotey.pa.878@gmail.com","firstname":"Eun Palmer Akweteh","lastname":"Allotey","mobile":"9044935796","state":"GHANA","title":"Mr/Mrs.","zip":"00233","statusCode":0,"statusMessage":"Success","merchantcode":"dsfdSSa22AAAj","kcode":"9623","tokenID":null,"checksum":"78547624A667F160E84C55181C7BDC128FB94CE87A8FCB771B22FC0C1DA68ADE37CD9EFB9F39546D97E3F38DA5916F8B790DDF17DB0EB710B10E596A585A0765"}}

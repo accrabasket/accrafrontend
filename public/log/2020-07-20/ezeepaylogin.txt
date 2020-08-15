@@ -1,0 +1,10 @@
+
+ Request - 2020-07-20 10:34:33
+{"merchantcode":"dsfdSSa22AAAj","agentcode":"11698","tokenid":null,"checksum":"074d21ae42391b096e66d50646feec7385544271353a2ac5ac38eee1811da597de397d987d5705df11c6682f2d0f56b420981e9b1d03e1200757d4da3e6c9de3"}
+ Ezeepay Response:-
+ Request - 2020-07-20 11:27:42
+{"merchantcode":"dsfdSSa22AAAj","agentcode":"5234","tokenid":null,"checksum":"ab70766143cb45c284d7f5d727448bb551a550728abd3c3681e3faa91df316cd82cb6bb68f2fc2c9e50eb7b9261eee639dd959ba4efb5c5276b6dfb666aefb08"}
+ Ezeepay Response:-{"isSuccess":true,"message":"Data received successfully.","status":200,"result":{"address":"Plot 3, dade link off of dade street, Cantonments, Accra-Ghana","companyname":"Ezipaygh","city":"GHANA","contactphone":"9719505011","country":null,"emailid":"sumitshr2000@gmail.com","firstname":"Sumit","lastname":"Sharma","mobile":"9719505011","state":"GHANA","title":"Mr/Mrs.","zip":"00233","statusCode":0,"statusMessage":"Success","merchantcode":"dsfdSSa22AAAj","kcode":"5234","tokenID":null,"checksum":"3599E036455069037F143DBEADE2D9D381AE2F8EAAA63D987F68F0C77E4B59E399AD2DBBC6D35531EF85752A44E8BC26C14FC0409E6983A71BE16D7945EA6F28"}}
+ Request - 2020-07-20 15:45:22
+{"merchantcode":"dsfdSSa22AAAj","agentcode":"11722","tokenid":null,"checksum":"744d525166b4bca3cadb57f0258f0d4466cdec84b8f900889b92afd96cfc4562341b55321c193519e665faa9fe87fd64b55302f9541758f56c31a827bd818b3e"}
+ Ezeepay Response:-{"isSuccess":true,"message":"Data received successfully.","status":200,"result":{"address":"Plot 3, dade link off of dade street, Cantonments, Accra-Ghana","companyname":"Ezipaygh","city":"GHANA","contactphone":"7508483014","country":null,"emailid":"info@binaconsult.co.uk","firstname":"Josephine A","lastname":"Amoah","mobile":"7508483014","state":"GHANA","title":"Mr/Mrs.","zip":"00233","statusCode":0,"statusMessage":"Success","merchantcode":"dsfdSSa22AAAj","kcode":"11722","tokenID":null,"checksum":"D618F550013CA79FDD8D11E9F1A7DD00C7BFD6669B64C7A4791B6057E36FAF6C2A56302071EEC3B1754841697BF26E5DCD903A94F8B842DDF72BA174FF4387CD"}}

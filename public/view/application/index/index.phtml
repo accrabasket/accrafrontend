@@ -1,27 +1,19 @@
 <div class="content">
-    <div id="thm-mart-slideshow" class="thm-mart-slideshow">
-        <div class="container">
-            <div id='thm_slider_wrapper' class='thm_slider_wrapper fullwidthbanner-container' >
-                <div id='thm-rev-slider' class='rev_slider fullwidthabanner'>
-                    <ul>
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:1440px;height:300px;overflow:hidden;visibility:hidden;">  
+	<div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1440px;height:300px;overflow:hidden;">        
+            
+                    
                         <?php
                         foreach ($this->banner['data'] as $bannerDetails) {
                             $bannerPath = $this->banner['imageRootPath'] . "/" . $bannerDetails['image_name'];
                             ?>
-                            <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb="<?= $bannerPath ?>"><img src='<?= $bannerPath ?>'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image1" />
-<!--                                <div class="info">
-                                    <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='180'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'><span>Get 50% off</span></div>
-                                    <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>Simply <span>delicious</span></div>
-                                    <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='550'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="buy-btn">Shop Now</a></div>
-                                    <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Little things make a big difference</div>
-                                </div>-->
-                            </li> 
+                            <div>
+                <img data-u="image"  src="<?=$bannerPath?>" />
+            </div>
                             <?php
                         }
                         ?>
-                    </ul>
-                </div>
-            </div>
+                    
         </div>
     </div>
 
@@ -98,10 +90,10 @@
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
             <div class="new_title">
-                <h2>Best Seller</h2>
+                <h2>Hot Deals</h2><a class="viewmore" href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=hotdeals"> View More</a>
             </div>
             <div id="best-seller" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 products-grid">
+                <div class="slider-items slider-width-col4 products-grid"> 
                     <?php
                     //echo "<pre>";print_r($this->productDataList);die;
                     ///$this->productDataList[productImageData][$product[product_id][0][type]
@@ -159,64 +151,109 @@
     </div>
     </section>
 </div>
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        jQuery('#thm-rev-slider').show().revolution({
-            dottedOverlay: 'none',
-            delay: 5000,
-            startwidth: 0,
-            startheight: 650,
-            hideThumbs: 200,
-            thumbWidth: 200,
-            thumbHeight: 50,
-            thumbAmount: 2,
-            navigationType: 'thumb',
-            navigationArrows: 'solo',
-            navigationStyle: 'round',
-            touchenabled: 'on',
-            onHoverStop: 'on',
-            swipe_velocity: 0.7,
-            swipe_min_touches: 1,
-            swipe_max_touches: 1,
-            drag_block_vertical: false,
-            spinner: 'spinner0',
-            keyboardNavigation: 'off',
-            navigationHAlign: 'center',
-            navigationVAlign: 'bottom',
-            navigationHOffset: 0,
-            navigationVOffset: 20,
-            soloArrowLeftHalign: 'left',
-            soloArrowLeftValign: 'center',
-            soloArrowLeftHOffset: 20,
-            soloArrowLeftVOffset: 0,
-            soloArrowRightHalign: 'right',
-            soloArrowRightValign: 'center',
-            soloArrowRightHOffset: 20,
-            soloArrowRightVOffset: 0,
-            shadow: 0,
-            fullWidth: 'on',
-            fullScreen: 'on',
-            stopLoop: 'off',
-            stopAfterLoops: -1,
-            stopAtSlide: -1,
-            shuffle: 'off',
-            autoHeight: 'on',
-            forceFullWidth: 'off',
-            fullScreenAlignForce: 'off',
-            minFullScreenHeight: 0,
-            hideNavDelayOnMobile: 1500,
-            hideThumbsOnMobile: 'off',
-            hideBulletsOnMobile: 'off',
-            hideArrowsOnMobile: 'off',
-            hideThumbsUnderResolution: 0,
-            hideSliderAtLimit: 0,
-            hideCaptionAtLimit: 0,
-            hideAllCaptionAtLilmit: 0,
-            startWithSlide: 0,
-            fullScreenOffsetContainer: ''
-        });
-    });
-</script>
+    <!-- #region Jssor Slider Begin -->
+    <!-- Generator: Jssor Slider Composer -->
+    <!-- Source: https://www.jssor.com/demos/image-slider.slider/=edit -->
+    <script src="/public/js/jssor.slider-28.0.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.jssor_1_slider_init = function() {
+
+            var jssor_1_SlideoTransitions = [
+              [{b:500,d:1000,x:0,e:{x:6}}],
+              [{b:-1,d:1,x:100,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+              [{b:-1,d:1,x:200,p:{x:{d:1,dO:9}}},{b:0,d:2000,x:0,e:{x:6},p:{x:{dl:0.1}}}],
+              [{b:-1,d:1,rX:20,rY:90},{b:0,d:4000,rX:0,e:{rX:1}}],
+              [{b:-1,d:1,rY:-20},{b:0,d:4000,rY:-90,e:{rY:7}}],
+              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:3000,sX:1,sY:1,e:{sX:1,sY:1}}],
+              [{b:-1,d:1,sX:2,sY:2},{b:1000,d:5000,sX:1,sY:1,e:{sX:3,sY:3}}],
+              [{b:-1,d:1,tZ:300},{b:0,d:2000,o:1},{b:3500,d:3500,tZ:0,e:{tZ:1}}],
+              [{b:-1,d:1,x:20,p:{x:{o:33,r:0.5}}},{b:0,d:1000,x:0,o:0.5,e:{x:3,o:1},p:{x:{dl:0.05,o:33},o:{dl:0.02,o:68,rd:2}}},{b:1000,d:1000,o:1,e:{o:1},p:{o:{dl:0.05,o:68,rd:2}}}],
+              [{b:-1,d:1,da:[0,700]},{b:0,d:600,da:[700,700],e:{da:1}}],
+              [{b:600,d:1000,o:0.4}],
+              [{b:-1,d:1,da:[0,400]},{b:200,d:600,da:[400,400],e:{da:1}}],
+              [{b:800,d:1000,o:0.4}],
+              [{b:-1,d:1,sX:1.1,sY:1.1},{b:0,d:1600,o:1},{b:1600,d:5000,sX:0.9,sY:0.9,e:{sX:1,sY:1}}],
+              [{b:0,d:1000,o:1,p:{o:{o:4}}}],
+              [{b:1000,d:1000,o:1,p:{o:{o:4}}}]
+            ];
+
+            var jssor_1_options = {
+              $AutoPlay: 1,
+              $CaptionSliderOptions: {
+                $Class: $JssorCaptionSlideo$,
+                $Transitions: jssor_1_SlideoTransitions
+              },
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $SpacingX: 16,
+                $SpacingY: 16
+              }
+            };
+
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            /*#region responsive code begin*/
+
+            var MAX_WIDTH = 1440;
+
+            function ScaleSlider() {
+                var containerElement = jssor_1_slider.$Elmt.parentNode;
+                var containerWidth = containerElement.clientWidth;
+
+                if (containerWidth) {
+
+                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+                    jssor_1_slider.$ScaleWidth(expectedWidth);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+
+            ScaleSlider();
+
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+            $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            /*#endregion responsive code end*/
+        };
+    </script>
+<link href="//fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&subset=latin-ext,cyrillic-ext,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,regular,italic,700,700italic&subset=latin-ext,greek-ext,cyrillic-ext,greek,vietnamese,latin,cyrillic" rel="stylesheet" type="text/css" />
+    <style>
+        /*jssor slider loading skin double-tail-spin css*/
+        .jssorl-004-double-tail-spin img {
+            animation-name: jssorl-004-double-tail-spin;
+            animation-duration: 1.6s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes jssorl-004-double-tail-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /*jssor slider bullet skin 031 css*/
+        .jssorb031 {position:absolute;}
+        .jssorb031 .i {position:absolute;cursor:pointer;}
+        .jssorb031 .i .b {fill:#000;fill-opacity:0.6;stroke:#fff;stroke-width:1600;stroke-miterlimit:10;stroke-opacity:0.8;}
+        .jssorb031 .i:hover .b {fill:#fff;fill-opacity:1;stroke:#000;stroke-opacity:1;}
+        .jssorb031 .iav .b {fill:#fff;stroke:#000;stroke-width:1600;fill-opacity:.6;}
+        .jssorb031 .i.idn {opacity:.3;}
+
+        /*jssor slider arrow skin 051 css*/
+        .jssora051 {display:block;position:absolute;cursor:pointer;}
+        .jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
+        .jssora051:hover {opacity:.8;}
+        .jssora051.jssora051dn {opacity:.5;}
+        .jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+    </style>
+
 <style>
     .ex1{
          margin-top:auto;
@@ -228,3 +265,5 @@
 
 
 
+    <script type="text/javascript">jssor_1_slider_init();
+    </script>

@@ -16,6 +16,9 @@ website:   	http://www.themesmart.net/
 /* body RobotoSlab,Arial,sans-serif /*/
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
+.viewmore{
+   left:5%; position:relative;
+}
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -1009,6 +1012,9 @@ footer .newsletter-row {
 #fade{ display: none !important; }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+.viewmore{
+   left:10%; position:relative;
+}
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -1849,6 +1855,9 @@ footer .newsletter-row {
 
 }
 @media (min-width: 768px) and (max-width: 991px) {
+.viewmore{
+   left:30%; position:relative;
+}
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -2458,12 +2467,18 @@ button.button.btn-proceed-checkout:before {
 }
 
 @media (min-width: 992px) and (max-width: 1169px) {
+.viewmore{
+   left:60%; position:relative;
+}
 	.fl-cart-contain {display:none}
 	
 }
 
 }
 @media (min-width: 992px) and (max-width: 1199px) {
+.viewmore{
+   left:60%; position:relative;
+}
 #page {width:100%}
 .tp-caption.ExtraLargeTitle {left:0px!important}
 .tp-caption.LargeTitle {left:0px!important}
@@ -2864,12 +2879,18 @@ ol#compare-items li a.product-name {
 
 }
  @media (min-width: 1200px) {
+.viewmore{
+   left:60%; position:relative;
+}
 .latest-blog .col-lg-6, .latest-blog .col-md-6, .latest-blog .col-sm-6 {
 	width: 49.5%
 }
 
 }
  @media (max-width: 767px) {
+.viewmore{
+   left:10%; position:relative;
+}
 .page-heading {margin-top:0px; padding:50px 0px}
 .blog-wrapper .entry-date {
     position: relative;
