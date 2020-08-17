@@ -2615,7 +2615,7 @@ margin-right:0!important
 }
 @media screen and (min-width:320px) {
     .owl-carousel .owl-item {
-	width:210px !important;
+	width:100px !important;
 }
 }
 
