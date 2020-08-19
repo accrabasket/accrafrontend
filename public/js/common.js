@@ -40,8 +40,8 @@ jQuery(document).ready(function() {
             items: 8,
             itemsDesktop: [1024, 5],
             itemsDesktopSmall: [900, 4],
-            itemsTablet: [600, 2],
-            itemsMobile: [320, 2],
+            itemsTablet: [600, 4],
+            itemsMobile: [320, 4],
             navigation: !0,
             navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
             slideSpeed: 500,
@@ -66,7 +66,7 @@ jQuery(document).ready(function() {
 	      itemsDesktop : [1024,3], //5 items between 1024px and 901px
 	      itemsDesktopSmall : [900,3], // 3 items betweem 900px and 601px
 	      itemsTablet: [600,2], //2 items between 600 and 0;
-	      itemsMobile : [320,1],
+	      itemsMobile : [320,2],
 	      navigation : true,
 	      navigationText : ["<a class=\"flex-prev\"></a>","<a class=\"flex-next\"></a>"],
 	      slideSpeed : 500,

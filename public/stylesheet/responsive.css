@@ -19,6 +19,17 @@ website:   	http://www.themesmart.net/
 .viewmore{
    left:5%; position:relative;
 }
+.featured-pro .pro-img img {
+    position: relative;
+    border-radius: 150px;
+    width: 70px !important;
+    height: 70px !important;
+    border: 5px #ddd solid;
+    margin-top: 20px;
+}
+.owl-item .item {
+     margin: 0 0px;
+}
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
