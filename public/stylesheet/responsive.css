@@ -16,6 +16,17 @@ website:   	http://www.themesmart.net/
 /* body RobotoSlab,Arial,sans-serif /*/
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
+footer address {
+	margin-top:0px !important;
+}
+footer .co-info {
+	padding:0px 0px !important;
+}
+.footer-column{
+	margin:0px !important;
+	padding:0px !important;
+	min-height:0px !important;
+}
 .viewmore{
    left:15% !important; position:relative;
 }
@@ -209,7 +220,7 @@ span.input-group-btn {
 
 .footer-inner .container {padding-left:15px; padding-right:15px}
 
-.footer-column {padding-top:20px; margin-bottom:20px}
+/*.footer-column {padding-top:20px; margin-bottom:20px}*/
 
 .footer-bottom .company-links li {
 	margin-left: 0;
