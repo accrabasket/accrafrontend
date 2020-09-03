@@ -16,6 +16,12 @@ website:   	http://www.themesmart.net/
 /* body RobotoSlab,Arial,sans-serif /*/
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
+header {
+    width: 100% !important;
+    position: fixed;
+    z-index: 1000;
+}
+
 footer address {
 	margin-top:0px !important;
 }
@@ -536,7 +542,9 @@ ul.navmenu {
      margin-top: -45px;
 }
 ul#cart-sidebar {
-	padding: 10px 0 0;
+    padding: 10px 0 0;
+    height: 300px;
+    overflow: scroll;
 }
 .fl-mini-cart-content li.item {
 	width: 290px;

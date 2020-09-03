@@ -94,6 +94,9 @@ small {
 
 .col3-layout .col-main {
 }
+.pac-container{
+	z-index:9999999999999 !important;
+}
 .col3-layout .col-wrapper {
 	float: left;
 	width: 780px;
@@ -110,12 +113,9 @@ small {
 
 /* Header Start */ 
 header {
-	width: 100%;
-	position: relative;
-	z-index:1000;
-
-
-
+    width: 100%;
+    position: relative;
+    z-index: 1000;
 }
 
 #header {background:#88be4c;}

@@ -18,8 +18,8 @@
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/owl.theme.css">
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.bxslider.css">
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.mobile-menu.css">
-        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/style.css?v=1" media="all">
-        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/responsive.css?v6" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/style.css?v=5" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/responsive.css?v8" media="all">
 
         <!--link href='<?= $this->basePath() ?>/public/css/googlecss1.css' rel='stylesheet' type='text/css'>
         <link href='<?= $this->basePath() ?>/public/css/googlecss2.css' rel='stylesheet' type='text/css'>
@@ -39,7 +39,7 @@
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/parallax.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/revslider.js"></script>
-        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/common.js?v=1"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/common.js?v=2"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/custom-common.js?v=1"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.bxslider.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/owl.carousel.min.js"></script>
@@ -48,7 +48,7 @@
     </head>
     <body>    
         <div id="page"  ng-app="app">
-            <header>
+            <header style="width:100%">
                 <div class="header-banner">
                     <div class="assetBlock">
 <!--                        <div style="height: 20px; overflow: hidden;" id="slideshow">
@@ -57,8 +57,8 @@
                         </div>-->
                       <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 5px;">
                             <div class="btn-group">
-				<input  id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
-                                <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+				<input style="width:93%"  id="searchTextField" type="text" size="50" placeholder="Enter a location" value="<?php echo $GLOBALS['fcityaddress'];?>" autocomplete="on" runat="server"/>  
+                                <span id="searchclear" style="width:6%" class="glyphicon glyphicon-remove-circle"></span>
 				<input type="hidden" id="city2" name="city2" />
 				<input type="hidden" id="cityLat" name="cityLat" />
 				<input type="hidden" id="cityLng" name="cityLng" />
@@ -251,6 +251,18 @@
                 </div>
    
             </header>
+<div style="clear:both"></div>
+<div class="hidden-lg hidden-md">
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</div>
+
             <script>
     var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
     var city = 0;
