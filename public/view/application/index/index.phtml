@@ -117,7 +117,7 @@
             <div class="new_title">
                 <h2>Hot Deals</h2><a class="viewmore" href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=hotdeals"> View More</a>
             </div>
-	    <table class="hidden-md hidden-sm hidden-lg">
+	    <table class="hidden-md hidden-sm hidden-lg" cellspacing="5">
 	          <?php		
 		    $counter= 0;
 		 //  $rowCounter = 0;	
@@ -128,11 +128,11 @@
 		
                     ?>
 
-		<tr><?php
+		<tr style="border-bottom:1px solid #ccc"><?php
 		
 		}
 ?>
-			<td <?php if($counter%2== 0){ ?>style="border-right:1px solid #ccc;"<?php }?> width="150">
+			<td cellpadding="5" <?php if($counter%2== 0){ ?>style="border-right:1px solid #ccc;"<?php }?> width="150">
 <div class="item">
                             <div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
@@ -156,7 +156,21 @@
                                                  
                                           </select>
                                          <div class="item-price">
-                                      		<div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
+                                      		<div class="price-box">
+							<span class="regular-price" ><br/>
+								<span class="price">GHC <?=$value['actual_price']?>  
+									<?php
+									if(!empty($value['discount_value'])) {
+										echo "<br/><strike>$value[price]</strike> &nbsp;$value[discount_value]";
+										if($value['discount_type'] == 'percent') {
+											echo "%";
+										}
+										echo "off";
+									}
+									?>
+								 </span>
+							 </span>
+						 </div>
                                         </div>
                                       </div>
                                   </div>
