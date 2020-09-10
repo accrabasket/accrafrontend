@@ -382,6 +382,44 @@ alt="<?=$product['product_name']?>"></a>
       </div>
     </div>
     </section>
+
+<!--Category slider Start-->
+    <div class="top-cate">
+        <div class="featured-pro container">
+            <div class="row">
+                <div class="slider-items-products">
+                    <div class="new_title">
+                        <h2>Shop By Store</h2>
+                    </div> 
+                    <div id="top-categories" class="product-flexslider hidden-buttons">
+                        <div class="slider-items slider-width-col6 products-grid">
+                            <?php 
+                           foreach ($this->marchantList['data']  as $merchantDetail) {
+					
+				 $imageId = $merchantDetail['id'];
+                                    ?>
+                                    <div class="item">
+                                        <div class="pro-img">
+				          <a href="<?= $this->basePath() ?>/index.php/application/index/product?merchant=<?= $merchantDetail['user_id'] ?>">   
+					     <img style="border:0px;" src="<?=$this->marchantList['images'][$imageId]?>" alt="No Image"/>	    
+                                             <!--div class="pro-info"><?= $merchantDetail['first_name'] ?></div-->
+				          </a>
+                                        </div>
+                                    </div>              
+                                    <?php
+                                
+                            }
+                            ?>
+
+                            <!-- End Item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Category silder End--> 
+
 </div>
     <!-- #region Jssor Slider Begin -->
     <!-- Generator: Jssor Slider Composer -->

@@ -39,6 +39,7 @@ class IndexController extends AbstractActionController
         $this->view->cityList = $this->session['city_list'];
         $postParams['product_type'] = array('offers','hotdeals'); 
         $productData = $this->productlistAction($postParams);
+
         $GLOBALS['hidemenu'] = 1;
         $this->view->productDataList = json_decode($productData, true);
 
@@ -232,7 +233,7 @@ class IndexController extends AbstractActionController
         $marchantList = $this->commonObj->curlhitApi($postParams);
         $marchantList = json_decode($marchantList,true);
         if(!empty($marchantList)){
-            $marchantList = $marchantList['data'];
+           // $marchantList = $marchantList['data'];
         }
         return $marchantList;
     }
