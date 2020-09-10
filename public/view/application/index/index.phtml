@@ -146,6 +146,9 @@
                                 <div class="info-inner">
                                   <div class="item-title" style="height:30px;margin-top:10px;"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
                                   <div class="item-content">
+					<div class="item-price">
+                                      		<div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
+                                        </div>					  
                                       <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
 
                                             <?php
@@ -155,16 +158,6 @@
                                                  
                                           </select>
                                     
-                                    <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
-                                    </div>
-				      <div class="add_cart">
-<!--                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?= $id ?>','<?= $this->productDetails['product_name'] ?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
-                                            <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
-                                                <i class="fa fa-plus green-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'add', 1)"></i> 
-                                                <b>&nbsp;{{cartResponse.data['<?= $id ?>'].number_of_item}}&nbsp;</b>
-                                                <i class="fa fa-minus red-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'delete', 1)"></i>                       
-                                            </span>-->
                                       </div>
                                   </div>
                                 </div>
