@@ -227,10 +227,24 @@ alt="<?=$product['product_name']?>"></a>
                                             ?>
                                                  
                                           </select>
+					    <div class="item-price">
+							<div class="price-box">
+								<span class="regular-price" ><br/>
+									<span class="price">GHC <?=$value['actual_price']?>  
+										<?php
+										if(!empty($value['discount_value'])) {
+											echo "<br/><strike>$value[price]</strike> &nbsp;$value[discount_value]";
+											if($value['discount_type'] == 'percent') {
+												echo "%";
+											}
+											echo "off";
+										}
+										?>
+									 </span>
+								 </span>
+							 </div>
+						</div>
                                     
-                                    <div class="item-price">
-                                      <div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
-                                    </div>
 				      <div class="add_cart">
 <!--                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?= $id ?>','<?= $this->productDetails['product_name'] ?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
                                             <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
