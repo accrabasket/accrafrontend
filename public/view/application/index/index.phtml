@@ -146,9 +146,7 @@
                                 <div class="info-inner">
                                   <div class="item-title" style="height:30px;margin-top:10px;"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
                                   <div class="item-content">
-					<div class="item-price">
-                                      		<div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
-                                        </div>					  
+										  
                                       <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
 
                                             <?php
@@ -157,7 +155,9 @@
                                             ?>
                                                  
                                           </select>
-                                    
+                                         <div class="item-price">
+                                      		<div class="price-box"><span class="regular-price" ><span class="price">GHC <?=$value['actual_price']?></span> </span> </div>
+                                        </div>
                                       </div>
                                   </div>
                                 </div>
