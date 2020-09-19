@@ -81,7 +81,7 @@
                     <div class="new_title">
                         <h2>Top Categories</h2>
                     </div> 
-                    <div id="top-categories" class="product-flexslider hidden-buttons">
+                    <div id="top-categories" class="product-flexslider hidden-buttons hidden-xs">
                         <div class="slider-items slider-width-col6 products-grid">
                             <?php
                             foreach ($GLOBALS['category_list']['data'] as $category) {
@@ -105,6 +105,36 @@
                             <!-- End Item -->
                         </div>
                     </div>
+                
+     <table class="hidden-lg hidden-md" width="100%">
+<?php
+                           $categoryCounter = 0; 
+			   foreach ($GLOBALS['category_list']['data'] as $category) {
+			        if (!empty($category['top_category']) && $category['top_category'] == 'yes') {
+                                        $categoryImageDetails = $GLOBALS['category_list']['images'][$category['id']][0];
+        	                        $categoryImagePath = $GLOBALS['category_list']['imageRootPath'] . '/' . $categoryImageDetails['type'] . '/' . $categoryImageDetails['image_id'] . '/' . $categoryImageDetails['image_name'];
+                                 
+
+	                          	if($categoryCounter%3==0){
+						echo "<tr>";
+					}     
+					echo "<td widht='33%' height='120' align='center'>";?>
+					   <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
+                                                <img width="80" height="80" src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+						<div class="pro-info" style="font-size:10px;margin-top:10px;"> <?= $category['category_name'] ?></div>
+                                            </a>
+				<?php
+				        echo " </td>";
+					if($categoryCounter%3==2){
+						echo "</tr>";
+					}
+					$categoryCounter++;			
+				}
+
+                           }
+                            ?>
+	
+      </table>
                 </div>
             </div>
         </div>
