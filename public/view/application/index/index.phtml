@@ -227,71 +227,27 @@ break 2;
             <div id="best-seller" class="product-flexslider hidden-buttons hidden-xs">
                 <div class="slider-items slider-width-col4 products-grid"> 
                     <?php
-                    //echo "<pre>";print_r($this->productDataList);die;
-                    ///$this->productDataList[productImageData][$product[product_id][0][type]
-                    ///$product[product_id]/
-                    //$this->productDataList[productImageData][$product[product_id][0][image_name]
-                    foreach($this->productDataList['data'] as $product) {
-                        $productImageDetails = $this->productDataList['productImageData'][$product['product_id']][0];
-                        foreach ($product['attribute'] as $value) {
-                            //echo "<pre>";print_r($value);die;
+                    foreach($this->promotionList['data'] as $product) {
                     ?>
                     <div class="item">
                             <div class="item-inner">
                               <div class="item-img" style="height:216px;overflow: hidden">
                                   <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>" class="product-image">
                                         <img src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>alt="<?=$product['product_name']?>"></a>
-alt="<?=$product['product_name']?>"></a>
-
-                                  
+alt="<?=$product['product_name']?>"></a>                                  
                                 </div>
                               </div>                                 
                               <div class="item-info">
                                 <div class="info-inner">
                                   <div class="item-title"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
-                                  <div class="item-content">
-                                      <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
-
-                                            <?php
-                                            
-                                                echo "<option value=$value[attribute_id]>" . $value['quantity'] .$value['unit']. "</option>";
-                                            ?>
-                                                 
-                                          </select>
-					    <div class="item-price">
-							<div class="price-box">
-								<span class="regular-price" ><br/>
-									<span class="price">GHC <?=$value['actual_price']?>  
-										<?php
-										if(!empty($value['discount_value'])) {
-											echo "<br/><strike>$value[price]</strike> &nbsp;$value[discount_value]";
-											if($value['discount_type'] == 'percent') {
-												echo "%";
-											}
-											echo "off";
-										}
-										?>
-									 </span>
-								 </span>
-							 </div>
-						</div>
-                                    
-				      <div class="add_cart">
-<!--                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?= $id ?>','<?= $this->productDetails['product_name'] ?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
-                                            <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
-                                                <i class="fa fa-plus green-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'add', 1)"></i> 
-                                                <b>&nbsp;{{cartResponse.data['<?= $id ?>'].number_of_item}}&nbsp;</b>
-                                                <i class="fa fa-minus red-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'delete', 1)"></i>                       
-                                            </span>-->
-                                      </div>
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
                           </div>
                     <?php
                         }
-                    }
+                    //}
                     ?>
           <!-- End Item --> 
         </div>
