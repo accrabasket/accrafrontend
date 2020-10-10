@@ -226,6 +226,17 @@ class IndexController extends AbstractActionController
         return $categoryList;
     }
     
+    function promotionList(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $categoryList  = array();
+        $postParams['method'] = 'promotionList';
+        $categoryList = $this->commonObj->curlhitApi($postParams);
+        $categoryList = json_decode($categoryList,true);
+        if(!empty($categoryList)){
+            $categoryList['data'] = $this->prepairCategory($categoryList['data']);
+        }
+        return $categoryList;
+    }	
     function getMarchantList(){
         $postParams = (array) $this->getRequest()->getPost();
         $marchantList  = array();
