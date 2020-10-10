@@ -145,7 +145,7 @@
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
             <div class="new_title">
-                <h2>Hot Deals</h2><a class="viewmore" href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=hotdeals"> View More</a>
+                <h2>Promotions</h2><a class="viewmore" href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=hotdeals"> View More</a>
             </div>
 	    <table class="hidden-md hidden-sm hidden-lg" cellspacing="5">
 	          <?php		
@@ -227,24 +227,15 @@ break 2;
             <div id="best-seller" class="product-flexslider hidden-buttons hidden-xs">
                 <div class="slider-items slider-width-col4 products-grid"> 
                     <?php
-                    foreach($this->promotionList['data'] as $product) {
+                    foreach($this->promotionList['data'] as $category) {
                     ?>
                     <div class="item">
-                            <div class="item-inner">
-                              <div class="item-img" style="height:216px;overflow: hidden">
-                                  <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>" class="product-image">
-                                        <img src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>alt="<?=$product['product_name']?>"></a>
-alt="<?=$product['product_name']?>"></a>                                  
-                                </div>
-                              </div>                                 
-                              <div class="item-info">
-                                <div class="info-inner">
-                                  <div class="item-title"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
-                                  
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+<div class="pro-img">
+                                            <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
+                                                <img src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+                                            </a>
+                                            <div class="pro-info"><?= $category['category_name'] ?></div>
+                                        </div>			    
                     <?php
                         }
                     //}
