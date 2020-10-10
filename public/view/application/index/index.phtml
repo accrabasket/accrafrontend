@@ -233,10 +233,11 @@ break 2;
 			<div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
                                   <div class="item-img-info">
-                                            <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
-                                                <img src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+                                            <a href="<?= $this->basePath() ?>/index.php/application/index/product?promotion_id=<?= $category['id'] ?>">
+                                                <!--img src="<?= $categoryImagePath ?>"  alt="<?= $category['promotion_name'] ?>"-->
+						    <div class="pro-info"><?= $category['promotion_name'] ?></div>
                                             </a>
-                                            <div class="pro-info"><?= $category['category_name'] ?></div>
+                                            
                                   </div>
 				</div>
 			  </div>	
