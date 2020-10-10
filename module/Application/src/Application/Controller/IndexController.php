@@ -47,6 +47,7 @@ class IndexController extends AbstractActionController
         $productData = $this->productlistAction($postParams);
         $GLOBALS['hidemenu'] = 1;
         $this->view->newArrivals = json_decode($productData, true);
+	$this->view->promotionList = $this->promotionList();    
 
         return $this->view;
     }
