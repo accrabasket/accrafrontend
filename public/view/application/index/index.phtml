@@ -230,12 +230,16 @@ break 2;
                     foreach($this->promotionList['data'] as $category) {
                     ?>
                     <div class="item">
-<div class="pro-img">
+			<div class="item-inner">
+                              <div class="item-img" style="height:160px;overflow: hidden">
+                                  <div class="item-img-info">
                                             <a href="<?= $this->basePath() ?>/index.php/application/index/product?id=<?= $category['id'] ?>">
                                                 <img src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
                                             </a>
                                             <div class="pro-info"><?= $category['category_name'] ?></div>
-                                        </div>			    
+                                  </div>
+				</div>
+			    </div>	
                     <?php
                         }
                     //}
