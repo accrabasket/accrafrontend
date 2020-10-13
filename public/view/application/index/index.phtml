@@ -152,7 +152,7 @@
 		    $imageRootPath = $this->promotionList['imageRootPath'].'/promotion/';
 		    $counter= 0;
 		 //  $rowCounter = 0;	
-                    foreach($this->promotionList['data'] as $product) {
+                    foreach($this->promotionList['data'] as $category) {
                         
                         
                         if($counter%2== 0){
@@ -167,45 +167,11 @@
 <div class="item">
                             <div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
-                                  <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>" class="product-image">
-                                        <img width="150" src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>
+                                  <div class="item-img-info"><a href="<?=$this->basePath() ?>/index.php/application/index/product?promotion_id=<?= $category['id']?>" class="product-image">
+                                        <img width="150" src="<?php echo $imageRootPath.$category[id].'/'.$this->promotionList[images][$category[id]][0][image_name] ?>"></a>
                                   
                                 </div>
-                              </div>                                 
-                              <div class="item-info" style="font-size:12px; font-weight:bold;">
-                                <div class="info-inner">
-                                  <div class="item-title" style="height:30px;margin-top:10px;"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>"><?=$product['product_name']?></a> </div>
-                                  <div class="item-content">
-										  
-                                      <select id="selectBox_{{$index}}" ng-mouseover="delete($index)" style="border:1px solid #FF3300; border-radius:4px; padding:4px; width:120px;" >
-
-                                            <?php
-                                            
-                                                echo "<option value=$value[attribute_id]>" . $value['quantity'] .$value['unit']. "</option>";
-                                            ?>
-                                                 
-                                          </select>
-                                         <div class="item-price">
-                                      		<div class="price-box">
-							<span class="regular-price" ><br/>
-								<span class="price">GHC <?=$value['actual_price']?>  
-									<?php
-									if(!empty($value['discount_value'])) {
-										echo "<br/><strike>$value[price]</strike> &nbsp;$value[discount_value]";
-										if($value['discount_type'] == 'percent') {
-											echo "%";
-										}
-										echo "off";
-									}
-									?>
-								 </span>
-							 </span>
-						 </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
+                              </div>  
                             </div>
                           </div>
 </td>
