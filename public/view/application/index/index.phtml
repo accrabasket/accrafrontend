@@ -149,12 +149,12 @@
             </div>
 	    <table class="hidden-md hidden-sm hidden-lg" cellspacing="5">
 	          <?php		
-		    //pirnt_r($this->promotionList);die;
+		    $imageRootPath = $this->promotionList['imageRootPath'].'/promotion/';
 		    $counter= 0;
 		 //  $rowCounter = 0;	
-                    foreach($this->productDataList['data'] as $product) {
-                        $productImageDetails = $this->productDataList['productImageData'][$product['product_id']][0];
-                        foreach ($product['attribute'] as $value) {
+                    foreach($this->promotionList['data'] as $product) {
+                        
+                        
                         if($counter%2== 0){
 		
                     ?>
@@ -168,8 +168,7 @@
                             <div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
                                   <div class="item-img-info"><a href="<?=$this->basePath()?>/index.php/application/index/productdetails?id=<?=$product['product_id']?>-<?=$value['attribute_id']?>" title="<?=$product['product_name']?>" class="product-image">
-                                        <img width="150
-" src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>
+                                        <img width="150" src="<?php echo $this->productDataList['imageRootPath'].'/'.$productImageDetails['type'].'/'.$product['product_id'].'/'.$productImageDetails['image_name']?>" alt="<?=$product['product_name']?>"></a>
                                   
                                 </div>
                               </div>                                 
@@ -221,20 +220,21 @@ if($counter==4){
 break 2;
 }
 		}
-		}
+		
 		?>	
 	   </table>	
             <div id="best-seller" class="product-flexslider hidden-buttons hidden-xs">
                 <div class="slider-items slider-width-col4 products-grid"> 
                     <?php
-                    foreach($this->promotionList['data'] as $category) {
+		    
+                    foreach($this->promotionList['data'] as $category) {		
                     ?>
                     <div class="item">
 			<div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
                                   <div class="item-img-info">
                                             <a href="<?= $this->basePath() ?>/index.php/application/index/product?promotion_id=<?= $category['id'] ?>">
-                                                <!--img src="<?= $categoryImagePath ?>"  alt="<?= $category['promotion_name'] ?>"-->
+                                                <img height="160" src="<?=$imageRootPath.$category[id].'/'.$this->promotionList[images][$category[id]][0][image_name] ?>"  alt="<?= $category['promotion_name'] ?>">
 						    <div class="pro-info"><?= $category['promotion_name'] ?></div>
                                             </a>
                                             
