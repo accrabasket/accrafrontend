@@ -147,7 +147,7 @@
             <div class="new_title">
                 <h2>Promotions</h2><a class="viewmore" href="<?= $this->basePath() ?>/index.php/application/index/product?product_type=hotdeals"> View More</a>
             </div>
-	    <table class="hidden-md hidden-sm hidden-lg" cellspacing="5">
+	    <table class="hidden-md hidden-sm hidden-lg" cellspacing="5" width="100%">
 	          <?php		
 		    $imageRootPath = $this->promotionList['imageRootPath'].'/promotion/';
 		    $counter= 0;
@@ -163,7 +163,7 @@
 		
 		}
 ?>
-			<td cellpadding="5" width="160" align="center"  <?php if($counter%2== 0){ ?>style="border-right:1px solid #ccc;"<?php }?>>
+			<td cellpadding="5" align="center"  <?php if($counter%2== 0){ ?>style="border-right:1px solid #ccc;"<?php }?>>
 <div class="item">
                             <div class="item-inner">
                               <div class="item-img" style="height:160px;overflow: hidden">
