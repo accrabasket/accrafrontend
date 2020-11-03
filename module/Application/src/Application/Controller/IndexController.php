@@ -105,6 +105,9 @@ class IndexController extends AbstractActionController
         if(!empty($request['product_type'])){
             $searchParams['product_type'] = $request['product_type'];
         }        
+	if(!empty($request['promotion_id'])){
+		$searchParams['promotion_id'] = $request['promotion_id'];
+	}
         		//print_r($searchParams);die;
         $this->view->searchBy = $searchParams;
         return $this->view;
@@ -232,6 +235,7 @@ class IndexController extends AbstractActionController
         $categoryList  = array();
         $postParams['method'] = 'promotionList';
         $categoryList = $this->commonObj->curlhitApi($postParams);
+	
         $categoryList = json_decode($categoryList,true);
         if(!empty($categoryList)){
             $categoryList['data'] = $this->prepairCategory($categoryList['data']);
