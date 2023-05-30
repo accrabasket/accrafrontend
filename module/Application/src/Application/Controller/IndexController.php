@@ -30,6 +30,7 @@ class IndexController extends AbstractActionController
         $GLOBALS['category_list'] = $this->session['category_list'] = $this->categoryList();
 	$GLOBALS['fcityaddress'] = $this->session['fcityaddress'];
 	$GLOBALS['fcityaddresstmp'] = $this->session['fcityaddresstmp'];
+	$GLOBALS['wallet_amount'] = !empty($this->session['wallet_amount'])?$this->session['wallet_amount']:0;
         //}
     }
     public function indexAction()
@@ -39,10 +40,9 @@ class IndexController extends AbstractActionController
         $this->view->cityList = $this->session['city_list'];
         $postParams['product_type'] = array('offers','hotdeals'); 
         $productData = $this->productlistAction($postParams);
-
         $GLOBALS['hidemenu'] = 1;
         $this->view->productDataList = json_decode($productData, true);
-
+	$this->view->featureCategoryList = $this->featurecategoryList();
         $postParams['product_type'] = array('new_arrival'); 
         $productData = $this->productlistAction($postParams);
         $GLOBALS['hidemenu'] = 1;
@@ -65,7 +65,28 @@ class IndexController extends AbstractActionController
    public function verifyOptAction() {
         return $this->view;
     }
-    
+    public function featurecategoryAction(){
+    	$request = (array) $this->getRequest()->getQuery(); 
+    	$searchBy = array();
+    	$searchBy['feature_category_id']= $request['feature_category_id'];
+    	$this->view->searchBy = $searchBy;
+    	return $this->view;   	
+    }
+    public function cateoryOfFeatureAction() {
+       $postParams = (array) $this->getRequest()->getPost();
+        $postParams['method'] = 'featurecategorylist';
+        
+        if(!empty($postParams['feature_category_id'])){
+            $postParams['feature_category_id'] = $postParams['feature_category_id'];
+        }
+        
+        $postParams['pagination'] = 1;
+        $postParams['page'] = !empty($postParams['page'])?$postParams['page']:1;
+        $featureCategoryList = $this->commonObj->curlhitApi($postParams,'application/product');
+
+        echo $featureCategoryList;
+        exit;    
+    }
     public function productAction() {
         $searchParams = array();
         $request = (array) $this->getRequest()->getQuery();
@@ -142,17 +163,172 @@ class IndexController extends AbstractActionController
     public function faqAction(){
         return $this->view;
     }
-    
-    public function loginAction(){
+public function loginwithfbAction(){
+	include_once('fb-config.php');
+	try {
+	  $accessToken = $helper->getAccessToken();
+	} catch(Facebook\Exceptions\FacebookResponseException $e) {
+	  // When Graph returns an error
+	  echo 'Graph returned an error: ' . $e->getMessage();
+	  exit;
+	} catch(Facebook\Exceptions\FacebookSDKException $e) {
+	  // When validation fails or other local issues
+	  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+	  exit;
+	}	    
+if (!isset($accessToken)) {
+  if ($helper->getError()) {
+    header('HTTP/1.0 401 Unauthorized');
+    echo "Error: " . $helper->getError() . "\n";
+    echo "Error Code: " . $helper->getErrorCode() . "\n";
+    echo "Error Reason: " . $helper->getErrorReason() . "\n";
+    echo "Error Description: " . $helper->getErrorDescription() . "\n";
+  } else {
+    header('HTTP/1.0 400 Bad Request');
+    echo 'Bad request';
+  }
+  exit;
+}
+
+if(!$accessToken->isLongLived()){
+  // Exchanges a short-lived access token for a long-lived one
+  try {
+    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+  } catch (Facebook\Exceptions\FacebookSDKException $e) {
+    echo "<p>Error getting long-lived access token: " . $e->getMessage() . "</p>\n\n";
+    exit;
+  }
+}
+$res 	= 	$fb->get('/me?fields=first_name, last_name, picture, email',$accessToken->getValue());
+$fbUser	=	$res->getDecodedBody();
+	if(!empty($fbUser)) {
+
+	 
+		$postParams = array();
+		$postParams['method'] = 'userlist';
+		$postParams['email'] = $fbUser['email'];
+		$response = $this->commonObj->curlhitApi($postParams,'application/customer');
+		$user = json_decode($response,true);
+		if($user['status'] != 'success'){
+			$userParams = array();
+			$userParams['email'] = $postParams['email'];
+			$userParams['name'] = $fbUser['first_name']." ".$fbUser['last_name']; 
+			$userParams['password'] = $postParams['email'].$userParams['name']; 
+			$userParams['method'] = 'addedituser';
+			$userParams['registration_type'] = 'google';
+			$userParams['city_id'] = 1;
+			$response = $this->commonObj->curlhitApi($userParams, 'application/customer');
+			$user = json_decode($response,true);		
+		}
+		if($user['status'] == 'success'){
+		    $data['data'] = array_values($user['data']);
+		    $params['method'] = 'updatecart';
+		    $params['user_id'] = $data['data'][0]['id'];
+		    $params['guest_user_id'] = session_id();
+		    $response = $this->commonObj->curlhitApi($params, 'application/customer');
+		    $update = json_decode($response,true);
+		    $this->session['user'] = $data;
+		    if(!empty($agentCode)) {
+		        $this->session['agentcode'] = $agentCode;
+		        header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+		        exit;                
+		    }
+		}
+	}
+    // Google Login Url = $client->createAuthUrl(); 
+
+        if(!empty($this->session['user'])) {
+            header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+
+            exit;
+        }
+        die;
+    }    
+ public function loginAction(){
+        require('google-api-php-client-2.4.0/vendor/autoload.php');
+	$client = new \Google_Client();
+	$client->setClientId('38978372100-oph3c9b0ki0qefdmhconin1niqj74fjt.apps.googleusercontent.com');
+	// Enter your Client Secrect
+	$client->setClientSecret('xsrXgMGPfLvZ2AZlLVIs8jeK');
+	// Enter the Redirect URL
+	$client->setRedirectUri('https://afrobaskets.com/index.php/application/index/login');
+
+	// Adding those scopes which we want to get (email & profile Information)
+	$client->addScope("email");
+	$client->addScope("profile");
+
+
+	if(isset($_GET['code'])) {
+
+	    $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+	    $client->setAccessToken($token['access_token']);
+
+	    // getting profile information
+	    $google_oauth = new \Google_Service_Oauth2($client);
+	    $google_account_info = $google_oauth->userinfo->get();
+	    
+		$postParams = array();
+		$postParams['method'] = 'userlist';
+		$postParams['email'] = $google_account_info->email;
+		$response = $this->commonObj->curlhitApi($postParams,'application/customer');
+		$user = json_decode($response,true);
+		if($user['status'] != 'success'){
+			$userParams = array();
+			$userParams['email'] = $postParams['email'];
+			$userParams['name'] = $google_account_info->name; 
+			$userParams['password'] = $postParams['email'].$userParams['name']; 
+			$userParams['method'] = 'addedituser';
+			$userParams['registration_type'] = 'google';
+			$userParams['city_id'] = 1;
+			$response = $this->commonObj->curlhitApi($userParams, 'application/customer');
+			$user = json_decode($response,true);		
+		}
+		if($user['status'] == 'success'){
+		    $data['data'] = array_values($user['data']);
+		    $params['method'] = 'updatecart';
+		    $params['user_id'] = $data['data'][0]['id'];
+		    $params['guest_user_id'] = session_id();
+		    $response = $this->commonObj->curlhitApi($params, 'application/customer');
+		    $update = json_decode($response,true);
+		    $this->session['user'] = $data;
+		    if(!empty($agentCode)) {
+		        $this->session['agentcode'] = $agentCode;
+		        header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
+		        exit;                
+		    }
+		}
+	}
+    // Google Login Url = $client->createAuthUrl(); 
+
         if(!empty($this->session['user'])) {
             header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
             exit;
         }
+        $this->view->googleLink = $client->createAuthUrl(); 
+ include_once('fb-config.php');
+$permissions = array('email'); // Optional permissions
+$this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.php/application/index/loginwithfb', $permissions);          
         return $this->view;
     }
     
     public function signupAction(){
+            require('google-api-php-client-2.4.0/vendor/autoload.php');
+	$client = new \Google_Client();
+	$client->setClientId('38978372100-oph3c9b0ki0qefdmhconin1niqj74fjt.apps.googleusercontent.com');
+	// Enter your Client Secrect
+	$client->setClientSecret('xsrXgMGPfLvZ2AZlLVIs8jeK');
+	// Enter the Redirect URL
+	$client->setRedirectUri('https://afrobaskets.com/index.php/application/index/login');
+        $this->view->googleLink = $client->createAuthUrl(); 
+       include_once('fb-config.php');
+     $permissions = array('email'); // Optional permissions
+   $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.php/application/index/loginwithfb', $permissions);  
+	// Adding those scopes which we want to get (email & profile Information)
+	$client->addScope("email");
+	$client->addScope("profile");
+	$this->view->googleLink = $client->createAuthUrl();
         $this->view->cityList = $this->session['city_list'];
+        
         return $this->view;
     }
     
@@ -224,12 +400,23 @@ class IndexController extends AbstractActionController
         $postParams['method'] = 'categoryList';
         $categoryList = $this->commonObj->curlhitApi($postParams);
         $categoryList = json_decode($categoryList,true);
+        $categoryList['category_list'] = $categoryList['data'];
         if(!empty($categoryList)){
             $categoryList['data'] = $this->prepairCategory($categoryList['data']);
         }
         return $categoryList;
     }
-    
+    function featurecategoryList(){
+        $postParams = (array) $this->getRequest()->getPost();
+        $categoryList  = array();
+        $postParams['method'] = 'featurecategoryList';
+        $categoryList = $this->commonObj->curlhitApi($postParams);
+        $categoryList = json_decode($categoryList,true);
+        if(!empty($categoryList)){
+            $categoryList['data'] = $this->prepairCategory($categoryList['data']);
+        }
+        return $categoryList;
+    }
     function promotionList(){
         $postParams = (array) $this->getRequest()->getPost();
         $categoryList  = array();
@@ -323,7 +510,7 @@ class IndexController extends AbstractActionController
         exit;
     }
     
-    public function loginuserAction() {
+    public function loginuserAction() {         
         $postParams = (array) $this->getRequest()->getPost();
         if(empty($postParams)) {
             $postParams = (array) $this->getRequest()->getQuery();
@@ -377,7 +564,14 @@ class IndexController extends AbstractActionController
             $params['guest_user_id'] = session_id();
             $response = $this->commonObj->curlhitApi($params, 'application/customer');
             $update = json_decode($response,true);
+            $walletParams = array();
+            $walletParams['method'] = 'getBallance';
+            $walletParams['user_id'] = $params['user_id'];  
+            $walletParams['wallet_key'] = $user['wallet_key']; 
+            $walletresponse = $this->commonObj->curlhitApi($walletParams, 'application/wallet'); 
+            $walletResponseArray = json_decode($walletresponse, true) ;        
             $this->session['user'] = $data;
+            $this->session['wallet_amount'] = $walletResponseArray['data']['amount'];
             if(!empty($agentCode)) {
                 $this->session['agentcode'] = $agentCode;
                 header('location:'.$GLOBALS['SITE_APP_URL'].'/index');
@@ -459,6 +653,7 @@ class IndexController extends AbstractActionController
             $signupData['method'] = 'addedituser';
             $signupData['city_id'] = 1;
             $signupData['ezeepay_signup'] = 1;
+            $signupData['registration_type'] = 'google';
             $result = $this->commonObj->curlhitApi($signupData, 'application/customer'); 
             $response = json_decode($result, true);
         }
@@ -662,7 +857,16 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
         echo $productList;
         exit;
     } 
-    
+    function payNowAction(){
+    	$request = (array)$this->getRequest()->getPost();
+    	if (!empty($request['order_id'])) {
+            $request['method'] = 'getPaymentLink';
+            $request['user_id'] = $this->session['user']['data'][0]['id'];
+            echo $productList = $this->commonObj->curlhitApi($request,'application/customer');
+            
+        }
+        exit;
+    }
     function orderdetailsAction() {
        $request = (array) $this->getRequest()->getQuery();
        if (!empty($request['order_id'])) {

@@ -37,8 +37,8 @@ class common {
         }
         $url = BASKET_API . $controller;
         $parametes = http_build_query($data);
-        if ($params['method'] == 'placeorder') {
-//echo $url = $url.'?'.$parametes;die;
+        if ($params['method'] == 'checkout') {
+	//echo $url = $url.'?'.$parametes;die;
         }
 
         return $this->cObj->callPostCurl($url, $parametes);
