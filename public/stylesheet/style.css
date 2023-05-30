@@ -33,8 +33,6 @@ a:hover {
 	color: #ed6663;
 	text-decoration: none;
 }
-:hover {
-}
 small {
 	font-size: 85%;
 	font-weight: normal;
@@ -515,7 +513,7 @@ ul.currencies_list li a:hover {
 	cursor: pointer;
 	margin: 0px;
 	display: block !important;
-	background:#ed6663
+	/*background:#ed6663*/
 }
 .mini-cart .basket a {
 	color: #333;
@@ -534,13 +532,7 @@ ul.currencies_list li a:hover {
 	transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
 	box-shadow: inset 0 0 0 0 #202020
 }
-.fl-cart-contain > .mini-cart:hover > .basket a {
-	-webkit-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
-	-o-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
-	transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
-	box-shadow: inset 0 -80px 0 0 #252932;
-	color: #fff;
-}
+
 .mini-cart .basket a span {
 	background: #fff;
 	display: inline-block;
@@ -644,6 +636,8 @@ ul.currencies_list li a:hover {
 }
 ul#cart-sidebar {
 	padding: 10px 15px 0px;
+	max-height:300px;
+	overflow-y:scroll;
 }
 
 ul#cart-sidebar .btn-edit {padding: 0px 0px; border:none; display:block; text-align:center}
@@ -740,9 +734,7 @@ background:#f6f6f6
 	background-image: url(../images/btn_remove.png);
 	margin: 0px 0 0 5px;
 }
-.btn-remove1:hover, .btn-remove1:focus {
-	background-position: 0 -12px;
-}
+
 .btn-remove1 {
 	display: block;
 	width: 15px;
@@ -1543,7 +1535,6 @@ ul.level1 {
 }
 
 #nav li.drop-menu:hover ul li ul {opacity:0;}
-#nav li.drop-menu:hover ul li:hover ul {opacity:1;}
 
 #nav > li.drop-menu {
 	position: relative;
@@ -11809,8 +11800,9 @@ select#shipping-address-select {
 }
 .fl-links {
 	float: right;
-	background:#75a93a
-
+	background:#75a93a;
+	left:4px;
+	position:relative;
 }
 .fl-links .clicker {
 	padding: 0px 20px;

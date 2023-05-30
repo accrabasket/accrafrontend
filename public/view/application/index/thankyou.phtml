@@ -1,11 +1,15 @@
 <?php 
 if(!empty($this->productDetails)){
+$payable_amount=0;
 foreach ($this->productDetails['data'] as $key => $value) {
         //print_r($value);
-        $orderid = $value['order_details']['order_id'];   
+$orderid = $value['order_details']['order_id'];
+	if(!empty($value['order_details']['parent_order_id'])){
+		$orderid = $value['order_details']['parent_order_id'];
+        }
 		$deliverydate  = $value['order_details']['delivery_date'];
-		$payable_amount  = $value['order_details']['payable_amount'];
-		$numberifitme =  count($value['orderitem']);
+		$payable_amount += $value['order_details']['payable_amount'];
+		$numberifitme += count($value['orderitem']);
 		 $idexoftimeslot = $value['order_details']['time_slot_id'];
 		$timeslot = $this->productDetails['time_slot_list'][$idexoftimeslot]['start_time_slot']." To ".$this->productDetails['time_slot_list'][$idexoftimeslot]['end_time_slot'];
 		$indexofshiping = $value['order_details']['shipping_address_id'];

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="facebook-domain-verification" content="04y7hwtxtyk2mauji57jk112qywfko" />
         <title>Afrobaskets</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
         <meta name="description" content="Default Description">
         <meta name="keywords" content="fashion, store, E-commerce">
         <meta name="robots" content="*">
         <link rel="icon" href="#" type="image/x-icon">
-        <link rel="shortcut icon" href="#" type="image/x-icon">
+        <link rel="shortcut icon" href="#" type="image/x-icon"> 
 
         <!-- CSS Style -->
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/bootstrap.min.css">
@@ -18,8 +18,8 @@
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/owl.theme.css">
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.bxslider.css">
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/jquery.mobile-menu.css">
-        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/style.css?v=5" media="all">
-        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/responsive.css?v8" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/style.css?v=19" media="all">
+        <link rel="stylesheet" type="text/css" href="<?= $this->basePath() ?>/public/stylesheet/responsive.css?v13" media="all">
 
         <!--link href='<?= $this->basePath() ?>/public/css/googlecss1.css' rel='stylesheet' type='text/css'>
         <link href='<?= $this->basePath() ?>/public/css/googlecss2.css' rel='stylesheet' type='text/css'>
@@ -39,8 +39,8 @@
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/parallax.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/revslider.js"></script>
-        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/common.js?v=2"></script>
-        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/custom-common.js?v=1"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/common.js?v=9"></script>
+        <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/custom-common.js?v=86"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.bxslider.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/owl.carousel.min.js"></script>
         <script type="text/javascript" src="<?= $this->basePath() ?>/public/js/jquery.mobile-menu.min.js"></script>
@@ -179,6 +179,7 @@
                                                     <li><a href="<?= $this->basePath() ?>/index.php/application/index/changepassword">Change Password</a></li> 
                                                     <li><a href="<?= $this->basePath() ?>/index.php/application/index/currentorder">My Order</a></li>
                                                     <li><a href="<?= $this->basePath() ?>/index.php/application/index/checkout" title="Checkout">Checkout</a></li>
+                                                    <li><a href="#">Wallet Amount - GHC <?= $GLOBALS['wallet_amount']?></li></a>
                                                     <li><a href="<?= $this->basePath() ?>/index.php/application/index/logout">Log-out</a></li> 
                                                 <?php } else { ?>
                                                 </ul>
@@ -234,10 +235,10 @@
                                     </div>
                                 </div>
                                 <!--mini-cart-->
-                                <div class="navbar-collapse">
+                                <div class="navbar-collapse hidden-sm hidden-xs">
                                     <form class="navbar-form" role="search" action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
                                         <div class="input-group">
-                                            <input type="text" id="myInput" class="form-control" placeholder="Search" ng-model="searchItem" name="search" ng-change="getProductList()" autocomplete="off">
+                                            <input type="text" id="myInput" class="form-control" placeholder="Search" ng-model="searchItem" name="search" ng-change="getProductList('myInput')" autocomplete="off">
                                             
                                             <span class="input-group-btn">
                                                 <button type="submit" id="searchBtn" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
@@ -247,6 +248,14 @@
                                 <!--links-->
                             </div>
                         </div>
+                                <div class="hidden-lg hidden-md">
+                                    <form class="navbar-form" role="search" action="<?=$this->basePath()?>/index.php/application/index/product" method="post">
+                                        
+                                            <input type="text" id="myInput1" class="form-control col-sm-12 col-xs-12" placeholder="Search for products, Brands and More" ng-model="searchItem" name="search" ng-change="getProductList('myInput1')" autocomplete="off">
+
+                                        
+                                    </form>
+                                </div> 
                     </div>
                 </div>
    
@@ -266,6 +275,7 @@
             <script>
     var serverAppUrl = '<?php echo $GLOBALS['SITE_APP_URL']; ?>';
     var city = 0;
+    var categoryList = <?php echo json_encode($GLOBALS['category_list']['category_list'])?>;
 </script>
 
 <style>
@@ -300,6 +310,9 @@ input[type=submit] {
   left: -314px;
   width: 391px;
   right: 0;
+  max-height:300px;
+  overflow:scroll;
+  overflow-x: hidden;
 }
 
 .autocomplete-items div {
@@ -318,5 +331,19 @@ input[type=submit] {
 .autocomplete-active {
   background-color: DodgerBlue !important; 
   color: #ffffff; 
+}
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 17px !important;
+  width: 327px;
+  right: 0;
+}
 }
 </style>

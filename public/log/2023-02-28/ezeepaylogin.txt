@@ -1,0 +1,4 @@
+
+ Request - 2023-02-28 17:29:54
+{"merchantcode":"dsfdSSa22AAAj","agentcode":"86692","tokenid":null,"checksum":"8b1038d97713378ba0ba0736735fae144a2c2184d3ed2260b1cce34efbb33f3beaebf5eb536033235695d98dac55dcdaf0d28001b1fc817189b222ce0ffe1c13"}
+ Ezeepay Response:-{"isSuccess":true,"message":"Data received successfully.","status":200,"result":{"address":"Plot 3, dade link off of dade street, Cantonments, Accra-Ghana","companyname":"Ezipaygh","city":"GHANA","contactphone":"596164010","country":null,"emailid":"kennedyagyapong882@gmail.com","firstname":"KENNEDY","lastname":"AGYAPONG","mobile":"596164010","state":"GHANA","title":"Mr/Mrs.","zip":"00233","statusCode":0,"statusMessage":"Success","merchantcode":"dsfdSSa22AAAj","kcode":"86692","tokenID":null,"checksum":"BC18CEAF50A498603D53AB260B9934E2F601E4F2977C85AD979A80FC926121D0A584E61EAD5779D302C314B35A8016888939BEC6946D7BDD9EF42D4FCA101F1C","CurrentBalance":"0"}}

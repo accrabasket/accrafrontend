@@ -24,6 +24,8 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
                 $scope.product = $scope.cartData.data;
                 $scope.productImage = $scope.cartData.imageRootPath;
                 $scope.productImageDetais = $scope.cartData.productDetails.productImageData;
+                $scope.walletAmount = response.data.walletAmount;
+                console.log($scope.walletAmount);
                 $scope.ajaxLoadingData = false;
             } else {
                 $scope.ajaxLoadingData = false;
@@ -88,7 +90,11 @@ app.controller('chekout', function ($scope, $http, $sce, $timeout, $rootScope) {
         $scope.payment = 0;
         //$(".timeslotradioclass").prop('checked', false);
     }
-    
+    $scope.deductWalletAmount = function() {
+
+    	$scope.placeOrderData.use_wallet_amount = $scope.use_wallet_amount;
+    	$scope.getcartdata();
+    }
     $scope.selectTimeSlot = function(deliveryTimeSlot) {
         $scope.placeOrderData.time_slot_id =  deliveryTimeSlot;
         $scope.payment = 0;

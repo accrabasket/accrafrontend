@@ -5,10 +5,15 @@
                 <h4 class="danger" style="color:red" ng-show="errorShow">{{errorMsg}}</h4>
                 <h4 class="danger" style="color:green" ng-show="successShow">{{successMsg}}</h4>
                 <div class="login-body">
-                    <form  method="post">
+                    <form  method="post"><br/>
+                    <a href="<?=$this->googleLink?>"><img src="<?=$this->basePath()?>/public/images/google-g-icon-12.jpg" height="25"/><b>&nbsp;GOOGLE</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="<?=$this->fbLoginUrl?>"><img src="<?=$this->basePath()?>/public/images/fb.png" height="30"/><b>&nbsp;FACEBOOK</b></a>
+            	<br/><br/>
+            	OR<br/><br/>
                         <input type="text" class="user" name="email" ng-model="loginData.email" placeholder="Enter your email" required="">
                         <input type="password" name="password" ng-model="loginData.password" class="lock" placeholder="Password" required="">
                         <input type="submit" value="Login" ng-click="login(loginData)">
+                        
                         <div class="forgot-grid">
                             <!--<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Remember me</label>-->
                             <div class="forgot">
@@ -19,16 +24,7 @@
                     </form>
                 </div>  
                 <h6> Not a Member? <a  href="<?=$this->basePath()?>/index.php/application/index/signup">Sign Up Now »</a> </h6> 
-                <div class="login-page-bottom social-icons">
-                    <h5>Recover your social account</h5>
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
-                        <li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
-                        <li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
-                        <li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
-                        <li><a href="#" class="fa fa-rss icon rss"> </a></li> 
-                    </ul> 
-                </div>
+                
             </div>
         </div>
         <div style="position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.3); z-index: 99999999; width: 100%; height: 100%;"  ng-show="ajaxLoadingData">

@@ -7,6 +7,7 @@ function ObjecttoParams(obj) {
 }
 ;
 var placeSearch, autocomplete;
+var globalinput = {};
 function initAutocomplete() {
     autocomplete = new google.maps.places.Autocomplete(
             (document.getElementById('autocomplete')),
@@ -109,7 +110,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
 	
     }
     $scope.busySemaFor = 0;
-    $rootScope.getProductList = function() {
+    $rootScope.getProductList = function(inputboxId) {
         var params = {};        
         console.log($scope.searchItem);
         if($scope.busySemaFor == 0) {
@@ -122,21 +123,41 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (response) {
                 $scope.busySemaFor = 0;
-                $scope.productArr = [];
+                $scope.productArr = {};
                 if($scope.searchItem != params.product_name) {
-                    $rootScope.getProductList();
-                }else{
-                    angular.forEach(response.data, function(value, key){
-                        $scope.productArr.push(value.product_name);
+                    $rootScope.getProductList(inputboxId);
+                }else{  
+                    if(response.data != undefined) {                  
+                    angular.forEach(response.data, function(value, key){  
+                       if($scope.productArr[value.category_id] == undefined) {
+                       	$scope.productArr[value.category_id] = [];
+                       }                  	
+                    	angular.forEach(value.attribute, function(attribute, attribute_key){
+                    		attribute.category_id = value.category_id;
+                        	//$scope.productArr.push(attribute);
+                        	$scope.productArr[value.category_id].push(attribute);
+                        });
                     });
-                    autocomplete(document.getElementById("myInput"), $scope.productArr);
+                    autocomplete(document.getElementById(inputboxId), $scope.productArr);		   
+                    }else {
+                      var inp = document.getElementById(inputboxId);
+                      a = document.createElement("DIV");
+		      a.setAttribute("id", inp.id + "autocomplete-list");
+		      a.setAttribute("class", "autocomplete-items");
+		      /*append the DIV element as a child of the autocomplete container:*/
+		      inp.parentNode.appendChild(a);
+                    	b = document.createElement("DIV");
+          		b.innerHTML = "<span style='width:102%;margin-left:0px;text-align:center;'><strong>No Record Found.</strong></span>";                    
+  			 a.appendChild(b);	
+                    }
+
                 }                
             });         
         }
     }
     
     
-function autocomplete(inp, arr) {
+function autocomplete(inp, arr1) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
   var currentFocus;
@@ -150,36 +171,61 @@ function autocomplete(inp, arr) {
       currentFocus = -1;
       /*create a DIV element that will contain the items (values):*/
       a = document.createElement("DIV");
-      console.log("id=>"+inp.id)
       a.setAttribute("id", inp.id + "autocomplete-list");
       a.setAttribute("class", "autocomplete-items");
       /*append the DIV element as a child of the autocomplete container:*/
       inp.parentNode.appendChild(a);
       /*for each item in the array...*/
-      for (i = 0; i < arr.length; i++) {
+      //for (i = 0; i < arr.length; i++) {
+      for (const j in arr1) {
+        var arr = arr1[j]; 
+        
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<a href='https://"+location.hostname+"/index.php/application/index/product?id="+j+"'><strong>"+(categoryList[j].category_name)+"</strong></a>";
+          /*insert a input field that will hold the current array item's value:*/
+          //b.innerHTML += "<input type='hidden' value='" + arr[i].attribute_name +"' rel='"+arr[i].product_id+"-"+arr[i].attribute_id+"'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          /*b.addEventListener("click", function(e) {
+              inp.value = this.getElementsByTagName("input")[0].value;
+              globalinput.rel = this.getElementsByTagName("input")[0].getAttribute('rel');
+              closeAllLists();
+          });*/
+          a.appendChild(b);
+                  
+        for (const i in arr) {
         /*check if the item starts with the same letters as the text field value:*/
         //if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
           /*create a DIV element for each matching element:*/
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
-          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-          b.innerHTML += arr[i].substr(val.length);
+          
+          b.innerHTML = "<span style='margin-left:10px;'>"+arr[i].attribute_name +"   "+ arr[i].quantity+" "+arr[i].unit +"  (GHC"+arr[i].actual_price+")"+"</span>";
           /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.innerHTML += "<input type='hidden' value='" + arr[i].attribute_name +"' rel='"+arr[i].product_id+"-"+arr[i].attribute_id+"'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
-              /*insert the value for the autocomplete text field:*/
               inp.value = this.getElementsByTagName("input")[0].value;
-              console.log("inp.value=>"+inp.value)
-              /*close the list of autocompleted values,
-              (or any other open lists of autocompleted values:*/
+              globalinput.rel = this.getElementsByTagName("input")[0].getAttribute('rel');
               closeAllLists();
           });
           a.appendChild(b);
+        }      
         }
+b = document.createElement("DIV");
+          
+          b.innerHTML = "<none class='block'><span class='block-title' style='width:102%;margin-left:0px;text-align:center;'><strong>View All Products</strong></span></none>"; 
+          /*execute a function when someone clicks on the item value (DIV element):*/
+
+          b.addEventListener("click", function(e) {
+		document.getElementById("searchBtn").click();
+		document.getElementById("searchBtn").click();
+          });           
+          a.appendChild(b);        
       //}
   //});
   /*execute a function presses a key on the keyboard:*/
+
   inp.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
@@ -232,9 +278,14 @@ function autocomplete(inp, arr) {
   }
   /*execute a function when someone clicks in the document:*/
   document.addEventListener("click", function (e) {
-      jQuery("#searchBtn").click();
+  	console.log(globalinput);
+  	if(globalinput.rel == undefined){
+  	}else{
+  	window.location.href= "https://"+location.hostname+"/index.php/application/index/productdetails?id="+globalinput.rel;
+  	}
+      //jQuery("#searchBtn").click();
       //closeAllLists(e.target);
-  });
+  })
 }    
 });
 

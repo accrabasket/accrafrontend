@@ -124,6 +124,7 @@
                                                     <a style="color:red" ng-show="{{data.order_details.order_status == 'order_placed'}}" ng-click="cancelOrder(data.order_details.store_id, data.order_details.order_id)" href="javascript:void(0)" > 
                                                         cancel order
                                                     </a>
+                                                    <button ng-click="payNow(data.order_details.order_id)"  ng-show="{{data.order_details.order_status != 'cancelled' && data.order_details.payment_status=='unpaid'}}" type="button" class="btn-checkout"><span>Pay Now</span></button>
 
                                                 </td>
                                                 <td>{{data.order_details.created_date}}</td>
@@ -156,7 +157,7 @@
     </div> 
 </div>
 
-<script src="<?php echo $this->basePath() . '/public/js/frontend/currentorder.js' ?>"></script>
+<script src="<?php echo $this->basePath() . '/public/js/frontend/currentorder.js?v=4' ?>"></script>
 <script>
          var PAGE_COUNT = 5;
          var PAGING_GAP = 3;

@@ -1564,6 +1564,7 @@ input#amount {
 }  
 .login-body {
     padding: 3em;
+    padding-top:0px;
     background-color: #fff;
     -webkit-box-shadow:0px 0px 4px 1px rgb(189, 189, 189);
     -moz-box-shadow:0px 0px 4px 1px rgb(189, 189, 189);

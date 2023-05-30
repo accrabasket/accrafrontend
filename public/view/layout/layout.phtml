@@ -1,5 +1,6 @@
 <?php
         echo $this->partial('layout/header');
+        $GLOBALS['LEFT_MENU_ALLOW'][] = 'featurecategory';
         if(in_array($GLOBALS['action'], $GLOBALS['LEFT_MENU_ALLOW'])){
             ?>
         <div class="page-heading">

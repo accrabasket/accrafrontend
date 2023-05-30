@@ -53,7 +53,23 @@ app.controller('orderController', function ($scope, $http,$timeout) {
         $scope.filter.order_status = 'current_order';
         $scope.getOrderList();
     }
-    
+    $scope.payNow = function(orderId) {
+    	console.log('ss');
+        $scope.ajaxLoadingData = true;
+	$scope.params = {};
+	$scope.params.order_id = orderId;
+        $http({
+            method: 'POST',
+            url: serverAppUrl + '/payNow',
+            data : ObjecttoParams($scope.params),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (response) {
+            $scope.ajaxLoadingData = false;
+	    if(response !=undefined ) {
+		window.location.href = response.paymentUrl;
+            }
+        });  
+    }
     $scope.getOrderList = function() { 
         $scope.ajaxLoadingData = true;
         //$scope.numberOfRecord = 0;

@@ -31,11 +31,7 @@
                 </div>
                 <!--End For version 1,2,6-->
                 <!-- For version 3 -->
-                <div class="product-shop col-sm-6 col-xs-12">
-                
-                  <div class="product-name">
-                    <h1 itemprop="name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?></h1>
-                  </div>
+                <div class="product-shop col-sm-6 col-xs-12">               
                   <!--product-name-->
                   
                 <?php 
@@ -44,14 +40,23 @@
                             $price = $this->productDetails['attribute'][$this->selectedAttr]['price'];
                             $actualPrice = $this->productDetails['attribute'][$this->selectedAttr]['actual_price'];
                             $id = $this->productDetails['attribute'][$this->selectedAttr]['id'];
+                            $quantity = $this->productDetails['attribute'][$this->selectedAttr]['quantity']." ".$this->productDetails['attribute'][$this->selectedAttr]['unit'];
+                            $disType = "";
+                            if($this->productDetails['attribute'][$this->selectedAttr]['discount_type'] == 'percent'){
+                            	$disType = "%";
+                            }
+                            $discount = $this->productDetails['attribute'][$this->selectedAttr]['discount_value']."".$disType;                            
 //                                        }
-                    }
-                ?>                  
+                    }                    
+                ?>   
+                  <div class="product-name">
+                    <h1 itemprop="name"><?= !empty($this->productDetails['product_name'])?$this->productDetails['product_name']:''?> - <?=$quantity?></h1>
+                  </div>                               
                   <div class="price-block">
-                    <div class="price-box"> <span class="regular-price" id="product-price-123"> <span class="price">GHC<?= $actualPrice?></span> </span> </div>
-                    <p class="availability in-stock">
-                      <link itemprop="availability" href="http://schema.org/InStock">
-                      <span>In stock</span></p>
+                    <div class="price-box"> <span class="regular-price" id="product-price-123"> 
+                     <span class="price">GHC <?= $actualPrice?></span> </span> &nbsp;&nbsp;&nbsp;
+                     <span ng-if="<?=$discount?>" class="price">Discount - <?= $discount?></span> </span> 
+                    </div>
                   </div>
                   <!--price-block-->
                   <div class="short-description">
@@ -75,7 +80,7 @@
                         <!--custom pull-left-->
                       </div>
                         {{product}}
-                        <button class="button btn-cart" type="button" ng-if="!cartResponse.data['<?=$id?>'].number_of_item" ng-click="addToCart('<?=$id?>','<?=$this->productDetails['product_name']?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
+                        <button class="button btn-cart" type="button" ng-if="!cartResponse.data['<?=$id?>'].number_of_item" ng-click="addToCart('<?=$id?>','<?=$this->productDetails['product_name']?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="tel:+233553354848" style="margin-top:5px;display:block;font-size:20px;" class="hidden-lg hidden-md">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-phone" aria-hidden="true"></i></a>
                         <span ng-if="cartResponse.data['<?=$id?>'].number_of_item">
                             <i class="fa fa-plus green-text" ng-click="addToCart('<?=$id?>', '<?=$this->productDetails['product_name']?>', 'add', 1)"></i> 
                             <b>&nbsp;{{cartResponse.data['<?=$id?>'].number_of_item}}&nbsp;</b>

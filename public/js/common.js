@@ -163,9 +163,16 @@ jQuery(document).ready(function() {
         jQuery(".fl-cart-contain").mouseenter(function() {
             jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideDown()
         }), jQuery(".fl-cart-contain").mouseleave(function() {
-            jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
+            //jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
         })
     }
+    jQuery("body").click(function(){
+    	jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
+    })
+    jQuery(".fl-cart-contain").click(function(){
+    	jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideDown();
+    	event.stopImmediatePropagation();
+    })
 
     function deleteCartInSidebar() {
         return is_checkout_page > 0 ? !1 : void jQuery("#cart-sidebar a.btn-remove, #mini_cart_block a.btn-remove").each(function() {})
@@ -387,6 +394,7 @@ jQuery(window).on("load", function() {
                     var n = e(this).closest("form"),
                         i = n.find("input");
                     n.addClass("active"), i.focus()
+		
                 }), e(document).on("click", '.navbar-collapse form[role="search"].active button[type="submit"]', function(n) {
                     
                 })

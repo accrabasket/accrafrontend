@@ -20,6 +20,9 @@ app.controller('product', function ($scope, $http, $sce, $timeout, searchBy,page
         
         if(searchBy.merchant_id != undefined && searchBy.merchant_id != ''){
             $scope.searchProductParams.merchant_id = searchBy.merchant_id;
+        }
+        if(searchBy.promotion_id != undefined && searchBy.promotion_id != ''){
+            $scope.searchProductParams.promotion_id = searchBy.promotion_id;
         } 
         
         if(searchBy.product_name != undefined && searchBy.product_name != ''){

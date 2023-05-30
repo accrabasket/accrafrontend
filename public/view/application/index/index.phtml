@@ -72,7 +72,83 @@
             </ul>
         </div>
     </div>-->
+    <!--feature category slider Start-->
+    <div class="top-cate">
+        <div class="featured-pro container">
+            <div class="row">
+                <div class="slider-items-products">
+                    <div class="new_title">
+                        <h2>Featured Categories</h2>
+                    </div> 
+                    <div id="top-categories" class="product-flexslider hidden-buttons hidden-xs">
+                        <div class="slider-items slider-width-col6 products-grid">
+                            <?php
+                            foreach ($this->featureCategoryList['data'] as $featureKey=>$category) {
+                                if(!empty($this->featureCategoryList['images'][$featureKey])) {
+                                $featureImage = $this->featureCategoryList['images'][$featureKey][0];
+                                $categoryImagePath = $this->featureCategoryList['imageRootPath'].'/'.$featureImage['type'] . '/'  . $featureImage['image_name'];
+                                }else {
+                                    $categoryImageDetails = $GLOBALS['category_list']['images'][$category['category_id']][0];
+                                    $categoryImagePath = $GLOBALS['category_list']['imageRootPath'] . '/' . $categoryImageDetails['type'] . '/' . $categoryImageDetails['image_id'] . '/' . $categoryImageDetails['image_name'];
+                                    }
+                                    ?>
+                                    <div class="item">
+                                        <div class="pro-img">
+                                            <a href="<?= $this->basePath() ?>/index.php/application/index/featurecategory?feature_category_id=<?= $category['id'] ?>">
+                                                <img src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+                                            </a>
+                                            <div class="pro-info"><?= $category['category_name'] ?></div>
+                                        </div>
+                                    </div>              
+                                    <?php                                
+                            }
+                            ?>
 
+                            <!-- End Item -->
+                        </div>
+                    </div>
+
+                
+
+     <table class="hidden-lg hidden-md" width="100%">
+<?php
+                           $categoryCounter = 0; 
+			   foreach ($this->featureCategoryList['data'] as $featureKey=>$category) {
+			   if(!empty($this->featureCategoryList['images'][$featureKey])) {
+                                $featureImage = $this->featureCategoryList['images'][$featureKey][0];
+                                $categoryImagePath = $this->featureCategoryList['imageRootPath'].'/'.$featureImage['type'] . '/'  . $featureImage['image_name'];
+                                }else{
+                                        $categoryImageDetails = $GLOBALS['category_list']['images'][$category['category_id']][0];
+        	                        $categoryImagePath = $GLOBALS['category_list']['imageRootPath'] . '/' . $categoryImageDetails['type'] . '/' . $categoryImageDetails['image_id'] . '/' . $categoryImageDetails['image_name'];
+        	                        }
+                                 
+
+	                          	if($categoryCounter%3==0){
+						echo "<tr>";
+					}     
+					echo "<td widht='33%' height='120' align='center'>";?>
+					   <a href="<?= $this->basePath() ?>/index.php/application/index/featurecategory?feature_category_id=<?= $category['id'] ?>">
+                                                <img width="80" height="80" src="<?= $categoryImagePath ?>"  alt="<?= $category['category_name'] ?>">
+						<div class="pro-info" style="font-size:10px;margin-top:10px;"> <?= $category['category_name'] ?></div>
+                                            </a>
+				<?php
+				        echo " </td>";
+					if($categoryCounter%3==2){
+						echo "</tr>";
+					}
+					$categoryCounter++;	
+
+                           }
+                            ?>
+	
+      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+       <!-- feature end Pro Slider -->
     <!--Category slider Start-->
     <div class="top-cate">
         <div class="featured-pro container">
@@ -84,6 +160,7 @@
                     <div id="top-categories" class="product-flexslider hidden-buttons hidden-xs">
                         <div class="slider-items slider-width-col6 products-grid">
                             <?php
+//echo "<pre>";print_r($GLOBALS['category_list']['data'][133]['child']);die;
                             foreach ($GLOBALS['category_list']['data'] as $category) {
                                 if (!empty($category['top_category']) && $category['top_category'] == 'yes') {
                                     $categoryImageDetails = $GLOBALS['category_list']['images'][$category['id']][0];
@@ -182,7 +259,7 @@
 		<?php
 }
 $counter++;
-if($counter==4){
+if($counter==10){
 break 2;
 }
 		}
@@ -282,7 +359,7 @@ break 2;
 									?>
 								 </span>
 							 </span>
-						 </div>
+						 </div>						
                                         </div>
                                       </div>
                                   </div>
@@ -357,14 +434,14 @@ alt="<?=$product['product_name']?>"></a>
 							 </div>
 						</div>
                                     
-				      <div class="add_cart">
-<!--                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?= $id ?>','<?= $this->productDetails['product_name'] ?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
+				      <!--div class="add_cart">
+                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?=$product[attribute][$value[attribute_id]]['id']?>', '<?=$product['product_name']?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
                                             <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
                                                 <i class="fa fa-plus green-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'add', 1)"></i> 
                                                 <b>&nbsp;{{cartResponse.data['<?= $id ?>'].number_of_item}}&nbsp;</b>
                                                 <i class="fa fa-minus red-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'delete', 1)"></i>                       
-                                            </span>-->
-                                      </div>
+                                            </span>
+                                      </div-->
                                   </div>
                                 </div>
                               </div>
@@ -521,6 +598,14 @@ alt="<?=$product['product_name']?>"></a>
 							 </span>
 						 </div>
                                           </div>
+                                          <!--div class="add_cart">
+                                            <button class="button btn-cart" type="button"  ng-click="addToCart('<?=$product[attribute][$value[attribute_id]]['id']?>', '<?=$product['product_name']?>','add', 1)" title="Add to Cart" class="button btn-cart"><span><i class="icon-basket"></i>Add to Cart</span></button>
+                                            <span ng-if="cartResponse.data['<?= $id ?>'].number_of_item">
+                                                <i class="fa fa-plus green-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'add', 1)"></i> 
+                                                <b>&nbsp;{{cartResponse.data['<?= $id ?>'].number_of_item}}&nbsp;</b>
+                                                <i class="fa fa-minus red-text" ng-click="addToCart('<?= $id ?>', '<?= $this->productDetails['product_name'] ?>', 'delete', 1)"></i>                       
+                                            </span>
+                                      </div-->
                                   </div>
                                 </div>
                               </div>
