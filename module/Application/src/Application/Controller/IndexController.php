@@ -15,6 +15,9 @@ use Zend\Session\Container;
 use Application\Model\common;
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var \Application\Model\common
+     */
     public $commonObj;
     public $view;
     public $session;
@@ -32,6 +35,14 @@ class IndexController extends AbstractActionController
 	$GLOBALS['fcityaddresstmp'] = $this->session['fcityaddresstmp'];
 	$GLOBALS['wallet_amount'] = !empty($this->session['wallet_amount'])?$this->session['wallet_amount']:0;
         //}
+    }
+    
+    protected function getUserId()
+    {
+        if (!isset($this->session['user']) || !isset($this->session['user']['data']) || !isset($this->session['user']['data'][0]['id'])) {
+            return null;
+        }
+        return $this->session['user']['data'][0]['id'];
     }
     public function indexAction()
     { 
@@ -91,7 +102,7 @@ class IndexController extends AbstractActionController
         $searchParams = array();
         $request = (array) $this->getRequest()->getQuery();
         $postParams = (array) $this->getRequest()->getPost();
-        $this->view->session = !empty($this->session['user']['data'][0]['id'])?$this->session['user']['data'][0]['id']:0;
+        $this->view->session = !empty($this->getUserId()) ? $this->getUserId() : 0;
         if(!empty($request['id'])){
             $searchParams['category_id'] = $request['id'];
             if(!empty($this->session['category_list']['data'][$request['id']])) {
@@ -471,8 +482,8 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
     public function addtocartAction() {
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'addtocart';
-        if(!empty($this->session['user']['data'][0]['id'])){
-            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        if(!empty($this->getUserId())){
+            $postParams['user_id'] = $this->getUserId();
         }else{
             $postParams['guest_user_id'] = session_id();
         }
@@ -486,8 +497,8 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
         $postParams = (array) $this->getRequest()->getPost();
         //$cartList  = array();
         $postParams['method'] = 'getitemintocart';
-        if(!empty($this->session['user']['data'][0]['id'])){
-            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        if(!empty($this->getUserId())){
+            $postParams['user_id'] = $this->getUserId();
         }else{
             $postParams['guest_user_id'] = session_id();
         }
@@ -685,7 +696,7 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
         }else{
             $data['method'] = 'changepassword';;
             $data['password'] = $postParams['password'];
-            $data['user_id'] =  $this->session['user']['data'][0]['id'];
+            $data['user_id'] =  $this->getUserId();
         }
         $data['new_password'] = $postParams['new_password'];
         $response = $this->commonObj->curlhitApi($data, 'application/customer');
@@ -708,7 +719,7 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
     }
     
     public function checkoutAction(){
-        if(empty($this->session['user']['data'][0]['id'])){
+        if(empty($this->getUserId())){
             $path = $GLOBALS['SITE_APP_URL'].'/login';
             header('Location: '.$path);
             exit;
@@ -723,8 +734,8 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
         $postParams = (array) $this->getRequest()->getPost();
         $cartList  = array();
         $postParams['method'] = 'checkout';
-        if(!empty($this->session['user']['data'][0]['id'])) {
-            $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        if(!empty($this->getUserId())) {
+            $postParams['user_id'] = $this->getUserId();
         }
         $cartList = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $cartList;
@@ -732,9 +743,9 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
     }
     
     public function getUserAddressAction(){
-	$postParams = (array) $this->getRequest()->getPost();
+	    $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'getaddresslist';
-        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $postParams['user_id'] = $this->getUserId();
         $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $addressList;
         exit;
@@ -748,7 +759,7 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
     }
     public function placeorderAction() {
         $postParams = (array) $this->getRequest()->getPost();
-        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $postParams['user_id'] = $this->getUserId();
         $postParams['method'] = 'placeorder';
         /*if(!empty($this->session['agentcode']) && $postParams['payment_type'] == 'ezeepay_wallet') {
             $paymentResponse = $this->deductAmountFromEzeepayWallet($postParams['payableAmount']);
@@ -773,7 +784,7 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
 		$postParams['city_id']= (int)$this->session['city_tmp'];
 		$postParams['city_name']= $this->session['fcityaddresstmp'];
         $postParams['method'] = 'addeditdeliveryaddress';
-        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $postParams['user_id'] = $this->getUserId();
         $addressList = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $addressList;
         exit;
@@ -789,7 +800,7 @@ $this->view->fbLoginUrl = $helper->getLoginUrl('https://afrobaskets.com/index.ph
 	$postParams = (array) $this->getRequest()->getPost();
         $data = array();
         $data['method'] = 'addedituser';
-        $data['id'] = $this->session['user']['data'][0]['id'];
+        $data['id'] = $this->getUserId();
         $data['name'] = $postParams['name'];
         $data['email'] = $postParams['email'];
         $data['mobile_number'] = $postParams['mobile_number'];
@@ -819,7 +830,7 @@ $gotpdata = array('method'=>'generateotp','otp_type'=>'register','user_id'=>0,'m
 echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer');
 }
     public function currentorderAction(){
-        if(empty($this->session['user']['data'][0]['id'])){
+        if(empty($this->getUserId())){
             $path = $GLOBALS['SITE_APP_URL'].'/login';
             header('Location: '.$path);
             exit;
@@ -834,7 +845,7 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
         if(!empty($request['page'])) {
             $request['page'] = $request['page'];
         }
-        $request['user_id'] = $this->session['user']['data'][0]['id'];
+        $request['user_id'] = $this->getUserId();
 		unset($request['order_status']); 
         $productList = $this->commonObj->curlhitApi($request,'application/customer');
         $productList = json_decode($productList, true);
@@ -851,7 +862,7 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
         $request = (array)$this->getRequest()->getPost();
         $request['method'] = 'updateOrderstatus';
         $request['order_status'] = 'cancelled';
-        $request['user_id'] = $this->session['user']['data'][0]['id'];
+        $request['user_id'] = $this->getUserId();
         $productList = $this->commonObj->curlhitApi($request,'application/customer');
         $productList = json_decode($productList, true);
         echo $productList;
@@ -861,7 +872,7 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
     	$request = (array)$this->getRequest()->getPost();
     	if (!empty($request['order_id'])) {
             $request['method'] = 'getPaymentLink';
-            $request['user_id'] = $this->session['user']['data'][0]['id'];
+            $request['user_id'] = $this->getUserId();
             echo $productList = $this->commonObj->curlhitApi($request,'application/customer');
             
         }
@@ -922,7 +933,7 @@ echo $addressList = $this->commonObj->curlhitApi($gotpdata,'application/customer
     function deleteShippingAddressAction(){
         $postParams = (array) $this->getRequest()->getPost();
         $postParams['method'] = 'deleteshippingaddress';
-        $postParams['user_id'] = $this->session['user']['data'][0]['id'];
+        $postParams['user_id'] = $this->getUserId();
         $response = $this->commonObj->curlhitApi($postParams,'application/customer');
         echo $response;
         exit;

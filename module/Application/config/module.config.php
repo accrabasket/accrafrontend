@@ -20,6 +20,23 @@ return array(
                     ),
                 ),
             ),
+            // Short top-level action route: allows URLs like /viewcart
+            // to map to Application\Controller\Index::viewcartAction()
+            'short_action' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/:action',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\\Controller',
+                        'controller' => 'Index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them

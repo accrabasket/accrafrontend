@@ -4,7 +4,6 @@
             		
                     
                         <?php
-			
                         foreach ($this->banner['data'] as $bannerDetails) {
                             $bannerPath = $this->banner['imageRootPath'] . "/" . $bannerDetails['image_name'];
 			   $link = "#";
@@ -260,7 +259,7 @@
 }
 $counter++;
 if($counter==10){
-break 2;
+ break;
 }
 		}
 		
@@ -662,7 +661,7 @@ alt="<?=$product['product_name']?>"></a>
     <!-- #region Jssor Slider Begin -->
     <!-- Generator: Jssor Slider Composer -->
     <!-- Source: https://www.jssor.com/demos/image-slider.slider/=edit -->
-    <script src="/public/js/jssor.slider-28.0.0.min.js" type="text/javascript"></script>
+    <script src="<?=$GLOBALS['SITE_APP_URL']?>/public/js/jssor.slider-28.0.0.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         window.jssor_1_slider_init = function() {
 
