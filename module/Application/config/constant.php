@@ -1,12 +1,12 @@
 <?php
 $GLOBALS['HTTP_SITE_ADMIN_URL'] = 'http://' .$_SERVER['HTTP_HOST'].'/admin/';
 //$GLOBALS['SITE_APP_URL'] = 'https://'.$_SERVER['SERVER_NAME'].'/index.php/application/index';
-$GLOBALS['SITE_APP_URL'] = 'http://'.$_SERVER['SERVER_NAME'].'/accrafrontend';
+$GLOBALS['SITE_APP_URL'] = 'https://'.$_SERVER['SERVER_NAME'];
 $GLOBALS['SITE_COMPANY_URL'] = 'https://localhost/accrabasket/merchant/';
 $GLOBALS['PAGE_BEFORE_LOGIN'] = array('Admin\Controller\Index\login','Admin\Controller\Index\index');
 $GLOBALS['SITE_PATH'] = $_SERVER['DOCUMENT_ROOT'];
 define('NODE_API', 'https://localhost:3000/');
-define('BASKET_API', 'http://localhost/basketapi/index.php/');
+define('BASKET_API', 'https://crtup.in/basketapi/');
 $GLOBALS['PRODUCTIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'accrabasket/product_img';
 $GLOBALS['ATTRIBUTEIMAGEPATH'] = $_SERVER['DOCUMENT_ROOT'].'/accrabasket/attribute_img';
 $GLOBALS['LEFT_MENU_ALLOW'] = array('product','hotdeals');
