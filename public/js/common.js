@@ -197,7 +197,7 @@ jQuery(document).ready(function() {
 		jQuery('#locatonerror').remove();
             if(response>0){
                 jQuery("#selectcity").modal('hide');
-                location.reload();
+                //location.reload();
             }else{
 			jQuery('#searchTextField').after("<div class='error' id='locatonerror'>service not available these area. choose to another place</div>");
 			}
@@ -412,10 +412,10 @@ jQuery(window).on("load", function() {
         jQuery('#locatonerror').remove();
         if (response > 0) {
             jQuery("#selectcity").modal('hide');
-            location.reload();
+            //location.reload();
         } else {
             alert('service not available these area. choose to another place');
-            location.reload();
+            //location.reload();
             //jQuery('#searchTextField').after("<div class='error' id='locatonerror'>service not available these area. choose to another place</div>");
         }
     });

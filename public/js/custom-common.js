@@ -97,7 +97,7 @@ app.controller('cartcontroller', function ($scope, $http, $rootScope) {
         }).success(function (response) {
             if(response>0){
                 $("#selectcity").modal('hide');
-                location.reload();
+                //location.reload();
             }
         });        
     }
