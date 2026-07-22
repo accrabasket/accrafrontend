@@ -160,11 +160,11 @@ jQuery(document).ready(function() {
         })
     /*  Top Cart */
     function slideEffectAjax() {
-        jQuery(".fl-cart-contain").mouseenter(function() {
-            jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideDown()
-        }), jQuery(".fl-cart-contain").mouseleave(function() {
-            //jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
-        })
+        // jQuery(".fl-cart-contain").mouseenter(function() {
+        //     jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideDown()
+        // }), jQuery(".fl-cart-contain").mouseleave(function() {
+        //     //jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
+        // })
     }
     jQuery("body").click(function(){
     	jQuery(this).find(".fl-mini-cart-content").stop(true, true).slideUp()
@@ -420,3 +420,7 @@ jQuery(window).on("load", function() {
         }
     });
 } 
+
+
+
+

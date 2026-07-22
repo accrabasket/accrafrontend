@@ -4,7 +4,7 @@ app.controller('signup', function ($scope, $http, $sce, $timeout) {
     $scope.successShow = false;
     $scope.ajaxLoadingData = false;
     $scope.signupData = {};
-	$scope.signupData.phonecode = "+233";
+	$scope.signupData.phonecode = "+91";
 
     $scope.createaccount = function (signupData) {
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
