@@ -899,7 +899,7 @@ background-color: #fff;
 }
 #nav > li > a > span {
 	display: inline-block;
-	padding: 0 15px;
+	padding: 0 10px;
 	line-height:80px
 	
 }
@@ -1186,7 +1186,7 @@ ul.level1 {
 	visibility: visible;
 	transition: all 0.4s ease-in-out 0s;
 	-webkit-transform: scale(1.0) rotate(0deg);
-	transform: scale(1.0) rotate(0deg);
+	transform: scale(0);
 }
 #nav .level0-wrapper2 .col-1 {
 	float: left;
