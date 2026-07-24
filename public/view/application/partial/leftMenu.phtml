@@ -87,7 +87,7 @@
           <div class="block-content">
             <div class="summary">
               <p class="amount">There is <a href="#">{{totalItemInCart}} item's</a> in your cart.</p>
-              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">GHC{{totalPrice}}</span> </p>
+              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">Rs{{totalPrice}}</span> </p>
             </div>
             <div class="ajax-checkout" ng-if="totalItemInCart">
               <button type="button" title="Checkout" class="button button-checkout" onClick="window.location = '<?=$this->basePath()?>/index.php/application/index/checkout'"> <span>Checkout</span> </button>
@@ -104,7 +104,7 @@
                       </div>
                     <!--access--> 
                     
-                    <strong>{{cartItem.number_of_item}}</strong> x <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+                    <strong>{{cartItem.number_of_item}}</strong> x <span class="price">Rs {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
                     <p class="product-name"><a href="javascript::void(0)">{{cartItem.item_name}}</a></p>
                   </div>
                   <!--product-details-bottoms--> 

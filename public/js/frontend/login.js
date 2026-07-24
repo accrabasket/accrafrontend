@@ -11,12 +11,13 @@ app.controller('login', function ($scope, $http, $timeout) {
         var error = ' ';
         
         if (loginData.email == undefined || loginData.email == '') {
-            error = 'Email should not empty';
-        }else{
-            if (!filter.test(loginData.email)) {
-                error = 'Enter correct email id .';
-            }
+            error = 'Email or Mobile Number should not empty';
         }
+        //else{
+        //     if (!filter.test(loginData.email)) {
+        //         error = 'Enter correct email id .';
+        //     }
+        // }
         if (loginData.password == undefined || loginData.password == '') {
             error = 'Password should not empty';
         }

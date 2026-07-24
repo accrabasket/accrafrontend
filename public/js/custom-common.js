@@ -200,7 +200,7 @@ function autocomplete(inp, arr1) {
           b = document.createElement("DIV");
           /*make the matching letters bold:*/
           
-          b.innerHTML = "<span style='margin-left:10px;'>"+arr[i].attribute_name +"   "+ arr[i].quantity+" "+arr[i].unit +"  (GHC"+arr[i].actual_price+")"+"</span>";
+          b.innerHTML = "<span style='margin-left:10px;'>"+arr[i].attribute_name +"   "+ arr[i].quantity+" "+arr[i].unit +"  (RS"+arr[i].actual_price+")"+"</span>";
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + arr[i].attribute_name +"' rel='"+arr[i].product_id+"-"+arr[i].attribute_id+"'>";
           /*execute a function when someone clicks on the item value (DIV element):*/
