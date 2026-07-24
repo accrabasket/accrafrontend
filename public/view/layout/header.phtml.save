@@ -196,7 +196,7 @@
                                         <div class="basket"> <a href="javascript:void(0);"><span> {{totalItemInCart}} </span></a> </div>
                                         <div class="fl-mini-cart-content" style="display: none;">
                                             <div class="block-subtitle">
-                                                <div class="top-subtotal">{{totalItemInCart}} items, <span class="price">GHC{{totalPrice}}</span> </div>
+                                                <div class="top-subtotal">{{totalItemInCart}} items, <span class="price">Rs{{totalPrice}}</span> </div>
                                                 <!--top-subtotal-->
                                                 <!--pull-right-->
                                             </div>
@@ -210,7 +210,7 @@
                                                         </a>
                                                         <div class="product-details">
                                                             <!--access-->
-                                                            <strong>{{cartItem.number_of_item}}</strong> x <span class="price">GHC {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
+                                                            <strong>{{cartItem.number_of_item}}</strong> x <span class="price">Rs {{cartResponse.productDetails.data[cartItem.merchant_inventry_id].price}}</span>
 
                                                             <p class="product-name"><a href="javascript::void(0)">{{cartItem.item_name}}</a></p>
                                                             

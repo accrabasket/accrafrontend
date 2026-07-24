@@ -48,11 +48,11 @@
                                         <td>
                                             <?=$orderitem['number_of_item']?>
                                         </td>
-                                        <td class="">GHC <?=$orderitem['amount']?></td>
+                                        <td class="">Rs <?=$orderitem['amount']?></td>
                                         <!--<td class=""><?=$orderitem['product_dump']['product_details']['product_desc']?></td>-->
                                         
-                                        <td class="">GHC <?=$orderitem['discount_amount']?></td>
-                                        <td class="">GHC <?=$orderitem['tax_amount']?></td>
+                                        <td class="">Rs <?=$orderitem['discount_amount']?></td>
+                                        <td class="">Rs <?=$orderitem['tax_amount']?></td>
                                         <td class=""><?=$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['house_number'].' '
                                                     .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['street_detail'].' '
                                                     .$this->productDetails['shipping_address_list'][$value['order_details']['shipping_address_id']]['area'].' '
